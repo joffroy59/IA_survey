@@ -53,6 +53,16 @@
           "name": "Multi-LLM Chatbot",
           "icon": "",
           "tools": []
+        },
+        {
+          "name": "Assistant de productivité",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Modèle de fondation",
+          "icon": "",
+          "tools": []
         }
       ]
     },
@@ -118,6 +128,26 @@
         },
         {
           "name": "Automatisation",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Constructeur d'apps no-code",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Orchestration d'agents IA",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Plateforme de données IA",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Agents de communication IA",
           "icon": "",
           "tools": []
         }

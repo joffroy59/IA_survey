@@ -3,6 +3,21 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## 0000000) Résolution de conflit pendant "finish feature" (uncommitted)
+
+### Changed
+- Résolution des conflits de merge avec `main` dans `data/tools.json`.
+- Conservation de la structure des sous-catégories tout en gardant les listes `tools` vides (objectif du reset complet).
+- Régénération de `index.html` pour aligner le rendu avec le dataset fusionné.
+
+### Why
+- Rendre la PR mergeable tout en préservant l’intention fonctionnelle demandée: reconstruire les catalogues depuis une base vide.
+
+### Files touched
+- `data/tools.json`
+- `index.html`
+- `WORK_DONE_NOTE.md`
+
 ## 000000) Règle "finish feature" (uncommitted)
 
 ### Changed
