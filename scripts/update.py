@@ -28,9 +28,14 @@ GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 SEARCH_QUERIES = [
     "new AI tools 2026 site:producthunt.com OR site:theresanaiforthat.com",
-    "meilleurs nouveaux outils intelligence artificielle 2026",
-    "best new AI tools launched 2026",
-    "new AI image video audio tools 2026",
+    "new AI tools 2026 site:futurepedia.io OR site:uneed.best",
+    "new AI agentic workflows site:news.ycombinator.com 2026",
+    "best new AI coding tools 2026 site:tldr.tech",
+    "trending AI repositories 2026 site:github.com",
+    "new AI image video audio tools 2026 site:the-decoder.com",
+    "meilleurs outils IA agentique 2026",
+    "state-of-the-art AI benchmarks April 2026",
+    "best professional AI tools for developers 2026"
 ]
 
 MAX_SEARCH_RESULTS = 15  # par requête
