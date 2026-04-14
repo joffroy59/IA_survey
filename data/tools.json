@@ -112,6 +112,32 @@
               "new": true
             }
           ]
+        },
+        {
+          "name": "Chatbot",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Character.AI",
+              "provider": "Character AI",
+              "url": "https://beta.character.ai/",
+              "desc": "Créer et interagir avec des personnages IA.",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Multi-LLM Chatbot",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Use AI",
+              "provider": "Use AI",
+              "url": "https://use.ai/",
+              "desc": "Accès illimité à 25+ LLMs avancés.",
+              "new": true
+            }
+          ]
         }
       ]
     },
@@ -287,6 +313,26 @@
               "provider": "",
               "url": "https://airia.ai/",
               "desc": "Plateforme d'orchestration AI d'entreprise.",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Automatisation",
+          "icon": "",
+          "tools": [
+            {
+              "name": "n8n",
+              "provider": "",
+              "url": "https://n8n.io/",
+              "desc": "Automatisation de workflows open-source.",
+              "new": true
+            },
+            {
+              "name": "Make.com",
+              "provider": "Make",
+              "url": "https://www.make.com/",
+              "desc": "Plateforme d'intégration et d'automatisation IA.",
               "new": true
             }
           ]
@@ -486,6 +532,66 @@
               "provider": "",
               "url": "https://unblocked.ai/",
               "desc": "Outil de revue de code AI contextuel.",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Framework IA",
+          "icon": "",
+          "tools": [
+            {
+              "name": "CrewAI",
+              "provider": "CrewAI",
+              "url": "https://www.crewai.com/",
+              "desc": "Framework pour construire agents IA collaboratifs.",
+              "new": true
+            },
+            {
+              "name": "LangChain",
+              "provider": "LangChain",
+              "url": "https://www.langchain.com/",
+              "desc": "Framework pour construire des applications LLM.",
+              "new": true
+            },
+            {
+              "name": "Smolagents",
+              "provider": "Hugging Face",
+              "url": "https://github.com/huggingface/smol-ai/tree/main/smol-agents",
+              "desc": "Bibliothèque open-source pour agents IA.",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Développement logiciel",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Blitzy",
+              "provider": "",
+              "url": "https://blitzy.com/",
+              "desc": "Orchestre agents IA pour créer des logiciels.",
+              "new": true
+            },
+            {
+              "name": "Astral",
+              "provider": "OpenAI (acquisition)",
+              "url": "https://astral.sh/",
+              "desc": "Plateforme de développement logiciel pilotée IA.",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "App Builder No-Code",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Base44",
+              "provider": "",
+              "url": "https://base44.com/",
+              "desc": "Constructeur d'applications AI sans code.",
               "new": true
             }
           ]
