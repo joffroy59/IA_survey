@@ -63,7 +63,10 @@ def search_new_tools() -> str:
     with DDGS() as ddgs:
         for query in SEARCH_QUERIES:
             try:
-                hits = list(ddgs.text(query, max_results=MAX_SEARCH_RESULTS))
+                response = ddgs.text(query, max_results=MAX_SEARCH_RESULTS)
+                print(f"🔎  Search for '{query}")
+                print(f"📋  Result Search '{response}")
+                hits = list(response)
                 for h in hits:
                     results.append(f"- {h['title']}: {h['body']} ({h['href']})")
                 time.sleep(1)  # rate limit courtesy
