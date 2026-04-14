@@ -27,10 +27,12 @@ TOOLS_FILE = ROOT / "data" / "tools.json"
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 SEARCH_QUERIES = [
-    "new AI tools 2026 site:producthunt.com OR site:theresanaiforthat.com",
+    "new AI tools 2026 site:producthunt.com OR site:theresanaiforthat.com OR site:www.matora.fr/ia/ OR site:www.techradar.com/best/best-ai-tools",
     "meilleurs nouveaux outils intelligence artificielle 2026",
     "best new AI tools launched 2026",
     "new AI image video audio tools 2026",
+    "new AI coding tools 2026",
+    "new AI agentic tools 2026",
 ]
 
 MAX_SEARCH_RESULTS = 15  # par requête
