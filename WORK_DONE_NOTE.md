@@ -3,6 +3,28 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## BUGFIX) Gemini quota reached: wait 60s then retry once
+
+### Changed
+- Enhanced `scripts/update.py` quota handling in `ask_gemini()`.
+- When Gemini returns `ResourceExhausted` (429), updater now:
+  - waits 60 seconds,
+  - retries exactly once,
+  - then gracefully falls back to `[]` if still failing.
+- Added configuration constant `GEMINI_RETRY_WAIT_SECONDS = 60`.
+
+### Why
+- Quota errors can be temporary windows; a delayed retry can recover automatically.
+- Keeps CI stable while still giving one chance to collect tools before fallback.
+
+### Files touched
+- `scripts/update.py`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/update.py`
+- `python scripts/update.py --help`
+
 ## BUGFIX) Gemini quota 429 resilience in update workflow
 
 ### Changed
