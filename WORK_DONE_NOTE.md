@@ -3,6 +3,39 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## 0) Process rule hardening (uncommitted)
+
+### Changed
+- Updated `.github/copilot-instructions.md` to require:
+  - a mandatory final task report for every change,
+  - a mandatory update to `WORK_DONE_NOTE.md` for every change.
+- Defined required fields for each work note entry:
+  - date,
+  - what changed,
+  - why,
+  - files touched.
+
+### Why
+- To ensure consistent reporting and persistent project history for every task, including small edits.
+
+### Files touched
+- `.github/copilot-instructions.md`
+- `WORK_DONE_NOTE.md`
+
+## 00) Mandatory commit workflow (uncommitted)
+
+### Changed
+- Updated `.github/copilot-instructions.md` with a required commit rule.
+- Added the requirement to always commit task-related changes after verification/tests succeed.
+- Defined commit constraints: stage only related files, use a clear message, and avoid leaving task-related edits uncommitted.
+
+### Why
+- To ensure every completed change is traceable in git history and reduce risk of forgotten local modifications.
+
+### Files touched
+- `.github/copilot-instructions.md`
+- `WORK_DONE_NOTE.md`
+
 ## 1) Multi-page architecture (committed)
 
 ### Changed
