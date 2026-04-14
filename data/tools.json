@@ -152,6 +152,32 @@
               "new": true
             }
           ]
+        },
+        {
+          "name": "Assistant de productivité",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Notion AI",
+              "provider": "Notion",
+              "url": "https://www.notion.so/product/ai",
+              "desc": "Assistant IA pour notes, tâches et documents",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Modèle de fondation",
+          "icon": "",
+          "tools": [
+            {
+              "name": "GLM-5",
+              "provider": "Zhipu AI",
+              "url": "https://www.zhipuai.cn/",
+              "desc": "Modèle d'IA pour tâches agentiques complexes",
+              "new": true
+            }
+          ]
         }
       ]
     },
@@ -347,6 +373,65 @@
               "provider": "Make",
               "url": "https://www.make.com/",
               "desc": "Plateforme d'intégration et d'automatisation IA.",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Constructeur d'apps no-code",
+          "icon": "",
+          "tools": [
+            {
+              "name": "OnSpace AI",
+              "provider": "",
+              "url": "https://onspace.ai/",
+              "desc": "Crée des MVPs, outils internes avec IA",
+              "new": true
+            },
+            {
+              "name": "Subterranean",
+              "provider": "",
+              "url": "https://subterranean.ai/",
+              "desc": "Backend rapide pour apps et MVPs basées sur IA",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Orchestration d'agents IA",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Camunda",
+              "provider": "",
+              "url": "https://camunda.com/",
+              "desc": "Orchestration et automatisation de processus IA",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Plateforme de données IA",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Snowflake",
+              "provider": "",
+              "url": "https://www.snowflake.com/",
+              "desc": "Plateforme de données avec IA agentique",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Agents de communication IA",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Dialpad Agentic AI",
+              "provider": "Dialpad",
+              "url": "https://www.dialpad.com/ai-agent/",
+              "desc": "Agents IA pour automatiser communications client",
               "new": true
             }
           ]
