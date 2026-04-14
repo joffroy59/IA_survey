@@ -81,6 +81,7 @@ def ask_gemini(prompt: str) -> str:
         print("GOOGLE_API_KEY not set. Skipping LLM step.")
         return "[]"
 
+    print(dir(genai))
     model = genai.GenerativeModel("gemini-2.5-flash")
     response = model.generate_content(prompt)
     return response.text
