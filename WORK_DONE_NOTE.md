@@ -3,6 +3,28 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## BUGFIX) Gemini quota 429 resilience in update workflow
+
+### Changed
+- Updated `scripts/update.py` to handle Gemini API failures gracefully in `ask_gemini()`.
+- Added explicit handling for:
+  - `ResourceExhausted` (quota/rate limit, HTTP 429)
+  - `GoogleAPICallError` (generic Google API failures)
+  - fallback `Exception` for unexpected runtime errors
+- On these errors, the updater now logs a clear message and returns `[]` instead of crashing.
+
+### Why
+- GitHub Actions job was failing with exit code 1 when Gemini free-tier quota was exceeded.
+- For this project, missing Gemini output should degrade gracefully: keep pipeline running and update dates/metadata rather than fail the whole run.
+
+### Files touched
+- `scripts/update.py`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/update.py`
+- `python scripts/update.py --help`
+
 ## RELEASE v1.0.0) Production Release: GitFlow + History Tracking
 
 ### Changed

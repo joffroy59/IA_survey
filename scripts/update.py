@@ -16,11 +16,13 @@ from pathlib import Path
 try:
     from ddgs import DDGS
     import google.generativeai as genai
+    from google.api_core import exceptions as google_api_exceptions
 except ImportError:
     print("Installing dependencies...")
     os.system("pip install ddgs google-generativeai --quiet")
     from ddgs import DDGS
     import google.generativeai as genai
+    from google.api_core import exceptions as google_api_exceptions
 
 # ── Config ────────────────────────────────────────────────────────────────────
 ROOT = Path(__file__).parent.parent
@@ -172,8 +174,19 @@ def ask_gemini(prompt: str) -> str:
 
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel("gemini-2.5-flash")
-    response = model.generate_content(prompt)
-    return response.text
+    try:
+        response = model.generate_content(prompt)
+        return response.text
+    except google_api_exceptions.ResourceExhausted as e:
+        print(f"Gemini quota exceeded (ResourceExhausted). Skipping LLM step: {e}")
+        return "[]"
+    except google_api_exceptions.GoogleAPICallError as e:
+        print(f"Gemini API call failed. Skipping LLM step: {e}")
+        return "[]"
+    except Exception as e:
+        # Keep update jobs resilient when Gemini is temporarily unavailable.
+        print(f"Unexpected Gemini error. Skipping LLM step: {e}")
+        return "[]"
 
 
 def extract_new_tools(search_results: str, existing_names: list[str]) -> list[dict]:
