@@ -151,6 +151,45 @@
       border-color: var(--accent);
       color: #fff;
     }
+    .button-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    .history-table thead {
+      background: var(--surface2);
+    }
+    .history-table th {
+      text-align: left;
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      border-bottom: 1px solid var(--border);
+    }
+    .history-table td {
+      padding: 10px 12px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+    }
+    .history-table tr:hover {
+      background: rgba(108,99,255,0.05);
+    }
+    .history-date {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent2);
+    }
+    .history-count {
+      text-align: right;
+      color: var(--muted);
+    }
 
     /* ── Nav tabs ── */
     nav {
@@ -381,7 +420,7 @@
 <body>
 
 <header>
-  <div class="header-badge">🤖 Auto-updated by AI · 14/04/2026</div>
+  <div class="header-badge">🤖 Auto-updated by AI · 15/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
   <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
   <p class="update-info">Dernière mise à jour : <span>2026-04-14</span></p>
@@ -393,9 +432,12 @@
     <div>
       <div class="page-meta-label">Type de page</div>
       <div class="page-meta-title">Panorama Generaliste</div>
-      <div class="page-meta-desc">Vue complete des meilleurs outils IA grand public et pro.</div>
+      <div class="page-meta-desc">Vue complete des outils detectes par veille automatique.</div>
     </div>
-    <button class="info-btn" type="button" id="open-search-info">Sources de recherche</button>
+    <div class="button-group">
+      <button class="info-btn" type="button" id="open-search-info">Sources</button>
+      <button class="info-btn" type="button" id="open-history-info">Historique</button>
+    </div>
   </div>
 </header>
 
@@ -421,6 +463,35 @@
       <div class="subcategory-title">📌 Indispensables</div>
       <div class="tools-grid">
         
+      <a class="tool-card" href="https://chatgpt.com/" target="_blank" rel="noopener">
+        <div class="tool-name">ChatGPT</div>
+        <div class="tool-provider">OpenAI</div>
+        <div class="tool-desc">Le plus populaire</div>
+      </a>
+
+      <a class="tool-card" href="https://claude.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Claude</div>
+        <div class="tool-provider">Anthropic</div>
+        <div class="tool-desc">Excellent pour l'analyse</div>
+      </a>
+
+      <a class="tool-card" href="https://gemini.google.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Gemini</div>
+        <div class="tool-provider">Google</div>
+        <div class="tool-desc">Intégré à Google</div>
+      </a>
+
+      <a class="tool-card" href="https://copilot.microsoft.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Copilot</div>
+        <div class="tool-provider">Microsoft</div>
+        <div class="tool-desc">Intégré à Windows</div>
+      </a>
+
+      <a class="tool-card" href="https://www.perplexity.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Perplexity</div>
+        
+        <div class="tool-desc">Recherche IA</div>
+      </a>
       </div>
     </div>
 
@@ -428,6 +499,29 @@
       <div class="subcategory-title">⭐ Importantes</div>
       <div class="tools-grid">
         
+      <a class="tool-card" href="https://chat.mistral.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Le Chat</div>
+        <div class="tool-provider">Mistral</div>
+        <div class="tool-desc">IA française</div>
+      </a>
+
+      <a class="tool-card" href="https://www.grok.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Grok</div>
+        <div class="tool-provider">xAI</div>
+        <div class="tool-desc">IA d'Elon Musk</div>
+      </a>
+
+      <a class="tool-card" href="https://meta.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Meta AI</div>
+        <div class="tool-provider">Meta</div>
+        <div class="tool-desc">IA de Meta</div>
+      </a>
+
+      <a class="tool-card" href="https://chat.deepseek.com/" target="_blank" rel="noopener">
+        <div class="tool-name">DeepSeek</div>
+        
+        <div class="tool-desc">IA chinoise open source</div>
+      </a>
       </div>
     </div>
 
@@ -435,41 +529,23 @@
       <div class="subcategory-title">🔬 Avancées - Veille</div>
       <div class="tools-grid">
         
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Productivité / Email</div>
-      <div class="tools-grid">
+      <a class="tool-card" href="https://chat.qwen.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Qwen</div>
+        <div class="tool-provider">Alibaba</div>
         
-      </div>
-    </div>
+      </a>
 
-    <div class="subcategory">
-      <div class="subcategory-title"> Chatbot</div>
-      <div class="tools-grid">
+      <a class="tool-card" href="https://www.kimi.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Kimi</div>
+        <div class="tool-provider">Moonshot</div>
         
-      </div>
-    </div>
+      </a>
 
-    <div class="subcategory">
-      <div class="subcategory-title"> Multi-LLM Chatbot</div>
-      <div class="tools-grid">
+      <a class="tool-card" href="https://agent.minimax.io/" target="_blank" rel="noopener">
+        <div class="tool-name">MiniMax</div>
         
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Assistant de productivité</div>
-      <div class="tools-grid">
         
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Modèle de fondation</div>
-      <div class="tools-grid">
-        
+      </a>
       </div>
     </div>
   </section>
@@ -484,6 +560,29 @@
       <div class="subcategory-title">🎙️ Réunions & Audio</div>
       <div class="tools-grid">
         
+      <a class="tool-card" href="https://www.notta.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Notta</div>
+        
+        <div class="tool-desc">Réunion App Mobile</div>
+      </a>
+
+      <a class="tool-card" href="https://fireflies.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Fireflies.ai</div>
+        
+        <div class="tool-desc">Transcription réunions</div>
+      </a>
+
+      <a class="tool-card" href="https://otter.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Otter.ai</div>
+        
+        <div class="tool-desc">Prise de notes IA</div>
+      </a>
+
+      <a class="tool-card" href="https://plaud.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Plaud AI</div>
+        
+        
+      </a>
       </div>
     </div>
 
@@ -491,104 +590,23 @@
       <div class="subcategory-title">📊 Productivité & Présentation</div>
       <div class="tools-grid">
         
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Gestion des connaissances</div>
-      <div class="tools-grid">
+      <a class="tool-card" href="https://gamma.app/" target="_blank" rel="noopener">
+        <div class="tool-name">Gamma</div>
         
-      </div>
-    </div>
+        <div class="tool-desc">Présentations IA</div>
+      </a>
 
-    <div class="subcategory">
-      <div class="subcategory-title"> Infrastructure IA</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
+      <a class="tool-card" href="https://www.canva.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Canva AI</div>
+        <div class="tool-provider">Canva</div>
+        <div class="tool-desc">Design IA</div>
+      </a>
 
-    <div class="subcategory">
-      <div class="subcategory-title"> Prise de notes de réunions</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Synthèse de réunions</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Présentations / Idées</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Voyage</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Notetaker</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Dictée vocale</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Orchestration AI</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Automatisation</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Constructeur d'apps no-code</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Orchestration d'agents IA</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Plateforme de données IA</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Agents de communication IA</div>
-      <div class="tools-grid">
-        
+      <a class="tool-card" href="https://notebooklm.google/" target="_blank" rel="noopener">
+        <div class="tool-name">NotebookLM</div>
+        <div class="tool-provider">Google</div>
+        <div class="tool-desc">FAQ, Podcast IA</div>
+      </a>
       </div>
     </div>
   </section>
@@ -603,6 +621,23 @@
       <div class="subcategory-title">🎨 Gratuit & accessible</div>
       <div class="tools-grid">
         
+      <a class="tool-card" href="https://sora.chatgpt.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Sora</div>
+        <div class="tool-provider">OpenAI</div>
+        <div class="tool-desc">Gratuit</div>
+      </a>
+
+      <a class="tool-card" href="https://gemini.google.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Imagen (Gemini)</div>
+        <div class="tool-provider">Google</div>
+        <div class="tool-desc">Gratuit</div>
+      </a>
+
+      <a class="tool-card" href="https://www.bing.com/images/create" target="_blank" rel="noopener">
+        <div class="tool-name">Bing Creator</div>
+        <div class="tool-provider">Microsoft</div>
+        <div class="tool-desc">Gratuit</div>
+      </a>
       </div>
     </div>
 
@@ -610,6 +645,17 @@
       <div class="subcategory-title">💎 Usages pro</div>
       <div class="tools-grid">
         
+      <a class="tool-card" href="https://www.midjourney.com/" target="_blank" rel="noopener">
+        <div class="tool-name">MidJourney</div>
+        
+        <div class="tool-desc">Référence qualité</div>
+      </a>
+
+      <a class="tool-card" href="https://firefly.adobe.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Adobe Firefly</div>
+        <div class="tool-provider">Adobe</div>
+        <div class="tool-desc">Pro créatif</div>
+      </a>
       </div>
     </div>
 
@@ -617,13 +663,35 @@
       <div class="subcategory-title">🛠️ Open Source & expérimentaux</div>
       <div class="tools-grid">
         
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Edition photo & vidéo IA</div>
-      <div class="tools-grid">
+      <a class="tool-card" href="https://stablediffusionweb.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Stable Diffusion</div>
         
+        
+      </a>
+
+      <a class="tool-card" href="https://www.recraft.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Recraft</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://leonardo.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Leonardo AI</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://ideogram.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Ideogram</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://flux-ai.io/" target="_blank" rel="noopener">
+        <div class="tool-name">Flux</div>
+        
+        
+      </a>
       </div>
     </div>
   </section>
@@ -638,55 +706,29 @@
       <div class="subcategory-title">⌨️ Assistants code</div>
       <div class="tools-grid">
         
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Création d'apps No-code</div>
-      <div class="tools-grid">
+      <a class="tool-card" href="https://github.com/copilot" target="_blank" rel="noopener">
+        <div class="tool-name">GitHub Copilot</div>
+        <div class="tool-provider">Microsoft</div>
         
-      </div>
-    </div>
+      </a>
 
-    <div class="subcategory">
-      <div class="subcategory-title"> Prompt Engineering</div>
-      <div class="tools-grid">
+      <a class="tool-card" href="https://cursor.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Cursor</div>
+        <div class="tool-provider">Anysphere</div>
         
-      </div>
-    </div>
+      </a>
 
-    <div class="subcategory">
-      <div class="subcategory-title"> Agent AI</div>
-      <div class="tools-grid">
+      <a class="tool-card" href="https://claude.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Claude</div>
+        <div class="tool-provider">Anthropic</div>
         
-      </div>
-    </div>
+      </a>
 
-    <div class="subcategory">
-      <div class="subcategory-title"> Code Review</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Framework IA</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Développement logiciel</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> App Builder No-Code</div>
-      <div class="tools-grid">
-        
+      <a class="tool-card" href="https://claude.ai/download" target="_blank" rel="noopener">
+        <div class="tool-name">Claude Code</div>
+        <div class="tool-provider">Anthropic</div>
+        <div class="tool-desc">Agent terminal</div>
+      </a>
       </div>
     </div>
   </section>
@@ -701,6 +743,29 @@
       <div class="subcategory-title">🎵 Génération musicale</div>
       <div class="tools-grid">
         
+      <a class="tool-card" href="https://suno.com" target="_blank" rel="noopener">
+        <div class="tool-name">Suno</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://www.udio.com" target="_blank" rel="noopener">
+        <div class="tool-name">Udio</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://www.songr.ai" target="_blank" rel="noopener">
+        <div class="tool-name">SongR</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://boomy.com" target="_blank" rel="noopener">
+        <div class="tool-name">Boomy</div>
+        
+        
+      </a>
       </div>
     </div>
 
@@ -708,6 +773,23 @@
       <div class="subcategory-title">🎤 Voix & clonage vocal</div>
       <div class="tools-grid">
         
+      <a class="tool-card" href="https://elevenlabs.io" target="_blank" rel="noopener">
+        <div class="tool-name">ElevenLabs</div>
+        
+        <div class="tool-desc">Leader voix réaliste</div>
+      </a>
+
+      <a class="tool-card" href="https://murf.ai" target="_blank" rel="noopener">
+        <div class="tool-name">Murf AI</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://www.descript.com" target="_blank" rel="noopener">
+        <div class="tool-name">Descript</div>
+        
+        
+      </a>
       </div>
     </div>
   </section>
@@ -722,6 +804,35 @@
       <div class="subcategory-title">🎬 Text-to-Video PRO</div>
       <div class="tools-grid">
         
+      <a class="tool-card" href="https://deepmind.google/models/veo/" target="_blank" rel="noopener">
+        <div class="tool-name">Veo</div>
+        <div class="tool-provider">Google</div>
+        <div class="tool-desc">Ultra réaliste</div>
+      </a>
+
+      <a class="tool-card" href="https://klingai.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Kling</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://app.runwayml.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Runway</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://lumalabs.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Luma Dream Machine</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://sora.chatgpt.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Sora</div>
+        <div class="tool-provider">OpenAI</div>
+        
+      </a>
       </div>
     </div>
 
@@ -729,6 +840,23 @@
       <div class="subcategory-title">🧍 Avatar IA</div>
       <div class="tools-grid">
         
+      <a class="tool-card" href="https://www.heygen.com/" target="_blank" rel="noopener">
+        <div class="tool-name">HeyGen</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://www.synthesia.io/" target="_blank" rel="noopener">
+        <div class="tool-name">Synthesia</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://www.colossyan.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Colossyan</div>
+        
+        
+      </a>
       </div>
     </div>
 
@@ -736,6 +864,11 @@
       <div class="subcategory-title">🆕 Génération vidéo et image</div>
       <div class="tools-grid">
         
+      <a class="tool-card is-new" href="https://www.atlabs.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Atlabs</div>
+        <div class="tool-provider">Atlabs</div>
+        <div class="tool-desc">Plateforme IA pour génération images et vidéos</div>
+      </a>
       </div>
     </div>
 
@@ -743,13 +876,11 @@
       <div class="subcategory-title">🆕 Image-to-Video</div>
       <div class="tools-grid">
         
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Présentations vidéo</div>
-      <div class="tools-grid">
-        
+      <a class="tool-card is-new" href="https://www.vo3ai.com/" target="_blank" rel="noopener">
+        <div class="tool-name">VO3AI</div>
+        <div class="tool-provider">VO3AI</div>
+        <div class="tool-desc">Crée des vidéos à partir d'images statiques</div>
+      </a>
       </div>
     </div>
   </section>
@@ -768,16 +899,32 @@
     </div>
     <div class="modal-meta">Page: Panorama Generaliste · Dernière mise à jour: 2026-04-14</div>
     <ol class="query-list">
-      <li>new AI tools 2026 site:producthunt.com OR site:theresanaiforthat.com</li>
-      <li>new AI tools 2026 site:futurepedia.io OR site:uneed.best</li>
-      <li>new AI agentic workflows site:news.ycombinator.com 2026</li>
-      <li>best new AI coding tools 2026 site:tldr.tech</li>
-      <li>trending AI repositories 2026 site:github.com</li>
-      <li>new AI image video audio tools 2026 site:the-decoder.com</li>
-      <li>meilleurs outils IA agentique 2026</li>
-      <li>state-of-the-art AI benchmarks April 2026</li>
-      <li>best professional AI tools for developers 2026</li>
+      <li>Aucune requête enregistrée.</li>
     </ol>
+  </div>
+</div>
+
+<div class="modal-overlay" id="history-modal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Historique des versions">
+    <div class="modal-header">
+      <div class="modal-title">Historique des versions</div>
+      <button class="close-btn" type="button" id="close-history-info">Fermer</button>
+    </div>
+    <div class="modal-meta">Page: Panorama Generaliste · Dernières 10 générations</div>
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>Date de génération</th>
+          <th class="history-count">Outils détectés</th>
+        </tr>
+      </thead>
+      <tbody>
+                <tr>
+          <td class="history-date">2026-04-15</td>
+          <td class="history-count">50</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
@@ -785,8 +932,11 @@
   const tabs = document.querySelectorAll('.nav-tab');
   const categories = document.querySelectorAll('.category');
   const searchModal = document.getElementById('search-modal');
+  const historyModal = document.getElementById('history-modal');
   const openSearchInfo = document.getElementById('open-search-info');
   const closeSearchInfo = document.getElementById('close-search-info');
+  const openHistoryInfo = document.getElementById('open-history-info');
+  const closeHistoryInfo = document.getElementById('close-history-info');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
@@ -803,27 +953,47 @@
   // Show all on load
   categories.forEach(c => c.classList.add('visible'));
 
+  // Search modal handlers
   openSearchInfo.addEventListener('click', () => {
     searchModal.classList.add('open');
     searchModal.setAttribute('aria-hidden', 'false');
   });
 
-  function closeModal() {
+  closeSearchInfo.addEventListener('click', () => {
     searchModal.classList.remove('open');
     searchModal.setAttribute('aria-hidden', 'true');
+  });
+
+  // History modal handlers
+  openHistoryInfo.addEventListener('click', () => {
+    historyModal.classList.add('open');
+    historyModal.setAttribute('aria-hidden', 'false');
+  });
+
+  closeHistoryInfo.addEventListener('click', () => {
+    historyModal.classList.remove('open');
+    historyModal.setAttribute('aria-hidden', 'true');
+  });
+
+  // Close modals on overlay click or Escape
+  function closeAllModals() {
+    [searchModal, historyModal].forEach(m => {
+      m.classList.remove('open');
+      m.setAttribute('aria-hidden', 'true');
+    });
   }
 
-  closeSearchInfo.addEventListener('click', closeModal);
-
-  searchModal.addEventListener('click', (event) => {
-    if (event.target === searchModal) {
-      closeModal();
-    }
+  [searchModal, historyModal].forEach(modal => {
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeAllModals();
+      }
+    });
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && searchModal.classList.contains('open')) {
-      closeModal();
+    if (event.key === 'Escape') {
+      closeAllModals();
     }
   });
 </script>

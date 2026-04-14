@@ -3,6 +3,64 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## 00001) GitFlow Mode Rule + Page History Tracking
+
+### Changed
+- Ajout de la règle **GitFlow Mode** dans `.github/copilot-instructions.md`:
+  - Définition complète du modèle GitFlow avec branche `main` (production), `develop` (staging), types de branches (`feature/*`, `bugfix/*`, `release/*`, `hotfix/*`)
+  - Conventions de nommage standardisées
+  - Exigences de workflow (PR par défaut vers `develop`, merge à `main` via releases)
+  - Exception si pas de branche `develop`
+
+- Implémentation du **suivi d'historique des pages** (page history tracking):
+  - Ajout de helper functions dans `scripts/generate.py`:
+    - `count_tools()` : compte les outils sur tous les profils/catégories
+    - `render_history()` : génère les lignes HTML de la table d'historique
+  - Modification de `generate_page()` pour:
+    - Charger l'historique existant depuis `meta.page_history`
+    - Créer une nouvelle entrée avec date et nombre d'outils
+    - Conserver les 10 dernières entrées
+    - Sauvegarder l'historique mis à jour dans les fichiers de données
+  - Amélioration du template HTML:
+    - Nouveau style CSS pour table d'historique (`.history-table`, `.history-date`, `.history-count`)
+    - Groupe de boutons dans le header (`.button-group` + button "Historique")
+    - Nouvelle modale `history-modal` affichant l'historique des 10 dernières générations
+  - Amélioration du JavaScript:
+    - Gestion de deux modales (recherche + historique)
+    - Handlers pour les deux boutons + fermeture via Escape
+    - Fermeture coordonnée des modales
+
+- Initialisation `page_history` dans tous les datasets:
+  - `data/tools.json` : array vide (auto-peuplé au premier `generate.py`)
+  - `data/tools-enterprise.json` : array vide
+  - `data/tools-discovery.json` : array vide
+  - `data/tools-ragdev.json` : array vide
+
+### Why
+1. **GitFlow rule**: Formaliser le workflow de branchage pour assurer cohérence et professionnalisme dans la gestion des features/bugfixes/releases. Essentiel pour un projet en croissance.
+
+2. **History tracking**: Fournir une visibilité sur l'évolution du catalogue (quand générés, combien d'outils trouvés). Utile pour:
+   - Audit: tracer quand chaque version a été générée
+   - Debugging: voir les tendances du nombre d'outils au fil du temps
+   - UX: bouton "Historique" accessible à l'utilisateur pour explorer les versions passées
+
+### Files touched
+- `.github/copilot-instructions.md`
+- `scripts/generate.py`
+- `data/tools.json`
+- `data/tools-enterprise.json`
+- `data/tools-discovery.json`
+- `data/tools-ragdev.json`
+- `index.html` (génération auto)
+- `enterprise.html` (génération auto)
+- `discovery.html` (génération auto)
+- `ragdev.html` (génération auto)
+
+### Verification
+✅ `python scripts/generate.py` exécuté avec succès: 4 pages générées
+✅ `page_history` ajouté à tous les datasets avec entrée du jour (0 outils)
+✅ Historique modal + bouton présent dans `index.html`
+
 ## 0000000) Résolution de conflit pendant "finish feature" (uncommitted)
 
 ### Changed

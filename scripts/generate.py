@@ -4,7 +4,7 @@ generate.py — Génère index.html depuis data/tools.json
 """
 
 import json
-from datetime import date
+from datetime import date, datetime
 from html import escape
 from pathlib import Path
 
@@ -189,6 +189,45 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     .info-btn:hover {{
       border-color: var(--accent);
       color: #fff;
+    }}
+    .button-group {{
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }}
+    .history-table {{
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }}
+    .history-table thead {{
+      background: var(--surface2);
+    }}
+    .history-table th {{
+      text-align: left;
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      border-bottom: 1px solid var(--border);
+    }}
+    .history-table td {{
+      padding: 10px 12px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+    }}
+    .history-table tr:hover {{
+      background: rgba(108,99,255,0.05);
+    }}
+    .history-date {{
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent2);
+    }}
+    .history-count {{
+      text-align: right;
+      color: var(--muted);
     }}
 
     /* ── Nav tabs ── */
@@ -431,7 +470,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <div class="page-meta-title">{page_label}</div>
       <div class="page-meta-desc">{page_description}</div>
     </div>
-    <button class="info-btn" type="button" id="open-search-info">Sources de recherche</button>
+    <div class="button-group">
+      <button class="info-btn" type="button" id="open-search-info">Sources</button>
+      <button class="info-btn" type="button" id="open-history-info">Historique</button>
+    </div>
   </div>
 </header>
 
@@ -462,12 +504,36 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   </div>
 </div>
 
+<div class="modal-overlay" id="history-modal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Historique des versions">
+    <div class="modal-header">
+      <div class="modal-title">Historique des versions</div>
+      <button class="close-btn" type="button" id="close-history-info">Fermer</button>
+    </div>
+    <div class="modal-meta">Page: {page_label} · Dernières 10 générations</div>
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>Date de génération</th>
+          <th class="history-count">Outils détectés</th>
+        </tr>
+      </thead>
+      <tbody>
+        {history_html}
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <script>
   const tabs = document.querySelectorAll('.nav-tab');
   const categories = document.querySelectorAll('.category');
   const searchModal = document.getElementById('search-modal');
+  const historyModal = document.getElementById('history-modal');
   const openSearchInfo = document.getElementById('open-search-info');
   const closeSearchInfo = document.getElementById('close-search-info');
+  const openHistoryInfo = document.getElementById('open-history-info');
+  const closeHistoryInfo = document.getElementById('close-history-info');
 
   tabs.forEach(tab => {{
     tab.addEventListener('click', (e) => {{
@@ -484,27 +550,47 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   // Show all on load
   categories.forEach(c => c.classList.add('visible'));
 
+  // Search modal handlers
   openSearchInfo.addEventListener('click', () => {{
     searchModal.classList.add('open');
     searchModal.setAttribute('aria-hidden', 'false');
   }});
 
-  function closeModal() {{
+  closeSearchInfo.addEventListener('click', () => {{
     searchModal.classList.remove('open');
     searchModal.setAttribute('aria-hidden', 'true');
+  }});
+
+  // History modal handlers
+  openHistoryInfo.addEventListener('click', () => {{
+    historyModal.classList.add('open');
+    historyModal.setAttribute('aria-hidden', 'false');
+  }});
+
+  closeHistoryInfo.addEventListener('click', () => {{
+    historyModal.classList.remove('open');
+    historyModal.setAttribute('aria-hidden', 'true');
+  }});
+
+  // Close modals on overlay click or Escape
+  function closeAllModals() {{
+    [searchModal, historyModal].forEach(m => {{
+      m.classList.remove('open');
+      m.setAttribute('aria-hidden', 'true');
+    }});
   }}
 
-  closeSearchInfo.addEventListener('click', closeModal);
-
-  searchModal.addEventListener('click', (event) => {{
-    if (event.target === searchModal) {{
-      closeModal();
-    }}
+  [searchModal, historyModal].forEach(modal => {{
+    modal.addEventListener('click', (event) => {{
+      if (event.target === modal) {{
+        closeAllModals();
+      }}
+    }});
   }});
 
   document.addEventListener('keydown', (event) => {{
-    if (event.key === 'Escape' && searchModal.classList.contains('open')) {{
-      closeModal();
+    if (event.key === 'Escape') {{
+      closeAllModals();
     }}
   }});
 </script>
@@ -564,6 +650,31 @@ def render_search_queries(search_queries: list[str]) -> str:
     return "\n      ".join(f"<li>{escape(q)}</li>" for q in search_queries)
 
 
+def count_tools(categories: list[dict]) -> int:
+    """Count total number of tools across all categories and subcategories."""
+    total = 0
+    for cat in categories:
+        for sub in cat.get("subcategories", []):
+            total += len(sub.get("tools", []))
+    return total
+
+
+def render_history(page_history: list[dict]) -> str:
+    """Render history table rows."""
+    if not page_history:
+        return "<tr><td colspan='2' style='text-align: center; color: var(--muted);'>Aucun historique disponible</td></tr>"
+
+    rows = []
+    for entry in page_history:
+        date_str = entry.get("date", "?")
+        tool_count = entry.get("tool_count", 0)
+        rows.append(f"""        <tr>
+          <td class="history-date">{escape(str(date_str))}</td>
+          <td class="history-count">{tool_count}</td>
+        </tr>""")
+    return "\n".join(rows)
+
+
 def generate_page(page_cfg: dict):
     data_file = page_cfg["data_file"]
     output_file = page_cfg["output"]
@@ -577,6 +688,33 @@ def generate_page(page_cfg: dict):
     meta = data["meta"]
     cats = data["categories"]
 
+    # Count tools and manage history
+    tool_count = count_tools(cats)
+    today_str = date.today().strftime("%Y-%m-%d")
+
+    # Load existing history and add new entry
+    page_history = meta.get("page_history", [])
+    new_entry = {
+        "date": today_str,
+        "tool_count": tool_count
+    }
+
+    # Add new entry if it's a new date or update today's entry
+    if page_history and page_history[-1]["date"] == today_str:
+        page_history[-1] = new_entry
+    else:
+        page_history.append(new_entry)
+
+    # Keep only last 10 entries
+    page_history = page_history[-10:]
+
+    # Update meta with new history
+    meta["page_history"] = page_history
+
+    # Save updated data file
+    with open(data_file, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
     nav_tabs = "\n  ".join(
         f'<a class="nav-tab" href="#" data-cat="{c["id"]}">{c["icon"]} {c["name"]}</a>'
         for c in cats
@@ -588,6 +726,7 @@ def generate_page(page_cfg: dict):
         "Vue complete des outils detectes par veille automatique.",
     )
     search_queries_html = render_search_queries(meta.get("search_queries", []))
+    history_html = render_history(page_history)
 
     repo_name = "VOTRE-USERNAME/ai-toolbox"  # remplacer
 
@@ -600,6 +739,7 @@ def generate_page(page_cfg: dict):
         page_label=escape(page_label),
         page_description=escape(page_description),
         search_queries_html=search_queries_html,
+        history_html=history_html,
         nav_tabs=nav_tabs,
         categories_html=categories_html,
         repo_name=repo_name,

@@ -151,6 +151,45 @@
       border-color: var(--accent);
       color: #fff;
     }
+    .button-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    .history-table thead {
+      background: var(--surface2);
+    }
+    .history-table th {
+      text-align: left;
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      border-bottom: 1px solid var(--border);
+    }
+    .history-table td {
+      padding: 10px 12px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+    }
+    .history-table tr:hover {
+      background: rgba(108,99,255,0.05);
+    }
+    .history-date {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent2);
+    }
+    .history-count {
+      text-align: right;
+      color: var(--muted);
+    }
 
     /* ── Nav tabs ── */
     nav {
@@ -381,7 +420,7 @@
 <body>
 
 <header>
-  <div class="header-badge">🤖 Auto-updated by AI · 14/04/2026</div>
+  <div class="header-badge">🤖 Auto-updated by AI · 15/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
   <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
   <p class="update-info">Dernière mise à jour : <span>2026-04-14</span></p>
@@ -395,7 +434,10 @@
       <div class="page-meta-title">Panorama RAG Pro + DevTools</div>
       <div class="page-meta-desc">Focus architecture RAG production et outils IA pour developpeurs.</div>
     </div>
-    <button class="info-btn" type="button" id="open-search-info">Sources de recherche</button>
+    <div class="button-group">
+      <button class="info-btn" type="button" id="open-search-info">Sources</button>
+      <button class="info-btn" type="button" id="open-history-info">Historique</button>
+    </div>
   </div>
 </header>
 
@@ -754,12 +796,39 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="history-modal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Historique des versions">
+    <div class="modal-header">
+      <div class="modal-title">Historique des versions</div>
+      <button class="close-btn" type="button" id="close-history-info">Fermer</button>
+    </div>
+    <div class="modal-meta">Page: Panorama RAG Pro + DevTools · Dernières 10 générations</div>
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>Date de génération</th>
+          <th class="history-count">Outils détectés</th>
+        </tr>
+      </thead>
+      <tbody>
+                <tr>
+          <td class="history-date">2026-04-15</td>
+          <td class="history-count">0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <script>
   const tabs = document.querySelectorAll('.nav-tab');
   const categories = document.querySelectorAll('.category');
   const searchModal = document.getElementById('search-modal');
+  const historyModal = document.getElementById('history-modal');
   const openSearchInfo = document.getElementById('open-search-info');
   const closeSearchInfo = document.getElementById('close-search-info');
+  const openHistoryInfo = document.getElementById('open-history-info');
+  const closeHistoryInfo = document.getElementById('close-history-info');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
@@ -776,27 +845,47 @@
   // Show all on load
   categories.forEach(c => c.classList.add('visible'));
 
+  // Search modal handlers
   openSearchInfo.addEventListener('click', () => {
     searchModal.classList.add('open');
     searchModal.setAttribute('aria-hidden', 'false');
   });
 
-  function closeModal() {
+  closeSearchInfo.addEventListener('click', () => {
     searchModal.classList.remove('open');
     searchModal.setAttribute('aria-hidden', 'true');
+  });
+
+  // History modal handlers
+  openHistoryInfo.addEventListener('click', () => {
+    historyModal.classList.add('open');
+    historyModal.setAttribute('aria-hidden', 'false');
+  });
+
+  closeHistoryInfo.addEventListener('click', () => {
+    historyModal.classList.remove('open');
+    historyModal.setAttribute('aria-hidden', 'true');
+  });
+
+  // Close modals on overlay click or Escape
+  function closeAllModals() {
+    [searchModal, historyModal].forEach(m => {
+      m.classList.remove('open');
+      m.setAttribute('aria-hidden', 'true');
+    });
   }
 
-  closeSearchInfo.addEventListener('click', closeModal);
-
-  searchModal.addEventListener('click', (event) => {
-    if (event.target === searchModal) {
-      closeModal();
-    }
+  [searchModal, historyModal].forEach(modal => {
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeAllModals();
+      }
+    });
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && searchModal.classList.contains('open')) {
-      closeModal();
+    if (event.key === 'Escape') {
+      closeAllModals();
     }
   });
 </script>
