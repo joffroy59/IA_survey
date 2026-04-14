@@ -3,6 +3,100 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## 0000000) Résolution de conflit pendant "finish feature" (uncommitted)
+
+### Changed
+- Résolution des conflits de merge avec `main` dans `data/tools.json`.
+- Conservation de la structure des sous-catégories tout en gardant les listes `tools` vides (objectif du reset complet).
+- Régénération de `index.html` pour aligner le rendu avec le dataset fusionné.
+
+### Why
+- Rendre la PR mergeable tout en préservant l’intention fonctionnelle demandée: reconstruire les catalogues depuis une base vide.
+
+### Files touched
+- `data/tools.json`
+- `index.html`
+- `WORK_DONE_NOTE.md`
+
+## 000000) Règle "finish feature" (uncommitted)
+
+### Changed
+- Ajout d'une règle explicite dans `.github/copilot-instructions.md` pour la commande utilisateur "finish feature".
+- Définition du flux obligatoire de bout en bout:
+  - vérification,
+  - commit,
+  - push,
+  - création de PR vers `main`,
+  - merge de la PR.
+
+### Why
+- Garantir qu'une demande "finish feature" aboutit systématiquement à une feature réellement finalisée et intégrée dans `main`, sans étape manquante.
+
+### Files touched
+- `.github/copilot-instructions.md`
+- `WORK_DONE_NOTE.md`
+
+## 00000) Reset complet des catalogues outils (uncommitted)
+
+### Changed
+- Vidé toutes les listes `tools` dans les datasets de profils:
+  - `data/tools.json`
+  - `data/tools-enterprise.json`
+  - `data/tools-discovery.json`
+  - `data/tools-ragdev.json`
+- Régénéré les pages statiques associées:
+  - `index.html`
+  - `enterprise.html`
+  - `discovery.html`
+  - `ragdev.html`
+
+### Why
+- Repartir d’un catalogue vide pour reconstruire entièrement les outils depuis les requêtes définies dans les fichiers de contexte (search query profiles).
+
+### Files touched
+- `data/tools.json`
+- `data/tools-enterprise.json`
+- `data/tools-discovery.json`
+- `data/tools-ragdev.json`
+- `index.html`
+- `enterprise.html`
+- `discovery.html`
+- `ragdev.html`
+- `WORK_DONE_NOTE.md`
+
+## 0000) Reusable consumer workflow example (uncommitted)
+
+### Changed
+- Added `.github/workflows/update-consumer-example.yml`.
+- The workflow demonstrates two reuse patterns of the unit workflow:
+  - `single` mode: call one profile selected via input.
+  - `matrix` mode: call all profiles (`general`, `enterprise`, `discovery`, `ragdev`).
+- Added a shared `generate-and-commit` job that downloads dataset artifacts, regenerates pages, and commits updates.
+
+### Why
+- To provide a concrete template showing how to consume the unit profile workflow from another workflow as a modular building block.
+
+### Files touched
+- `.github/workflows/update-consumer-example.yml`
+- `WORK_DONE_NOTE.md`
+
+## 000) Workflow split by search profile (uncommitted)
+
+### Changed
+- Refactored `.github/workflows/update.yml` to run one stage per search profile (`general`, `enterprise`, `discovery`, `ragdev`) using a matrix job.
+- Added a final stage that regenerates all pages and commits all updated datasets/pages together.
+- Added reusable unit workflow `.github/workflows/update-profile-unit.yml` with `workflow_call` input `profile` so other workflows can invoke one profile update as a standalone building block.
+- Added `workflow_dispatch` support on the unit workflow for manual per-profile runs.
+
+### Why
+- To avoid a single monolithic update stage and make each query-group update independently executable/reusable.
+- To enable composition from other workflows, profile-by-profile, as a unitary workflow element.
+
+### Files touched
+- `.github/workflows/update.yml`
+- `.github/workflows/update-profile-unit.yml`
+- `WORK_DONE_NOTE.md`
+
 ## 0) Process rule hardening (uncommitted)
 
 ### Changed

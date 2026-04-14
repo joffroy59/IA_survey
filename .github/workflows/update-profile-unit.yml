@@ -1,0 +1,68 @@
+name: Update Single Profile Unit
+
+on:
+  workflow_call:
+    inputs:
+      profile:
+        description: "Search profile to update"
+        required: true
+        type: string
+    secrets:
+      GEMINI_API_KEY:
+        required: false
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: "Search profile to update"
+        required: true
+        type: choice
+        options:
+          - general
+          - enterprise
+          - discovery
+          - ragdev
+
+permissions:
+  contents: read
+
+jobs:
+  update-profile:
+    runs-on: ubuntu-latest
+    env:
+      PROFILE: ${{ inputs.profile != '' && inputs.profile || github.event.inputs.profile }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade ddgs google-generativeai
+
+      - name: Resolve dataset path
+        run: |
+          case "$PROFILE" in
+            general) DATASET_PATH="data/tools.json" ;;
+            enterprise) DATASET_PATH="data/tools-enterprise.json" ;;
+            discovery) DATASET_PATH="data/tools-discovery.json" ;;
+            ragdev) DATASET_PATH="data/tools-ragdev.json" ;;
+            *) echo "Unknown profile: $PROFILE"; exit 1 ;;
+          esac
+          echo "DATASET_PATH=$DATASET_PATH" >> "$GITHUB_ENV"
+
+      - name: Update profile dataset
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/update.py --profile "$PROFILE"
+
+      - name: Upload updated dataset artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dataset-${{ env.PROFILE }}
+          path: ${{ env.DATASET_PATH }}
+          if-no-files-found: error
