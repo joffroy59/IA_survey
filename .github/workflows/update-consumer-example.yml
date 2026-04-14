@@ -1,0 +1,80 @@
+name: Update Consumer Example
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Execution mode"
+        required: true
+        type: choice
+        options:
+          - single
+          - matrix
+        default: single
+      profile:
+        description: "Profile used in single mode"
+        required: true
+        type: choice
+        options:
+          - general
+          - enterprise
+          - discovery
+          - ragdev
+        default: general
+
+permissions:
+  contents: write
+
+jobs:
+  single-profile:
+    if: ${{ github.event.inputs.mode == 'single' }}
+    uses: ./.github/workflows/update-profile-unit.yml
+    with:
+      profile: ${{ github.event.inputs.profile }}
+    secrets: inherit
+
+  matrix-profiles:
+    if: ${{ github.event.inputs.mode == 'matrix' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [general, enterprise, discovery, ragdev]
+    uses: ./.github/workflows/update-profile-unit.yml
+    with:
+      profile: ${{ matrix.profile }}
+    secrets: inherit
+
+  generate-and-commit:
+    needs:
+      - single-profile
+      - matrix-profiles
+    if: ${{ always() && (needs.single-profile.result == 'success' || needs.matrix-profiles.result == 'success') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download updated datasets
+        uses: actions/download-artifact@v4
+        with:
+          pattern: dataset-*
+          merge-multiple: true
+          path: .
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate pages
+        run: python scripts/generate.py
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/tools.json data/tools-enterprise.json data/tools-discovery.json data/tools-ragdev.json
+          git add index.html enterprise.html discovery.html ragdev.html
+          git diff --staged --quiet || git commit -m "🤖 Consumer update: $(date '+%Y-%m-%d')"
+          git push

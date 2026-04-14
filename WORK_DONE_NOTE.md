@@ -3,6 +3,22 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## 0000) Reusable consumer workflow example (uncommitted)
+
+### Changed
+- Added `.github/workflows/update-consumer-example.yml`.
+- The workflow demonstrates two reuse patterns of the unit workflow:
+  - `single` mode: call one profile selected via input.
+  - `matrix` mode: call all profiles (`general`, `enterprise`, `discovery`, `ragdev`).
+- Added a shared `generate-and-commit` job that downloads dataset artifacts, regenerates pages, and commits updates.
+
+### Why
+- To provide a concrete template showing how to consume the unit profile workflow from another workflow as a modular building block.
+
+### Files touched
+- `.github/workflows/update-consumer-example.yml`
+- `WORK_DONE_NOTE.md`
+
 ## 000) Workflow split by search profile (uncommitted)
 
 ### Changed
