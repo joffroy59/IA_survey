@@ -49,6 +49,13 @@ PROFILE_CONFIG = {
         "page_description": "Version optimisee des requetes generales pour detecter les nouveautes.",
         "query_profile": "discovery",
     },
+    "ragdev": {
+        "tools_file": ROOT / "data" / "tools-ragdev.json",
+        "page_name": "ragdev",
+        "page_label": "Panorama RAG Pro + DevTools",
+        "page_description": "Focus architecture RAG production et outils IA pour developpeurs.",
+        "query_profile": "ragdev",
+    },
 }
 
 MAX_SEARCH_RESULTS = 15  # par requête

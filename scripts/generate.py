@@ -29,6 +29,12 @@ PAGE_CONFIGS = [
         "data_file": ROOT / "data" / "tools-discovery.json",
         "output": ROOT / "discovery.html",
     },
+    {
+      "slug": "ragdev",
+      "label": "Vue RAG Pro + DevTools",
+      "data_file": ROOT / "data" / "tools-ragdev.json",
+      "output": ROOT / "ragdev.html",
+    },
 ]
 
 HTML_TEMPLATE = """<!DOCTYPE html>

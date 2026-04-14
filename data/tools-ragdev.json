@@ -1,0 +1,734 @@
+{
+  "meta": {
+    "title": "Boîte à outils IA Génératives",
+    "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
+    "last_updated": "2026-04-14",
+    "page_name": "ragdev",
+    "page_label": "Panorama RAG Pro + DevTools",
+    "page_description": "Focus architecture RAG production et outils IA pour developpeurs.",
+    "search_queries": [
+      "enterprise RAG architecture best practices 2026",
+      "production RAG pipeline design patterns LLM 2026",
+      "scalable retrieval augmented generation architecture",
+      "RAG system design chunking embedding retrieval strategies",
+      "RAG frameworks comparison LangChain LlamaIndex Haystack 2026",
+      "best RAG tools open source production ready",
+      "RAG orchestration frameworks enterprise AI",
+      "LangChain alternatives RAG pipelines 2026",
+      "vector database comparison enterprise RAG Pinecone Weaviate Qdrant 2026",
+      "hybrid search BM25 vector search RAG implementation",
+      "best embedding models for RAG 2026 benchmark",
+      "agentic RAG workflows multi step retrieval LLM",
+      "AI agents with RAG memory tools frameworks 2026",
+      "tool calling RAG agents enterprise workflows",
+      "enterprise knowledge base chatbot RAG implementation",
+      "RAG for internal documentation search company",
+      "AI document processing RAG pipeline enterprise",
+      "RAG use cases enterprise automation support IT",
+      "secure RAG architecture enterprise GDPR privacy LLM",
+      "on premise RAG deployment enterprise secure AI",
+      "data governance in RAG systems enterprise",
+      "RAG latency optimization caching retrieval pipeline",
+      "improving RAG accuracy reranking evaluation methods",
+      "RAG evaluation metrics benchmark retrieval quality",
+      "state of the art RAG research paper 2026",
+      "RAG benchmark leaderboard retrieval augmented generation",
+      "advanced RAG techniques multi vector retrieval",
+      "RAG pipeline python example production github",
+      "deploy RAG system docker kubernetes LLM",
+      "end to end RAG system tutorial enterprise",
+      "RAG architecture site:github.com",
+      "RAG pipeline site:arxiv.org",
+      "RAG system design site:medium.com OR site:substack.com",
+      "Show HN RAG project site:news.ycombinator.com",
+      "AI coding agents CLI tools 2026 Claude Code alternatives",
+      "developer AI assistant self hosted coding tools 2026",
+      "AI pair programming tools enterprise secure 2026",
+      "best AI coding tools for teams enterprise 2026",
+      "LLM CLI tools local workflow developers 2026",
+      "Ollama use cases developers local LLM workflow",
+      "run LLM locally developer tools open source 2026",
+      "AI terminal assistant tools developers 2026",
+      "LLM inference engines comparison vLLM TensorRT Triton 2026",
+      "high performance LLM serving open source 2026",
+      "optimize LLM inference GPU batching vLLM guide",
+      "LLM gateway tools OpenRouter alternatives enterprise",
+      "multi model LLM routing tools developers 2026",
+      "AI API orchestration layer LLM tools comparison",
+      "autonomous coding agents frameworks 2026 open source",
+      "AI dev agents workflows code generation automation",
+      "agentic coding tools multi step development AI",
+      "LLM developer platform self hosted enterprise stack",
+      "AI dev platform internal tools engineering teams 2026",
+      "build internal AI dev platform company LLM stack",
+      "secure AI coding tools enterprise GDPR privacy",
+      "on premise AI developer tools LLM enterprise",
+      "private AI coding assistant company data protection",
+      "AI developer tools site:github.com LLM CLI OR agent",
+      "LLM dev tools open source trending github 2026",
+      "self hosted AI dev tools repository github",
+      "Show HN AI dev tool CLI agent site:news.ycombinator.com",
+      "developer AI tool discussion LLM site:news.ycombinator.com",
+      "AI coding tools benchmark 2026 developer productivity",
+      "LLM coding assistants comparison Claude vs Gemini vs open source",
+      "outils IA dev entreprise open source Europe 2026",
+      "plateforme IA développeur entreprise self hosted"
+    ]
+  },
+  "categories": [
+    {
+      "id": "generiques",
+      "name": "IA Génériques",
+      "icon": "🧠",
+      "subcategories": [
+        {
+          "name": "Indispensables",
+          "icon": "📌",
+          "tools": [
+            {
+              "name": "ChatGPT",
+              "provider": "OpenAI",
+              "url": "https://chatgpt.com/",
+              "desc": "Le plus populaire"
+            },
+            {
+              "name": "Claude",
+              "provider": "Anthropic",
+              "url": "https://claude.ai/",
+              "desc": "Excellent pour l'analyse"
+            },
+            {
+              "name": "Gemini",
+              "provider": "Google",
+              "url": "https://gemini.google.com/",
+              "desc": "Intégré à Google"
+            },
+            {
+              "name": "Copilot",
+              "provider": "Microsoft",
+              "url": "https://copilot.microsoft.com/",
+              "desc": "Intégré à Windows"
+            },
+            {
+              "name": "Perplexity",
+              "provider": "",
+              "url": "https://www.perplexity.ai/",
+              "desc": "Recherche IA"
+            }
+          ]
+        },
+        {
+          "name": "Importantes",
+          "icon": "⭐",
+          "tools": [
+            {
+              "name": "Le Chat",
+              "provider": "Mistral",
+              "url": "https://chat.mistral.ai/",
+              "desc": "IA française"
+            },
+            {
+              "name": "Grok",
+              "provider": "xAI",
+              "url": "https://www.grok.com/",
+              "desc": "IA d'Elon Musk"
+            },
+            {
+              "name": "Meta AI",
+              "provider": "Meta",
+              "url": "https://meta.ai/",
+              "desc": "IA de Meta"
+            },
+            {
+              "name": "DeepSeek",
+              "provider": "",
+              "url": "https://chat.deepseek.com/",
+              "desc": "IA chinoise open source"
+            }
+          ]
+        },
+        {
+          "name": "Avancées - Veille",
+          "icon": "🔬",
+          "tools": [
+            {
+              "name": "Qwen",
+              "provider": "Alibaba",
+              "url": "https://chat.qwen.ai/",
+              "desc": ""
+            },
+            {
+              "name": "Kimi",
+              "provider": "Moonshot",
+              "url": "https://www.kimi.com/",
+              "desc": ""
+            },
+            {
+              "name": "MiniMax",
+              "provider": "",
+              "url": "https://agent.minimax.io/",
+              "desc": ""
+            }
+          ]
+        },
+        {
+          "name": "Productivité / Email",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Superhuman",
+              "provider": "",
+              "url": "https://superhuman.com",
+              "desc": "Boîte de réception intelligente pour emails",
+              "new": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "specialisees",
+      "name": "IA Spécialisées",
+      "icon": "📱",
+      "subcategories": [
+        {
+          "name": "Réunions & Audio",
+          "icon": "🎙️",
+          "tools": [
+            {
+              "name": "Notta",
+              "provider": "",
+              "url": "https://www.notta.ai/",
+              "desc": "Réunion App Mobile"
+            },
+            {
+              "name": "Fireflies.ai",
+              "provider": "",
+              "url": "https://fireflies.ai/",
+              "desc": "Transcription réunions"
+            },
+            {
+              "name": "Otter.ai",
+              "provider": "",
+              "url": "https://otter.ai/",
+              "desc": "Prise de notes IA"
+            },
+            {
+              "name": "Plaud AI",
+              "provider": "",
+              "url": "https://plaud.ai/",
+              "desc": ""
+            }
+          ]
+        },
+        {
+          "name": "Productivité & Présentation",
+          "icon": "📊",
+          "tools": [
+            {
+              "name": "Gamma",
+              "provider": "",
+              "url": "https://gamma.app/",
+              "desc": "Présentations IA"
+            },
+            {
+              "name": "Canva AI",
+              "provider": "Canva",
+              "url": "https://www.canva.com/",
+              "desc": "Design IA"
+            },
+            {
+              "name": "NotebookLM",
+              "provider": "Google",
+              "url": "https://notebooklm.google/",
+              "desc": "FAQ, Podcast IA"
+            }
+          ]
+        },
+        {
+          "name": "Gestion des connaissances",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Klu",
+              "provider": "",
+              "url": "https://klu.ai",
+              "desc": "Unifie les connaissances d'entreprise et réunions",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Infrastructure IA",
+          "icon": "",
+          "tools": [
+            {
+              "name": "AgentMail",
+              "provider": "",
+              "url": "https://agentmail.ai",
+              "desc": "Boîtes de réception dédiées pour agents IA",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Prise de notes de réunions",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Fathom",
+              "provider": "",
+              "url": "https://fathom.video",
+              "desc": "Notes et résumés de réunions automatiques",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Synthèse de réunions",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Recaply",
+              "provider": "",
+              "url": "https://recaply.io",
+              "desc": "Structure les appels en briefs d'équipe",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Présentations / Idées",
+          "icon": "",
+          "tools": [
+            {
+              "name": "PowerMode",
+              "provider": "",
+              "url": "https://powermode.ai",
+              "desc": "Génère des idées et présentations",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Voyage",
+          "icon": "",
+          "tools": [
+            {
+              "name": "FIFA World Cup 2026 Trip Builder",
+              "provider": "There's An AI For That",
+              "url": "https://theresanaiforthat.com",
+              "desc": "Planifie voyages autour des matchs de la Coupe du Monde.",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Notetaker",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Granola",
+              "provider": "",
+              "url": "https://www.producthunt.com/products/granola-ai",
+              "desc": "Transforme les réunions en notes et tâches.",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Dictée vocale",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Flow",
+              "provider": "Wispr AI",
+              "url": "https://wispr.ai/",
+              "desc": "Plateforme de dictée vocale sans édition.",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Orchestration AI",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Airia",
+              "provider": "",
+              "url": "https://airia.ai/",
+              "desc": "Plateforme d'orchestration AI d'entreprise.",
+              "new": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "images",
+      "name": "IA Images",
+      "icon": "🎨",
+      "subcategories": [
+        {
+          "name": "Gratuit & accessible",
+          "icon": "🎨",
+          "tools": [
+            {
+              "name": "Sora",
+              "provider": "OpenAI",
+              "url": "https://sora.chatgpt.com/",
+              "desc": "Gratuit"
+            },
+            {
+              "name": "Imagen (Gemini)",
+              "provider": "Google",
+              "url": "https://gemini.google.com/",
+              "desc": "Gratuit"
+            },
+            {
+              "name": "Bing Creator",
+              "provider": "Microsoft",
+              "url": "https://www.bing.com/images/create",
+              "desc": "Gratuit"
+            }
+          ]
+        },
+        {
+          "name": "Usages pro",
+          "icon": "💎",
+          "tools": [
+            {
+              "name": "MidJourney",
+              "provider": "",
+              "url": "https://www.midjourney.com/",
+              "desc": "Référence qualité"
+            },
+            {
+              "name": "Adobe Firefly",
+              "provider": "Adobe",
+              "url": "https://firefly.adobe.com/",
+              "desc": "Pro créatif"
+            }
+          ]
+        },
+        {
+          "name": "Open Source & expérimentaux",
+          "icon": "🛠️",
+          "tools": [
+            {
+              "name": "Stable Diffusion",
+              "provider": "",
+              "url": "https://stablediffusionweb.com/",
+              "desc": ""
+            },
+            {
+              "name": "Recraft",
+              "provider": "",
+              "url": "https://www.recraft.ai/",
+              "desc": ""
+            },
+            {
+              "name": "Leonardo AI",
+              "provider": "",
+              "url": "https://leonardo.ai/",
+              "desc": ""
+            },
+            {
+              "name": "Ideogram",
+              "provider": "",
+              "url": "https://ideogram.ai/",
+              "desc": ""
+            },
+            {
+              "name": "Flux",
+              "provider": "",
+              "url": "https://flux-ai.io/",
+              "desc": ""
+            }
+          ]
+        },
+        {
+          "name": "Edition photo & vidéo IA",
+          "icon": "",
+          "tools": [
+            {
+              "name": "MyEdit",
+              "provider": "CyberLink",
+              "url": "https://www.cyberlink.com/products/photo-director-365/features_en_US.html",
+              "desc": "Conversion image-vidéo et édition photo IA",
+              "new": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "code",
+      "name": "Code & Dev",
+      "icon": "💻",
+      "subcategories": [
+        {
+          "name": "Assistants code",
+          "icon": "⌨️",
+          "tools": [
+            {
+              "name": "GitHub Copilot",
+              "provider": "Microsoft",
+              "url": "https://github.com/copilot",
+              "desc": ""
+            },
+            {
+              "name": "gemini cli",
+              "provider": "Google",
+              "url": "https://geminicli.com",
+              "desc": "A lightweight command-line interface for interacting with Google's Gemini models directly from the terminal for rapid prompting, scripting, and workflow automation."
+            },
+            {
+              "name": "Gemini Code Assist",
+              "provider": "Google",
+              "url": "https://codeassist.google/",
+              "desc": "AI-powered collaborator integrated into IDEs and development workflows to help developers write, debug, and optimize code faster through real-time suggestions and deep codebase analysis."
+            },
+            {
+              "name": "Cursor",
+              "provider": "Anysphere",
+              "url": "https://cursor.com/",
+              "desc": ""
+            },
+            {
+              "name": "Claude",
+              "provider": "Anthropic",
+              "url": "https://claude.ai/",
+              "desc": ""
+            },
+            {
+              "name": "Claude Code",
+              "provider": "Anthropic",
+              "url": "https://claude.ai/download",
+              "desc": "Agent terminal"
+            }
+          ]
+        },
+        {
+          "name": "Création d'apps No-code",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Glide",
+              "provider": "",
+              "url": "https://glideapps.com",
+              "desc": "Crée des applications à partir de données existantes",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Prompt Engineering",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Promptfoo",
+              "provider": "OpenAI (acquired)",
+              "url": "https://promptfoo.dev/",
+              "desc": "Teste et évalue les invites (prompts) AI.",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Agent AI",
+          "icon": "",
+          "tools": [
+            {
+              "name": "microgpt",
+              "provider": "",
+              "url": "https://github.com/mueller-p/microgpt",
+              "desc": "Un petit agent AI pour tâches simples.",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Code Review",
+          "icon": "",
+          "tools": [
+            {
+              "name": "Unblocked",
+              "provider": "",
+              "url": "https://unblocked.ai/",
+              "desc": "Outil de revue de code AI contextuel.",
+              "new": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "audio",
+      "name": "IA Audio",
+      "icon": "🎧",
+      "subcategories": [
+        {
+          "name": "Génération musicale",
+          "icon": "🎵",
+          "tools": [
+            {
+              "name": "Suno",
+              "provider": "",
+              "url": "https://suno.com",
+              "desc": ""
+            },
+            {
+              "name": "Udio",
+              "provider": "",
+              "url": "https://www.udio.com",
+              "desc": ""
+            },
+            {
+              "name": "SongR",
+              "provider": "",
+              "url": "https://www.songr.ai",
+              "desc": ""
+            },
+            {
+              "name": "Boomy",
+              "provider": "",
+              "url": "https://boomy.com",
+              "desc": ""
+            }
+          ]
+        },
+        {
+          "name": "Voix & clonage vocal",
+          "icon": "🎤",
+          "tools": [
+            {
+              "name": "ElevenLabs",
+              "provider": "",
+              "url": "https://elevenlabs.io",
+              "desc": "Leader voix réaliste"
+            },
+            {
+              "name": "Murf AI",
+              "provider": "",
+              "url": "https://murf.ai",
+              "desc": ""
+            },
+            {
+              "name": "Descript",
+              "provider": "",
+              "url": "https://www.descript.com",
+              "desc": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "video",
+      "name": "IA Vidéo",
+      "icon": "🎬",
+      "subcategories": [
+        {
+          "name": "Text-to-Video PRO",
+          "icon": "🎬",
+          "tools": [
+            {
+              "name": "Veo",
+              "provider": "Google",
+              "url": "https://deepmind.google/models/veo/",
+              "desc": "Ultra réaliste"
+            },
+            {
+              "name": "Kling",
+              "provider": "",
+              "url": "https://klingai.com/",
+              "desc": ""
+            },
+            {
+              "name": "Runway",
+              "provider": "",
+              "url": "https://app.runwayml.com/",
+              "desc": ""
+            },
+            {
+              "name": "Luma Dream Machine",
+              "provider": "",
+              "url": "https://lumalabs.ai/",
+              "desc": ""
+            },
+            {
+              "name": "Sora",
+              "provider": "OpenAI",
+              "url": "https://sora.chatgpt.com/",
+              "desc": ""
+            }
+          ]
+        },
+        {
+          "name": "Avatar IA",
+          "icon": "🧍",
+          "tools": [
+            {
+              "name": "HeyGen",
+              "provider": "",
+              "url": "https://www.heygen.com/",
+              "desc": ""
+            },
+            {
+              "name": "Synthesia",
+              "provider": "",
+              "url": "https://www.synthesia.io/",
+              "desc": ""
+            },
+            {
+              "name": "Colossyan",
+              "provider": "",
+              "url": "https://www.colossyan.com/",
+              "desc": ""
+            }
+          ]
+        },
+        {
+          "name": "Génération vidéo et image",
+          "icon": "🆕",
+          "tools": [
+            {
+              "name": "Atlabs",
+              "provider": "Atlabs",
+              "url": "https://www.atlabs.ai/",
+              "desc": "Plateforme IA pour génération images et vidéos",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Image-to-Video",
+          "icon": "🆕",
+          "tools": [
+            {
+              "name": "VO3AI",
+              "provider": "VO3AI",
+              "url": "https://www.vo3ai.com/",
+              "desc": "Crée des vidéos à partir d'images statiques",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Présentations vidéo",
+          "icon": "",
+          "tools": [
+            {
+              "name": "NextDocs",
+              "provider": "",
+              "url": "https://theresanaiforthat.com/nextdocs/",
+              "desc": "Anime les objets dans vos présentations.",
+              "new": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
