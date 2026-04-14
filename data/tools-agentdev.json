@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "title": "Boîte à outils IA Génératives",
+    "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
+    "last_updated": "2026-04-15",
+    "page_name": "agentdev",
+    "page_label": "Panorama Agent Dev + IDE Tools",
+    "page_description": "Outils spécialisés pour développement d'agents IA autonomes et IDE enrichis d'IA.",
+    "search_queries": [
+      "AI agent development frameworks 2026 open source",
+      "autonomous agent tools for developers 2026",
+      "agent IDE tools VSCode extensions 2026",
+      "multi-agent orchestration platforms dev tools",
+      "LangGraph AutoGen agent framework comparison 2026",
+      "best agent development frameworks Python 2026",
+      "agent memory management frameworks 2026",
+      "tool calling agent frameworks integration",
+      "AI agent debugging tools monitoring 2026",
+      "VS Code AI agent extensions 2026",
+      "IDE tools for AI development ChatGPT Claude plugins",
+      "AI assistant IDE integration JetBrains VSCode",
+      "Cursor Windsurf AI IDE comparison 2026",
+      "best AI-powered code editor 2026",
+      "collaborative AI development tools teams",
+      "agent chains workflows automation tools",
+      "AI testing frameworks for agent systems",
+      "agent validation evaluation tools 2026",
+      "self-improving autonomous agents 2026",
+      "agent observability logging tools production",
+      "AI agent deployment platforms open source",
+      "kubernetes deployment AI agents 2026",
+      "serverless AI agent platforms 2026",
+      "agent scaling concurrency management tools",
+      "AI agent security sandbox isolation 2026",
+      "secure multi-agent systems frameworks",
+      "agent fine-tuning optimization tools 2026",
+      "local agent development environment setup",
+      "ollama local AI agent development",
+      "agent benchmark datasets evaluation metrics",
+      "AI agent reasoning explanation interpretability",
+      "agent tool integration plugins extensibility",
+      "agent knowledge base integration RAG",
+      "AI agent state management persistence",
+      "agent workflow visualization tools",
+      "AI development UI dashboard tools",
+      "agent performance profiling optimization",
+      "AI agent error handling recovery",
+      "open source agent projects github 2026",
+      "Show HN AI agent tool site:news.ycombinator.com",
+      "AI agent framework benchmarks comparison 2026",
+      "developer productivity AI tools 2026",
+      "pair programming with AI agents",
+      "code review AI agents automation",
+      "documentation generation AI tools",
+      "test generation from code AI",
+      "AI refactoring tools for developers",
+      "bug detection AI agents tools",
+      "outils IA développement agent 2026",
+      "framework agent France open source",
+      "plateforme agent développeur entreprise"
+    ],
+    "page_history": [
+      {
+        "date": "2026-04-15",
+        "tool_count": 0
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "agent-frameworks",
+      "name": "🤖 Agent Frameworks",
+      "icon": "🤖",
+      "subcategories": [
+        {
+          "name": "Multi-Agent Orchestration",
+          "icon": "🔗",
+          "tools": []
+        },
+        {
+          "name": "Single Agent Libraries",
+          "icon": "📚",
+          "tools": []
+        },
+        {
+          "name": "Agent Workflow & Chains",
+          "icon": "⛓️",
+          "tools": []
+        },
+        {
+          "name": "Memory & State Management",
+          "icon": "🧠",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "ide-ai-tools",
+      "name": "💻 IDE + AI Tools",
+      "icon": "💻",
+      "subcategories": [
+        {
+          "name": "AI-Powered Editors",
+          "icon": "✏️",
+          "tools": []
+        },
+        {
+          "name": "VSCode Extensions",
+          "icon": "🔌",
+          "tools": []
+        },
+        {
+          "name": "JetBrains Integration",
+          "icon": "🎯",
+          "tools": []
+        },
+        {
+          "name": "Pair Programming AI",
+          "icon": "👯",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "agent-tools",
+      "name": "🛠️ Agent Tools & Utils",
+      "icon": "🛠️",
+      "subcategories": [
+        {
+          "name": "Debugging & Monitoring",
+          "icon": "🔍",
+          "tools": []
+        },
+        {
+          "name": "Testing & Evaluation",
+          "icon": "✅",
+          "tools": []
+        },
+        {
+          "name": "Deployment & Scaling",
+          "icon": "🚀",
+          "tools": []
+        },
+        {
+          "name": "Visualization & UI",
+          "icon": "📊",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "dev-productivity",
+      "name": "⚡ Developer Productivity",
+      "icon": "⚡",
+      "subcategories": [
+        {
+          "name": "Code Generation & Refactoring",
+          "icon": "♻️",
+          "tools": []
+        },
+        {
+          "name": "Testing & Documentation",
+          "icon": "📝",
+          "tools": []
+        },
+        {
+          "name": "Code Review & Analysis",
+          "icon": "🔎",
+          "tools": []
+        },
+        {
+          "name": "Collaboration Tools",
+          "icon": "🤝",
+          "tools": []
+        }
+      ]
+    }
+  ]
+}

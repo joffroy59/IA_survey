@@ -8,6 +8,7 @@ import json
 import os
 import sys
 import time
+import argparse
 from datetime import date
 from pathlib import Path
 
@@ -23,34 +24,74 @@ except ImportError:
 
 # ── Config ────────────────────────────────────────────────────────────────────
 ROOT = Path(__file__).parent.parent
-TOOLS_FILE = ROOT / "data" / "tools.json"
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+SEARCH_QUERIES_FILE = ROOT / "data" / "search_queries.json"
 
-SEARCH_QUERIES = [
-    "new AI tools 2026 site:producthunt.com OR site:theresanaiforthat.com",
-    "new AI tools 2026 site:futurepedia.io OR site:uneed.best",
-    "new AI agentic workflows site:news.ycombinator.com 2026",
-    "best new AI coding tools 2026 site:tldr.tech",
-    "trending AI repositories 2026 site:github.com",
-    "new AI image video audio tools 2026 site:the-decoder.com",
-    "meilleurs outils IA agentique 2026",
-    "state-of-the-art AI benchmarks April 2026",
-    "best professional AI tools for developers 2026"
-]
+PROFILE_CONFIG = {
+    "general": {
+        "tools_file": ROOT / "data" / "tools.json",
+        "page_name": "general",
+    },
+    "enterprise": {
+        "tools_file": ROOT / "data" / "tools-enterprise.json",
+        "page_name": "enterprise",
+    },
+    "discovery": {
+        "tools_file": ROOT / "data" / "tools-discovery.json",
+        "page_name": "discovery",
+    },
+    "ragdev": {
+        "tools_file": ROOT / "data" / "tools-ragdev.json",
+        "page_name": "ragdev",
+    },
+    "agentdev": {
+        "tools_file": ROOT / "data" / "tools-agentdev.json",
+        "page_name": "agentdev",
+    },
+}
 
 MAX_SEARCH_RESULTS = 15  # par requête
 
 
-def load_tools() -> dict:
-    with open(TOOLS_FILE, "r", encoding="utf-8") as f:
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Update AI tools datasets")
+    parser.add_argument(
+        "--profile",
+        choices=sorted(PROFILE_CONFIG.keys()),
+        default="general",
+        help="Dataset profile to update",
+    )
+    return parser.parse_args()
+
+
+def load_search_queries() -> dict[str, list[str]]:
+    if not SEARCH_QUERIES_FILE.exists():
+        raise FileNotFoundError(f"Missing search query file: {SEARCH_QUERIES_FILE}")
+
+    with open(SEARCH_QUERIES_FILE, "r", encoding="utf-8") as f:
+        payload = json.load(f)
+
+    profiles = payload.get("profiles", {})
+    query_map: dict[str, list[str]] = {}
+    for profile_name in PROFILE_CONFIG.keys():
+        profile_queries = profiles.get(profile_name, {}).get("queries", [])
+        if not isinstance(profile_queries, list) or not profile_queries:
+            raise ValueError(f"No queries configured for profile '{profile_name}'")
+        query_map[profile_name] = [q for q in profile_queries if isinstance(q, str) and q.strip()]
+
+    return query_map
+
+
+def load_tools(tools_file: Path) -> dict:
+    with open(tools_file, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
-def save_tools(data: dict):
+def save_tools(data: dict, tools_file: Path):
     data["meta"]["last_updated"] = date.today().isoformat()
-    with open(TOOLS_FILE, "w", encoding="utf-8") as f:
+    with open(tools_file, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    print(f"✅ tools.json saved ({date.today()})")
+    print(f"✅ {tools_file.name} saved ({date.today()})")
 
 
 def get_existing_names(data: dict) -> list[str]:
@@ -62,15 +103,14 @@ def get_existing_names(data: dict) -> list[str]:
     return names
 
 
-def search_new_tools() -> str:
+def search_new_tools(search_queries: list[str]) -> str:
     """DuckDuckGo search — no API key required."""
     results = []
     with DDGS() as ddgs:
-        for query in SEARCH_QUERIES:
+        for query in search_queries:
             try:
                 response = ddgs.text(query, max_results=MAX_SEARCH_RESULTS)
                 print(f"🔎  Search for '{query}")
-                print(f"📋  Result Search '{response}")
                 hits = list(response)
                 for h in hits:
                     results.append(f"- {h['title']}: {h['body']} ({h['href']})")
@@ -193,12 +233,19 @@ def add_tools_to_data(data: dict, new_tools: list[dict]) -> int:
 
 
 def main():
-    print("🔍 Searching for new AI tools...")
-    data = load_tools()
+    args = parse_args()
+    profile = args.profile
+    cfg = PROFILE_CONFIG[profile]
+    tools_file = cfg["tools_file"]
+    query_map = load_search_queries()
+    search_queries = query_map[profile]
+
+    print(f"🔍 Searching for new AI tools ({profile} profile)...")
+    data = load_tools(tools_file)
     existing = get_existing_names(data)
     print(f"   {len(existing)} existing tools loaded")
 
-    search_results = search_new_tools()
+    search_results = search_new_tools(search_queries)
     print(f"   {len(search_results.splitlines())} search results collected")
 
     print("🤖 Asking Gemini to identify new tools...")
@@ -208,11 +255,12 @@ def main():
     if new_tools:
         added = add_tools_to_data(data, new_tools)
         print(f"✅ {added} new tools added")
-        save_tools(data)
+        save_tools(data, tools_file)
     else:
         print("ℹ️  No new tools to add, updating date only")
-        save_tools(data)
+        save_tools(data, tools_file)
 
 
 if __name__ == "__main__":
     main()
+
