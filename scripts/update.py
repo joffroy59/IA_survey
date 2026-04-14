@@ -13,12 +13,12 @@ from pathlib import Path
 
 # ── Dépendances ──────────────────────────────────────────────────────────────
 try:
-    from duckduckgo_search import DDGS
+    from ddgs import DDGS
     import google.genai as genai
 except ImportError:
     print("Installing dependencies...")
-    os.system("pip install duckduckgo-search google-genai --quiet")
-    from duckduckgo_search import DDGS
+    os.system("pip install ddgs google-genai --quiet")
+    from ddgs import DDGS
     import google.genai as genai
 
 # ── Config ────────────────────────────────────────────────────────────────────

@@ -24,7 +24,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install duckduckgo-search google-genai
+          pip install ddgs google-genai
 
       - name: Search & update tools.json
         env:
