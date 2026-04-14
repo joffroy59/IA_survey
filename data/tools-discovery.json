@@ -1,0 +1,232 @@
+{
+  "meta": {
+    "title": "Boîte à outils IA Génératives",
+    "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
+    "last_updated": "2026-04-14",
+    "page_name": "discovery",
+    "page_label": "Panorama Decouverte",
+    "page_description": "Version optimisee des requetes generales pour detecter les nouveautes.",
+    "search_queries": [
+      "latest AI tools 2026 site:theresanaiforthat.com OR site:futurepedia.io",
+      "new AI startups tools 2026 site:producthunt.com AI",
+      "trending AI tools this week 2026 site:theresanaiforthat.com",
+      "best new AI tools April 2026 site:futurepedia.io",
+      "trending AI repositories 2026 site:github.com stars >100",
+      "AI agent open source projects 2026 site:github.com",
+      "Show HN AI tool 2026 site:news.ycombinator.com",
+      "AI agent discussion 2026 site:news.ycombinator.com",
+      "AI coding assistant tools 2026",
+      "AI video generation tools 2026",
+      "AI automation agent tools 2026",
+      "meilleurs outils IA 2026 nouveautés",
+      "outils IA productivité 2026",
+      "state of the art AI tools 2026 blog",
+      "new AI workflows automation tools 2026"
+    ],
+    "page_history": [
+      {
+        "date": "2026-04-15",
+        "tool_count": 0
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "generiques",
+      "name": "IA Génériques",
+      "icon": "🧠",
+      "subcategories": [
+        {
+          "name": "Indispensables",
+          "icon": "📌",
+          "tools": []
+        },
+        {
+          "name": "Importantes",
+          "icon": "⭐",
+          "tools": []
+        },
+        {
+          "name": "Avancées - Veille",
+          "icon": "🔬",
+          "tools": []
+        },
+        {
+          "name": "Productivité / Email",
+          "icon": "",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "specialisees",
+      "name": "IA Spécialisées",
+      "icon": "📱",
+      "subcategories": [
+        {
+          "name": "Réunions & Audio",
+          "icon": "🎙️",
+          "tools": []
+        },
+        {
+          "name": "Productivité & Présentation",
+          "icon": "📊",
+          "tools": []
+        },
+        {
+          "name": "Gestion des connaissances",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Infrastructure IA",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Prise de notes de réunions",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Synthèse de réunions",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Présentations / Idées",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Voyage",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Notetaker",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Dictée vocale",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Orchestration AI",
+          "icon": "",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "images",
+      "name": "IA Images",
+      "icon": "🎨",
+      "subcategories": [
+        {
+          "name": "Gratuit & accessible",
+          "icon": "🎨",
+          "tools": []
+        },
+        {
+          "name": "Usages pro",
+          "icon": "💎",
+          "tools": []
+        },
+        {
+          "name": "Open Source & expérimentaux",
+          "icon": "🛠️",
+          "tools": []
+        },
+        {
+          "name": "Edition photo & vidéo IA",
+          "icon": "",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "code",
+      "name": "Code & Dev",
+      "icon": "💻",
+      "subcategories": [
+        {
+          "name": "Assistants code",
+          "icon": "⌨️",
+          "tools": []
+        },
+        {
+          "name": "Création d'apps No-code",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Prompt Engineering",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Agent AI",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Code Review",
+          "icon": "",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "audio",
+      "name": "IA Audio",
+      "icon": "🎧",
+      "subcategories": [
+        {
+          "name": "Génération musicale",
+          "icon": "🎵",
+          "tools": []
+        },
+        {
+          "name": "Voix & clonage vocal",
+          "icon": "🎤",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "video",
+      "name": "IA Vidéo",
+      "icon": "🎬",
+      "subcategories": [
+        {
+          "name": "Text-to-Video PRO",
+          "icon": "🎬",
+          "tools": []
+        },
+        {
+          "name": "Avatar IA",
+          "icon": "🧍",
+          "tools": []
+        },
+        {
+          "name": "Génération vidéo et image",
+          "icon": "🆕",
+          "tools": []
+        },
+        {
+          "name": "Image-to-Video",
+          "icon": "🆕",
+          "tools": []
+        },
+        {
+          "name": "Présentations vidéo",
+          "icon": "",
+          "tools": []
+        }
+      ]
+    }
+  ]
+}
