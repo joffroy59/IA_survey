@@ -21,6 +21,7 @@ on:
           - enterprise
           - discovery
           - ragdev
+          - agentdev
 
 permissions:
   contents: read
@@ -51,6 +52,7 @@ jobs:
             enterprise) DATASET_PATH="data/tools-enterprise.json" ;;
             discovery) DATASET_PATH="data/tools-discovery.json" ;;
             ragdev) DATASET_PATH="data/tools-ragdev.json" ;;
+            agentdev) DATASET_PATH="data/tools-agentdev.json" ;;
             *) echo "Unknown profile: $PROFILE"; exit 1 ;;
           esac
           echo "DATASET_PATH=$DATASET_PATH" >> "$GITHUB_ENV"
