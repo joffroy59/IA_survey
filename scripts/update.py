@@ -68,6 +68,7 @@ PROFILE_CONFIG = {
 }
 
 MAX_SEARCH_RESULTS = 15  # par requête
+GEMINI_RETRY_WAIT_SECONDS = 60
 
 
 def parse_args() -> argparse.Namespace:
@@ -174,12 +175,30 @@ def ask_gemini(prompt: str) -> str:
 
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel("gemini-2.5-flash")
-    try:
+
+    def _generate_once() -> str:
         response = model.generate_content(prompt)
         return response.text
+
+    try:
+        return _generate_once()
     except google_api_exceptions.ResourceExhausted as e:
-        print(f"Gemini quota exceeded (ResourceExhausted). Skipping LLM step: {e}")
-        return "[]"
+        print(
+            "Gemini quota exceeded (ResourceExhausted). "
+            f"Waiting {GEMINI_RETRY_WAIT_SECONDS}s before one retry: {e}"
+        )
+        time.sleep(GEMINI_RETRY_WAIT_SECONDS)
+        try:
+            return _generate_once()
+        except google_api_exceptions.ResourceExhausted as retry_error:
+            print(f"Gemini quota still exceeded after retry. Skipping LLM step: {retry_error}")
+            return "[]"
+        except google_api_exceptions.GoogleAPICallError as retry_error:
+            print(f"Gemini API call failed after retry. Skipping LLM step: {retry_error}")
+            return "[]"
+        except Exception as retry_error:
+            print(f"Unexpected Gemini error after retry. Skipping LLM step: {retry_error}")
+            return "[]"
     except google_api_exceptions.GoogleAPICallError as e:
         print(f"Gemini API call failed. Skipping LLM step: {e}")
         return "[]"
