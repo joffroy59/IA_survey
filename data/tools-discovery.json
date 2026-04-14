@@ -3,19 +3,25 @@
     "title": "Boîte à outils IA Génératives",
     "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
     "last_updated": "2026-04-14",
-    "page_name": "general",
-    "page_label": "Panorama Generaliste",
-    "page_description": "Vue complete des meilleurs outils IA grand public et pro.",
+    "page_name": "discovery",
+    "page_label": "Panorama Decouverte",
+    "page_description": "Version optimisee des requetes generales pour detecter les nouveautes.",
     "search_queries": [
-      "new AI tools 2026 site:producthunt.com OR site:theresanaiforthat.com",
-      "new AI tools 2026 site:futurepedia.io OR site:uneed.best",
-      "new AI agentic workflows site:news.ycombinator.com 2026",
-      "best new AI coding tools 2026 site:tldr.tech",
-      "trending AI repositories 2026 site:github.com",
-      "new AI image video audio tools 2026 site:the-decoder.com",
-      "meilleurs outils IA agentique 2026",
-      "state-of-the-art AI benchmarks April 2026",
-      "best professional AI tools for developers 2026"
+      "latest AI tools 2026 site:theresanaiforthat.com OR site:futurepedia.io",
+      "new AI startups tools 2026 site:producthunt.com AI",
+      "trending AI tools this week 2026 site:theresanaiforthat.com",
+      "best new AI tools April 2026 site:futurepedia.io",
+      "trending AI repositories 2026 site:github.com stars >100",
+      "AI agent open source projects 2026 site:github.com",
+      "Show HN AI tool 2026 site:news.ycombinator.com",
+      "AI agent discussion 2026 site:news.ycombinator.com",
+      "AI coding assistant tools 2026",
+      "AI video generation tools 2026",
+      "AI automation agent tools 2026",
+      "meilleurs outils IA 2026 nouveautés",
+      "outils IA productivité 2026",
+      "state of the art AI tools 2026 blog",
+      "new AI workflows automation tools 2026"
     ]
   },
   "categories": [
@@ -123,32 +129,6 @@
               "provider": "",
               "url": "https://superhuman.com",
               "desc": "Boîte de réception intelligente pour emails",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Chatbot",
-          "icon": "",
-          "tools": [
-            {
-              "name": "Character.AI",
-              "provider": "Character AI",
-              "url": "https://beta.character.ai/",
-              "desc": "Créer et interagir avec des personnages IA.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Multi-LLM Chatbot",
-          "icon": "",
-          "tools": [
-            {
-              "name": "Use AI",
-              "provider": "Use AI",
-              "url": "https://use.ai/",
-              "desc": "Accès illimité à 25+ LLMs avancés.",
               "new": true
             }
           ]
@@ -327,26 +307,6 @@
               "provider": "",
               "url": "https://airia.ai/",
               "desc": "Plateforme d'orchestration AI d'entreprise.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Automatisation",
-          "icon": "",
-          "tools": [
-            {
-              "name": "n8n",
-              "provider": "",
-              "url": "https://n8n.io/",
-              "desc": "Automatisation de workflows open-source.",
-              "new": true
-            },
-            {
-              "name": "Make.com",
-              "provider": "Make",
-              "url": "https://www.make.com/",
-              "desc": "Plateforme d'intégration et d'automatisation IA.",
               "new": true
             }
           ]
@@ -546,66 +506,6 @@
               "provider": "",
               "url": "https://unblocked.ai/",
               "desc": "Outil de revue de code AI contextuel.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Framework IA",
-          "icon": "",
-          "tools": [
-            {
-              "name": "CrewAI",
-              "provider": "CrewAI",
-              "url": "https://www.crewai.com/",
-              "desc": "Framework pour construire agents IA collaboratifs.",
-              "new": true
-            },
-            {
-              "name": "LangChain",
-              "provider": "LangChain",
-              "url": "https://www.langchain.com/",
-              "desc": "Framework pour construire des applications LLM.",
-              "new": true
-            },
-            {
-              "name": "Smolagents",
-              "provider": "Hugging Face",
-              "url": "https://github.com/huggingface/smol-ai/tree/main/smol-agents",
-              "desc": "Bibliothèque open-source pour agents IA.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Développement logiciel",
-          "icon": "",
-          "tools": [
-            {
-              "name": "Blitzy",
-              "provider": "",
-              "url": "https://blitzy.com/",
-              "desc": "Orchestre agents IA pour créer des logiciels.",
-              "new": true
-            },
-            {
-              "name": "Astral",
-              "provider": "OpenAI (acquisition)",
-              "url": "https://astral.sh/",
-              "desc": "Plateforme de développement logiciel pilotée IA.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "App Builder No-Code",
-          "icon": "",
-          "tools": [
-            {
-              "name": "Base44",
-              "provider": "",
-              "url": "https://base44.com/",
-              "desc": "Constructeur d'applications AI sans code.",
               "new": true
             }
           ]

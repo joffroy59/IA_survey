@@ -3,19 +3,34 @@
     "title": "Boîte à outils IA Génératives",
     "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
     "last_updated": "2026-04-14",
-    "page_name": "general",
-    "page_label": "Panorama Generaliste",
-    "page_description": "Vue complete des meilleurs outils IA grand public et pro.",
+    "page_name": "enterprise",
+    "page_label": "Panorama Enterprise",
+    "page_description": "Focus RAG, agents, infra, securite et cas d'usage entreprise.",
     "search_queries": [
-      "new AI tools 2026 site:producthunt.com OR site:theresanaiforthat.com",
-      "new AI tools 2026 site:futurepedia.io OR site:uneed.best",
-      "new AI agentic workflows site:news.ycombinator.com 2026",
-      "best new AI coding tools 2026 site:tldr.tech",
-      "trending AI repositories 2026 site:github.com",
-      "new AI image video audio tools 2026 site:the-decoder.com",
-      "meilleurs outils IA agentique 2026",
-      "state-of-the-art AI benchmarks April 2026",
-      "best professional AI tools for developers 2026"
+      "RAG architecture tools enterprise 2026",
+      "retrieval augmented generation frameworks production 2026",
+      "best RAG tools open source vector database 2026",
+      "LLM RAG pipeline production stack 2026",
+      "AI agents frameworks enterprise automation 2026",
+      "agentic workflows tools production AI agents 2026",
+      "multi agent systems frameworks 2026 open source",
+      "AI orchestration tools LangChain alternatives 2026",
+      "AI developer tools enterprise coding assistant self hosted 2026",
+      "secure AI coding tools for companies 2026",
+      "on premise AI dev tools LLM enterprise 2026",
+      "LLM infrastructure tools enterprise deployment 2026",
+      "self hosted LLM stack enterprise vector db embedding 2026",
+      "AI platform enterprise stack comparison 2026",
+      "AI use cases enterprise automation internal tools 2026",
+      "AI for business process automation tools 2026",
+      "LLM internal knowledge base chatbot enterprise 2026",
+      "secure AI tools enterprise GDPR LLM privacy 2026",
+      "on premise AI tools Europe compliance 2026",
+      "AI tools enterprise site:github.com RAG OR agent",
+      "AI infrastructure blog LLM stack 2026 site:medium.com OR site:substack.com",
+      "Show HN enterprise AI tool RAG agent site:news.ycombinator.com",
+      "outils IA entreprise RAG agentique France 2026",
+      "plateforme IA entreprise Europe LLM open source"
     ]
   },
   "categories": [
@@ -123,32 +138,6 @@
               "provider": "",
               "url": "https://superhuman.com",
               "desc": "Boîte de réception intelligente pour emails",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Chatbot",
-          "icon": "",
-          "tools": [
-            {
-              "name": "Character.AI",
-              "provider": "Character AI",
-              "url": "https://beta.character.ai/",
-              "desc": "Créer et interagir avec des personnages IA.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Multi-LLM Chatbot",
-          "icon": "",
-          "tools": [
-            {
-              "name": "Use AI",
-              "provider": "Use AI",
-              "url": "https://use.ai/",
-              "desc": "Accès illimité à 25+ LLMs avancés.",
               "new": true
             }
           ]
@@ -327,26 +316,6 @@
               "provider": "",
               "url": "https://airia.ai/",
               "desc": "Plateforme d'orchestration AI d'entreprise.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Automatisation",
-          "icon": "",
-          "tools": [
-            {
-              "name": "n8n",
-              "provider": "",
-              "url": "https://n8n.io/",
-              "desc": "Automatisation de workflows open-source.",
-              "new": true
-            },
-            {
-              "name": "Make.com",
-              "provider": "Make",
-              "url": "https://www.make.com/",
-              "desc": "Plateforme d'intégration et d'automatisation IA.",
               "new": true
             }
           ]
@@ -546,66 +515,6 @@
               "provider": "",
               "url": "https://unblocked.ai/",
               "desc": "Outil de revue de code AI contextuel.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Framework IA",
-          "icon": "",
-          "tools": [
-            {
-              "name": "CrewAI",
-              "provider": "CrewAI",
-              "url": "https://www.crewai.com/",
-              "desc": "Framework pour construire agents IA collaboratifs.",
-              "new": true
-            },
-            {
-              "name": "LangChain",
-              "provider": "LangChain",
-              "url": "https://www.langchain.com/",
-              "desc": "Framework pour construire des applications LLM.",
-              "new": true
-            },
-            {
-              "name": "Smolagents",
-              "provider": "Hugging Face",
-              "url": "https://github.com/huggingface/smol-ai/tree/main/smol-agents",
-              "desc": "Bibliothèque open-source pour agents IA.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Développement logiciel",
-          "icon": "",
-          "tools": [
-            {
-              "name": "Blitzy",
-              "provider": "",
-              "url": "https://blitzy.com/",
-              "desc": "Orchestre agents IA pour créer des logiciels.",
-              "new": true
-            },
-            {
-              "name": "Astral",
-              "provider": "OpenAI (acquisition)",
-              "url": "https://astral.sh/",
-              "desc": "Plateforme de développement logiciel pilotée IA.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "App Builder No-Code",
-          "icon": "",
-          "tools": [
-            {
-              "name": "Base44",
-              "provider": "",
-              "url": "https://base44.com/",
-              "desc": "Constructeur d'applications AI sans code.",
               "new": true
             }
           ]

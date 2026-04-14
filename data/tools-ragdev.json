@@ -3,19 +3,76 @@
     "title": "Boîte à outils IA Génératives",
     "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
     "last_updated": "2026-04-14",
-    "page_name": "general",
-    "page_label": "Panorama Generaliste",
-    "page_description": "Vue complete des meilleurs outils IA grand public et pro.",
+    "page_name": "ragdev",
+    "page_label": "Panorama RAG Pro + DevTools",
+    "page_description": "Focus architecture RAG production et outils IA pour developpeurs.",
     "search_queries": [
-      "new AI tools 2026 site:producthunt.com OR site:theresanaiforthat.com",
-      "new AI tools 2026 site:futurepedia.io OR site:uneed.best",
-      "new AI agentic workflows site:news.ycombinator.com 2026",
-      "best new AI coding tools 2026 site:tldr.tech",
-      "trending AI repositories 2026 site:github.com",
-      "new AI image video audio tools 2026 site:the-decoder.com",
-      "meilleurs outils IA agentique 2026",
-      "state-of-the-art AI benchmarks April 2026",
-      "best professional AI tools for developers 2026"
+      "enterprise RAG architecture best practices 2026",
+      "production RAG pipeline design patterns LLM 2026",
+      "scalable retrieval augmented generation architecture",
+      "RAG system design chunking embedding retrieval strategies",
+      "RAG frameworks comparison LangChain LlamaIndex Haystack 2026",
+      "best RAG tools open source production ready",
+      "RAG orchestration frameworks enterprise AI",
+      "LangChain alternatives RAG pipelines 2026",
+      "vector database comparison enterprise RAG Pinecone Weaviate Qdrant 2026",
+      "hybrid search BM25 vector search RAG implementation",
+      "best embedding models for RAG 2026 benchmark",
+      "agentic RAG workflows multi step retrieval LLM",
+      "AI agents with RAG memory tools frameworks 2026",
+      "tool calling RAG agents enterprise workflows",
+      "enterprise knowledge base chatbot RAG implementation",
+      "RAG for internal documentation search company",
+      "AI document processing RAG pipeline enterprise",
+      "RAG use cases enterprise automation support IT",
+      "secure RAG architecture enterprise GDPR privacy LLM",
+      "on premise RAG deployment enterprise secure AI",
+      "data governance in RAG systems enterprise",
+      "RAG latency optimization caching retrieval pipeline",
+      "improving RAG accuracy reranking evaluation methods",
+      "RAG evaluation metrics benchmark retrieval quality",
+      "state of the art RAG research paper 2026",
+      "RAG benchmark leaderboard retrieval augmented generation",
+      "advanced RAG techniques multi vector retrieval",
+      "RAG pipeline python example production github",
+      "deploy RAG system docker kubernetes LLM",
+      "end to end RAG system tutorial enterprise",
+      "RAG architecture site:github.com",
+      "RAG pipeline site:arxiv.org",
+      "RAG system design site:medium.com OR site:substack.com",
+      "Show HN RAG project site:news.ycombinator.com",
+      "AI coding agents CLI tools 2026 Claude Code alternatives",
+      "developer AI assistant self hosted coding tools 2026",
+      "AI pair programming tools enterprise secure 2026",
+      "best AI coding tools for teams enterprise 2026",
+      "LLM CLI tools local workflow developers 2026",
+      "Ollama use cases developers local LLM workflow",
+      "run LLM locally developer tools open source 2026",
+      "AI terminal assistant tools developers 2026",
+      "LLM inference engines comparison vLLM TensorRT Triton 2026",
+      "high performance LLM serving open source 2026",
+      "optimize LLM inference GPU batching vLLM guide",
+      "LLM gateway tools OpenRouter alternatives enterprise",
+      "multi model LLM routing tools developers 2026",
+      "AI API orchestration layer LLM tools comparison",
+      "autonomous coding agents frameworks 2026 open source",
+      "AI dev agents workflows code generation automation",
+      "agentic coding tools multi step development AI",
+      "LLM developer platform self hosted enterprise stack",
+      "AI dev platform internal tools engineering teams 2026",
+      "build internal AI dev platform company LLM stack",
+      "secure AI coding tools enterprise GDPR privacy",
+      "on premise AI developer tools LLM enterprise",
+      "private AI coding assistant company data protection",
+      "AI developer tools site:github.com LLM CLI OR agent",
+      "LLM dev tools open source trending github 2026",
+      "self hosted AI dev tools repository github",
+      "Show HN AI dev tool CLI agent site:news.ycombinator.com",
+      "developer AI tool discussion LLM site:news.ycombinator.com",
+      "AI coding tools benchmark 2026 developer productivity",
+      "LLM coding assistants comparison Claude vs Gemini vs open source",
+      "outils IA dev entreprise open source Europe 2026",
+      "plateforme IA développeur entreprise self hosted"
     ]
   },
   "categories": [
@@ -123,32 +180,6 @@
               "provider": "",
               "url": "https://superhuman.com",
               "desc": "Boîte de réception intelligente pour emails",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Chatbot",
-          "icon": "",
-          "tools": [
-            {
-              "name": "Character.AI",
-              "provider": "Character AI",
-              "url": "https://beta.character.ai/",
-              "desc": "Créer et interagir avec des personnages IA.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Multi-LLM Chatbot",
-          "icon": "",
-          "tools": [
-            {
-              "name": "Use AI",
-              "provider": "Use AI",
-              "url": "https://use.ai/",
-              "desc": "Accès illimité à 25+ LLMs avancés.",
               "new": true
             }
           ]
@@ -327,26 +358,6 @@
               "provider": "",
               "url": "https://airia.ai/",
               "desc": "Plateforme d'orchestration AI d'entreprise.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Automatisation",
-          "icon": "",
-          "tools": [
-            {
-              "name": "n8n",
-              "provider": "",
-              "url": "https://n8n.io/",
-              "desc": "Automatisation de workflows open-source.",
-              "new": true
-            },
-            {
-              "name": "Make.com",
-              "provider": "Make",
-              "url": "https://www.make.com/",
-              "desc": "Plateforme d'intégration et d'automatisation IA.",
               "new": true
             }
           ]
@@ -546,66 +557,6 @@
               "provider": "",
               "url": "https://unblocked.ai/",
               "desc": "Outil de revue de code AI contextuel.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Framework IA",
-          "icon": "",
-          "tools": [
-            {
-              "name": "CrewAI",
-              "provider": "CrewAI",
-              "url": "https://www.crewai.com/",
-              "desc": "Framework pour construire agents IA collaboratifs.",
-              "new": true
-            },
-            {
-              "name": "LangChain",
-              "provider": "LangChain",
-              "url": "https://www.langchain.com/",
-              "desc": "Framework pour construire des applications LLM.",
-              "new": true
-            },
-            {
-              "name": "Smolagents",
-              "provider": "Hugging Face",
-              "url": "https://github.com/huggingface/smol-ai/tree/main/smol-agents",
-              "desc": "Bibliothèque open-source pour agents IA.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "Développement logiciel",
-          "icon": "",
-          "tools": [
-            {
-              "name": "Blitzy",
-              "provider": "",
-              "url": "https://blitzy.com/",
-              "desc": "Orchestre agents IA pour créer des logiciels.",
-              "new": true
-            },
-            {
-              "name": "Astral",
-              "provider": "OpenAI (acquisition)",
-              "url": "https://astral.sh/",
-              "desc": "Plateforme de développement logiciel pilotée IA.",
-              "new": true
-            }
-          ]
-        },
-        {
-          "name": "App Builder No-Code",
-          "icon": "",
-          "tools": [
-            {
-              "name": "Base44",
-              "provider": "",
-              "url": "https://base44.com/",
-              "desc": "Constructeur d'applications AI sans code.",
               "new": true
             }
           ]
