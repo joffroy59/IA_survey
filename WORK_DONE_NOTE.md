@@ -3,6 +3,59 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## BUGFIX) History contained only one date per day
+
+### Changed
+- Updated `scripts/generate.py` history logic to store per-run timestamp entries.
+- Replaced daily key behavior (`date: YYYY-MM-DD`) with timestamped run entries (`generated_at: YYYY-MM-DD HH:MM:SS`).
+- Kept backward compatibility in renderer: history table now reads `generated_at` first, then legacy `date` if present.
+- History still keeps only the latest 10 entries.
+
+### Why
+- Previous logic overwrote the same day's history entry, so users only saw one date per day in the modal.
+- Requirement is to track update history across runs, not collapse all runs of a day into one row.
+
+### Files touched
+- `scripts/generate.py`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python scripts/generate.py`
+- Checked generated pages show multiple timestamp rows in history modal after repeated generation.
+
+## BUGFIX) GitHub Action did not update agentdev page
+
+### Changed
+- Updated `.github/workflows/update.yml` to include `agentdev` in matrix profile updates.
+- Updated commit stage to include:
+  - `data/tools-agentdev.json`
+  - `agentdev.html`
+- Updated `.github/workflows/update-profile-unit.yml` to support `agentdev` in:
+  - manual `workflow_dispatch` profile choices
+  - dataset path resolution case block
+- Updated `.github/workflows/update-consumer-example.yml` for consistency:
+  - `agentdev` added in single/matrix profile options
+  - commit stage includes `tools-agentdev.json` and `agentdev.html`
+- Also fixed history tracking: changed from daily collapse to per-run timestamps with millisecond precision.
+
+### Why
+- Artifacts were correct, but repository pages stayed stale because workflow matrix/commit lists still targeted only 4 profiles.
+- As a result, `agentdev` dataset/page was neither updated in scheduled runs nor committed to the repository.
+- History now preserves multiple runs on same day instead of overwriting.
+
+### Files touched
+- `.github/workflows/update.yml`
+- `.github/workflows/update-profile-unit.yml`
+- `.github/workflows/update-consumer-example.yml`
+- `scripts/generate.py`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Checked workflow matrix includes `agentdev`.
+- Checked commit steps include `data/tools-agentdev.json` and `agentdev.html`.
+- Checked profile unit resolves `agentdev` dataset path.
+- Verified history entries have distinct per-run timestamps.
+
 ## BUGFIX) Gemini quota 429 resilience in update workflow
 
 ### Changed
