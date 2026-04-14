@@ -3,27 +3,38 @@
 Date: 2026-04-15
 Repository: IA_survey
 
-## BUGFIX) Gemini quota reached: wait 60s then retry once
+## BUGFIX) GitHub Action did not update agentdev page
 
 ### Changed
-- Enhanced `scripts/update.py` quota handling in `ask_gemini()`.
-- When Gemini returns `ResourceExhausted` (429), updater now:
-  - waits 60 seconds,
-  - retries exactly once,
-  - then gracefully falls back to `[]` if still failing.
-- Added configuration constant `GEMINI_RETRY_WAIT_SECONDS = 60`.
+- Updated `.github/workflows/update.yml` to include `agentdev` in matrix profile updates.
+- Updated commit stage to include:
+  - `data/tools-agentdev.json`
+  - `agentdev.html`
+- Updated `.github/workflows/update-profile-unit.yml` to support `agentdev` in:
+  - manual `workflow_dispatch` profile choices
+  - dataset path resolution case block
+- Updated `.github/workflows/update-consumer-example.yml` for consistency:
+  - `agentdev` added in single/matrix profile options
+  - commit stage includes `tools-agentdev.json` and `agentdev.html`
+- Also fixed history tracking: changed from daily collapse to per-run timestamps with millisecond precision.
 
 ### Why
-- Quota errors can be temporary windows; a delayed retry can recover automatically.
-- Keeps CI stable while still giving one chance to collect tools before fallback.
+- Artifacts were correct, but repository pages stayed stale because workflow matrix/commit lists still targeted only 4 profiles.
+- As a result, `agentdev` dataset/page was neither updated in scheduled runs nor committed to the repository.
+- History now preserves multiple runs on same day instead of overwriting.
 
 ### Files touched
-- `scripts/update.py`
+- `.github/workflows/update.yml`
+- `.github/workflows/update-profile-unit.yml`
+- `.github/workflows/update-consumer-example.yml`
+- `scripts/generate.py`
 - `WORK_DONE_NOTE.md`
 
 ### Verification
-- `python -m py_compile scripts/update.py`
-- `python scripts/update.py --help`
+- Checked workflow matrix includes `agentdev`.
+- Checked commit steps include `data/tools-agentdev.json` and `agentdev.html`.
+- Checked profile unit resolves `agentdev` dataset path.
+- Verified history entries have distinct per-run timestamps.
 
 ## BUGFIX) Gemini quota 429 resilience in update workflow
 
