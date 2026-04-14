@@ -24,7 +24,7 @@ except ImportError:
 # ── Config ────────────────────────────────────────────────────────────────────
 ROOT = Path(__file__).parent.parent
 TOOLS_FILE = ROOT / "data" / "tools.json"
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+
 
 SEARCH_QUERIES = [
     "new AI tools 2026 site:producthunt.com OR site:theresanaiforthat.com",
@@ -77,11 +77,10 @@ def search_new_tools() -> str:
 
 def ask_gemini(prompt: str) -> str:
     """Appel Gemini Flash — free tier: 1500 req/day."""
-    if not GEMINI_API_KEY:
-        print("GEMINI_API_KEY not set. Skipping LLM step.")
+    if not os.environ.get("GOOGLE_API_KEY"):
+        print("GOOGLE_API_KEY not set. Skipping LLM step.")
         return "[]"
 
-    genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel("gemini-2.5-flash")
     response = model.generate_content(prompt)
     return response.text
