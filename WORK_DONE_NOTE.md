@@ -3,6 +3,23 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## 000) Workflow split by search profile (uncommitted)
+
+### Changed
+- Refactored `.github/workflows/update.yml` to run one stage per search profile (`general`, `enterprise`, `discovery`, `ragdev`) using a matrix job.
+- Added a final stage that regenerates all pages and commits all updated datasets/pages together.
+- Added reusable unit workflow `.github/workflows/update-profile-unit.yml` with `workflow_call` input `profile` so other workflows can invoke one profile update as a standalone building block.
+- Added `workflow_dispatch` support on the unit workflow for manual per-profile runs.
+
+### Why
+- To avoid a single monolithic update stage and make each query-group update independently executable/reusable.
+- To enable composition from other workflows, profile-by-profile, as a unitary workflow element.
+
+### Files touched
+- `.github/workflows/update.yml`
+- `.github/workflows/update-profile-unit.yml`
+- `WORK_DONE_NOTE.md`
+
 ## 0) Process rule hardening (uncommitted)
 
 ### Changed
