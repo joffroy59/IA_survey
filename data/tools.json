@@ -2,7 +2,13 @@
   "meta": {
     "title": "Boîte à outils IA Génératives",
     "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
-    "last_updated": "2026-04-14"
+    "last_updated": "2026-04-14",
+    "page_history": [
+      {
+        "date": "2026-04-15",
+        "tool_count": 50
+      }
+    ]
   },
   "categories": [
     {

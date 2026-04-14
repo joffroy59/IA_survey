@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "title": "Boîte à outils IA Génératives",
+    "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
+    "last_updated": "2026-04-14",
+    "page_name": "enterprise",
+    "page_label": "Panorama Enterprise",
+    "page_description": "Focus RAG, agents, infra, securite et cas d'usage entreprise.",
+    "search_queries": [
+      "RAG architecture tools enterprise 2026",
+      "retrieval augmented generation frameworks production 2026",
+      "best RAG tools open source vector database 2026",
+      "LLM RAG pipeline production stack 2026",
+      "AI agents frameworks enterprise automation 2026",
+      "agentic workflows tools production AI agents 2026",
+      "multi agent systems frameworks 2026 open source",
+      "AI orchestration tools LangChain alternatives 2026",
+      "AI developer tools enterprise coding assistant self hosted 2026",
+      "secure AI coding tools for companies 2026",
+      "on premise AI dev tools LLM enterprise 2026",
+      "LLM infrastructure tools enterprise deployment 2026",
+      "self hosted LLM stack enterprise vector db embedding 2026",
+      "AI platform enterprise stack comparison 2026",
+      "AI use cases enterprise automation internal tools 2026",
+      "AI for business process automation tools 2026",
+      "LLM internal knowledge base chatbot enterprise 2026",
+      "secure AI tools enterprise GDPR LLM privacy 2026",
+      "on premise AI tools Europe compliance 2026",
+      "AI tools enterprise site:github.com RAG OR agent",
+      "AI infrastructure blog LLM stack 2026 site:medium.com OR site:substack.com",
+      "Show HN enterprise AI tool RAG agent site:news.ycombinator.com",
+      "outils IA entreprise RAG agentique France 2026",
+      "plateforme IA entreprise Europe LLM open source"
+    ],
+    "page_history": [
+      {
+        "date": "2026-04-15",
+        "tool_count": 0
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "generiques",
+      "name": "IA Génériques",
+      "icon": "🧠",
+      "subcategories": [
+        {
+          "name": "Indispensables",
+          "icon": "📌",
+          "tools": []
+        },
+        {
+          "name": "Importantes",
+          "icon": "⭐",
+          "tools": []
+        },
+        {
+          "name": "Avancées - Veille",
+          "icon": "🔬",
+          "tools": []
+        },
+        {
+          "name": "Productivité / Email",
+          "icon": "",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "specialisees",
+      "name": "IA Spécialisées",
+      "icon": "📱",
+      "subcategories": [
+        {
+          "name": "Réunions & Audio",
+          "icon": "🎙️",
+          "tools": []
+        },
+        {
+          "name": "Productivité & Présentation",
+          "icon": "📊",
+          "tools": []
+        },
+        {
+          "name": "Gestion des connaissances",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Infrastructure IA",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Prise de notes de réunions",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Synthèse de réunions",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Présentations / Idées",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Voyage",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Notetaker",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Dictée vocale",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Orchestration AI",
+          "icon": "",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "images",
+      "name": "IA Images",
+      "icon": "🎨",
+      "subcategories": [
+        {
+          "name": "Gratuit & accessible",
+          "icon": "🎨",
+          "tools": []
+        },
+        {
+          "name": "Usages pro",
+          "icon": "💎",
+          "tools": []
+        },
+        {
+          "name": "Open Source & expérimentaux",
+          "icon": "🛠️",
+          "tools": []
+        },
+        {
+          "name": "Edition photo & vidéo IA",
+          "icon": "",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "code",
+      "name": "Code & Dev",
+      "icon": "💻",
+      "subcategories": [
+        {
+          "name": "Assistants code",
+          "icon": "⌨️",
+          "tools": []
+        },
+        {
+          "name": "Création d'apps No-code",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Prompt Engineering",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Agent AI",
+          "icon": "",
+          "tools": []
+        },
+        {
+          "name": "Code Review",
+          "icon": "",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "audio",
+      "name": "IA Audio",
+      "icon": "🎧",
+      "subcategories": [
+        {
+          "name": "Génération musicale",
+          "icon": "🎵",
+          "tools": []
+        },
+        {
+          "name": "Voix & clonage vocal",
+          "icon": "🎤",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "video",
+      "name": "IA Vidéo",
+      "icon": "🎬",
+      "subcategories": [
+        {
+          "name": "Text-to-Video PRO",
+          "icon": "🎬",
+          "tools": []
+        },
+        {
+          "name": "Avatar IA",
+          "icon": "🧍",
+          "tools": []
+        },
+        {
+          "name": "Génération vidéo et image",
+          "icon": "🆕",
+          "tools": []
+        },
+        {
+          "name": "Image-to-Video",
+          "icon": "🆕",
+          "tools": []
+        },
+        {
+          "name": "Présentations vidéo",
+          "icon": "",
+          "tools": []
+        }
+      ]
+    }
+  ]
+}
