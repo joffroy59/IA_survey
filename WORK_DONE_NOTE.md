@@ -3,6 +3,24 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## 000000) Règle "finish feature" (uncommitted)
+
+### Changed
+- Ajout d'une règle explicite dans `.github/copilot-instructions.md` pour la commande utilisateur "finish feature".
+- Définition du flux obligatoire de bout en bout:
+  - vérification,
+  - commit,
+  - push,
+  - création de PR vers `main`,
+  - merge de la PR.
+
+### Why
+- Garantir qu'une demande "finish feature" aboutit systématiquement à une feature réellement finalisée et intégrée dans `main`, sans étape manquante.
+
+### Files touched
+- `.github/copilot-instructions.md`
+- `WORK_DONE_NOTE.md`
+
 ## 00000) Reset complet des catalogues outils (uncommitted)
 
 ### Changed

@@ -28,3 +28,14 @@ Commit requirements:
 1. Stage only files related to the task.
 2. Use a clear commit message describing the change.
 3. Do not leave task-related changes uncommitted.
+
+## "Finish Feature" Rule (Required)
+
+When the user says "finish feature", always do all steps below in order:
+1. Verify tests/checks relevant to the task.
+2. Commit all task-related changes.
+3. Push the branch.
+4. Open a pull request to `main`.
+5. Merge the pull request when mergeable.
+
+Do not stop at a partial state when this command is used.
