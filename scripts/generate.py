@@ -5,11 +5,31 @@ generate.py — Génère index.html depuis data/tools.json
 
 import json
 from datetime import date
+from html import escape
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
-TOOLS_FILE = ROOT / "data" / "tools.json"
-OUTPUT = ROOT / "index.html"
+
+PAGE_CONFIGS = [
+    {
+        "slug": "general",
+        "label": "Vue Generale",
+        "data_file": ROOT / "data" / "tools.json",
+        "output": ROOT / "index.html",
+    },
+    {
+        "slug": "enterprise",
+        "label": "Vue Enterprise",
+        "data_file": ROOT / "data" / "tools-enterprise.json",
+        "output": ROOT / "enterprise.html",
+    },
+    {
+        "slug": "discovery",
+        "label": "Vue Decouverte",
+        "data_file": ROOT / "data" / "tools-discovery.json",
+        "output": ROOT / "discovery.html",
+    },
+]
 
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="fr">
@@ -92,6 +112,78 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       color: var(--muted);
     }}
     .update-info span {{ color: var(--accent2); }}
+    .page-switcher {{
+      margin-top: 20px;
+      display: inline-flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(17, 17, 24, 0.9);
+    }}
+    .page-link {{
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }}
+    .page-link.active, .page-link:hover {{
+      color: #fff;
+      border-color: var(--accent);
+      background: var(--accent);
+    }}
+    .page-meta {{
+      margin: 20px auto 0;
+      max-width: 820px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(17, 17, 24, 0.85);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 16px;
+    }}
+    .page-meta-label {{
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--accent2);
+      text-transform: uppercase;
+    }}
+    .page-meta-title {{
+      font-weight: 700;
+      font-size: 16px;
+      margin-top: 4px;
+    }}
+    .page-meta-desc {{
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }}
+    .info-btn {{
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: all 0.2s;
+    }}
+    .info-btn:hover {{
+      border-color: var(--accent);
+      color: #fff;
+    }}
 
     /* ── Nav tabs ── */
     nav {{
@@ -251,8 +343,71 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     }}
     footer a {{ color: var(--accent2); text-decoration: none; }}
 
+    .modal-overlay {{
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 5, 8, 0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 99;
+    }}
+    .modal-overlay.open {{ display: flex; }}
+    .modal {{
+      width: min(920px, 100%);
+      max-height: 82vh;
+      overflow: auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      padding: 18px 20px;
+    }}
+    .modal-header {{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }}
+    .modal-title {{
+      font-size: 18px;
+      font-weight: 700;
+    }}
+    .close-btn {{
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface2);
+      color: var(--text);
+      padding: 7px 10px;
+      cursor: pointer;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }}
+    .modal-meta {{
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }}
+    .query-list {{
+      list-style: decimal inside;
+      display: grid;
+      gap: 8px;
+    }}
+    .query-list li {{
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.45;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      border-radius: 8px;
+      padding: 8px 10px;
+    }}
+
     @media (max-width: 600px) {{
       .tools-grid {{ grid-template-columns: 1fr 1fr; }}
+      .page-meta {{ grid-template-columns: 1fr; }}
     }}
   </style>
 </head>
@@ -263,6 +418,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <h1>{title}</h1>
   <p class="subtitle">{subtitle}</p>
   <p class="update-info">Dernière mise à jour : <span>{last_updated}</span></p>
+  <div class="page-switcher">{page_switcher}</div>
+  <div class="page-meta">
+    <div>
+      <div class="page-meta-label">Type de page</div>
+      <div class="page-meta-title">{page_label}</div>
+      <div class="page-meta-desc">{page_description}</div>
+    </div>
+    <button class="info-btn" type="button" id="open-search-info">Sources de recherche</button>
+  </div>
 </header>
 
 <nav>
@@ -275,13 +439,29 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </main>
 
 <footer>
-  Généré automatiquement par GitHub Actions + Gemini AI · 
+  Généré automatiquement par GitHub Actions + Gemini AI ·
   <a href="https://github.com/{repo_name}" target="_blank">Voir sur GitHub</a>
 </footer>
+
+<div class="modal-overlay" id="search-modal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Recherche utilisee">
+    <div class="modal-header">
+      <div class="modal-title">Requêtes de recherche utilisées</div>
+      <button class="close-btn" type="button" id="close-search-info">Fermer</button>
+    </div>
+    <div class="modal-meta">Page: {page_label} · Dernière mise à jour: {last_updated}</div>
+    <ol class="query-list">
+      {search_queries_html}
+    </ol>
+  </div>
+</div>
 
 <script>
   const tabs = document.querySelectorAll('.nav-tab');
   const categories = document.querySelectorAll('.category');
+  const searchModal = document.getElementById('search-modal');
+  const openSearchInfo = document.getElementById('open-search-info');
+  const closeSearchInfo = document.getElementById('close-search-info');
 
   tabs.forEach(tab => {{
     tab.addEventListener('click', (e) => {{
@@ -297,6 +477,30 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   // Show all on load
   categories.forEach(c => c.classList.add('visible'));
+
+  openSearchInfo.addEventListener('click', () => {{
+    searchModal.classList.add('open');
+    searchModal.setAttribute('aria-hidden', 'false');
+  }});
+
+  function closeModal() {{
+    searchModal.classList.remove('open');
+    searchModal.setAttribute('aria-hidden', 'true');
+  }}
+
+  closeSearchInfo.addEventListener('click', closeModal);
+
+  searchModal.addEventListener('click', (event) => {{
+    if (event.target === searchModal) {{
+      closeModal();
+    }}
+  }});
+
+  document.addEventListener('keydown', (event) => {{
+    if (event.key === 'Escape' && searchModal.classList.contains('open')) {{
+      closeModal();
+    }}
+  }});
 </script>
 
 </body>
@@ -339,8 +543,29 @@ def render_category(cat: dict) -> str:
   </section>"""
 
 
-def generate():
-    with open(TOOLS_FILE, "r", encoding="utf-8") as f:
+def render_page_switcher(active_slug: str) -> str:
+    links = []
+    for cfg in PAGE_CONFIGS:
+        href = cfg["output"].name
+        classes = "page-link active" if cfg["slug"] == active_slug else "page-link"
+        links.append(f'<a class="{classes}" href="{href}">{escape(cfg["label"])}</a>')
+    return "\n    ".join(links)
+
+
+def render_search_queries(search_queries: list[str]) -> str:
+    if not search_queries:
+        return "<li>Aucune requête enregistrée.</li>"
+    return "\n      ".join(f"<li>{escape(q)}</li>" for q in search_queries)
+
+
+def generate_page(page_cfg: dict):
+    data_file = page_cfg["data_file"]
+    output_file = page_cfg["output"]
+    if not data_file.exists():
+        print(f"Skipping {output_file.name}: missing {data_file.name}")
+        return
+
+    with open(data_file, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     meta = data["meta"]
@@ -351,6 +576,12 @@ def generate():
         for c in cats
     )
     categories_html = "\n".join(render_category(c) for c in cats)
+    page_label = meta.get("page_label", "Panorama Generaliste")
+    page_description = meta.get(
+        "page_description",
+        "Vue complete des outils detectes par veille automatique.",
+    )
+    search_queries_html = render_search_queries(meta.get("search_queries", []))
 
     repo_name = "VOTRE-USERNAME/ai-toolbox"  # remplacer
 
@@ -359,15 +590,24 @@ def generate():
         subtitle=meta["subtitle"],
         today=date.today().strftime("%d/%m/%Y"),
         last_updated=meta.get("last_updated", ""),
+        page_switcher=render_page_switcher(meta.get("page_name", "general")),
+        page_label=escape(page_label),
+        page_description=escape(page_description),
+        search_queries_html=search_queries_html,
         nav_tabs=nav_tabs,
         categories_html=categories_html,
         repo_name=repo_name,
     )
 
-    with open(OUTPUT, "w", encoding="utf-8") as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         f.write(html)
 
-    print(f"✅ index.html generated ({OUTPUT})")
+    print(f"✅ {output_file.name} generated ({output_file})")
+
+
+def generate():
+    for page_cfg in PAGE_CONFIGS:
+        generate_page(page_cfg)
 
 
 if __name__ == "__main__":
