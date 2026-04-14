@@ -407,6 +407,18 @@
               "desc": ""
             },
             {
+              "name": "gemini cli",
+              "provider": "Google",
+              "url": "https://geminicli.com",
+              "desc": "A lightweight command-line interface for interacting with Google's Gemini models directly from the terminal for rapid prompting, scripting, and workflow automation."
+            },
+            {
+              "name": "Gemini Code Assist",
+              "provider": "Google",
+              "url": "https://codeassist.google/",
+              "desc": "AI-powered collaborator integrated into IDEs and development workflows to help developers write, debug, and optimize code faster through real-time suggestions and deep codebase analysis."
+            },
+            {
               "name": "Cursor",
               "provider": "Anysphere",
               "url": "https://cursor.com/",
