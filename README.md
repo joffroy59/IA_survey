@@ -18,7 +18,7 @@ Boîte à outils IA mise à jour automatiquement chaque semaine par GitHub Actio
 ### 1. Fork ce dépôt
 
 ```bash
-git clone https://github.com/VOTRE-USERNAME/ai-toolbox
+git clone https://joffroy59.github.io/IA_survey/
 ```
 
 ### 2. Obtenir une clé Gemini gratuite
