@@ -14,12 +14,12 @@ from pathlib import Path
 # ── Dépendances ──────────────────────────────────────────────────────────────
 try:
     from duckduckgo_search import DDGS
-    import google.generativeai as genai
+    import google.genai as genai
 except ImportError:
     print("Installing dependencies...")
-    os.system("pip install duckduckgo-search google-generativeai --quiet")
+    os.system("pip install duckduckgo-search google-genai --quiet")
     from duckduckgo_search import DDGS
-    import google.generativeai as genai
+    import google.genai as genai
 
 # ── Config ────────────────────────────────────────────────────────────────────
 ROOT = Path(__file__).parent.parent
@@ -50,7 +50,7 @@ def save_tools(data: dict):
     data["meta"]["last_updated"] = date.today().isoformat()
     with open(TOOLS_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    print(f"✅ tools.json saved ({date.today()})")
+    print(f"tools.json saved ({date.today()})")
 
 
 def get_existing_names(data: dict) -> list[str]:
@@ -69,21 +69,21 @@ def search_new_tools() -> str:
         for query in SEARCH_QUERIES:
             try:
                 response = ddgs.text(query, max_results=MAX_SEARCH_RESULTS)
-                print(f"🔎  Search for '{query}")
-                print(f"📋  Result Search '{response}")
+                print(f"Search for '{query}")
+                print(f"Result Search '{response}")
                 hits = list(response)
                 for h in hits:
                     results.append(f"- {h['title']}: {h['body']} ({h['href']})")
                 time.sleep(1)  # rate limit courtesy
             except Exception as e:
-                print(f"⚠️  Search error for '{query}': {e}")
+                print(f"Search error for '{query}': {e}")
     return "\n".join(results[:60])  # limit context size
 
 
 def ask_gemini(prompt: str) -> str:
     """Appel Gemini Flash — free tier: 1500 req/day."""
     if not GEMINI_API_KEY:
-        print("❌ GEMINI_API_KEY not set. Skipping LLM step.")
+        print("GEMINI_API_KEY not set. Skipping LLM step.")
         return "[]"
 
     genai.configure(api_key=GEMINI_API_KEY)
@@ -138,7 +138,7 @@ Règles :
         if isinstance(tools, list):
             return tools
     except json.JSONDecodeError as e:
-        print(f"⚠️  JSON parse error: {e}\nRaw: {raw[:300]}")
+        print(f"JSON parse error: {e}\nRaw: {raw[:300]}")
     return []
 
 
@@ -174,7 +174,7 @@ def add_tools_to_data(data: dict, new_tools: list[dict]) -> int:
                 break
 
         if not target_sub:
-            target_sub = {"name": sub_name, "icon": "🆕", "tools": []}
+            target_sub = {"name": sub_name, "icon": "", "tools": []}
             target_cat.setdefault("subcategories", []).append(target_sub)
 
         # Ajouter l'outil
@@ -187,13 +187,13 @@ def add_tools_to_data(data: dict, new_tools: list[dict]) -> int:
         })
         existing_names.append(name.lower())
         added += 1
-        print(f"  ➕ Added: {name} → {target_cat['name']} / {target_sub['name']}")
+        print(f"Added: {name} -> {target_cat['name']} / {target_sub['name']}")
 
     return added
 
 
 def main():
-    print("🔍 Searching for new AI tools...")
+    print("Searching for new AI tools...")
     data = load_tools()
     existing = get_existing_names(data)
     print(f"   {len(existing)} existing tools loaded")
@@ -201,16 +201,16 @@ def main():
     search_results = search_new_tools()
     print(f"   {len(search_results.splitlines())} search results collected")
 
-    print("🤖 Asking Gemini to identify new tools...")
+    print("Asking Gemini to identify new tools...")
     new_tools = extract_new_tools(search_results, existing)
     print(f"   {len(new_tools)} candidates found")
 
     if new_tools:
         added = add_tools_to_data(data, new_tools)
-        print(f"✅ {added} new tools added")
+        print(f"{added} new tools added")
         save_tools(data)
     else:
-        print("ℹ️  No new tools to add, updating date only")
+        print("No new tools to add, updating date only")
         save_tools(data)
 
 
