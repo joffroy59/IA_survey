@@ -3,6 +3,37 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## RELEASE v1.1.0) Production Release: Quota Resilience + Workflow Automation
+
+### Changed
+- **Version**: v1.1.0 - Stability and automation release
+- Merged PR #10: Gemini quota exceeded graceful retry (60s wait + single retry)
+- Merged PR #11: Fixed GitHub Actions workflow automation for agentdev profile
+  - Added agentdev to all workflow matrices
+  - Fixed commit stages to include agentdev dataset and pages
+- Merged history timestamp fix: per-run tracking instead of daily collapse
+- Released to main branch with tag v1.1.0
+
+### Why
+- Production release incorporating critical resilience improvements and automation coverage gaps
+- Quota handling prevents CI failures during free-tier rate limits
+- Workflow fixes ensure all 5 profiles (general, enterprise, discovery, ragdev, agentdev) are properly updated in scheduled runs
+- History tracking improvements provide better audit trail for multiple runs per day
+
+### Files touched
+- All 3 workflow files (update.yml, update-profile-unit.yml, update-consumer-example.yml)
+- scripts/update.py, scripts/generate.py
+- All 5 data JSON files and HTML pages
+- WORK_DONE_NOTE.md, git tag v1.1.0
+
+### Verification
+- PR #10 merged to develop ✓
+- PR #11 merged to develop ✓
+- develop merged to main with --no-ff ✓
+- Tag v1.1.0 created and pushed ✓
+- All workflow files validated ✓
+- History entries show distinct per-run timestamps ✓
+
 ## BUGFIX) History contained only one date per day
 
 ### Changed
