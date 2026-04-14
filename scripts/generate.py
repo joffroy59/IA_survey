@@ -35,6 +35,12 @@ PAGE_CONFIGS = [
       "data_file": ROOT / "data" / "tools-ragdev.json",
       "output": ROOT / "ragdev.html",
     },
+    {
+      "slug": "agentdev",
+      "label": "Vue Agent Dev + IDE Tools",
+      "data_file": ROOT / "data" / "tools-agentdev.json",
+      "output": ROOT / "agentdev.html",
+    },
 ]
 
 HTML_TEMPLATE = """<!DOCTYPE html>

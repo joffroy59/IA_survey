@@ -56,6 +56,13 @@ PROFILE_CONFIG = {
         "page_description": "Focus architecture RAG production et outils IA pour developpeurs.",
         "query_profile": "ragdev",
     },
+    "agentdev": {
+        "tools_file": ROOT / "data" / "tools-agentdev.json",
+        "page_name": "agentdev",
+        "page_label": "Panorama Agent Dev + IDE Tools",
+        "page_description": "Outils spécialisés pour développement d'agents IA autonomes et IDE enrichis d'IA.",
+        "query_profile": "agentdev",
+    },
 }
 
 MAX_SEARCH_RESULTS = 15  # par requête
