@@ -3,6 +3,34 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## 00000) Reset complet des catalogues outils (uncommitted)
+
+### Changed
+- Vidé toutes les listes `tools` dans les datasets de profils:
+  - `data/tools.json`
+  - `data/tools-enterprise.json`
+  - `data/tools-discovery.json`
+  - `data/tools-ragdev.json`
+- Régénéré les pages statiques associées:
+  - `index.html`
+  - `enterprise.html`
+  - `discovery.html`
+  - `ragdev.html`
+
+### Why
+- Repartir d’un catalogue vide pour reconstruire entièrement les outils depuis les requêtes définies dans les fichiers de contexte (search query profiles).
+
+### Files touched
+- `data/tools.json`
+- `data/tools-enterprise.json`
+- `data/tools-discovery.json`
+- `data/tools-ragdev.json`
+- `index.html`
+- `enterprise.html`
+- `discovery.html`
+- `ragdev.html`
+- `WORK_DONE_NOTE.md`
+
 ## 0000) Reusable consumer workflow example (uncommitted)
 
 ### Changed
