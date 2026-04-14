@@ -672,7 +672,7 @@ def render_history(page_history: list[dict]) -> str:
 
     rows = []
     for entry in page_history:
-        date_str = entry.get("date", "?")
+        date_str = entry.get("generated_at") or entry.get("date", "?")
         tool_count = entry.get("tool_count", 0)
         rows.append(f"""        <tr>
           <td class="history-date">{escape(str(date_str))}</td>
@@ -694,30 +694,25 @@ def generate_page(page_cfg: dict):
     meta = data["meta"]
     cats = data["categories"]
 
-    # Count tools and manage history
+    # Count tools and manage history per run.
     tool_count = count_tools(cats)
-    today_str = date.today().strftime("%Y-%m-%d")
+    now_iso = datetime.now().isoformat(timespec="milliseconds").replace("T", " ")
 
-    # Load existing history and add new entry
+    # Load existing history and add new entry.
     page_history = meta.get("page_history", [])
     new_entry = {
-        "date": today_str,
-        "tool_count": tool_count
+        "generated_at": now_iso,
+        "tool_count": tool_count,
     }
+    page_history.append(new_entry)
 
-    # Add new entry if it's a new date or update today's entry
-    if page_history and page_history[-1]["date"] == today_str:
-        page_history[-1] = new_entry
-    else:
-        page_history.append(new_entry)
-
-    # Keep only last 10 entries
+    # Keep only last 10 entries.
     page_history = page_history[-10:]
 
-    # Update meta with new history
+    # Update meta with new history.
     meta["page_history"] = page_history
 
-    # Save updated data file
+    # Save updated data file.
     with open(data_file, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 

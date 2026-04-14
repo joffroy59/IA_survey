@@ -3,6 +3,26 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## BUGFIX) History contained only one date per day
+
+### Changed
+- Updated `scripts/generate.py` history logic to store per-run timestamp entries.
+- Replaced daily key behavior (`date: YYYY-MM-DD`) with timestamped run entries (`generated_at: YYYY-MM-DD HH:MM:SS`).
+- Kept backward compatibility in renderer: history table now reads `generated_at` first, then legacy `date` if present.
+- History still keeps only the latest 10 entries.
+
+### Why
+- Previous logic overwrote the same day's history entry, so users only saw one date per day in the modal.
+- Requirement is to track update history across runs, not collapse all runs of a day into one row.
+
+### Files touched
+- `scripts/generate.py`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python scripts/generate.py`
+- Checked generated pages show multiple timestamp rows in history modal after repeated generation.
+
 ## BUGFIX) GitHub Action did not update agentdev page
 
 ### Changed
