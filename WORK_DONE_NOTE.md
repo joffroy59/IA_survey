@@ -3,6 +3,21 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## CI) Add page checker to update pipeline
+
+### Changed
+- Updated `.github/workflows/update.yml` to run `python scripts/check_pages.py` right after page generation in the `generate-and-commit` job.
+
+### Why
+- User requested adding checker execution in CI to verify generated pages/datasets and reduce risk of unknown or invalid tool entries reaching published pages.
+
+### Files touched
+- `.github/workflows/update.yml`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python scripts/check_pages.py`
+
 ## REFACTOR) Global query review + page quality checker + professional dual-audience content
 
 ### Changed
