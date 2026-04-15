@@ -26,6 +26,7 @@ on:
           - cowork
           - ocr
           - dococr
+          - aicliapps
         default: general
 
 env:
@@ -47,7 +48,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        profile: [general, enterprise, discovery, ragdev, agentdev, vscode, newrag, cowork, ocr, dococr]
+        profile: [general, enterprise, discovery, ragdev, agentdev, vscode, newrag, cowork, ocr, dococr, aicliapps]
     uses: ./.github/workflows/update-profile-unit.yml
     with:
       profile: ${{ matrix.profile }}
@@ -84,8 +85,8 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/tools.json data/tools-enterprise.json data/tools-discovery.json data/tools-ragdev.json data/tools-agentdev.json
-          git add data/tools-vscode.json data/tools-newrag.json data/tools-cowork.json data/tools-ocr.json data/tools-dococr.json
+          git add data/tools-vscode.json data/tools-newrag.json data/tools-cowork.json data/tools-ocr.json data/tools-dococr.json data/tools-aicliapps.json
           git add index.html enterprise.html discovery.html ragdev.html agentdev.html
-          git add vscode.html newrag.html cowork.html ocr.html dococr.html compare-view.html
+          git add vscode.html newrag.html cowork.html ocr.html dococr.html aicliapps.html compare-view.html
           git diff --staged --quiet || git commit -m "🤖 Consumer update: $(date '+%Y-%m-%d')"
           git push

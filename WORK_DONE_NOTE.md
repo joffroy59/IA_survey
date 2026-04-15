@@ -3,6 +3,42 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## FEATURE) New subject page AI CLI Applications
+
+### Changed
+- Added new subject profile `aicliapps` in `data/search_queries.json` with 10 DuckDuckGo queries in French.
+- Registered `aicliapps` in `scripts/update.py` and `scripts/generate.py` so dataset updates and HTML generation support the new profile.
+- Updated workflow matrices/options/path mappings in:
+  - `.github/workflows/update.yml`
+  - `.github/workflows/update-profile-unit.yml`
+  - `.github/workflows/update-consumer-example.yml`
+- Ran `python scripts/update.py --profile aicliapps` to create `data/tools-aicliapps.json` and apply profile metadata.
+- Ran `python scripts/generate.py` to generate `aicliapps.html` and refresh linked pages/data/snapshots/history.
+
+### Why
+- User requested creation of a page for a new subject.
+- The subject-driven profile and workflow wiring ensure the page is generated now and maintained by existing automation later.
+
+### Files touched
+- `data/search_queries.json`
+- `scripts/update.py`
+- `scripts/generate.py`
+- `.github/workflows/update.yml`
+- `.github/workflows/update-profile-unit.yml`
+- `.github/workflows/update-consumer-example.yml`
+- `data/tools-aicliapps.json`
+- `aicliapps.html`
+- Regenerated data/pages/snapshots for existing profiles via `scripts/generate.py`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/update.py scripts/generate.py`
+- `python scripts/update.py --profile aicliapps`
+- `python scripts/generate.py`
+
+Date: 2026-04-16
+Repository: IA_survey
+
 ## ADD) Query/Page/JSON custom agent for subject-driven DuckDuckGo workflow
 
 ### Changed

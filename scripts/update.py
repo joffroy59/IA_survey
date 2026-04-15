@@ -100,6 +100,13 @@ PROFILE_CONFIG = {
         "page_description": "Plateformes complètes pour ingestion, OCR, classification et workflow documentaire.",
         "query_profile": "dococr",
     },
+    "aicliapps": {
+        "tools_file": ROOT / "data" / "tools-aicliapps.json",
+        "page_name": "aicliapps",
+        "page_label": "Panorama AI CLI Applications",
+        "page_description": "Applications IA en ligne de commande pour developpeurs, DevOps et automatisation.",
+        "query_profile": "aicliapps",
+    },
 }
 
 MAX_SEARCH_RESULTS = 15  # par requête

@@ -2,7 +2,7 @@
   "meta": {
     "title": "Boîte à outils IA Génératives",
     "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
-    "last_updated": "2026-04-15",
+    "last_updated": "2026-04-16",
     "page_history": [
       {
         "generated_at": "2026-04-15 02:01:58.476",
@@ -47,24 +47,25 @@
         "snapshot_file": "snapshots/general/2026-04-15_15-57-44-231.html"
       },
       {
-        "generated_at": "2026-04-16 00:59:11.116",
+        "generated_at": "2026-04-16 00:59:11.148",
         "tool_count": 50,
-        "snapshot_file": "snapshots/general/2026-04-16_00-59-11-116.html"
+        "snapshot_file": "snapshots/aicliapps/2026-04-16_00-59-11-148.html"
       }
     ],
-    "page_name": "general",
-    "page_label": "Panorama Generaliste",
-    "page_description": "Vue complete des meilleurs outils IA grand public et pro.",
+    "page_name": "aicliapps",
+    "page_label": "Panorama AI CLI Applications",
+    "page_description": "Applications IA en ligne de commande pour developpeurs, DevOps et automatisation.",
     "search_queries": [
-      "new AI tools 2026 site:producthunt.com OR site:theresanaiforthat.com",
-      "new AI tools 2026 site:futurepedia.io OR site:uneed.best",
-      "new AI agentic workflows site:news.ycombinator.com 2026",
-      "best new AI coding tools 2026 site:tldr.tech",
-      "trending AI repositories 2026 site:github.com",
-      "new AI image video audio tools 2026 site:the-decoder.com",
-      "meilleurs outils IA agentique 2026",
-      "state-of-the-art AI benchmarks April 2026",
-      "best professional AI tools for developers 2026"
+      "applications IA en ligne de commande 2026",
+      "meilleures applications CLI IA pour développeurs 2026",
+      "assistant IA terminal open source 2026",
+      "outils CLI IA productivité développeur 2026",
+      "comparatif outils IA CLI open source vs SaaS 2026",
+      "workflow local avec applications IA CLI 2026",
+      "agent IA en terminal pour automatisation scripting 2026",
+      "alternatives à Claude Code en CLI 2026",
+      "sécurité et conformité des outils IA CLI en entreprise 2026",
+      "applications IA CLI pour DevOps et SRE 2026"
     ]
   },
   "categories": [
