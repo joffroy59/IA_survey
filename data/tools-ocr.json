@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "title": "Boîte à outils IA Génératives",
+    "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
+    "last_updated": "2026-04-15",
+    "page_name": "ocr",
+    "page_label": "Panorama OCR",
+    "page_description": "Outils OCR, extraction de texte et traitement intelligent de documents.",
+    "search_queries": [
+      "best OCR tools 2026",
+      "open source OCR engine comparison 2026",
+      "handwriting OCR ai tools 2026",
+      "invoice OCR extraction tools 2026",
+      "multilingual OCR tools enterprise 2026",
+      "OCR API cloud self hosted 2026",
+      "document text extraction ai 2026",
+      "table OCR extraction tools 2026",
+      "pdf OCR pipeline tools 2026",
+      "image to text ai OCR benchmark 2026",
+      "outils OCR IA 2026",
+      "OCR reconnaissance de texte entreprise"
+    ],
+    "page_history": [
+      {
+        "generated_at": "2026-04-15 02:29:49.432",
+        "tool_count": 0,
+        "snapshot_file": "snapshots/ocr/2026-04-15_02-29-49-432.html"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "ocr-engines",
+      "name": "🔎 Moteurs OCR",
+      "icon": "🔎",
+      "subcategories": [
+        {
+          "name": "OCR Général",
+          "icon": "📄",
+          "tools": []
+        },
+        {
+          "name": "OCR Manuscrit",
+          "icon": "✍️",
+          "tools": []
+        },
+        {
+          "name": "OCR Multilingue",
+          "icon": "🌐",
+          "tools": []
+        },
+        {
+          "name": "OCR Temps Réel",
+          "icon": "⚡",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "ocr-extraction",
+      "name": "📊 Extraction & Structuration",
+      "icon": "📊",
+      "subcategories": [
+        {
+          "name": "Factures & Reçus",
+          "icon": "🧾",
+          "tools": []
+        },
+        {
+          "name": "PDF & Tables",
+          "icon": "📑",
+          "tools": []
+        },
+        {
+          "name": "Formulaires",
+          "icon": "🗂️",
+          "tools": []
+        },
+        {
+          "name": "Validation Qualité",
+          "icon": "✅",
+          "tools": []
+        }
+      ]
+    }
+  ]
+}

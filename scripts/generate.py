@@ -60,6 +60,18 @@ PAGE_CONFIGS = [
       "data_file": ROOT / "data" / "tools-cowork.json",
       "output": ROOT / "cowork.html",
     },
+    {
+      "slug": "ocr",
+      "label": "Vue OCR",
+      "data_file": ROOT / "data" / "tools-ocr.json",
+      "output": ROOT / "ocr.html",
+    },
+    {
+      "slug": "dococr",
+      "label": "Vue OCR Système Complet",
+      "data_file": ROOT / "data" / "tools-dococr.json",
+      "output": ROOT / "dococr.html",
+    },
 ]
 
 HTML_TEMPLATE = """<!DOCTYPE html>

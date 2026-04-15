@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "title": "Boîte à outils IA Génératives",
+    "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
+    "last_updated": "2026-04-15",
+    "page_name": "dococr",
+    "page_label": "Panorama Système OCR Complet",
+    "page_description": "Plateformes complètes pour ingestion, OCR, classification et workflow documentaire.",
+    "search_queries": [
+      "end to end document processing OCR platform 2026",
+      "document ingestion OCR classification workflow 2026",
+      "IDP intelligent document processing tools 2026",
+      "invoice processing OCR complete system 2026",
+      "enterprise document automation OCR ai 2026",
+      "document management with OCR and RPA 2026",
+      "contract analysis OCR NLP platform 2026",
+      "knowledge extraction from scanned documents 2026",
+      "full stack OCR document pipeline open source",
+      "document ai workflow orchestration OCR 2026",
+      "système complet OCR documentaire 2026",
+      "plateforme OCR gestion documentaire entreprise"
+    ],
+    "page_history": [
+      {
+        "generated_at": "2026-04-15 02:29:49.434",
+        "tool_count": 0,
+        "snapshot_file": "snapshots/dococr/2026-04-15_02-29-49-434.html"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "dococr-pipeline",
+      "name": "🏗️ Pipeline Documentaire",
+      "icon": "🏗️",
+      "subcategories": [
+        {
+          "name": "Ingestion",
+          "icon": "📥",
+          "tools": []
+        },
+        {
+          "name": "OCR & Parsing",
+          "icon": "🔤",
+          "tools": []
+        },
+        {
+          "name": "Classification",
+          "icon": "🧠",
+          "tools": []
+        },
+        {
+          "name": "Extraction Entités",
+          "icon": "🏷️",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "dococr-workflow",
+      "name": "🔁 Workflow Complet",
+      "icon": "🔁",
+      "subcategories": [
+        {
+          "name": "Validation Humaine",
+          "icon": "👀",
+          "tools": []
+        },
+        {
+          "name": "RPA & Intégrations",
+          "icon": "🔌",
+          "tools": []
+        },
+        {
+          "name": "Stockage & Recherche",
+          "icon": "🗄️",
+          "tools": []
+        },
+        {
+          "name": "Gouvernance & Audit",
+          "icon": "🛡️",
+          "tools": []
+        }
+      ]
+    }
+  ]
+}

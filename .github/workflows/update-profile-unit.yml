@@ -25,6 +25,8 @@ on:
           - vscode
           - newrag
           - cowork
+          - ocr
+          - dococr
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -62,6 +64,8 @@ jobs:
             vscode) DATASET_PATH="data/tools-vscode.json" ;;
             newrag) DATASET_PATH="data/tools-newrag.json" ;;
             cowork) DATASET_PATH="data/tools-cowork.json" ;;
+            ocr) DATASET_PATH="data/tools-ocr.json" ;;
+            dococr) DATASET_PATH="data/tools-dococr.json" ;;
             *) echo "Unknown profile: $PROFILE"; exit 1 ;;
           esac
           echo "DATASET_PATH=$DATASET_PATH" >> "$GITHUB_ENV"
