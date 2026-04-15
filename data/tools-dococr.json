@@ -24,10 +24,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-16 01:18:16.829",
-        "tool_count": 24
-      },
-      {
         "generated_at": "2026-04-15 15:57:24.681",
         "tool_count": 24
       },
@@ -70,6 +66,11 @@
         "generated_at": "2026-04-16 01:28:23.972",
         "tool_count": 12,
         "snapshot_file": "snapshots/dococr/2026-04-16_01-28-23-972.html"
+      },
+      {
+        "generated_at": "2026-04-15 23:42:51.440",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/dococr/2026-04-15_23-42-51-440.html"
       }
     ]
   },
