@@ -3,6 +3,19 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## FEAT) GitLab CI/CD pipeline for Pages build & deploy
+
+### Changed
+- Created `.gitlab-ci.yml` with 4 stages (update, generate, build, deploy) adapting all 3 GitHub Actions workflows to GitLab CI.
+- Supports: push-to-main deploy, weekly scheduled updates, manual single/all profile updates.
+
+### Why
+- Provide a GitLab-compatible alternative for building and deploying generated HTML pages via GitLab Pages.
+
+### Files touched
+- `.gitlab-ci.yml`
+- `WORK_DONE_NOTE.md`
+
 ## DOC) SharePoint deploy plan
 
 ### Changed
