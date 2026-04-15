@@ -985,7 +985,7 @@ def generate_page(page_cfg: dict):
     search_queries_html = render_search_queries(meta.get("search_queries", []))
     history_html = render_history(page_history, output_file.name)
 
-    repo_name = "VOTRE-USERNAME/ai-toolbox"  # remplacer
+    repo_name = "joffroy59/IA_survey"  # remplacer
 
     html = HTML_TEMPLATE.format(
         title=meta["title"],
