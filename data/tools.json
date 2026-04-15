@@ -2,7 +2,7 @@
   "meta": {
     "title": "Boîte à outils IA Génératives",
     "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
-    "last_updated": "2026-04-14",
+    "last_updated": "2026-04-15",
     "page_history": [
       {
         "date": "2026-04-15",
@@ -25,9 +25,35 @@
         "tool_count": 50
       },
       {
-        "generated_at": "2026-04-14 23:58:10.386",
+        "generated_at": "2026-04-15 01:59:48.380",
+        "tool_count": 50
+      },
+      {
+        "generated_at": "2026-04-15 02:00:36.989",
+        "tool_count": 50
+      },
+      {
+        "generated_at": "2026-04-15 02:01:58.476",
+        "tool_count": 50
+      },
+      {
+        "generated_at": "2026-04-15 02:03:43.824",
         "tool_count": 50
       }
+    ],
+    "page_name": "general",
+    "page_label": "Panorama Generaliste",
+    "page_description": "Vue complete des meilleurs outils IA grand public et pro.",
+    "search_queries": [
+      "new AI tools 2026 site:producthunt.com OR site:theresanaiforthat.com",
+      "new AI tools 2026 site:futurepedia.io OR site:uneed.best",
+      "new AI agentic workflows site:news.ycombinator.com 2026",
+      "best new AI coding tools 2026 site:tldr.tech",
+      "trending AI repositories 2026 site:github.com",
+      "new AI image video audio tools 2026 site:the-decoder.com",
+      "meilleurs outils IA agentique 2026",
+      "state-of-the-art AI benchmarks April 2026",
+      "best professional AI tools for developers 2026"
     ]
   },
   "categories": [

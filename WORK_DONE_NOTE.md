@@ -3,6 +3,50 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## RELEASE PREP) Refresh generated datasets and pages
+
+### Changed
+- Regenerated all datasets and pages with current data pipeline.
+- Updated `data/tools.json`, `data/tools-enterprise.json`, `data/tools-discovery.json`, `data/tools-ragdev.json`, `data/tools-agentdev.json`.
+- Updated `index.html`, `enterprise.html`, `discovery.html`, `ragdev.html`, `agentdev.html`.
+
+### Why
+- Ensure release includes the latest generated content and consistent page history across profiles.
+
+### Files touched
+- `data/tools*.json`
+- `*.html`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/update.py scripts/generate.py scripts/seed_profiles.py`
+- `python scripts/generate.py`
+
+## FIX) Tool data missing from enterprise, discovery, ragdev, agentdev profiles
+
+### Changed
+- Updated `scripts/update.py` to pass `data` object to `extract_new_tools()` function.
+- Modified prompt generation in `extract_new_tools()` to be **dynamic**: now reads actual category structure from each profile's JSON instead of hardcoded values.
+- Created `scripts/seed_profiles.py` to populate all 4 non-general profiles with tools as baseline.
+  - enterprise.json: 88 tools seeded
+  - discovery.json: 88 tools seeded
+  - ragdev.json: 88 tools seeded
+  - agentdev.json: 48 tools seeded
+- Regenerated all 5 HTML pages with populated tool data.
+- All pages now render correctly with tools visible.
+
+### Why
+- JSON files for enterprise, discovery, ragdev, agentdev had empty tools arrays despite scheduled workflows running.
+- Root cause #1: Gemini prompt was hardcoded with category IDs that didn't match each profile's actual structure.
+- Root cause #2: `extract_new_tools()` was not receiving the `data` parameter, so it couldn't generate profile-aware prompts.
+- Solution: seed profiles as immediate fix, prepare for proper Gemini-based tool extraction with API key in CI.
+
+### Files touched
+- `scripts/update.py`, `scripts/seed_profiles.py`, all 5 `data/tools*.json` files, all 5 `*.html` pages
+
+### Verification
+- ✓ index.html: 50 tools | enterprise.html: 88 tools | discovery.html: 88 tools | ragdev.html: 88 tools | agentdev.html: 48 tools
+
 ## RELEASE v1.1.0) Production Release: Quota Resilience + Workflow Automation
 
 ### Changed
