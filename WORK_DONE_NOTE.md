@@ -3,6 +3,25 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## RELEASE PREP) Refresh generated datasets and pages
+
+### Changed
+- Regenerated all datasets and pages with current data pipeline.
+- Updated `data/tools.json`, `data/tools-enterprise.json`, `data/tools-discovery.json`, `data/tools-ragdev.json`, `data/tools-agentdev.json`.
+- Updated `index.html`, `enterprise.html`, `discovery.html`, `ragdev.html`, `agentdev.html`.
+
+### Why
+- Ensure release includes the latest generated content and consistent page history across profiles.
+
+### Files touched
+- `data/tools*.json`
+- `*.html`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/update.py scripts/generate.py scripts/seed_profiles.py`
+- `python scripts/generate.py`
+
 ## FIX) Tool data missing from enterprise, discovery, ragdev, agentdev profiles
 
 ### Changed
