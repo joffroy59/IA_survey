@@ -562,6 +562,71 @@ Repository: IA_survey
 - Also fixed history tracking: changed from daily collapse to per-run timestamps with millisecond precision.
 
 ### Why
+
+## BUGFIX) All pages showed the same tools
+
+### Date
+- 2026-04-16
+
+### Changed
+- Reworked `scripts/seed_profiles.py` to stop copying the same sequential tool chunks into every profile.
+- Added profile-aware deterministic selection logic so each profile gets a distinct subset of tools.
+- Regenerated profile datasets:
+  - `data/tools-enterprise.json`
+  - `data/tools-discovery.json`
+  - `data/tools-ragdev.json`
+  - `data/tools-agentdev.json`
+  - `data/tools-vscode.json`
+  - `data/tools-newrag.json`
+  - `data/tools-cowork.json`
+  - `data/tools-ocr.json`
+  - `data/tools-dococr.json`
+- Regenerated profile pages:
+  - `enterprise.html`
+  - `discovery.html`
+  - `ragdev.html`
+  - `agentdev.html`
+  - `vscode.html`
+  - `newrag.html`
+  - `cowork.html`
+  - `ocr.html`
+  - `dococr.html`
+
+### Why
+- The previous seeding approach distributed tools from a single general list in the same pattern, causing multiple pages to display effectively the same tools.
+- The new selection strategy ensures profile pages are differentiated while keeping deterministic generation.
+
+### Files touched
+- `scripts/seed_profiles.py`
+- `data/tools-enterprise.json`
+- `data/tools-discovery.json`
+- `data/tools-ragdev.json`
+- `data/tools-agentdev.json`
+- `data/tools-vscode.json`
+- `data/tools-newrag.json`
+- `data/tools-cowork.json`
+- `data/tools-ocr.json`
+- `data/tools-dococr.json`
+- `enterprise.html`
+- `discovery.html`
+- `ragdev.html`
+- `agentdev.html`
+- `vscode.html`
+- `newrag.html`
+- `cowork.html`
+- `ocr.html`
+- `dococr.html`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/seed_profiles.py`
+- `python scripts/seed_profiles.py`
+- `python scripts/generate.py`
+- Verified key profile pairs are no longer identical:
+  - `tools-enterprise.json` vs `tools-discovery.json` => different
+  - `tools-enterprise.json` vs `tools-ragdev.json` => different
+  - `tools-cowork.json` vs `tools-ocr.json` => different
+  - `tools-cowork.json` vs `tools-vscode.json` => different
 - Artifacts were correct, but repository pages stayed stale because workflow matrix/commit lists still targeted only 4 profiles.
 - As a result, `agentdev` dataset/page was neither updated in scheduled runs nor committed to the repository.
 - History now preserves multiple runs on same day instead of overwriting.

@@ -2,7 +2,7 @@
   "meta": {
     "title": "Boîte à outils IA Génératives",
     "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
-    "last_updated": "2026-04-15",
+    "last_updated": "2026-04-16",
     "page_name": "newrag",
     "page_label": "Panorama New RAG",
     "page_description": "Nouveaux frameworks, patterns et plateformes RAG 2026.",
@@ -22,6 +22,10 @@
       "outils RAG nouvelle génération 2026"
     ],
     "page_history": [
+      {
+        "generated_at": "2026-04-16 01:18:16.825",
+        "tool_count": 24
+      },
       {
         "generated_at": "2026-04-15 15:57:24.598",
         "tool_count": 24
@@ -57,14 +61,14 @@
         "snapshot_file": "snapshots/newrag/2026-04-15_15-57-44-532.html"
       },
       {
-        "generated_at": "2026-04-16 00:59:11.133",
+        "generated_at": "2026-04-16 01:18:17.028",
         "tool_count": 24,
-        "snapshot_file": "snapshots/newrag/2026-04-16_00-59-11-133.html"
+        "snapshot_file": "snapshots/newrag/2026-04-16_01-18-17-028.html"
       },
       {
-        "generated_at": "2026-04-15 23:17:27.356",
-        "tool_count": 24,
-        "snapshot_file": "snapshots/newrag/2026-04-15_23-17-27-356.html"
+        "generated_at": "2026-04-16 01:19:19.997",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-16_01-19-19-997.html"
       }
     ]
   },
@@ -79,40 +83,10 @@
           "icon": "🕸️",
           "tools": [
             {
-              "name": "ChatGPT",
-              "provider": "OpenAI",
-              "url": "https://chatgpt.com/",
-              "desc": "Le plus populaire"
-            },
-            {
-              "name": "Claude",
-              "provider": "Anthropic",
-              "url": "https://claude.ai/",
-              "desc": "Excellent pour l'analyse"
-            },
-            {
-              "name": "Gemini",
-              "provider": "Google",
-              "url": "https://gemini.google.com/",
-              "desc": "Intégré à Google"
-            }
-          ]
-        },
-        {
-          "name": "Agentic RAG",
-          "icon": "🤖",
-          "tools": [
-            {
-              "name": "Copilot",
-              "provider": "Microsoft",
-              "url": "https://copilot.microsoft.com/",
-              "desc": "Intégré à Windows"
-            },
-            {
-              "name": "Perplexity",
+              "name": "Kling",
               "provider": "",
-              "url": "https://www.perplexity.ai/",
-              "desc": "Recherche IA"
+              "url": "https://klingai.com/",
+              "desc": ""
             },
             {
               "name": "Le Chat",
@@ -123,15 +97,27 @@
           ]
         },
         {
+          "name": "Agentic RAG",
+          "icon": "🤖",
+          "tools": [
+            {
+              "name": "Leonardo AI",
+              "provider": "",
+              "url": "https://leonardo.ai/",
+              "desc": ""
+            },
+            {
+              "name": "Luma Dream Machine",
+              "provider": "",
+              "url": "https://lumalabs.ai/",
+              "desc": ""
+            }
+          ]
+        },
+        {
           "name": "Multimodal RAG",
           "icon": "🖼️",
           "tools": [
-            {
-              "name": "Grok",
-              "provider": "xAI",
-              "url": "https://www.grok.com/",
-              "desc": "IA d'Elon Musk"
-            },
             {
               "name": "Meta AI",
               "provider": "Meta",
@@ -139,10 +125,10 @@
               "desc": "IA de Meta"
             },
             {
-              "name": "DeepSeek",
+              "name": "MidJourney",
               "provider": "",
-              "url": "https://chat.deepseek.com/",
-              "desc": "IA chinoise open source"
+              "url": "https://www.midjourney.com/",
+              "desc": "Référence qualité"
             }
           ]
         },
@@ -151,22 +137,16 @@
           "icon": "🔗",
           "tools": [
             {
-              "name": "Qwen",
-              "provider": "Alibaba",
-              "url": "https://chat.qwen.ai/",
-              "desc": ""
-            },
-            {
-              "name": "Kimi",
-              "provider": "Moonshot",
-              "url": "https://www.kimi.com/",
-              "desc": ""
-            },
-            {
-              "name": "MiniMax",
+              "name": "Murf AI",
               "provider": "",
-              "url": "https://agent.minimax.io/",
+              "url": "https://murf.ai",
               "desc": ""
+            },
+            {
+              "name": "NotebookLM",
+              "provider": "Google",
+              "url": "https://notebooklm.google/",
+              "desc": "FAQ, Podcast IA"
             }
           ]
         }
@@ -188,12 +168,6 @@
               "desc": "Réunion App Mobile"
             },
             {
-              "name": "Fireflies.ai",
-              "provider": "",
-              "url": "https://fireflies.ai/",
-              "desc": "Transcription réunions"
-            },
-            {
               "name": "Otter.ai",
               "provider": "",
               "url": "https://otter.ai/",
@@ -206,22 +180,16 @@
           "icon": "📊",
           "tools": [
             {
+              "name": "Perplexity",
+              "provider": "",
+              "url": "https://www.perplexity.ai/",
+              "desc": "Recherche IA"
+            },
+            {
               "name": "Plaud AI",
               "provider": "",
               "url": "https://plaud.ai/",
               "desc": ""
-            },
-            {
-              "name": "Gamma",
-              "provider": "",
-              "url": "https://gamma.app/",
-              "desc": "Présentations IA"
-            },
-            {
-              "name": "Canva AI",
-              "provider": "Canva",
-              "url": "https://www.canva.com/",
-              "desc": "Design IA"
             }
           ]
         },
@@ -230,22 +198,16 @@
           "icon": "🎯",
           "tools": [
             {
-              "name": "NotebookLM",
-              "provider": "Google",
-              "url": "https://notebooklm.google/",
-              "desc": "FAQ, Podcast IA"
+              "name": "Qwen",
+              "provider": "Alibaba",
+              "url": "https://chat.qwen.ai/",
+              "desc": ""
             },
             {
-              "name": "Sora",
-              "provider": "OpenAI",
-              "url": "https://sora.chatgpt.com/",
-              "desc": "Gratuit"
-            },
-            {
-              "name": "Imagen (Gemini)",
-              "provider": "Google",
-              "url": "https://gemini.google.com/",
-              "desc": "Gratuit"
+              "name": "Recraft",
+              "provider": "",
+              "url": "https://www.recraft.ai/",
+              "desc": ""
             }
           ]
         },
@@ -254,22 +216,16 @@
           "icon": "🔒",
           "tools": [
             {
-              "name": "Bing Creator",
-              "provider": "Microsoft",
-              "url": "https://www.bing.com/images/create",
-              "desc": "Gratuit"
-            },
-            {
-              "name": "MidJourney",
+              "name": "Runway",
               "provider": "",
-              "url": "https://www.midjourney.com/",
-              "desc": "Référence qualité"
+              "url": "https://app.runwayml.com/",
+              "desc": ""
             },
             {
-              "name": "Adobe Firefly",
-              "provider": "Adobe",
-              "url": "https://firefly.adobe.com/",
-              "desc": "Pro créatif"
+              "name": "SongR",
+              "provider": "",
+              "url": "https://www.songr.ai",
+              "desc": ""
             }
           ]
         }
