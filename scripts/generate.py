@@ -96,6 +96,25 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       --new: #ff6b6b;
       --radius: 12px;
     }}
+
+    /* Light mode */
+    html[data-theme="light"] {{
+      --bg: #f8f7fc;
+      --surface: #ffffff;
+      --surface2: #f0edff;
+      --border: #e0d9f0;
+      --accent: #6c63ff;
+      --accent2: #00d4aa;
+      --text: #1a1620;
+      --muted: #6b6b7d;
+      --new: #ff6b6b;
+    }}
+
+    html[data-theme="light"] body {{
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(108,99,255,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(0,212,170,0.05) 0%, transparent 50%);
+    }}
     * {{ margin: 0; padding: 0; box-sizing: border-box; }}
     body {{
       font-family: 'Space Grotesk', sans-serif;
@@ -112,6 +131,28 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       text-align: center;
       padding: 60px 24px 40px;
       position: relative;
+    }}
+    .theme-toggle {{
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }}
+    .theme-toggle:hover {{
+      border-color: var(--accent);
+      background: var(--surface);
+      transform: scale(1.05);
     }}
     header::after {{
       content: '';
@@ -137,7 +178,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       font-size: clamp(28px, 5vw, 48px);
       font-weight: 700;
       letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #ffffff 30%, var(--accent));
+      background: linear-gradient(135deg, var(--text) 30%, var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -164,7 +205,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       padding: 8px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(17, 17, 24, 0.9);
+      background: var(--surface);
     }}
     .page-link {{
       text-decoration: none;
@@ -186,7 +227,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       max-width: 820px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: rgba(17, 17, 24, 0.85);
+      background: var(--surface);
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 12px;
@@ -496,6 +537,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
 
 <header>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · {today}</div>
   <h1>{title}</h1>
   <p class="subtitle">{subtitle}</p>
@@ -692,6 +734,32 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     if (event.key === 'Escape') {{
       closeAllModals();
     }}
+  }});
+
+  // Theme toggle functionality
+  const themeToggle = document.getElementById('theme-toggle');
+  const htmlElement = document.documentElement;
+  const storedTheme = localStorage.getItem('theme') || 'dark';
+
+  // Set initial theme
+  htmlElement.setAttribute('data-theme', storedTheme);
+  updateThemeToggle();
+
+  function updateThemeToggle() {{
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const isDark = currentTheme === 'dark';
+    themeToggle.textContent = isDark ? '☀️' : '🌙';
+    themeToggle.setAttribute('aria-pressed', String(!isDark));
+    themeToggle.setAttribute('aria-label', isDark ? 'Activer le mode clair' : 'Activer le mode sombre');
+    themeToggle.setAttribute('title', isDark ? 'Activer le mode clair' : 'Activer le mode sombre');
+  }}
+
+  themeToggle.addEventListener('click', () => {{
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    htmlElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeToggle();
   }});
 </script>
 

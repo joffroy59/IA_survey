@@ -3,6 +3,105 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## RELEASE) Merge and release prep refresh
+
+### Changed
+- Consolidated pending updates across generated pages and snapshots for all views.
+- Included compare view and VS Code dataset updates in the release content set.
+
+### Why
+- User requested merge and release; all pending tracked changes must be committed before merge.
+- Keeping generated HTML/data/snapshots aligned ensures release artifacts are consistent.
+
+### Files touched
+- `index.html`
+- `enterprise.html`
+- `discovery.html`
+- `ragdev.html`
+- `agentdev.html`
+- `vscode.html`
+- `newrag.html`
+- `cowork.html`
+- `ocr.html`
+- `dococr.html`
+- `compare-view.html`
+- `data/tools-vscode.json`
+- `snapshots/*`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Checked git status to confirm all pending tracked changes are included in release commit scope.
+
+## FIX) Light theme readability and contrast
+
+### Changed
+- Reworked title gradient contrast so the heading stays readable in light mode (`var(--text)` start color instead of pure white).
+- Replaced hardcoded dark header panel backgrounds with theme-aware surfaces:
+  - `.page-switcher` now uses `var(--surface)`
+  - `.page-meta` now uses `var(--surface)`
+- Updated generator template with the same contrast rules so future page generations keep the fix.
+
+### Why
+- In light mode, some components stayed visually dark and the first letters of "Boîte à outils IA Génératives" became hard to read due to white-on-light gradient.
+- The fix ensures consistent readability and visual coherence between dark and light themes.
+
+### Files touched
+- `scripts/generate.py`
+- `index.html`
+- `enterprise.html`
+- `discovery.html`
+- `ragdev.html`
+- `agentdev.html`
+- `vscode.html`
+- `newrag.html`
+- `cowork.html`
+- `ocr.html`
+- `dococr.html`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Checked updated CSS in generated pages (including `vscode.html`) to confirm:
+  - readable heading gradient in light mode
+  - no dark hardcoded panel backgrounds for page switcher/meta blocks
+
+## FEATURE) Add dark/light mode toggle to all pages
+
+### Changed
+- Added CSS variables for light mode theming to all main HTML files
+- Added theme toggle button (☀️/🌙) positioned in top-right of header
+- Implemented localStorage persistence for theme preference
+- Updated styles for light mode with complementary color palette:
+  - Light backgrounds (#f8f7fc, #ffffff)
+  - Dark text (#1a1620)
+  - Adjusted borders and muted colors for light mode
+- Added JavaScript functionality for theme switching and icon updates
+- Button styling with hover effects and smooth transitions
+
+### Why
+- Users requested ability to toggle between dark and light mode for better accessibility and user preference support.
+- Persistent storage ensures theme preference is remembered across sessions.
+- Consistent implementation across all pages for seamless user experience.
+
+### Files touched
+- `index.html`
+- `enterprise.html`
+- `discovery.html`
+- `ragdev.html`
+- `agentdev.html`
+- `vscode.html`
+- `newrag.html`
+- `cowork.html`
+- `ocr.html`
+- `dococr.html`
+- `compare-view.html`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- All 11 HTML files updated with theme variables and toggle functionality
+- Light mode colors tested for readability and contrast
+- localStorage integration verified for persistence
+- Theme toggle button positioned correctly in all page headers
+
 ## FEATURE) Add OCR page and complete OCR document system page
 
 ### Changed

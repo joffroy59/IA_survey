@@ -20,6 +20,25 @@
       --new: #ff6b6b;
       --radius: 12px;
     }
+
+    /* Light mode */
+    html[data-theme="light"] {
+      --bg: #f8f7fc;
+      --surface: #ffffff;
+      --surface2: #f0edff;
+      --border: #e0d9f0;
+      --accent: #6c63ff;
+      --accent2: #00d4aa;
+      --text: #1a1620;
+      --muted: #6b6b7d;
+      --new: #ff6b6b;
+    }
+
+    html[data-theme="light"] body {
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(108,99,255,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(0,212,170,0.05) 0%, transparent 50%);
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Space Grotesk', sans-serif;
@@ -36,6 +55,28 @@
       text-align: center;
       padding: 60px 24px 40px;
       position: relative;
+    }
+    .theme-toggle {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      background: var(--surface);
+      transform: scale(1.05);
     }
     header::after {
       content: '';
@@ -61,7 +102,7 @@
       font-size: clamp(28px, 5vw, 48px);
       font-weight: 700;
       letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #ffffff 30%, var(--accent));
+      background: linear-gradient(135deg, var(--text) 30%, var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -88,7 +129,7 @@
       padding: 8px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(17, 17, 24, 0.9);
+      background: var(--surface);
     }
     .page-link {
       text-decoration: none;
@@ -110,7 +151,7 @@
       max-width: 820px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: rgba(17, 17, 24, 0.85);
+      background: var(--surface);
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 12px;
@@ -420,6 +461,7 @@
 <body>
 
 <header>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · 15/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
   <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
@@ -461,17 +503,17 @@
 </nav>
 
 <main>
-  
+
   <section class="category" data-id="generiques">
     <div class="category-header">
       <div class="category-icon">🧠</div>
       <div class="category-title">IA Génériques</div>
     </div>
-    
+
     <div class="subcategory">
       <div class="subcategory-title">📌 Indispensables</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://chatgpt.com/" target="_blank" rel="noopener">
         <div class="tool-name">ChatGPT</div>
         <div class="tool-provider">OpenAI</div>
@@ -495,7 +537,7 @@
     <div class="subcategory">
       <div class="subcategory-title">⭐ Importantes</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://chat.mistral.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Le Chat</div>
         <div class="tool-provider">Mistral</div>
@@ -519,23 +561,23 @@
     <div class="subcategory">
       <div class="subcategory-title">🔬 Avancées - Veille</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://chat.qwen.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Qwen</div>
         <div class="tool-provider">Alibaba</div>
-        
+
       </a>
 
       <a class="tool-card" href="https://www.kimi.com/" target="_blank" rel="noopener">
         <div class="tool-name">Kimi</div>
         <div class="tool-provider">Moonshot</div>
-        
+
       </a>
 
       <a class="tool-card" href="https://agent.minimax.io/" target="_blank" rel="noopener">
         <div class="tool-name">MiniMax</div>
-        
-        
+
+
       </a>
       </div>
     </div>
@@ -543,23 +585,23 @@
     <div class="subcategory">
       <div class="subcategory-title"> Productivité / Email</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://chat.qwen.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Qwen</div>
         <div class="tool-provider">Alibaba</div>
-        
+
       </a>
 
       <a class="tool-card" href="https://www.kimi.com/" target="_blank" rel="noopener">
         <div class="tool-name">Kimi</div>
         <div class="tool-provider">Moonshot</div>
-        
+
       </a>
 
       <a class="tool-card" href="https://agent.minimax.io/" target="_blank" rel="noopener">
         <div class="tool-name">MiniMax</div>
-        
-        
+
+
       </a>
       </div>
     </div>
@@ -570,26 +612,26 @@
       <div class="category-icon">📱</div>
       <div class="category-title">IA Spécialisées</div>
     </div>
-    
+
     <div class="subcategory">
       <div class="subcategory-title">🎙️ Réunions & Audio</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://www.notta.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Notta</div>
-        
+
         <div class="tool-desc">Réunion App Mobile</div>
       </a>
 
       <a class="tool-card" href="https://fireflies.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Fireflies.ai</div>
-        
+
         <div class="tool-desc">Transcription réunions</div>
       </a>
 
       <a class="tool-card" href="https://otter.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Otter.ai</div>
-        
+
         <div class="tool-desc">Prise de notes IA</div>
       </a>
       </div>
@@ -598,10 +640,10 @@
     <div class="subcategory">
       <div class="subcategory-title">📊 Productivité & Présentation</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://gamma.app/" target="_blank" rel="noopener">
         <div class="tool-name">Gamma</div>
-        
+
         <div class="tool-desc">Présentations IA</div>
       </a>
 
@@ -622,7 +664,7 @@
     <div class="subcategory">
       <div class="subcategory-title"> Gestion des connaissances</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://notebooklm.google/" target="_blank" rel="noopener">
         <div class="tool-name">NotebookLM</div>
         <div class="tool-provider">Google</div>
@@ -646,7 +688,7 @@
     <div class="subcategory">
       <div class="subcategory-title"> Infrastructure IA</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://www.bing.com/images/create" target="_blank" rel="noopener">
         <div class="tool-name">Bing Creator</div>
         <div class="tool-provider">Microsoft</div>
@@ -655,7 +697,7 @@
 
       <a class="tool-card" href="https://www.midjourney.com/" target="_blank" rel="noopener">
         <div class="tool-name">MidJourney</div>
-        
+
         <div class="tool-desc">Référence qualité</div>
       </a>
 
@@ -670,23 +712,23 @@
     <div class="subcategory">
       <div class="subcategory-title"> Prise de notes de réunions</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://stablediffusionweb.com/" target="_blank" rel="noopener">
         <div class="tool-name">Stable Diffusion</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://www.recraft.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Recraft</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://leonardo.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Leonardo AI</div>
-        
-        
+
+
       </a>
       </div>
     </div>
@@ -694,23 +736,23 @@
     <div class="subcategory">
       <div class="subcategory-title"> Synthèse de réunions</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://ideogram.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Ideogram</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://flux-ai.io/" target="_blank" rel="noopener">
         <div class="tool-name">Flux</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://github.com/copilot" target="_blank" rel="noopener">
         <div class="tool-name">GitHub Copilot</div>
         <div class="tool-provider">Microsoft</div>
-        
+
       </a>
       </div>
     </div>
@@ -718,17 +760,17 @@
     <div class="subcategory">
       <div class="subcategory-title"> Présentations / Idées</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://cursor.com/" target="_blank" rel="noopener">
         <div class="tool-name">Cursor</div>
         <div class="tool-provider">Anysphere</div>
-        
+
       </a>
 
       <a class="tool-card" href="https://claude.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Claude</div>
         <div class="tool-provider">Anthropic</div>
-        
+
       </a>
 
       <a class="tool-card" href="https://claude.ai/download" target="_blank" rel="noopener">
@@ -742,23 +784,23 @@
     <div class="subcategory">
       <div class="subcategory-title"> Voyage</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://suno.com" target="_blank" rel="noopener">
         <div class="tool-name">Suno</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://www.udio.com" target="_blank" rel="noopener">
         <div class="tool-name">Udio</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://www.songr.ai" target="_blank" rel="noopener">
         <div class="tool-name">SongR</div>
-        
-        
+
+
       </a>
       </div>
     </div>
@@ -766,23 +808,23 @@
     <div class="subcategory">
       <div class="subcategory-title"> Notetaker</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://boomy.com" target="_blank" rel="noopener">
         <div class="tool-name">Boomy</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://elevenlabs.io" target="_blank" rel="noopener">
         <div class="tool-name">ElevenLabs</div>
-        
+
         <div class="tool-desc">Leader voix réaliste</div>
       </a>
 
       <a class="tool-card" href="https://murf.ai" target="_blank" rel="noopener">
         <div class="tool-name">Murf AI</div>
-        
-        
+
+
       </a>
       </div>
     </div>
@@ -790,11 +832,11 @@
     <div class="subcategory">
       <div class="subcategory-title"> Dictée vocale</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://www.descript.com" target="_blank" rel="noopener">
         <div class="tool-name">Descript</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://deepmind.google/models/veo/" target="_blank" rel="noopener">
@@ -805,8 +847,8 @@
 
       <a class="tool-card" href="https://klingai.com/" target="_blank" rel="noopener">
         <div class="tool-name">Kling</div>
-        
-        
+
+
       </a>
       </div>
     </div>
@@ -814,23 +856,23 @@
     <div class="subcategory">
       <div class="subcategory-title"> Orchestration AI</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://app.runwayml.com/" target="_blank" rel="noopener">
         <div class="tool-name">Runway</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://lumalabs.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Luma Dream Machine</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://sora.chatgpt.com/" target="_blank" rel="noopener">
         <div class="tool-name">Sora</div>
         <div class="tool-provider">OpenAI</div>
-        
+
       </a>
       </div>
     </div>
@@ -841,11 +883,11 @@
       <div class="category-icon">🎨</div>
       <div class="category-title">IA Images</div>
     </div>
-    
+
     <div class="subcategory">
       <div class="subcategory-title">🎨 Gratuit & accessible</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://sora.chatgpt.com/" target="_blank" rel="noopener">
         <div class="tool-name">Sora</div>
         <div class="tool-provider">OpenAI</div>
@@ -869,10 +911,10 @@
     <div class="subcategory">
       <div class="subcategory-title">💎 Usages pro</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://www.midjourney.com/" target="_blank" rel="noopener">
         <div class="tool-name">MidJourney</div>
-        
+
         <div class="tool-desc">Référence qualité</div>
       </a>
 
@@ -887,23 +929,23 @@
     <div class="subcategory">
       <div class="subcategory-title">🛠️ Open Source & expérimentaux</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://stablediffusionweb.com/" target="_blank" rel="noopener">
         <div class="tool-name">Stable Diffusion</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://www.recraft.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Recraft</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://leonardo.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Leonardo AI</div>
-        
-        
+
+
       </a>
       </div>
     </div>
@@ -911,10 +953,10 @@
     <div class="subcategory">
       <div class="subcategory-title"> Edition photo & vidéo IA</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://www.perplexity.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Perplexity</div>
-        
+
         <div class="tool-desc">Recherche IA</div>
       </a>
 
@@ -938,27 +980,27 @@
       <div class="category-icon">💻</div>
       <div class="category-title">Code & Dev</div>
     </div>
-    
+
     <div class="subcategory">
       <div class="subcategory-title">⌨️ Assistants code</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://github.com/copilot" target="_blank" rel="noopener">
         <div class="tool-name">GitHub Copilot</div>
         <div class="tool-provider">Microsoft</div>
-        
+
       </a>
 
       <a class="tool-card" href="https://cursor.com/" target="_blank" rel="noopener">
         <div class="tool-name">Cursor</div>
         <div class="tool-provider">Anysphere</div>
-        
+
       </a>
 
       <a class="tool-card" href="https://claude.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Claude</div>
         <div class="tool-provider">Anthropic</div>
-        
+
       </a>
       </div>
     </div>
@@ -966,22 +1008,22 @@
     <div class="subcategory">
       <div class="subcategory-title"> Création d'apps No-code</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://www.kimi.com/" target="_blank" rel="noopener">
         <div class="tool-name">Kimi</div>
         <div class="tool-provider">Moonshot</div>
-        
+
       </a>
 
       <a class="tool-card" href="https://agent.minimax.io/" target="_blank" rel="noopener">
         <div class="tool-name">MiniMax</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://www.notta.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Notta</div>
-        
+
         <div class="tool-desc">Réunion App Mobile</div>
       </a>
       </div>
@@ -990,23 +1032,23 @@
     <div class="subcategory">
       <div class="subcategory-title"> Prompt Engineering</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://fireflies.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Fireflies.ai</div>
-        
+
         <div class="tool-desc">Transcription réunions</div>
       </a>
 
       <a class="tool-card" href="https://otter.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Otter.ai</div>
-        
+
         <div class="tool-desc">Prise de notes IA</div>
       </a>
 
       <a class="tool-card" href="https://plaud.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Plaud AI</div>
-        
-        
+
+
       </a>
       </div>
     </div>
@@ -1014,10 +1056,10 @@
     <div class="subcategory">
       <div class="subcategory-title"> Agent AI</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://gamma.app/" target="_blank" rel="noopener">
         <div class="tool-name">Gamma</div>
-        
+
         <div class="tool-desc">Présentations IA</div>
       </a>
 
@@ -1038,7 +1080,7 @@
     <div class="subcategory">
       <div class="subcategory-title"> Code Review</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://sora.chatgpt.com/" target="_blank" rel="noopener">
         <div class="tool-name">Sora</div>
         <div class="tool-provider">OpenAI</div>
@@ -1065,27 +1107,27 @@
       <div class="category-icon">🎧</div>
       <div class="category-title">IA Audio</div>
     </div>
-    
+
     <div class="subcategory">
       <div class="subcategory-title">🎵 Génération musicale</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://suno.com" target="_blank" rel="noopener">
         <div class="tool-name">Suno</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://www.udio.com" target="_blank" rel="noopener">
         <div class="tool-name">Udio</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://www.songr.ai" target="_blank" rel="noopener">
         <div class="tool-name">SongR</div>
-        
-        
+
+
       </a>
       </div>
     </div>
@@ -1093,23 +1135,23 @@
     <div class="subcategory">
       <div class="subcategory-title">🎤 Voix & clonage vocal</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://elevenlabs.io" target="_blank" rel="noopener">
         <div class="tool-name">ElevenLabs</div>
-        
+
         <div class="tool-desc">Leader voix réaliste</div>
       </a>
 
       <a class="tool-card" href="https://murf.ai" target="_blank" rel="noopener">
         <div class="tool-name">Murf AI</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://www.descript.com" target="_blank" rel="noopener">
         <div class="tool-name">Descript</div>
-        
-        
+
+
       </a>
       </div>
     </div>
@@ -1120,11 +1162,11 @@
       <div class="category-icon">🎬</div>
       <div class="category-title">IA Vidéo</div>
     </div>
-    
+
     <div class="subcategory">
       <div class="subcategory-title">🎬 Text-to-Video PRO</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://deepmind.google/models/veo/" target="_blank" rel="noopener">
         <div class="tool-name">Veo</div>
         <div class="tool-provider">Google</div>
@@ -1133,14 +1175,14 @@
 
       <a class="tool-card" href="https://klingai.com/" target="_blank" rel="noopener">
         <div class="tool-name">Kling</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://app.runwayml.com/" target="_blank" rel="noopener">
         <div class="tool-name">Runway</div>
-        
-        
+
+
       </a>
       </div>
     </div>
@@ -1148,23 +1190,23 @@
     <div class="subcategory">
       <div class="subcategory-title">🧍 Avatar IA</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://www.heygen.com/" target="_blank" rel="noopener">
         <div class="tool-name">HeyGen</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://www.synthesia.io/" target="_blank" rel="noopener">
         <div class="tool-name">Synthesia</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://www.colossyan.com/" target="_blank" rel="noopener">
         <div class="tool-name">Colossyan</div>
-        
-        
+
+
       </a>
       </div>
     </div>
@@ -1172,7 +1214,7 @@
     <div class="subcategory">
       <div class="subcategory-title">🆕 Génération vidéo et image</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card is-new" href="https://www.atlabs.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Atlabs</div>
         <div class="tool-provider">Atlabs</div>
@@ -1184,7 +1226,7 @@
     <div class="subcategory">
       <div class="subcategory-title">🆕 Image-to-Video</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card is-new" href="https://www.vo3ai.com/" target="_blank" rel="noopener">
         <div class="tool-name">VO3AI</div>
         <div class="tool-provider">VO3AI</div>
@@ -1196,7 +1238,7 @@
     <div class="subcategory">
       <div class="subcategory-title"> Présentations vidéo</div>
       <div class="tools-grid">
-        
+
       <a class="tool-card" href="https://deepmind.google/models/veo/" target="_blank" rel="noopener">
         <div class="tool-name">Veo</div>
         <div class="tool-provider">Google</div>
@@ -1205,14 +1247,14 @@
 
       <a class="tool-card" href="https://klingai.com/" target="_blank" rel="noopener">
         <div class="tool-name">Kling</div>
-        
-        
+
+
       </a>
 
       <a class="tool-card" href="https://app.runwayml.com/" target="_blank" rel="noopener">
         <div class="tool-name">Runway</div>
-        
-        
+
+
       </a>
       </div>
     </div>
@@ -1222,7 +1264,7 @@
 <footer>
   Généré automatiquement par GitHub Actions + Gemini AI ·
   Copyright made by joffroy ·
-  <a href="https://github.com/VOTRE-USERNAME/ai-toolbox" target="_blank">Voir sur GitHub</a>
+  <a href="https://github.com/joffroy59/IA_survey" target="_blank">Voir sur GitHub</a>
 </footer>
 
 <div class="modal-overlay" id="search-modal" aria-hidden="true">
@@ -1448,6 +1490,28 @@
     if (event.key === 'Escape') {
       closeAllModals();
     }
+  });
+
+  // Theme toggle functionality
+  const themeToggle = document.getElementById('theme-toggle');
+  const htmlElement = document.documentElement;
+  const storedTheme = localStorage.getItem('theme') || 'dark';
+
+  // Set initial theme
+  htmlElement.setAttribute('data-theme', storedTheme);
+  updateThemeIcon();
+
+  function updateThemeIcon() {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+  }
+
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    htmlElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon();
   });
 </script>
 
