@@ -3,6 +3,171 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## CI) Add page checker to update pipeline
+
+### Changed
+- Updated `.github/workflows/update.yml` to run `python scripts/check_pages.py` right after page generation in the `generate-and-commit` job.
+
+### Why
+- User requested adding checker execution in CI to verify generated pages/datasets and reduce risk of unknown or invalid tool entries reaching published pages.
+
+### Files touched
+- `.github/workflows/update.yml`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python scripts/check_pages.py`
+
+## REFACTOR) Global query review + page quality checker + professional dual-audience content
+
+### Changed
+- Reworked `data/search_queries.json` so each profile now contains exactly 10 focused, theme-driven queries.
+- Updated `scripts/update.py`:
+  - enforced exactly 10 unique queries per profile at load time,
+  - added a tool quality gate to reject low-confidence names and invalid/non-product URLs before insertion.
+- Added `scripts/check_pages.py` to validate:
+  - query count/quality,
+  - tool URL and naming credibility,
+  - rendered HTML tool-card count vs JSON data.
+- Enhanced `scripts/generate.py` and regenerated all pages:
+  - introduced professional audience briefing blocks for two reader types (developers and managers),
+  - synchronized displayed page queries from `data/search_queries.json` as source-of-truth during generation.
+- Regenerated HTML pages and snapshots for all profiles.
+
+### Why
+- User requested a global review/refactor of queries for better results, with 10 queries per page theme.
+- User requested an automated checker to detect page/tool quality issues and avoid unknown/unreliable tool entries.
+- User requested more professional content and explicit adaptation for two audiences: technical (dev) and decision-makers (manager).
+
+### Files touched
+- `data/search_queries.json`
+- `scripts/update.py`
+- `scripts/generate.py`
+- `scripts/check_pages.py`
+- `index.html`
+- `enterprise.html`
+- `discovery.html`
+- `ragdev.html`
+- `agentdev.html`
+- `vscode.html`
+- `newrag.html`
+- `cowork.html`
+- `ocr.html`
+- `dococr.html`
+- `aicliapps.html`
+- `data/tools.json`
+- `data/tools-enterprise.json`
+- `data/tools-discovery.json`
+- `data/tools-ragdev.json`
+- `data/tools-agentdev.json`
+- `data/tools-vscode.json`
+- `data/tools-newrag.json`
+- `data/tools-cowork.json`
+- `data/tools-ocr.json`
+- `data/tools-dococr.json`
+- `data/tools-aicliapps.json`
+- `snapshots/*`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python scripts/generate.py`
+- `python scripts/check_pages.py`
+- `python -m py_compile scripts/generate.py scripts/update.py scripts/check_pages.py`
+
+## CI) Run auto update workflow on develop like main
+
+### Changed
+- Updated `.github/workflows/update.yml` trigger to run on `push` for both `main` and `develop` branches.
+
+### Why
+- User requested automatic build/deploy-style action execution on `develop` the same way as `main`.
+
+### Files touched
+- `.github/workflows/update.yml`
+- `WORK_DONE_NOTE.md`
+
+## FIX) Clean AI CLI JSON regeneration from query-only evidence + category validation rule
+
+### Changed
+- Refactored `scripts/update.py` for profile `aicliapps` to rebuild dataset from query-only evidence instead of cloning general tools.
+- Added dedicated CLI category taxonomy and category/subcategory validation before tool insertion.
+- Added fallback extraction improvements:
+  - structured DuckDuckGo result parsing
+  - known CLI tool detection from query evidence
+  - stricter filtering to avoid article-title noise
+- Regenerated `data/tools-aicliapps.json` from the defined query set using the new logic.
+- Updated `.github/agents/query-page-json-builder.agent.md` with a strict rule to always validate category/subcategory consistency with query evidence.
+
+### Why
+- User requested a clean CLI JSON regenerated from queries only and stronger category correctness.
+- Validation rules and cleaner extraction reduce misclassified and noisy entries.
+
+### Files touched
+- `scripts/update.py`
+- `data/tools-aicliapps.json`
+- `.github/agents/query-page-json-builder.agent.md`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python scripts/update.py --profile aicliapps`
+- Checked resulting `data/tools-aicliapps.json` structure and category assignments.
+
+Date: 2026-04-16
+Repository: IA_survey
+
+## FEATURE) New subject page AI CLI Applications
+
+### Changed
+- Added new subject profile `aicliapps` in `data/search_queries.json` with 10 DuckDuckGo queries in French.
+- Registered `aicliapps` in `scripts/update.py` and `scripts/generate.py` so dataset updates and HTML generation support the new profile.
+- Updated workflow matrices/options/path mappings in:
+  - `.github/workflows/update.yml`
+  - `.github/workflows/update-profile-unit.yml`
+  - `.github/workflows/update-consumer-example.yml`
+- Ran `python scripts/update.py --profile aicliapps` to create `data/tools-aicliapps.json` and apply profile metadata.
+- Ran `python scripts/generate.py` to generate `aicliapps.html` and refresh linked pages/data/snapshots/history.
+
+### Why
+- User requested creation of a page for a new subject.
+- The subject-driven profile and workflow wiring ensure the page is generated now and maintained by existing automation later.
+
+### Files touched
+- `data/search_queries.json`
+- `scripts/update.py`
+- `scripts/generate.py`
+- `.github/workflows/update.yml`
+- `.github/workflows/update-profile-unit.yml`
+- `.github/workflows/update-consumer-example.yml`
+- `data/tools-aicliapps.json`
+- `aicliapps.html`
+- Regenerated data/pages/snapshots for existing profiles via `scripts/generate.py`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/update.py scripts/generate.py`
+- `python scripts/update.py --profile aicliapps`
+- `python scripts/generate.py`
+
+Date: 2026-04-16
+Repository: IA_survey
+
+## ADD) Query/Page/JSON custom agent for subject-driven DuckDuckGo workflow
+
+### Changed
+- Created `.github/agents/query-page-json-builder.agent.md`.
+- Added a dedicated custom agent that asks the user for a subject, proposes DuckDuckGo queries, and guides JSON/page generation steps for this repository.
+
+### Why
+- User requested an agent that helps create a new JSON and page from a subject, with explicit user prompting and DuckDuckGo query generation.
+- This makes the workflow repeatable and consistent for future profile additions.
+
+### Files touched
+- `.github/agents/query-page-json-builder.agent.md`
+- `WORK_DONE_NOTE.md`
+
+Date: 2026-04-16
+Repository: IA_survey
+
 ## ADD) Mandatory GitFlow branch rule in repository instructions
 
 ### Changed
@@ -468,6 +633,71 @@ Repository: IA_survey
 - Also fixed history tracking: changed from daily collapse to per-run timestamps with millisecond precision.
 
 ### Why
+
+## BUGFIX) All pages showed the same tools
+
+### Date
+- 2026-04-16
+
+### Changed
+- Reworked `scripts/seed_profiles.py` to stop copying the same sequential tool chunks into every profile.
+- Added profile-aware deterministic selection logic so each profile gets a distinct subset of tools.
+- Regenerated profile datasets:
+  - `data/tools-enterprise.json`
+  - `data/tools-discovery.json`
+  - `data/tools-ragdev.json`
+  - `data/tools-agentdev.json`
+  - `data/tools-vscode.json`
+  - `data/tools-newrag.json`
+  - `data/tools-cowork.json`
+  - `data/tools-ocr.json`
+  - `data/tools-dococr.json`
+- Regenerated profile pages:
+  - `enterprise.html`
+  - `discovery.html`
+  - `ragdev.html`
+  - `agentdev.html`
+  - `vscode.html`
+  - `newrag.html`
+  - `cowork.html`
+  - `ocr.html`
+  - `dococr.html`
+
+### Why
+- The previous seeding approach distributed tools from a single general list in the same pattern, causing multiple pages to display effectively the same tools.
+- The new selection strategy ensures profile pages are differentiated while keeping deterministic generation.
+
+### Files touched
+- `scripts/seed_profiles.py`
+- `data/tools-enterprise.json`
+- `data/tools-discovery.json`
+- `data/tools-ragdev.json`
+- `data/tools-agentdev.json`
+- `data/tools-vscode.json`
+- `data/tools-newrag.json`
+- `data/tools-cowork.json`
+- `data/tools-ocr.json`
+- `data/tools-dococr.json`
+- `enterprise.html`
+- `discovery.html`
+- `ragdev.html`
+- `agentdev.html`
+- `vscode.html`
+- `newrag.html`
+- `cowork.html`
+- `ocr.html`
+- `dococr.html`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/seed_profiles.py`
+- `python scripts/seed_profiles.py`
+- `python scripts/generate.py`
+- Verified key profile pairs are no longer identical:
+  - `tools-enterprise.json` vs `tools-discovery.json` => different
+  - `tools-enterprise.json` vs `tools-ragdev.json` => different
+  - `tools-cowork.json` vs `tools-ocr.json` => different
+  - `tools-cowork.json` vs `tools-vscode.json` => different
 - Artifacts were correct, but repository pages stayed stale because workflow matrix/commit lists still targeted only 4 profiles.
 - As a result, `agentdev` dataset/page was neither updated in scheduled runs nor committed to the repository.
 - History now preserves multiple runs on same day instead of overwriting.

@@ -27,6 +27,7 @@ on:
           - cowork
           - ocr
           - dococr
+          - aicliapps
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -66,6 +67,7 @@ jobs:
             cowork) DATASET_PATH="data/tools-cowork.json" ;;
             ocr) DATASET_PATH="data/tools-ocr.json" ;;
             dococr) DATASET_PATH="data/tools-dococr.json" ;;
+            aicliapps) DATASET_PATH="data/tools-aicliapps.json" ;;
             *) echo "Unknown profile: $PROFILE"; exit 1 ;;
           esac
           echo "DATASET_PATH=$DATASET_PATH" >> "$GITHUB_ENV"
