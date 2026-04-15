@@ -22,10 +22,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-16 01:18:16.826",
-        "tool_count": 24
-      },
-      {
         "generated_at": "2026-04-15 15:57:24.631",
         "tool_count": 24
       },
@@ -68,6 +64,11 @@
         "generated_at": "2026-04-16 01:19:20.006",
         "tool_count": 16,
         "snapshot_file": "snapshots/cowork/2026-04-16_01-19-20-006.html"
+      },
+      {
+        "generated_at": "2026-04-15 23:28:01.562",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/cowork/2026-04-15_23-28-01-562.html"
       }
     ]
   },

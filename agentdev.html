@@ -462,7 +462,7 @@
 
 <header>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
-  <div class="header-badge">🤖 Auto-updated by AI · 16/04/2026</div>
+  <div class="header-badge">🤖 Auto-updated by AI · 15/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
   <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
   <p class="update-info">Dernière mise à jour : <span>2026-04-16</span></p>
@@ -476,7 +476,8 @@
     <a class="page-link" href="newrag.html">Vue New RAG</a>
     <a class="page-link" href="cowork.html">Vue Cowork</a>
     <a class="page-link" href="ocr.html">Vue OCR</a>
-    <a class="page-link" href="dococr.html">Vue OCR Système Complet</a></div>
+    <a class="page-link" href="dococr.html">Vue OCR Système Complet</a>
+    <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a></div>
   <div class="page-meta">
     <div>
       <div class="page-meta-label">Type de page</div>
@@ -795,11 +796,6 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date">2026-04-15 01:59:48.392</td>
-          <td class="history-count">0</td>
-          <td>-</td>
-        </tr>
-        <tr>
           <td class="history-date">2026-04-15 02:00:36.994</td>
           <td class="history-count">0</td>
           <td>-</td>
@@ -844,6 +840,11 @@
           <td class="history-count">12</td>
           <td><a href="snapshots/agentdev/2026-04-16_01-19-19-975.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-16_01-19-19-975.html&amp;right=agentdev.html">Comparer</a></td>
         </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/agentdev/2026-04-15_23-28-01-558.html" target="_blank">2026-04-15 23:28:01.558</a></td>
+          <td class="history-count">12</td>
+          <td><a href="snapshots/agentdev/2026-04-15_23-28-01-558.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-15_23-28-01-558.html&amp;right=agentdev.html">Comparer</a></td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -862,7 +863,7 @@
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
   const currentPageFile = 'agentdev.html';
-  const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}]};
+  const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}]};
 
   async function fetchAsText(path) {
     const res = await fetch(path, { cache: 'no-store' });

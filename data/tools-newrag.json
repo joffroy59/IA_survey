@@ -23,10 +23,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-16 01:18:16.825",
-        "tool_count": 24
-      },
-      {
         "generated_at": "2026-04-15 15:57:24.598",
         "tool_count": 24
       },
@@ -69,6 +65,11 @@
         "generated_at": "2026-04-16 01:19:19.997",
         "tool_count": 16,
         "snapshot_file": "snapshots/newrag/2026-04-16_01-19-19-997.html"
+      },
+      {
+        "generated_at": "2026-04-15 23:28:01.561",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-15_23-28-01-561.html"
       }
     ]
   },
