@@ -1,5 +1,25 @@
 # Work Done Note
 
+Date: 2026-04-16
+Repository: IA_survey
+
+## ADD) Maintainability-focused custom agent
+
+### Changed
+- Created `.github/agents/maintainability-guardian.agent.md`.
+- Added a focused custom agent definition for code maintenance work with best-practice guardrails (small scoped changes, readability, API safety, duplication reduction, and verification expectations).
+
+### Why
+- User requested an agent specialized in maintaining code with maintainability best practices.
+- A reusable custom agent helps apply consistent standards across future maintenance tasks.
+
+### Files touched
+- `.github/agents/maintainability-guardian.agent.md`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Verified frontmatter is present and valid-looking (`description`, `tools`, `argument-hint`, invocation settings).
+
 Date: 2026-04-15
 Repository: IA_survey
 
