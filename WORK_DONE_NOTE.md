@@ -3,6 +3,41 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## FEATURE) Add OCR page and complete OCR document system page
+
+### Changed
+- Added two new profiles and pages:
+  - `ocr` -> `ocr.html` + `data/tools-ocr.json`
+  - `dococr` -> `dococr.html` + `data/tools-dococr.json`
+- Added OCR-focused queries and full document OCR-system queries in `data/search_queries.json`.
+- Updated `scripts/update.py` profile config to support both new profiles.
+- Updated `scripts/generate.py` page config to generate `ocr.html` and `dococr.html`.
+- Updated workflows (`update.yml`, `update-profile-unit.yml`, `update-consumer-example.yml`) to include `ocr` and `dococr` in matrix/options/path/commit stages.
+- Regenerated pages and datasets, including snapshot history entries for both new pages.
+
+### Why
+- Requirement requested a dedicated OCR tools page and a dedicated page for complete document OCR systems.
+- Integrating profiles into update/generate/workflow ensures full automation parity with existing pages.
+
+### Files touched
+- `scripts/update.py`
+- `scripts/generate.py`
+- `data/search_queries.json`
+- `data/tools-ocr.json`
+- `data/tools-dococr.json`
+- `.github/workflows/update.yml`
+- `.github/workflows/update-profile-unit.yml`
+- `.github/workflows/update-consumer-example.yml`
+- Generated outputs: `ocr.html`, `dococr.html`, updated existing pages/datasets, and `snapshots/*`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/update.py scripts/generate.py`
+- `python scripts/update.py --profile ocr`
+- `python scripts/update.py --profile dococr`
+- `python scripts/generate.py`
+- Confirmed `ocr.html` and `dococr.html` generated and include standard page features.
+
 ## RELEASE PREP) Refresh pages/datasets before v1.3.0
 
 ### Changed

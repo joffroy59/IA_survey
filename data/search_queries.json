@@ -242,6 +242,40 @@
         "outils IA collaboration équipe 2026",
         "productivité équipe IA entreprise"
       ]
+    },
+    "ocr": {
+      "label": "OCR",
+      "queries": [
+        "best OCR tools 2026",
+        "open source OCR engine comparison 2026",
+        "handwriting OCR ai tools 2026",
+        "invoice OCR extraction tools 2026",
+        "multilingual OCR tools enterprise 2026",
+        "OCR API cloud self hosted 2026",
+        "document text extraction ai 2026",
+        "table OCR extraction tools 2026",
+        "pdf OCR pipeline tools 2026",
+        "image to text ai OCR benchmark 2026",
+        "outils OCR IA 2026",
+        "OCR reconnaissance de texte entreprise"
+      ]
+    },
+    "dococr": {
+      "label": "Complete OCR Document System",
+      "queries": [
+        "end to end document processing OCR platform 2026",
+        "document ingestion OCR classification workflow 2026",
+        "IDP intelligent document processing tools 2026",
+        "invoice processing OCR complete system 2026",
+        "enterprise document automation OCR ai 2026",
+        "document management with OCR and RPA 2026",
+        "contract analysis OCR NLP platform 2026",
+        "knowledge extraction from scanned documents 2026",
+        "full stack OCR document pipeline open source",
+        "document ai workflow orchestration OCR 2026",
+        "système complet OCR documentaire 2026",
+        "plateforme OCR gestion documentaire entreprise"
+      ]
     }
   }
 }

@@ -86,6 +86,20 @@ PROFILE_CONFIG = {
         "page_description": "Collaboration assistée par IA pour équipes produit, dev et ops.",
         "query_profile": "cowork",
     },
+    "ocr": {
+        "tools_file": ROOT / "data" / "tools-ocr.json",
+        "page_name": "ocr",
+        "page_label": "Panorama OCR",
+        "page_description": "Outils OCR, extraction de texte et traitement intelligent de documents.",
+        "query_profile": "ocr",
+    },
+    "dococr": {
+        "tools_file": ROOT / "data" / "tools-dococr.json",
+        "page_name": "dococr",
+        "page_label": "Panorama Système OCR Complet",
+        "page_description": "Plateformes complètes pour ingestion, OCR, classification et workflow documentaire.",
+        "query_profile": "dococr",
+    },
 }
 
 MAX_SEARCH_RESULTS = 15  # par requête
