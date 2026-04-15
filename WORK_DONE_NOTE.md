@@ -3,6 +3,59 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## UI) Show total tools and new tools on each page
+
+### Changed
+- Updated `scripts/generate.py` to compute:
+  - total tools count (`count_tools`)
+  - new tools count (`count_new_tools`, based on `new: true`)
+- Added a header line in generated pages:
+  - `Outils : X · Nouveaux : Y`
+- Regenerated all pages:
+  - `index.html`
+  - `enterprise.html`
+  - `discovery.html`
+  - `ragdev.html`
+  - `agentdev.html`
+
+### Why
+- Requirement: display both the total number of tools and the number of new tools on every page for quick visibility.
+
+### Files touched
+- `scripts/generate.py`
+- `index.html`
+- `enterprise.html`
+- `discovery.html`
+- `ragdev.html`
+- `agentdev.html`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/generate.py`
+- `python scripts/generate.py`
+- Checked all 5 pages contain `Outils : <span>...</span> · Nouveaux : <span>...</span>`
+
+## CI) Remove Node 20 deprecation warning in GitHub Actions
+
+### Changed
+- Added workflow-level environment variable `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` in:
+  - `.github/workflows/update.yml`
+  - `.github/workflows/update-profile-unit.yml`
+  - `.github/workflows/update-consumer-example.yml`
+
+### Why
+- GitHub Actions warned that Node.js 20-backed JavaScript actions are deprecated.
+- Opting in to Node 24 now removes warning noise and avoids future runtime breakage when Node 20 is removed.
+
+### Files touched
+- `.github/workflows/update.yml`
+- `.github/workflows/update-profile-unit.yml`
+- `.github/workflows/update-consumer-example.yml`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Reviewed workflow diffs to confirm `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` is present at workflow top level in all three files.
+
 ## RELEASE PREP) Refresh generated datasets and pages
 
 ### Changed

@@ -25,10 +25,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-15 02:00:28.682",
-        "tool_count": 93
-      },
-      {
         "date": "2026-04-15",
         "tool_count": 0
       },
@@ -62,6 +58,10 @@
       },
       {
         "generated_at": "2026-04-15 02:03:43.828",
+        "tool_count": 88
+      },
+      {
+        "generated_at": "2026-04-15 02:11:18.584",
         "tool_count": 88
       }
     ]

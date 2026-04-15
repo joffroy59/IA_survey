@@ -469,6 +469,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <h1>{title}</h1>
   <p class="subtitle">{subtitle}</p>
   <p class="update-info">Dernière mise à jour : <span>{last_updated}</span></p>
+  <p class="update-info">Outils : <span>{tool_count}</span> · Nouveaux : <span>{new_tool_count}</span></p>
   <div class="page-switcher">{page_switcher}</div>
   <div class="page-meta">
     <div>
@@ -665,6 +666,17 @@ def count_tools(categories: list[dict]) -> int:
     return total
 
 
+def count_new_tools(categories: list[dict]) -> int:
+    """Count tools marked as new across all categories and subcategories."""
+    total = 0
+    for cat in categories:
+        for sub in cat.get("subcategories", []):
+            for tool in sub.get("tools", []):
+                if tool.get("new"):
+                    total += 1
+    return total
+
+
 def render_history(page_history: list[dict]) -> str:
     """Render history table rows."""
     if not page_history:
@@ -696,6 +708,7 @@ def generate_page(page_cfg: dict):
 
     # Count tools and manage history per run.
     tool_count = count_tools(cats)
+    new_tool_count = count_new_tools(cats)
     now_iso = datetime.now().isoformat(timespec="milliseconds").replace("T", " ")
 
     # Load existing history and add new entry.
@@ -736,6 +749,8 @@ def generate_page(page_cfg: dict):
         subtitle=meta["subtitle"],
         today=date.today().strftime("%d/%m/%Y"),
         last_updated=meta.get("last_updated", ""),
+        tool_count=tool_count,
+        new_tool_count=new_tool_count,
         page_switcher=render_page_switcher(meta.get("page_name", "general")),
         page_label=escape(page_label),
         page_description=escape(page_description),
