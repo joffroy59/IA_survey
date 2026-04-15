@@ -1,0 +1,97 @@
+{
+  "meta": {
+    "title": "Boîte à outils IA Génératives",
+    "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
+    "last_updated": "2026-04-15",
+    "page_name": "newrag",
+    "page_label": "Panorama New RAG",
+    "page_description": "Nouveaux frameworks, patterns et plateformes RAG 2026.",
+    "search_queries": [
+      "new RAG frameworks 2026",
+      "advanced RAG techniques 2026 reranking",
+      "agentic RAG workflows 2026",
+      "RAG evaluation tools benchmark 2026",
+      "RAG observability tooling 2026",
+      "RAG chunking strategy latest 2026",
+      "hybrid retrieval tools BM25 vector 2026",
+      "graph RAG frameworks 2026",
+      "multimodal RAG platform 2026",
+      "open source RAG stack github 2026",
+      "state of the art RAG paper 2026",
+      "outils RAG nouvelle génération 2026"
+    ],
+    "page_history": [
+      {
+        "generated_at": "2026-04-15 02:17:46.953",
+        "tool_count": 0,
+        "snapshot_file": "snapshots/newrag/2026-04-15_02-17-46-953.html"
+      },
+      {
+        "generated_at": "2026-04-15 02:20:30.776",
+        "tool_count": 0,
+        "snapshot_file": "snapshots/newrag/2026-04-15_02-20-30-776.html"
+      },
+      {
+        "generated_at": "2026-04-15 02:21:30.279",
+        "tool_count": 0,
+        "snapshot_file": "snapshots/newrag/2026-04-15_02-21-30-279.html"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "new-rag-frameworks",
+      "name": "🧱 Frameworks New RAG",
+      "icon": "🧱",
+      "subcategories": [
+        {
+          "name": "Graph RAG",
+          "icon": "🕸️",
+          "tools": []
+        },
+        {
+          "name": "Agentic RAG",
+          "icon": "🤖",
+          "tools": []
+        },
+        {
+          "name": "Multimodal RAG",
+          "icon": "🖼️",
+          "tools": []
+        },
+        {
+          "name": "Orchestration",
+          "icon": "🔗",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "new-rag-quality",
+      "name": "📈 Qualité & Ops",
+      "icon": "📈",
+      "subcategories": [
+        {
+          "name": "Évaluation",
+          "icon": "✅",
+          "tools": []
+        },
+        {
+          "name": "Observabilité",
+          "icon": "📊",
+          "tools": []
+        },
+        {
+          "name": "Retrieval Tuning",
+          "icon": "🎯",
+          "tools": []
+        },
+        {
+          "name": "Security & Governance",
+          "icon": "🔒",
+          "tools": []
+        }
+      ]
+    }
+  ]
+}

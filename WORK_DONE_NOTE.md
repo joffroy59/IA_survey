@@ -3,6 +3,126 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## RELEASE PREP) Refresh pages/datasets before v1.3.0
+
+### Changed
+- Regenerated all pages and datasets prior to release merge.
+- Updated all `data/tools*.json` files and page outputs:
+  - `index.html`, `enterprise.html`, `discovery.html`, `ragdev.html`, `agentdev.html`, `vscode.html`, `newrag.html`, `cowork.html`
+- Added new snapshot versions under `snapshots/*` for history/compare continuity.
+
+### Why
+- Ensure release is published with latest generated state and synchronized history snapshots.
+
+### Files touched
+- `data/tools*.json`
+- `*.html`
+- `snapshots/*`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/update.py scripts/generate.py`
+- `python scripts/generate.py`
+
+## FEATURE) VS Code, New RAG, Cowork pages + history compare + ZIP export
+
+### Changed
+- Added 3 new profiles/pages:
+  - VS Code (`vscode.html`, `data/tools-vscode.json`)
+  - New RAG (`newrag.html`, `data/tools-newrag.json`)
+  - Cowork (`cowork.html`, `data/tools-cowork.json`)
+- Added profile queries in `data/search_queries.json` for `vscode`, `newrag`, and `cowork`.
+- Updated `scripts/update.py` profile config so these pages are updatable by workflow.
+- Updated workflows (`update.yml`, `update-profile-unit.yml`, `update-consumer-example.yml`) to include new profiles in matrix, manual choices, dataset paths, and auto-commit file lists.
+- Upgraded generated pages with:
+  - history entries linked to immutable snapshots
+  - compare action opening `compare-view.html`
+  - ZIP export buttons (`ZIP Page`, `ZIP All`)
+  - footer copyright text: "Copyright made by joffroy"
+- Added `compare-view.html` and snapshot persistence under `snapshots/<page>/...`.
+- Added snapshot pruning logic to keep storage aligned with retained history.
+
+### Why
+- Requirement requested dedicated pages for VS Code, New RAG, and Cowork themes.
+- Requirement requested clickable history with old-page viewing and comparison.
+- Requirement requested downloadable ZIP export (single page or all pages).
+- Requirement requested explicit copyright attribution.
+
+### Files touched
+- `scripts/generate.py`
+- `scripts/update.py`
+- `data/search_queries.json`
+- `data/tools-vscode.json`
+- `data/tools-newrag.json`
+- `data/tools-cowork.json`
+- `.github/workflows/update.yml`
+- `.github/workflows/update-profile-unit.yml`
+- `.github/workflows/update-consumer-example.yml`
+- Generated pages: `vscode.html`, `newrag.html`, `cowork.html`, `compare-view.html` + existing pages regenerated
+- Snapshot files: `snapshots/*`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/generate.py scripts/update.py`
+- `python scripts/generate.py`
+- `python scripts/update.py --profile vscode`
+- `python scripts/update.py --profile newrag`
+- `python scripts/update.py --profile cowork`
+- Confirmed new pages render ZIP buttons, history compare links, and copyright footer.
+
+## UI) Show total tools and new tools on each page
+
+### Changed
+- Updated `scripts/generate.py` to compute:
+  - total tools count (`count_tools`)
+  - new tools count (`count_new_tools`, based on `new: true`)
+- Added a header line in generated pages:
+  - `Outils : X · Nouveaux : Y`
+- Regenerated all pages:
+  - `index.html`
+  - `enterprise.html`
+  - `discovery.html`
+  - `ragdev.html`
+  - `agentdev.html`
+
+### Why
+- Requirement: display both the total number of tools and the number of new tools on every page for quick visibility.
+
+### Files touched
+- `scripts/generate.py`
+- `index.html`
+- `enterprise.html`
+- `discovery.html`
+- `ragdev.html`
+- `agentdev.html`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/generate.py`
+- `python scripts/generate.py`
+- Checked all 5 pages contain `Outils : <span>...</span> · Nouveaux : <span>...</span>`
+
+## CI) Remove Node 20 deprecation warning in GitHub Actions
+
+### Changed
+- Added workflow-level environment variable `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` in:
+  - `.github/workflows/update.yml`
+  - `.github/workflows/update-profile-unit.yml`
+  - `.github/workflows/update-consumer-example.yml`
+
+### Why
+- GitHub Actions warned that Node.js 20-backed JavaScript actions are deprecated.
+- Opting in to Node 24 now removes warning noise and avoids future runtime breakage when Node 20 is removed.
+
+### Files touched
+- `.github/workflows/update.yml`
+- `.github/workflows/update-profile-unit.yml`
+- `.github/workflows/update-consumer-example.yml`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Reviewed workflow diffs to confirm `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` is present at workflow top level in all three files.
+
 ## RELEASE PREP) Refresh generated datasets and pages
 
 ### Changed

@@ -1,0 +1,97 @@
+{
+  "meta": {
+    "title": "Boîte à outils IA Génératives",
+    "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
+    "last_updated": "2026-04-15",
+    "page_name": "vscode",
+    "page_label": "Panorama VS Code + Extensions IA",
+    "page_description": "Outils, extensions et workflows IA dédiés à VS Code.",
+    "search_queries": [
+      "best VS Code AI extensions 2026",
+      "VS Code Copilot alternatives 2026",
+      "open source vscode ai extension github 2026",
+      "vscode extension for prompt engineering",
+      "vscode ai code review extension",
+      "vscode terminal ai assistant tools",
+      "vscode extension autonomous coding agent",
+      "vscode extension documentation generation ai",
+      "cursor vs vscode ai workflow 2026",
+      "vscode ai refactoring extension",
+      "meilleures extensions IA VS Code 2026",
+      "vscode extension team productivity ai"
+    ],
+    "page_history": [
+      {
+        "generated_at": "2026-04-15 02:17:46.951",
+        "tool_count": 0,
+        "snapshot_file": "snapshots/vscode/2026-04-15_02-17-46-951.html"
+      },
+      {
+        "generated_at": "2026-04-15 02:20:30.774",
+        "tool_count": 0,
+        "snapshot_file": "snapshots/vscode/2026-04-15_02-20-30-774.html"
+      },
+      {
+        "generated_at": "2026-04-15 02:21:30.277",
+        "tool_count": 0,
+        "snapshot_file": "snapshots/vscode/2026-04-15_02-21-30-277.html"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "vscode-extensions",
+      "name": "🧩 Extensions VS Code",
+      "icon": "🧩",
+      "subcategories": [
+        {
+          "name": "Assistants Code",
+          "icon": "💡",
+          "tools": []
+        },
+        {
+          "name": "Refactoring & Review",
+          "icon": "🛠️",
+          "tools": []
+        },
+        {
+          "name": "Prompt & Chat",
+          "icon": "💬",
+          "tools": []
+        },
+        {
+          "name": "Tests & Docs",
+          "icon": "🧪",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "vscode-workflows",
+      "name": "⚙️ Workflows Dev",
+      "icon": "⚙️",
+      "subcategories": [
+        {
+          "name": "Terminal AI",
+          "icon": "🖥️",
+          "tools": []
+        },
+        {
+          "name": "CI/CD Integration",
+          "icon": "🚀",
+          "tools": []
+        },
+        {
+          "name": "Debugging",
+          "icon": "🐞",
+          "tools": []
+        },
+        {
+          "name": "Team Productivity",
+          "icon": "👥",
+          "tools": []
+        }
+      ]
+    }
+  ]
+}

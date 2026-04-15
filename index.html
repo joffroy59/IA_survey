@@ -424,11 +424,15 @@
   <h1>Boîte à outils IA Génératives</h1>
   <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
   <p class="update-info">Dernière mise à jour : <span>2026-04-15</span></p>
+  <p class="update-info">Outils : <span>50</span> · Nouveaux : <span>2</span></p>
   <div class="page-switcher"><a class="page-link active" href="index.html">Vue Generale</a>
     <a class="page-link" href="enterprise.html">Vue Enterprise</a>
     <a class="page-link" href="discovery.html">Vue Decouverte</a>
     <a class="page-link" href="ragdev.html">Vue RAG Pro + DevTools</a>
-    <a class="page-link" href="agentdev.html">Vue Agent Dev + IDE Tools</a></div>
+    <a class="page-link" href="agentdev.html">Vue Agent Dev + IDE Tools</a>
+    <a class="page-link" href="vscode.html">Vue VS Code</a>
+    <a class="page-link" href="newrag.html">Vue New RAG</a>
+    <a class="page-link" href="cowork.html">Vue Cowork</a></div>
   <div class="page-meta">
     <div>
       <div class="page-meta-label">Type de page</div>
@@ -438,6 +442,8 @@
     <div class="button-group">
       <button class="info-btn" type="button" id="open-search-info">Sources</button>
       <button class="info-btn" type="button" id="open-history-info">Historique</button>
+      <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
+      <button class="info-btn" type="button" id="export-all-zip">ZIP All</button>
     </div>
   </div>
 </header>
@@ -889,6 +895,7 @@
 
 <footer>
   Généré automatiquement par GitHub Actions + Gemini AI ·
+  Copyright made by joffroy ·
   <a href="https://github.com/VOTRE-USERNAME/ai-toolbox" target="_blank">Voir sur GitHub</a>
 </footer>
 
@@ -925,44 +932,59 @@
         <tr>
           <th>Date de génération</th>
           <th class="history-count">Outils détectés</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date">2026-04-15</td>
-          <td class="history-count">50</td>
-        </tr>
-        <tr>
-          <td class="history-date">2026-04-15 01:41:27</td>
-          <td class="history-count">50</td>
-        </tr>
-        <tr>
-          <td class="history-date">2026-04-15 01:41:27</td>
-          <td class="history-count">50</td>
-        </tr>
-        <tr>
           <td class="history-date">2026-04-15 01:41:46.708</td>
           <td class="history-count">50</td>
+          <td>-</td>
         </tr>
         <tr>
           <td class="history-date">2026-04-14 23:47:27.706</td>
           <td class="history-count">50</td>
+          <td>-</td>
         </tr>
         <tr>
           <td class="history-date">2026-04-15 01:59:48.380</td>
           <td class="history-count">50</td>
+          <td>-</td>
         </tr>
         <tr>
           <td class="history-date">2026-04-15 02:00:36.989</td>
           <td class="history-count">50</td>
+          <td>-</td>
         </tr>
         <tr>
           <td class="history-date">2026-04-15 02:01:58.476</td>
           <td class="history-count">50</td>
+          <td>-</td>
         </tr>
         <tr>
           <td class="history-date">2026-04-15 02:03:43.824</td>
           <td class="history-count">50</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td class="history-date">2026-04-15 02:11:18.580</td>
+          <td class="history-count">50</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/general/2026-04-15_02-17-46-938.html" target="_blank">2026-04-15 02:17:46.938</a></td>
+          <td class="history-count">50</td>
+          <td><a href="snapshots/general/2026-04-15_02-17-46-938.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-15_02-17-46-938.html&amp;right=index.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/general/2026-04-15_02-20-30-759.html" target="_blank">2026-04-15 02:20:30.759</a></td>
+          <td class="history-count">50</td>
+          <td><a href="snapshots/general/2026-04-15_02-20-30-759.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-15_02-20-30-759.html&amp;right=index.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/general/2026-04-15_02-21-30-263.html" target="_blank">2026-04-15 02:21:30.263</a></td>
+          <td class="history-count">50</td>
+          <td><a href="snapshots/general/2026-04-15_02-21-30-263.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-15_02-21-30-263.html&amp;right=index.html">Comparer</a></td>
         </tr>
         <tr>
           <td class="history-date">2026-04-15 00:09:30.037</td>
@@ -973,6 +995,7 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script>
   const tabs = document.querySelectorAll('.nav-tab');
   const categories = document.querySelectorAll('.category');
@@ -982,6 +1005,63 @@
   const closeSearchInfo = document.getElementById('close-search-info');
   const openHistoryInfo = document.getElementById('open-history-info');
   const closeHistoryInfo = document.getElementById('close-history-info');
+  const exportPageZipBtn = document.getElementById('export-page-zip');
+  const exportAllZipBtn = document.getElementById('export-all-zip');
+  const currentPageFile = 'index.html';
+  const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}]};
+
+  async function fetchAsText(path) {
+    const res = await fetch(path, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`Failed to fetch ${path} (${res.status})`);
+    return res.text();
+  }
+
+  function downloadBlob(filename, blob) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  async function exportZip(files, zipName) {
+    const zip = new JSZip();
+    for (const item of files) {
+      const content = await fetchAsText(item.path);
+      zip.file(item.name, content);
+    }
+    const blob = await zip.generateAsync({ type: 'blob' });
+    downloadBlob(zipName, blob);
+  }
+
+  exportPageZipBtn.addEventListener('click', async () => {
+    const current = exportManifest.pages.find(p => p.html === currentPageFile);
+    if (!current) return;
+    try {
+      await exportZip([
+        { path: current.html, name: current.html },
+        { path: current.data, name: current.data },
+      ], `export-${current.slug}.zip`);
+    } catch (err) {
+      alert(`Export page failed: ${err.message}`);
+    }
+  });
+
+  exportAllZipBtn.addEventListener('click', async () => {
+    try {
+      const files = [];
+      for (const p of exportManifest.pages) {
+        files.push({ path: p.html, name: p.html });
+        files.push({ path: p.data, name: p.data });
+      }
+      await exportZip(files, 'export-all-pages.zip');
+    } catch (err) {
+      alert(`Export all failed: ${err.message}`);
+    }
+  });
 
   tabs.forEach(tab => {
     tab.addEventListener('click', (e) => {

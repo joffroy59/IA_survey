@@ -191,6 +191,57 @@
         "framework agent France open source",
         "plateforme agent développeur entreprise"
       ]
+    },
+    "vscode": {
+      "label": "VS Code + AI Extensions",
+      "queries": [
+        "best VS Code AI extensions 2026",
+        "VS Code Copilot alternatives 2026",
+        "open source vscode ai extension github 2026",
+        "vscode extension for prompt engineering",
+        "vscode ai code review extension",
+        "vscode terminal ai assistant tools",
+        "vscode extension autonomous coding agent",
+        "vscode extension documentation generation ai",
+        "cursor vs vscode ai workflow 2026",
+        "vscode ai refactoring extension",
+        "meilleures extensions IA VS Code 2026",
+        "vscode extension team productivity ai"
+      ]
+    },
+    "newrag": {
+      "label": "New RAG",
+      "queries": [
+        "new RAG frameworks 2026",
+        "advanced RAG techniques 2026 reranking",
+        "agentic RAG workflows 2026",
+        "RAG evaluation tools benchmark 2026",
+        "RAG observability tooling 2026",
+        "RAG chunking strategy latest 2026",
+        "hybrid retrieval tools BM25 vector 2026",
+        "graph RAG frameworks 2026",
+        "multimodal RAG platform 2026",
+        "open source RAG stack github 2026",
+        "state of the art RAG paper 2026",
+        "outils RAG nouvelle génération 2026"
+      ]
+    },
+    "cowork": {
+      "label": "Cowork AI",
+      "queries": [
+        "AI collaboration tools for teams 2026",
+        "ai meeting assistant team workflow 2026",
+        "shared ai workspace tools 2026",
+        "ai project management copilots 2026",
+        "team knowledge management ai tools 2026",
+        "ai docs collaboration tools 2026",
+        "ai pair programming for teams 2026",
+        "ai design collaboration tools 2026",
+        "ai communication assistant slack teams 2026",
+        "enterprise team copilot platform 2026",
+        "outils IA collaboration équipe 2026",
+        "productivité équipe IA entreprise"
+      ]
     }
   }
 }
