@@ -3,6 +3,27 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## ADD) Docling search queries for OCR, DocOCR, New RAG, RAG Dev profiles
+
+### Changed
+- Added docling-related search queries to 4 profiles in `data/search_queries.json`:
+  - **ocr** (+2): `docling document parsing OCR python 2026`, `docling IBM open source document processing`
+  - **dococr** (+2): `docling document processing pipeline OCR parsing 2026`, `docling vs unstructured document ai comparison`
+  - **newrag** (+1): `docling document parsing for RAG pipeline 2026`
+  - **ragdev** (+1): `docling document parsing RAG ingestion pipeline 2026`
+- Synced queries to the 4 profile JSON data files.
+
+### Why
+- Docling (IBM open-source document processing) is highly relevant for OCR, document processing, and RAG ingestion pipelines but was missing from search queries.
+
+### Files touched
+- `data/search_queries.json`
+- `data/tools-ocr.json`
+- `data/tools-dococr.json`
+- `data/tools-newrag.json`
+- `data/tools-ragdev.json`
+- `WORK_DONE_NOTE.md`
+
 ## FIX) Seed missing profiles — vscode, newrag, cowork, ocr, dococr
 
 ### Changed
