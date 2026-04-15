@@ -783,6 +783,44 @@ Repository: IA_survey
     - Fermeture coordonnée des modales
 
 - Initialisation `page_history` dans tous les datasets:
+
+## QUERY UPDATE) Add mandatory tool discovery queries (English-only)
+
+### Date
+- 2026-04-16
+
+### Changed
+- Updated [data/search_queries.json](data/search_queries.json) to improve discovery for mandatory tools:
+  - Gemini CLI
+  - OpenCode
+  - OpenClaw
+  - Hermes
+  - Gemini Code Assist
+  - Docling
+  - Codex
+  - Claude
+  - Claude Code
+  - GitHub Copilot
+  - OpenAI
+  - broader AI CLI tool discovery
+- Added explicit mandatory-tool queries to profiles where they are most relevant:
+  - `agentdev`
+  - `vscode`
+  - `aicliapps`
+  - `ragdev` / `newrag` / `ocr` / `dococr` for Docling-focused coverage
+- Replaced remaining non-English query lines with English equivalents for better DuckDuckGo retrieval quality.
+
+### Why
+- Ensure update jobs discover required mandatory tools consistently.
+- Align query language with DuckDuckGo performance expectations (English-first).
+- Improve profile-specific relevance by targeting each mandatory tool to matching page intent.
+
+### Files touched
+- [data/search_queries.json](data/search_queries.json)
+- [WORK_DONE_NOTE.md](WORK_DONE_NOTE.md)
+
+### Verification
+- Parsed [data/search_queries.json](data/search_queries.json) with Python JSON loader successfully (`OK`).
   - `data/tools.json` : array vide (auto-peuplé au premier `generate.py`)
   - `data/tools-enterprise.json` : array vide
   - `data/tools-discovery.json` : array vide
