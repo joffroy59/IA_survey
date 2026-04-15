@@ -198,6 +198,38 @@
       flex-wrap: wrap;
       justify-content: center;
     }
+    .audience-brief {
+      margin: 18px auto 0;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .reader-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .reader-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+    .reader-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .reader-text {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
     .history-table {
       width: 100%;
       border-collapse: collapse;
@@ -455,6 +487,7 @@
     @media (max-width: 600px) {
       .tools-grid { grid-template-columns: 1fr 1fr; }
       .page-meta { grid-template-columns: 1fr; }
+      .audience-brief { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -490,6 +523,18 @@
       <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
       <button class="info-btn" type="button" id="export-all-zip">ZIP All</button>
     </div>
+  </div>
+  <div class="audience-brief">
+    <article class="reader-card reader-dev">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les developpeurs</div>
+      <div class="reader-text">Validez l&#x27;architecture, la securite et l&#x27;observabilite des stacks IA enterprise en conditions de production.</div>
+    </article>
+    <article class="reader-card reader-manager">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les managers</div>
+      <div class="reader-text">Cadrez le ROI, la gouvernance des donnees et les exigences de conformite pour un deploiement durable.</div>
+    </article>
   </div>
 </header>
 
@@ -1043,30 +1088,16 @@
     </div>
     <div class="modal-meta">Page: Panorama Enterprise · Dernière mise à jour: 2026-04-16</div>
     <ol class="query-list">
-      <li>RAG architecture tools enterprise 2026</li>
-      <li>retrieval augmented generation frameworks production 2026</li>
-      <li>best RAG tools open source vector database 2026</li>
-      <li>LLM RAG pipeline production stack 2026</li>
-      <li>AI agents frameworks enterprise automation 2026</li>
-      <li>agentic workflows tools production AI agents 2026</li>
-      <li>multi agent systems frameworks 2026 open source</li>
-      <li>AI orchestration tools LangChain alternatives 2026</li>
-      <li>AI developer tools enterprise coding assistant self hosted 2026</li>
-      <li>secure AI coding tools for companies 2026</li>
-      <li>on premise AI dev tools LLM enterprise 2026</li>
-      <li>LLM infrastructure tools enterprise deployment 2026</li>
-      <li>self hosted LLM stack enterprise vector db embedding 2026</li>
-      <li>AI platform enterprise stack comparison 2026</li>
-      <li>AI use cases enterprise automation internal tools 2026</li>
-      <li>AI for business process automation tools 2026</li>
-      <li>LLM internal knowledge base chatbot enterprise 2026</li>
-      <li>secure AI tools enterprise GDPR LLM privacy 2026</li>
-      <li>on premise AI tools Europe compliance 2026</li>
-      <li>AI tools enterprise site:github.com RAG OR agent</li>
-      <li>AI infrastructure blog LLM stack 2026 site:medium.com OR site:substack.com</li>
-      <li>Show HN enterprise AI tool RAG agent site:news.ycombinator.com</li>
-      <li>outils IA entreprise RAG agentique France 2026</li>
-      <li>plateforme IA entreprise Europe LLM open source</li>
+      <li>enterprise AI platform architecture 2026</li>
+      <li>enterprise RAG stack production 2026</li>
+      <li>secure enterprise AI tools GDPR compliance 2026</li>
+      <li>on premise enterprise LLM deployment tools 2026</li>
+      <li>enterprise agentic workflow automation tools 2026</li>
+      <li>enterprise AI governance and observability tools 2026</li>
+      <li>enterprise AI developer platform self hosted 2026</li>
+      <li>LLM infrastructure for enterprise teams 2026</li>
+      <li>outils IA entreprise conformite Europe 2026</li>
+      <li>enterprise knowledge assistant internal data RAG 2026</li>
     </ol>
   </div>
 </div>
@@ -1088,11 +1119,6 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date">2026-04-15 02:00:36.990</td>
-          <td class="history-count">40</td>
-          <td>-</td>
-        </tr>
-        <tr>
           <td class="history-date">2026-04-15 02:01:58.477</td>
           <td class="history-count">88</td>
           <td>-</td>
@@ -1128,9 +1154,19 @@
           <td><a href="snapshots/enterprise/2026-04-15_02-29-49-416.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-15_02-29-49-416.html&amp;right=enterprise.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/enterprise/2026-04-16_01-19-19-932.html" target="_blank">2026-04-16 01:19:19.932</a></td>
+          <td class="history-date"><a href="snapshots/enterprise/2026-04-16_01-23-21-621.html" target="_blank">2026-04-16 01:23:21.621</a></td>
           <td class="history-count">48</td>
-          <td><a href="snapshots/enterprise/2026-04-16_01-19-19-932.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-16_01-19-19-932.html&amp;right=enterprise.html">Comparer</a></td>
+          <td><a href="snapshots/enterprise/2026-04-16_01-23-21-621.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-16_01-23-21-621.html&amp;right=enterprise.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/enterprise/2026-04-16_01-27-20-652.html" target="_blank">2026-04-16 01:27:20.652</a></td>
+          <td class="history-count">48</td>
+          <td><a href="snapshots/enterprise/2026-04-16_01-27-20-652.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-16_01-27-20-652.html&amp;right=enterprise.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/enterprise/2026-04-16_01-28-23-954.html" target="_blank">2026-04-16 01:28:23.954</a></td>
+          <td class="history-count">48</td>
+          <td><a href="snapshots/enterprise/2026-04-16_01-28-23-954.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-16_01-28-23-954.html&amp;right=enterprise.html">Comparer</a></td>
         </tr>
         <tr>
           <td class="history-date"><a href="snapshots/enterprise/2026-04-15_23-28-01-552.html" target="_blank">2026-04-15 23:28:01.552</a></td>

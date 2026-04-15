@@ -34,10 +34,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-15 02:00:36.990",
-        "tool_count": 40
-      },
-      {
         "generated_at": "2026-04-15 02:01:58.477",
         "tool_count": 88
       },
@@ -70,14 +66,19 @@
         "snapshot_file": "snapshots/enterprise/2026-04-15_02-29-49-416.html"
       },
       {
-        "generated_at": "2026-04-16 01:19:19.932",
+        "generated_at": "2026-04-16 01:23:21.621",
         "tool_count": 48,
-        "snapshot_file": "snapshots/enterprise/2026-04-16_01-19-19-932.html"
+        "snapshot_file": "snapshots/enterprise/2026-04-16_01-23-21-621.html"
       },
       {
-        "generated_at": "2026-04-15 23:28:01.552",
+        "generated_at": "2026-04-16 01:27:20.652",
         "tool_count": 48,
-        "snapshot_file": "snapshots/enterprise/2026-04-15_23-28-01-552.html"
+        "snapshot_file": "snapshots/enterprise/2026-04-16_01-27-20-652.html"
+      },
+      {
+        "generated_at": "2026-04-16 01:28:23.954",
+        "tool_count": 48,
+        "snapshot_file": "snapshots/enterprise/2026-04-16_01-28-23-954.html"
       }
     ]
   },

@@ -198,6 +198,38 @@
       flex-wrap: wrap;
       justify-content: center;
     }
+    .audience-brief {
+      margin: 18px auto 0;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .reader-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .reader-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+    .reader-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .reader-text {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
     .history-table {
       width: 100%;
       border-collapse: collapse;
@@ -455,6 +487,7 @@
     @media (max-width: 600px) {
       .tools-grid { grid-template-columns: 1fr 1fr; }
       .page-meta { grid-template-columns: 1fr; }
+      .audience-brief { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -490,6 +523,18 @@
       <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
       <button class="info-btn" type="button" id="export-all-zip">ZIP All</button>
     </div>
+  </div>
+  <div class="audience-brief">
+    <article class="reader-card reader-dev">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les developpeurs</div>
+      <div class="reader-text">Evaluez les frameworks d&#x27;agents selon la fiabilite, la debuggabilite et la maintenabilite du code.</div>
+    </article>
+    <article class="reader-card reader-manager">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les managers</div>
+      <div class="reader-text">Selectionnez des solutions agentiques avec trajectoire claire de passage du POC a la production.</div>
+    </article>
   </div>
 </header>
 
@@ -724,57 +769,16 @@
     </div>
     <div class="modal-meta">Page: Panorama Agent Dev + IDE Tools · Dernière mise à jour: 2026-04-16</div>
     <ol class="query-list">
-      <li>AI agent development frameworks 2026 open source</li>
-      <li>autonomous agent tools for developers 2026</li>
-      <li>agent IDE tools VSCode extensions 2026</li>
-      <li>multi-agent orchestration platforms dev tools</li>
-      <li>LangGraph AutoGen agent framework comparison 2026</li>
-      <li>best agent development frameworks Python 2026</li>
-      <li>agent memory management frameworks 2026</li>
-      <li>tool calling agent frameworks integration</li>
-      <li>AI agent debugging tools monitoring 2026</li>
-      <li>VS Code AI agent extensions 2026</li>
-      <li>IDE tools for AI development ChatGPT Claude plugins</li>
-      <li>AI assistant IDE integration JetBrains VSCode</li>
-      <li>Cursor Windsurf AI IDE comparison 2026</li>
-      <li>best AI-powered code editor 2026</li>
-      <li>collaborative AI development tools teams</li>
-      <li>agent chains workflows automation tools</li>
-      <li>AI testing frameworks for agent systems</li>
-      <li>agent validation evaluation tools 2026</li>
-      <li>self-improving autonomous agents 2026</li>
-      <li>agent observability logging tools production</li>
-      <li>AI agent deployment platforms open source</li>
-      <li>kubernetes deployment AI agents 2026</li>
-      <li>serverless AI agent platforms 2026</li>
-      <li>agent scaling concurrency management tools</li>
-      <li>AI agent security sandbox isolation 2026</li>
-      <li>secure multi-agent systems frameworks</li>
-      <li>agent fine-tuning optimization tools 2026</li>
-      <li>local agent development environment setup</li>
-      <li>ollama local AI agent development</li>
-      <li>agent benchmark datasets evaluation metrics</li>
-      <li>AI agent reasoning explanation interpretability</li>
-      <li>agent tool integration plugins extensibility</li>
-      <li>agent knowledge base integration RAG</li>
-      <li>AI agent state management persistence</li>
-      <li>agent workflow visualization tools</li>
-      <li>AI development UI dashboard tools</li>
-      <li>agent performance profiling optimization</li>
-      <li>AI agent error handling recovery</li>
-      <li>open source agent projects github 2026</li>
-      <li>Show HN AI agent tool site:news.ycombinator.com</li>
-      <li>AI agent framework benchmarks comparison 2026</li>
-      <li>developer productivity AI tools 2026</li>
-      <li>pair programming with AI agents</li>
-      <li>code review AI agents automation</li>
-      <li>documentation generation AI tools</li>
-      <li>test generation from code AI</li>
-      <li>AI refactoring tools for developers</li>
-      <li>bug detection AI agents tools</li>
-      <li>outils IA développement agent 2026</li>
-      <li>framework agent France open source</li>
-      <li>plateforme agent développeur entreprise</li>
+      <li>AI agent development frameworks for engineers 2026</li>
+      <li>agent dev toolkit for coding workflows 2026</li>
+      <li>agent orchestration frameworks comparison 2026</li>
+      <li>agent memory and state management libraries 2026</li>
+      <li>AI agent debugging and tracing tools 2026</li>
+      <li>agent evaluation benchmark tools for dev teams 2026</li>
+      <li>agent security sandboxing frameworks 2026</li>
+      <li>multi agent development platform open source 2026</li>
+      <li>agent IDE integration for developers 2026</li>
+      <li>outils developpement d agents IA pour equipes 2026</li>
     </ol>
   </div>
 </div>
@@ -796,11 +800,6 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date">2026-04-15 02:00:36.994</td>
-          <td class="history-count">0</td>
-          <td>-</td>
-        </tr>
-        <tr>
           <td class="history-date">2026-04-15 02:01:58.484</td>
           <td class="history-count">48</td>
           <td>-</td>
@@ -836,9 +835,19 @@
           <td><a href="snapshots/agentdev/2026-04-15_02-29-49-424.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-15_02-29-49-424.html&amp;right=agentdev.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/agentdev/2026-04-16_01-19-19-975.html" target="_blank">2026-04-16 01:19:19.975</a></td>
+          <td class="history-date"><a href="snapshots/agentdev/2026-04-16_01-23-21-655.html" target="_blank">2026-04-16 01:23:21.655</a></td>
           <td class="history-count">12</td>
-          <td><a href="snapshots/agentdev/2026-04-16_01-19-19-975.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-16_01-19-19-975.html&amp;right=agentdev.html">Comparer</a></td>
+          <td><a href="snapshots/agentdev/2026-04-16_01-23-21-655.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-16_01-23-21-655.html&amp;right=agentdev.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/agentdev/2026-04-16_01-27-20-660.html" target="_blank">2026-04-16 01:27:20.660</a></td>
+          <td class="history-count">12</td>
+          <td><a href="snapshots/agentdev/2026-04-16_01-27-20-660.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-16_01-27-20-660.html&amp;right=agentdev.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/agentdev/2026-04-16_01-28-23-961.html" target="_blank">2026-04-16 01:28:23.961</a></td>
+          <td class="history-count">12</td>
+          <td><a href="snapshots/agentdev/2026-04-16_01-28-23-961.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-16_01-28-23-961.html&amp;right=agentdev.html">Comparer</a></td>
         </tr>
         <tr>
           <td class="history-date"><a href="snapshots/agentdev/2026-04-15_23-28-01-558.html" target="_blank">2026-04-15 23:28:01.558</a></td>
