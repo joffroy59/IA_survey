@@ -3,6 +3,18 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## DOC) SharePoint deploy plan
+
+### Changed
+- Created `SHAREPOINT_DEPLOY_PLAN.md` with 5 integration options for publishing HTML pages to enterprise SharePoint via GitHub Actions.
+
+### Why
+- Document the plan and possibilities for deploying generated pages to SharePoint.
+
+### Files touched
+- `SHAREPOINT_DEPLOY_PLAN.md`
+- `WORK_DONE_NOTE.md`
+
 ## ADD) Docling search queries for OCR, DocOCR, New RAG, RAG Dev profiles
 
 ### Changed
