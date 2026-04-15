@@ -3,6 +3,23 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## ADD) Mandatory GitFlow branch rule in repository instructions
+
+### Changed
+- Updated `.github/copilot-instructions.md` with a new required section: GitFlow Branch Rule.
+- Added explicit requirements to always create a dedicated branch per task and avoid direct work on `main` and `develop`.
+
+### Why
+- User requested a clear rule to always create a git branch and follow GitFlow workflow.
+- This reduces integration risk and keeps branch strategy consistent for all future tasks.
+
+### Files touched
+- `.github/copilot-instructions.md`
+- `WORK_DONE_NOTE.md`
+
+Date: 2026-04-16
+Repository: IA_survey
+
 ## ADD) Maintainability-focused custom agent
 
 ### Changed
