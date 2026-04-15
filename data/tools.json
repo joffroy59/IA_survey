@@ -5,14 +5,6 @@
     "last_updated": "2026-04-15",
     "page_history": [
       {
-        "date": "2026-04-15",
-        "tool_count": 50
-      },
-      {
-        "generated_at": "2026-04-15 01:41:27",
-        "tool_count": 50
-      },
-      {
         "generated_at": "2026-04-15 01:41:27",
         "tool_count": 50
       },
@@ -43,6 +35,16 @@
       {
         "generated_at": "2026-04-15 02:11:18.580",
         "tool_count": 50
+      },
+      {
+        "generated_at": "2026-04-15 02:17:46.938",
+        "tool_count": 50,
+        "snapshot_file": "snapshots/general/2026-04-15_02-17-46-938.html"
+      },
+      {
+        "generated_at": "2026-04-15 02:20:30.759",
+        "tool_count": 50,
+        "snapshot_file": "snapshots/general/2026-04-15_02-20-30-759.html"
       }
     ],
     "page_name": "general",

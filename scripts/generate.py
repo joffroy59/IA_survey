@@ -7,6 +7,7 @@ import json
 from datetime import date, datetime
 from html import escape
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT = Path(__file__).parent.parent
 
@@ -40,6 +41,24 @@ PAGE_CONFIGS = [
       "label": "Vue Agent Dev + IDE Tools",
       "data_file": ROOT / "data" / "tools-agentdev.json",
       "output": ROOT / "agentdev.html",
+    },
+    {
+      "slug": "vscode",
+      "label": "Vue VS Code",
+      "data_file": ROOT / "data" / "tools-vscode.json",
+      "output": ROOT / "vscode.html",
+    },
+    {
+      "slug": "newrag",
+      "label": "Vue New RAG",
+      "data_file": ROOT / "data" / "tools-newrag.json",
+      "output": ROOT / "newrag.html",
+    },
+    {
+      "slug": "cowork",
+      "label": "Vue Cowork",
+      "data_file": ROOT / "data" / "tools-cowork.json",
+      "output": ROOT / "cowork.html",
     },
 ]
 
@@ -480,6 +499,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <div class="button-group">
       <button class="info-btn" type="button" id="open-search-info">Sources</button>
       <button class="info-btn" type="button" id="open-history-info">Historique</button>
+      <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
+      <button class="info-btn" type="button" id="export-all-zip">ZIP All</button>
     </div>
   </div>
 </header>
@@ -495,6 +516,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
 <footer>
   Généré automatiquement par GitHub Actions + Gemini AI ·
+  Copyright made by joffroy ·
   <a href="https://github.com/{repo_name}" target="_blank">Voir sur GitHub</a>
 </footer>
 
@@ -523,6 +545,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <tr>
           <th>Date de génération</th>
           <th class="history-count">Outils détectés</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -532,6 +555,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script>
   const tabs = document.querySelectorAll('.nav-tab');
   const categories = document.querySelectorAll('.category');
@@ -541,6 +565,63 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   const closeSearchInfo = document.getElementById('close-search-info');
   const openHistoryInfo = document.getElementById('open-history-info');
   const closeHistoryInfo = document.getElementById('close-history-info');
+  const exportPageZipBtn = document.getElementById('export-page-zip');
+  const exportAllZipBtn = document.getElementById('export-all-zip');
+  const currentPageFile = '{history_page_file}';
+  const exportManifest = {export_manifest_json};
+
+  async function fetchAsText(path) {{
+    const res = await fetch(path, {{ cache: 'no-store' }});
+    if (!res.ok) throw new Error(`Failed to fetch ${{path}} (${{res.status}})`);
+    return res.text();
+  }}
+
+  function downloadBlob(filename, blob) {{
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }}
+
+  async function exportZip(files, zipName) {{
+    const zip = new JSZip();
+    for (const item of files) {{
+      const content = await fetchAsText(item.path);
+      zip.file(item.name, content);
+    }}
+    const blob = await zip.generateAsync({{ type: 'blob' }});
+    downloadBlob(zipName, blob);
+  }}
+
+  exportPageZipBtn.addEventListener('click', async () => {{
+    const current = exportManifest.pages.find(p => p.html === currentPageFile);
+    if (!current) return;
+    try {{
+      await exportZip([
+        {{ path: current.html, name: current.html }},
+        {{ path: current.data, name: current.data }},
+      ], `export-${{current.slug}}.zip`);
+    }} catch (err) {{
+      alert(`Export page failed: ${{err.message}}`);
+    }}
+  }});
+
+  exportAllZipBtn.addEventListener('click', async () => {{
+    try {{
+      const files = [];
+      for (const p of exportManifest.pages) {{
+        files.push({{ path: p.html, name: p.html }});
+        files.push({{ path: p.data, name: p.data }});
+      }}
+      await exportZip(files, 'export-all-pages.zip');
+    }} catch (err) {{
+      alert(`Export all failed: ${{err.message}}`);
+    }}
+  }});
 
   tabs.forEach(tab => {{
     tab.addEventListener('click', (e) => {{
@@ -677,20 +758,86 @@ def count_new_tools(categories: list[dict]) -> int:
     return total
 
 
-def render_history(page_history: list[dict]) -> str:
+def render_history(page_history: list[dict], current_page_file: str) -> str:
     """Render history table rows."""
     if not page_history:
-        return "<tr><td colspan='2' style='text-align: center; color: var(--muted);'>Aucun historique disponible</td></tr>"
+        return "<tr><td colspan='3' style='text-align: center; color: var(--muted);'>Aucun historique disponible</td></tr>"
 
     rows = []
     for entry in page_history:
         date_str = entry.get("generated_at") or entry.get("date", "?")
         tool_count = entry.get("tool_count", 0)
+        snapshot_file = entry.get("snapshot_file")
+
+        if snapshot_file:
+            date_cell = f'<a href="{escape(snapshot_file)}" target="_blank">{escape(str(date_str))}</a>'
+            compare_url = "compare-view.html?left=" + quote(snapshot_file) + "&right=" + quote(current_page_file)
+            actions = (
+                f'<a href="{escape(snapshot_file)}" target="_blank">Voir</a> · '
+                f'<a href="{escape(compare_url)}">Comparer</a>'
+            )
+        else:
+            date_cell = escape(str(date_str))
+            actions = "-"
+
         rows.append(f"""        <tr>
-          <td class="history-date">{escape(str(date_str))}</td>
+          <td class="history-date">{date_cell}</td>
           <td class="history-count">{tool_count}</td>
+          <td>{actions}</td>
         </tr>""")
     return "\n".join(rows)
+
+
+def build_export_manifest() -> str:
+    pages = []
+    for cfg in PAGE_CONFIGS:
+        pages.append(
+            {
+                "slug": cfg["slug"],
+                "html": cfg["output"].name,
+                "data": cfg["data_file"].relative_to(ROOT).as_posix(),
+            }
+        )
+    return json.dumps({"pages": pages}, ensure_ascii=False)
+
+
+def generate_compare_view_page():
+    compare_html = """<!DOCTYPE html>
+<html lang=\"fr\">
+<head>
+  <meta charset=\"UTF-8\" />
+  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
+  <title>Comparaison des versions</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #0f1116; color: #f2f4f8; }
+    header { padding: 12px 16px; border-bottom: 1px solid #2d3440; display: flex; gap: 12px; align-items: center; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; height: calc(100vh - 58px); padding: 8px; }
+    iframe { width: 100%; height: 100%; border: 1px solid #2d3440; background: #fff; }
+    a { color: #5cc8ff; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; height: auto; } iframe { min-height: 60vh; } }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Comparaison</strong>
+    <a href=\"javascript:history.back()\">Retour</a>
+    <span id=\"meta\"></span>
+  </header>
+  <div class=\"grid\">
+    <iframe id=\"left\" title=\"Version historique\"></iframe>
+    <iframe id=\"right\" title=\"Version actuelle\"></iframe>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const left = params.get('left');
+    const right = params.get('right');
+    if (left) document.getElementById('left').src = left;
+    if (right) document.getElementById('right').src = right;
+    document.getElementById('meta').textContent = `Historique: ${left || '-'} | Actuelle: ${right || '-'}`;
+  </script>
+</body>
+</html>"""
+    (ROOT / "compare-view.html").write_text(compare_html, encoding="utf-8")
 
 
 def generate_page(page_cfg: dict):
@@ -710,17 +857,33 @@ def generate_page(page_cfg: dict):
     tool_count = count_tools(cats)
     new_tool_count = count_new_tools(cats)
     now_iso = datetime.now().isoformat(timespec="milliseconds").replace("T", " ")
+    snapshot_name = now_iso.replace(" ", "_").replace(":", "-").replace(".", "-") + ".html"
+    snapshot_dir = ROOT / "snapshots" / page_cfg["slug"]
+    snapshot_dir.mkdir(parents=True, exist_ok=True)
+    snapshot_path = snapshot_dir / snapshot_name
+    snapshot_rel = snapshot_path.relative_to(ROOT).as_posix()
 
     # Load existing history and add new entry.
     page_history = meta.get("page_history", [])
     new_entry = {
         "generated_at": now_iso,
         "tool_count": tool_count,
+      "snapshot_file": snapshot_rel,
     }
     page_history.append(new_entry)
 
     # Keep only last 10 entries.
     page_history = page_history[-10:]
+
+    # Keep snapshots aligned with retained history to avoid unbounded growth.
+    allowed_snapshot_names = {
+      Path(entry["snapshot_file"]).name
+      for entry in page_history
+      if isinstance(entry, dict) and entry.get("snapshot_file")
+    }
+    for existing_snapshot in snapshot_dir.glob("*.html"):
+      if existing_snapshot.name not in allowed_snapshot_names:
+        existing_snapshot.unlink(missing_ok=True)
 
     # Update meta with new history.
     meta["page_history"] = page_history
@@ -740,7 +903,7 @@ def generate_page(page_cfg: dict):
         "Vue complete des outils detectes par veille automatique.",
     )
     search_queries_html = render_search_queries(meta.get("search_queries", []))
-    history_html = render_history(page_history)
+    history_html = render_history(page_history, output_file.name)
 
     repo_name = "VOTRE-USERNAME/ai-toolbox"  # remplacer
 
@@ -751,6 +914,8 @@ def generate_page(page_cfg: dict):
         last_updated=meta.get("last_updated", ""),
         tool_count=tool_count,
         new_tool_count=new_tool_count,
+        history_page_file=output_file.name,
+        export_manifest_json=build_export_manifest(),
         page_switcher=render_page_switcher(meta.get("page_name", "general")),
         page_label=escape(page_label),
         page_description=escape(page_description),
@@ -764,10 +929,15 @@ def generate_page(page_cfg: dict):
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(html)
 
+    # Save immutable snapshot for history view/compare.
+    with open(snapshot_path, "w", encoding="utf-8") as f:
+        f.write(html)
+
     print(f"✅ {output_file.name} generated ({output_file})")
 
 
 def generate():
+    generate_compare_view_page()
     for page_cfg in PAGE_CONFIGS:
         generate_page(page_cfg)
 

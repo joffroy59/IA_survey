@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "title": "Boîte à outils IA Génératives",
+    "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
+    "last_updated": "2026-04-15",
+    "page_name": "cowork",
+    "page_label": "Panorama Cowork IA",
+    "page_description": "Collaboration assistée par IA pour équipes produit, dev et ops.",
+    "search_queries": [
+      "AI collaboration tools for teams 2026",
+      "ai meeting assistant team workflow 2026",
+      "shared ai workspace tools 2026",
+      "ai project management copilots 2026",
+      "team knowledge management ai tools 2026",
+      "ai docs collaboration tools 2026",
+      "ai pair programming for teams 2026",
+      "ai design collaboration tools 2026",
+      "ai communication assistant slack teams 2026",
+      "enterprise team copilot platform 2026",
+      "outils IA collaboration équipe 2026",
+      "productivité équipe IA entreprise"
+    ],
+    "page_history": [
+      {
+        "generated_at": "2026-04-15 02:17:46.956",
+        "tool_count": 0,
+        "snapshot_file": "snapshots/cowork/2026-04-15_02-17-46-956.html"
+      },
+      {
+        "generated_at": "2026-04-15 02:20:30.777",
+        "tool_count": 0,
+        "snapshot_file": "snapshots/cowork/2026-04-15_02-20-30-777.html"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "cowork-collab",
+      "name": "🤝 Collaboration",
+      "icon": "🤝",
+      "subcategories": [
+        {
+          "name": "Réunions IA",
+          "icon": "🎤",
+          "tools": []
+        },
+        {
+          "name": "Docs & Notes",
+          "icon": "📝",
+          "tools": []
+        },
+        {
+          "name": "Knowledge Base",
+          "icon": "📚",
+          "tools": []
+        },
+        {
+          "name": "Communication",
+          "icon": "💬",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "cowork-execution",
+      "name": "🏢 Exécution Équipe",
+      "icon": "🏢",
+      "subcategories": [
+        {
+          "name": "Project Copilots",
+          "icon": "📌",
+          "tools": []
+        },
+        {
+          "name": "Design Collaboration",
+          "icon": "🎨",
+          "tools": []
+        },
+        {
+          "name": "Engineering Team AI",
+          "icon": "💻",
+          "tools": []
+        },
+        {
+          "name": "Ops Automation",
+          "icon": "⚡",
+          "tools": []
+        }
+      ]
+    }
+  ]
+}

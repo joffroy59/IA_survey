@@ -65,6 +65,27 @@ PROFILE_CONFIG = {
         "page_description": "Outils spécialisés pour développement d'agents IA autonomes et IDE enrichis d'IA.",
         "query_profile": "agentdev",
     },
+    "vscode": {
+        "tools_file": ROOT / "data" / "tools-vscode.json",
+        "page_name": "vscode",
+        "page_label": "Panorama VS Code + Extensions IA",
+        "page_description": "Outils, extensions et workflows IA dédiés à VS Code.",
+        "query_profile": "vscode",
+    },
+    "newrag": {
+        "tools_file": ROOT / "data" / "tools-newrag.json",
+        "page_name": "newrag",
+        "page_label": "Panorama New RAG",
+        "page_description": "Nouveaux frameworks, patterns et plateformes RAG 2026.",
+        "query_profile": "newrag",
+    },
+    "cowork": {
+        "tools_file": ROOT / "data" / "tools-cowork.json",
+        "page_name": "cowork",
+        "page_label": "Panorama Cowork IA",
+        "page_description": "Collaboration assistée par IA pour équipes produit, dev et ops.",
+        "query_profile": "cowork",
+    },
 }
 
 MAX_SEARCH_RESULTS = 15  # par requête

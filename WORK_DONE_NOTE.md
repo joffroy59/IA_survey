@@ -3,6 +3,52 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## FEATURE) VS Code, New RAG, Cowork pages + history compare + ZIP export
+
+### Changed
+- Added 3 new profiles/pages:
+  - VS Code (`vscode.html`, `data/tools-vscode.json`)
+  - New RAG (`newrag.html`, `data/tools-newrag.json`)
+  - Cowork (`cowork.html`, `data/tools-cowork.json`)
+- Added profile queries in `data/search_queries.json` for `vscode`, `newrag`, and `cowork`.
+- Updated `scripts/update.py` profile config so these pages are updatable by workflow.
+- Updated workflows (`update.yml`, `update-profile-unit.yml`, `update-consumer-example.yml`) to include new profiles in matrix, manual choices, dataset paths, and auto-commit file lists.
+- Upgraded generated pages with:
+  - history entries linked to immutable snapshots
+  - compare action opening `compare-view.html`
+  - ZIP export buttons (`ZIP Page`, `ZIP All`)
+  - footer copyright text: "Copyright made by joffroy"
+- Added `compare-view.html` and snapshot persistence under `snapshots/<page>/...`.
+- Added snapshot pruning logic to keep storage aligned with retained history.
+
+### Why
+- Requirement requested dedicated pages for VS Code, New RAG, and Cowork themes.
+- Requirement requested clickable history with old-page viewing and comparison.
+- Requirement requested downloadable ZIP export (single page or all pages).
+- Requirement requested explicit copyright attribution.
+
+### Files touched
+- `scripts/generate.py`
+- `scripts/update.py`
+- `data/search_queries.json`
+- `data/tools-vscode.json`
+- `data/tools-newrag.json`
+- `data/tools-cowork.json`
+- `.github/workflows/update.yml`
+- `.github/workflows/update-profile-unit.yml`
+- `.github/workflows/update-consumer-example.yml`
+- Generated pages: `vscode.html`, `newrag.html`, `cowork.html`, `compare-view.html` + existing pages regenerated
+- Snapshot files: `snapshots/*`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/generate.py scripts/update.py`
+- `python scripts/generate.py`
+- `python scripts/update.py --profile vscode`
+- `python scripts/update.py --profile newrag`
+- `python scripts/update.py --profile cowork`
+- Confirmed new pages render ZIP buttons, history compare links, and copyright footer.
+
 ## UI) Show total tools and new tools on each page
 
 ### Changed

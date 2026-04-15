@@ -22,6 +22,12 @@ on:
           - discovery
           - ragdev
           - agentdev
+          - vscode
+          - newrag
+          - cowork
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 permissions:
   contents: read
@@ -53,6 +59,9 @@ jobs:
             discovery) DATASET_PATH="data/tools-discovery.json" ;;
             ragdev) DATASET_PATH="data/tools-ragdev.json" ;;
             agentdev) DATASET_PATH="data/tools-agentdev.json" ;;
+            vscode) DATASET_PATH="data/tools-vscode.json" ;;
+            newrag) DATASET_PATH="data/tools-newrag.json" ;;
+            cowork) DATASET_PATH="data/tools-cowork.json" ;;
             *) echo "Unknown profile: $PROFILE"; exit 1 ;;
           esac
           echo "DATASET_PATH=$DATASET_PATH" >> "$GITHUB_ENV"
