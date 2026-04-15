@@ -12,9 +12,12 @@
         "AI workflow automation tools 2026",
         "generative AI tools comparison 2026",
         "open source AI tools 2026 production ready",
-        "meilleurs outils IA 2026 usage professionnel",
+        "best professional AI tools 2026 for engineering teams",
         "AI tools with API integration 2026",
-        "state of AI tooling ecosystem 2026"
+        "state of AI tooling ecosystem 2026",
+        "OpenAI Codex CLI capabilities 2026",
+        "Claude and Claude Code for developers 2026",
+        "GitHub Copilot and Gemini Code Assist comparison 2026"
       ]
     },
     "enterprise": {
@@ -28,7 +31,7 @@
         "enterprise AI governance and observability tools 2026",
         "enterprise AI developer platform self hosted 2026",
         "LLM infrastructure for enterprise teams 2026",
-        "outils IA entreprise conformite Europe 2026",
+        "enterprise AI compliance tools for Europe 2026",
         "enterprise knowledge assistant internal data RAG 2026"
       ]
     },
@@ -41,7 +44,7 @@
         "AI discovery radar for dev teams 2026",
         "AI discovery landscape 2026 open source and SaaS",
         "trending AI repos for discovery 2026 site:github.com",
-        "meilleurs nouveaux outils IA decouverte 2026",
+        "best newly launched AI tools discovery 2026",
         "AI discovery newsletter top picks 2026",
         "breakthrough AI discovery tools by category 2026",
         "AI workflow discovery and experimentation tools 2026"
@@ -56,10 +59,11 @@
         "RAG retrieval and reranking stack comparison 2026",
         "RAG observability and evaluation tools 2026",
         "RAG framework alternatives LangChain LlamaIndex 2026",
+        "Docling document parsing for RAG ingestion pipelines 2026",
         "RAG vector database benchmarking for dev teams 2026",
         "agentic RAG workflows for software teams 2026",
         "secure RAG deployment for enterprise dev environments 2026",
-        "outils RAG pro developpeur architecture 2026"
+        "RAG architecture tools for professional developer teams 2026"
       ]
     },
     "agentdev": {
@@ -67,6 +71,12 @@
       "queries": [
         "AI agent development frameworks for engineers 2026",
         "agent dev toolkit for coding workflows 2026",
+        "Gemini CLI for agent developers 2026",
+        "OpenAI Codex CLI for agent development 2026",
+        "Claude Code agent development workflows 2026",
+        "OpenCode CLI AI coding assistant 2026",
+        "OpenClaw AI tool capabilities and CLI usage",
+        "Hermes AI agent framework capabilities 2026",
         "agent orchestration frameworks comparison 2026",
         "agent memory and state management libraries 2026",
         "AI agent debugging and tracing tools 2026",
@@ -74,13 +84,18 @@
         "agent security sandboxing frameworks 2026",
         "multi agent development platform open source 2026",
         "agent IDE integration for developers 2026",
-        "outils developpement d agents IA pour equipes 2026"
+        "AI agent development tools for engineering teams 2026"
       ]
     },
     "vscode": {
       "label": "VS Code + AI Extensions",
       "queries": [
         "best VS Code AI extensions for developers 2026",
+        "Gemini Code Assist VS Code extension capabilities",
+        "GitHub Copilot VS Code extension capabilities",
+        "OpenAI Codex integration for VS Code workflows",
+        "Claude Code with VS Code terminal workflow",
+        "Gemini CLI with VS Code terminal tasks",
         "VS Code coding assistant extensions comparison 2026",
         "open source VS Code AI extension ecosystem 2026",
         "VS Code agent extension for code automation 2026",
@@ -88,7 +103,7 @@
         "VS Code AI refactoring productivity extensions 2026",
         "VS Code AI terminal assistant extension 2026",
         "VS Code enterprise AI extension governance 2026",
-        "meilleures extensions IA VS Code usage pro 2026",
+        "best VS Code AI extensions for professional teams 2026",
         "VS Code extension development with AI copilots 2026"
       ]
     },
@@ -102,9 +117,10 @@
         "RAG observability and quality monitoring new tools 2026",
         "RAG benchmark leaders and evaluation suites 2026",
         "RAG chunking and ingestion innovation 2026",
+        "Docling and modern document parsers for new RAG 2026",
         "agentic RAG systems state of practice 2026",
         "open source new RAG repositories 2026 site:github.com",
-        "outils RAG nouvelle generation production 2026"
+        "new generation RAG tools for production 2026"
       ]
     },
     "cowork": {
@@ -118,7 +134,7 @@
         "team knowledge base AI cowork assistant 2026",
         "AI documentation collaboration for dev teams 2026",
         "Slack Teams AI cowork assistant tools 2026",
-        "outils IA collaboration equipe produit 2026",
+        "AI collaboration tools for product teams 2026",
         "AI cowork platform enterprise security and compliance 2026"
       ]
     },
@@ -133,8 +149,8 @@
         "OCR table extraction quality tools 2026",
         "OCR handwriting recognition AI tools 2026",
         "PDF OCR pipeline tooling for developers 2026",
-        "OCR document parsing with docling 2026",
-        "outils OCR IA reconnaissance texte professionnelle 2026"
+        "OCR document parsing with Docling 2026",
+        "best OCR tools for professional text extraction workflows 2026"
       ]
     },
     "dococr": {
@@ -148,8 +164,8 @@
         "OCR plus RPA document automation platform 2026",
         "contract analysis OCR NLP complete stack 2026",
         "document lifecycle management OCR compliance 2026",
-        "docling based document OCR system architecture 2026",
-        "systeme complet OCR documentaire entreprise 2026"
+        "Docling based document OCR system architecture 2026",
+        "complete enterprise document OCR system architecture 2026"
       ]
     },
     "aicliapps": {
@@ -157,14 +173,23 @@
       "queries": [
         "AI CLI applications for developers 2026",
         "best AI command line tools for coding 2026",
+        "Gemini CLI capabilities and workflows",
+        "OpenAI Codex CLI capabilities and usage",
+        "Claude Code CLI capabilities and setup",
+        "GitHub Copilot CLI and terminal workflow",
+        "Gemini Code Assist CLI and IDE workflow",
+        "OpenCode CLI tool capabilities",
+        "OpenClaw CLI tool capabilities",
+        "Hermes CLI AI agent capabilities",
+        "list of AI CLI tools for developers 2026",
+        "all AI coding CLI tools site:github.com 2026",
         "AI terminal assistant open source CLI 2026",
         "AI CLI applications for DevOps SRE automation 2026",
         "self hosted AI CLI workflow with local LLM 2026",
         "AI CLI security and compliance for enterprise 2026",
         "agentic AI CLI tools for shell scripting 2026",
         "alternatives to Claude Code in CLI 2026",
-        "AI CLI productivity stack for engineering teams 2026",
-        "applications IA CLI usage professionnel 2026"
+        "AI CLI productivity stack for engineering teams 2026"
       ]
     }
   }
