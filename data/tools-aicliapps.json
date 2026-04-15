@@ -3,7 +3,13 @@
     "title": "Boîte à outils IA Génératives",
     "subtitle": "Applications IA CLI, mis à jour automatiquement",
     "last_updated": "2026-04-16",
-    "page_history": [],
+    "page_history": [
+      {
+        "generated_at": "2026-04-15 23:17:27.361",
+        "tool_count": 2,
+        "snapshot_file": "snapshots/aicliapps/2026-04-15_23-17-27-361.html"
+      }
+    ],
     "page_name": "aicliapps",
     "page_label": "Panorama AI CLI Applications",
     "page_description": "Applications IA en ligne de commande pour developpeurs, DevOps et automatisation.",
