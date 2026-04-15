@@ -29,6 +29,17 @@ Commit requirements:
 2. Use a clear commit message describing the change.
 3. Do not leave task-related changes uncommitted.
 
+## GitFlow Branch Rule (Required)
+
+For every new task, always create and work on a dedicated git branch before making changes.
+
+GitFlow requirements:
+1. Never work directly on `main`.
+2. Never work directly on `develop`.
+3. Create a branch that matches GitFlow intent (for example: `feature/...`, `hotfix/...`, `release/...`).
+4. Keep commits scoped to the branch purpose.
+5. Merge back through a pull request following the normal GitFlow path.
+
 ## "Finish Feature" Rule (Required)
 
 When the user says "finish feature", always do all steps below in order:

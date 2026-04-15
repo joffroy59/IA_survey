@@ -72,6 +72,12 @@ PAGE_CONFIGS = [
       "data_file": ROOT / "data" / "tools-dococr.json",
       "output": ROOT / "dococr.html",
     },
+    {
+      "slug": "aicliapps",
+      "label": "Vue AI CLI Applications",
+      "data_file": ROOT / "data" / "tools-aicliapps.json",
+      "output": ROOT / "aicliapps.html",
+    },
 ]
 
 HTML_TEMPLATE = """<!DOCTYPE html>
