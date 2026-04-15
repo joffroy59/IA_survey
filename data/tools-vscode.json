@@ -51,7 +51,7 @@
   "categories": [
     {
       "id": "vscode-extensions",
-      "name": "🧩 Extensions VS Code",
+      "name": "Extensions VS Code",
       "icon": "🧩",
       "subcategories": [
         {
@@ -78,7 +78,7 @@
     },
     {
       "id": "vscode-workflows",
-      "name": "⚙️ Workflows Dev",
+      "name": "Workflows Dev",
       "icon": "⚙️",
       "subcategories": [
         {

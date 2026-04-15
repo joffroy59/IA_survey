@@ -3,6 +3,35 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## RELEASE) Merge and release prep refresh
+
+### Changed
+- Consolidated pending updates across generated pages and snapshots for all views.
+- Included compare view and VS Code dataset updates in the release content set.
+
+### Why
+- User requested merge and release; all pending tracked changes must be committed before merge.
+- Keeping generated HTML/data/snapshots aligned ensures release artifacts are consistent.
+
+### Files touched
+- `index.html`
+- `enterprise.html`
+- `discovery.html`
+- `ragdev.html`
+- `agentdev.html`
+- `vscode.html`
+- `newrag.html`
+- `cowork.html`
+- `ocr.html`
+- `dococr.html`
+- `compare-view.html`
+- `data/tools-vscode.json`
+- `snapshots/*`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Checked git status to confirm all pending tracked changes are included in release commit scope.
+
 ## FIX) Light theme readability and contrast
 
 ### Changed
