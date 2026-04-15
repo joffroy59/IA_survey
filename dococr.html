@@ -20,6 +20,25 @@
       --new: #ff6b6b;
       --radius: 12px;
     }
+
+    /* Light mode */
+    html[data-theme="light"] {
+      --bg: #f8f7fc;
+      --surface: #ffffff;
+      --surface2: #f0edff;
+      --border: #e0d9f0;
+      --accent: #6c63ff;
+      --accent2: #00d4aa;
+      --text: #1a1620;
+      --muted: #6b6b7d;
+      --new: #ff6b6b;
+    }
+
+    html[data-theme="light"] body {
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(108,99,255,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(0,212,170,0.05) 0%, transparent 50%);
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Space Grotesk', sans-serif;
@@ -36,6 +55,28 @@
       text-align: center;
       padding: 60px 24px 40px;
       position: relative;
+    }
+    .theme-toggle {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      background: var(--surface);
+      transform: scale(1.05);
     }
     header::after {
       content: '';
@@ -61,7 +102,7 @@
       font-size: clamp(28px, 5vw, 48px);
       font-weight: 700;
       letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #ffffff 30%, var(--accent));
+      background: linear-gradient(135deg, var(--text) 30%, var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -88,7 +129,7 @@
       padding: 8px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(17, 17, 24, 0.9);
+      background: var(--surface);
     }
     .page-link {
       text-decoration: none;
@@ -110,7 +151,7 @@
       max-width: 820px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: rgba(17, 17, 24, 0.85);
+      background: var(--surface);
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 12px;
@@ -420,6 +461,7 @@
 <body>
 
 <header>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · 15/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
   <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
@@ -457,38 +499,38 @@
 </nav>
 
 <main>
-  
+
   <section class="category" data-id="dococr-pipeline">
     <div class="category-header">
       <div class="category-icon">🏗️</div>
       <div class="category-title">🏗️ Pipeline Documentaire</div>
     </div>
-    
+
     <div class="subcategory">
       <div class="subcategory-title">📥 Ingestion</div>
       <div class="tools-grid">
-        
+
       </div>
     </div>
 
     <div class="subcategory">
       <div class="subcategory-title">🔤 OCR & Parsing</div>
       <div class="tools-grid">
-        
+
       </div>
     </div>
 
     <div class="subcategory">
       <div class="subcategory-title">🧠 Classification</div>
       <div class="tools-grid">
-        
+
       </div>
     </div>
 
     <div class="subcategory">
       <div class="subcategory-title">🏷️ Extraction Entités</div>
       <div class="tools-grid">
-        
+
       </div>
     </div>
   </section>
@@ -498,32 +540,32 @@
       <div class="category-icon">🔁</div>
       <div class="category-title">🔁 Workflow Complet</div>
     </div>
-    
+
     <div class="subcategory">
       <div class="subcategory-title">👀 Validation Humaine</div>
       <div class="tools-grid">
-        
+
       </div>
     </div>
 
     <div class="subcategory">
       <div class="subcategory-title">🔌 RPA & Intégrations</div>
       <div class="tools-grid">
-        
+
       </div>
     </div>
 
     <div class="subcategory">
       <div class="subcategory-title">🗄️ Stockage & Recherche</div>
       <div class="tools-grid">
-        
+
       </div>
     </div>
 
     <div class="subcategory">
       <div class="subcategory-title">🛡️ Gouvernance & Audit</div>
       <div class="tools-grid">
-        
+
       </div>
     </div>
   </section>
@@ -715,6 +757,28 @@
     if (event.key === 'Escape') {
       closeAllModals();
     }
+  });
+
+  // Theme toggle functionality
+  const themeToggle = document.getElementById('theme-toggle');
+  const htmlElement = document.documentElement;
+  const storedTheme = localStorage.getItem('theme') || 'dark';
+
+  // Set initial theme
+  htmlElement.setAttribute('data-theme', storedTheme);
+  updateThemeIcon();
+
+  function updateThemeIcon() {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+  }
+
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    htmlElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon();
   });
 </script>
 
