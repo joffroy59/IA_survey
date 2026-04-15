@@ -208,9 +208,20 @@ def ask_gemini(prompt: str) -> str:
         return "[]"
 
 
-def extract_new_tools(search_results: str, existing_names: list[str]) -> list[dict]:
+def extract_new_tools(search_results: str, existing_names: list[str], data: dict = None) -> list[dict]:
     """Demande à Gemini d'identifier les nouveaux outils."""
     existing_str = ", ".join(existing_names[:50])
+
+    # Build category reference from actual data structure
+    category_ref = ""
+    if data and "categories" in data:
+        category_ref = "\n\nCATÉGORIES DISPONIBLES :\n"
+        for cat in data["categories"]:
+            cat_name = cat.get("name", "")
+            subs = [s.get("name", "") for s in cat.get("subcategories", [])]
+            category_ref += f"- {cat_name}: {', '.join(subs)}\n"
+    else:
+        category_ref = "(Pas de catégories disponibles - l'outil sera assigné à la première catégorie)"
 
     prompt = f"""Tu es un expert en outils IA. Analyse ces résultats de recherche et identifie des outils IA qui ne sont PAS déjà dans la liste existante.
 
@@ -220,6 +231,8 @@ LISTE EXISTANTE (noms à exclure) :
 RÉSULTATS DE RECHERCHE :
 {search_results}
 
+{category_ref}
+
 Retourne UNIQUEMENT un tableau JSON valide (sans markdown, sans commentaire) avec les nouveaux outils trouvés, format :
 [
   {{
@@ -227,15 +240,16 @@ Retourne UNIQUEMENT un tableau JSON valide (sans markdown, sans commentaire) ave
     "provider": "Entreprise ou vide",
     "url": "https://...",
     "desc": "Description courte en français (max 50 chars)",
-    "category_id": "generiques|specialisees|images|code|audio|video",
-    "subcategory_name": "Nom de la sous-catégorie existante ou nouvelle"
+    "category_id": "ID de la catégorie ou vide",
+    "subcategory_name": "Nom de la sous-catégorie existante"
   }}
 ]
 
 Règles :
 - Maximum 10 outils les plus pertinents
-- Uniquement des outils réels avec URL valide
+- Uniquement des outils réels avec URL valide et fonctionnel
 - Pas de doublons avec la liste existante
+- Utilise les noms de sous-catégories existants si possible
 - Si aucun nouvel outil pertinent, retourne []
 """
 
@@ -328,7 +342,7 @@ def main():
     print(f"   {len(search_results.splitlines())} search results collected")
 
     print("Asking Gemini to identify new tools...")
-    new_tools = extract_new_tools(search_results, existing)
+    new_tools = extract_new_tools(search_results, existing, data)
     print(f"   {len(new_tools)} candidates found")
 
     if new_tools:
