@@ -3,6 +3,18 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## CI) Run auto update workflow on develop like main
+
+### Changed
+- Updated `.github/workflows/update.yml` trigger to run on `push` for both `main` and `develop` branches.
+
+### Why
+- User requested automatic build/deploy-style action execution on `develop` the same way as `main`.
+
+### Files touched
+- `.github/workflows/update.yml`
+- `WORK_DONE_NOTE.md`
+
 ## FIX) Clean AI CLI JSON regeneration from query-only evidence + category validation rule
 
 ### Changed
