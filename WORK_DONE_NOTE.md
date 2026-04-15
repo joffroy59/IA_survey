@@ -3,6 +3,77 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## CI) Add page checker to update pipeline
+
+### Changed
+- Updated `.github/workflows/update.yml` to run `python scripts/check_pages.py` right after page generation in the `generate-and-commit` job.
+
+### Why
+- User requested adding checker execution in CI to verify generated pages/datasets and reduce risk of unknown or invalid tool entries reaching published pages.
+
+### Files touched
+- `.github/workflows/update.yml`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python scripts/check_pages.py`
+
+## REFACTOR) Global query review + page quality checker + professional dual-audience content
+
+### Changed
+- Reworked `data/search_queries.json` so each profile now contains exactly 10 focused, theme-driven queries.
+- Updated `scripts/update.py`:
+  - enforced exactly 10 unique queries per profile at load time,
+  - added a tool quality gate to reject low-confidence names and invalid/non-product URLs before insertion.
+- Added `scripts/check_pages.py` to validate:
+  - query count/quality,
+  - tool URL and naming credibility,
+  - rendered HTML tool-card count vs JSON data.
+- Enhanced `scripts/generate.py` and regenerated all pages:
+  - introduced professional audience briefing blocks for two reader types (developers and managers),
+  - synchronized displayed page queries from `data/search_queries.json` as source-of-truth during generation.
+- Regenerated HTML pages and snapshots for all profiles.
+
+### Why
+- User requested a global review/refactor of queries for better results, with 10 queries per page theme.
+- User requested an automated checker to detect page/tool quality issues and avoid unknown/unreliable tool entries.
+- User requested more professional content and explicit adaptation for two audiences: technical (dev) and decision-makers (manager).
+
+### Files touched
+- `data/search_queries.json`
+- `scripts/update.py`
+- `scripts/generate.py`
+- `scripts/check_pages.py`
+- `index.html`
+- `enterprise.html`
+- `discovery.html`
+- `ragdev.html`
+- `agentdev.html`
+- `vscode.html`
+- `newrag.html`
+- `cowork.html`
+- `ocr.html`
+- `dococr.html`
+- `aicliapps.html`
+- `data/tools.json`
+- `data/tools-enterprise.json`
+- `data/tools-discovery.json`
+- `data/tools-ragdev.json`
+- `data/tools-agentdev.json`
+- `data/tools-vscode.json`
+- `data/tools-newrag.json`
+- `data/tools-cowork.json`
+- `data/tools-ocr.json`
+- `data/tools-dococr.json`
+- `data/tools-aicliapps.json`
+- `snapshots/*`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python scripts/generate.py`
+- `python scripts/check_pages.py`
+- `python -m py_compile scripts/generate.py scripts/update.py scripts/check_pages.py`
+
 ## CI) Run auto update workflow on develop like main
 
 ### Changed

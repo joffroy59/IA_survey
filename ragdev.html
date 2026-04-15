@@ -198,6 +198,38 @@
       flex-wrap: wrap;
       justify-content: center;
     }
+    .audience-brief {
+      margin: 18px auto 0;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .reader-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .reader-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+    .reader-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .reader-text {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
     .history-table {
       width: 100%;
       border-collapse: collapse;
@@ -455,6 +487,7 @@
     @media (max-width: 600px) {
       .tools-grid { grid-template-columns: 1fr 1fr; }
       .page-meta { grid-template-columns: 1fr; }
+      .audience-brief { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -490,6 +523,18 @@
       <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
       <button class="info-btn" type="button" id="export-all-zip">ZIP All</button>
     </div>
+  </div>
+  <div class="audience-brief">
+    <article class="reader-card reader-dev">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les developpeurs</div>
+      <div class="reader-text">Concentrez-vous sur la qualite retrieval, l&#x27;evaluation et la stabilite de la pipeline RAG en production.</div>
+    </article>
+    <article class="reader-card reader-manager">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les managers</div>
+      <div class="reader-text">Suivez les gains de precision, de productivite et de reduction des risques sur les workflows metier.</div>
+    </article>
   </div>
 </header>
 
@@ -867,73 +912,16 @@
     </div>
     <div class="modal-meta">Page: Panorama RAG Pro + DevTools · Dernière mise à jour: 2026-04-16</div>
     <ol class="query-list">
-      <li>enterprise RAG architecture best practices 2026</li>
-      <li>production RAG pipeline design patterns LLM 2026</li>
-      <li>scalable retrieval augmented generation architecture</li>
-      <li>RAG system design chunking embedding retrieval strategies</li>
-      <li>RAG frameworks comparison LangChain LlamaIndex Haystack 2026</li>
-      <li>best RAG tools open source production ready</li>
-      <li>RAG orchestration frameworks enterprise AI</li>
-      <li>LangChain alternatives RAG pipelines 2026</li>
-      <li>vector database comparison enterprise RAG Pinecone Weaviate Qdrant 2026</li>
-      <li>hybrid search BM25 vector search RAG implementation</li>
-      <li>best embedding models for RAG 2026 benchmark</li>
-      <li>agentic RAG workflows multi step retrieval LLM</li>
-      <li>AI agents with RAG memory tools frameworks 2026</li>
-      <li>tool calling RAG agents enterprise workflows</li>
-      <li>enterprise knowledge base chatbot RAG implementation</li>
-      <li>RAG for internal documentation search company</li>
-      <li>AI document processing RAG pipeline enterprise</li>
-      <li>docling document parsing RAG ingestion pipeline 2026</li>
-      <li>RAG use cases enterprise automation support IT</li>
-      <li>secure RAG architecture enterprise GDPR privacy LLM</li>
-      <li>on premise RAG deployment enterprise secure AI</li>
-      <li>data governance in RAG systems enterprise</li>
-      <li>RAG latency optimization caching retrieval pipeline</li>
-      <li>improving RAG accuracy reranking evaluation methods</li>
-      <li>RAG evaluation metrics benchmark retrieval quality</li>
-      <li>state of the art RAG research paper 2026</li>
-      <li>RAG benchmark leaderboard retrieval augmented generation</li>
-      <li>advanced RAG techniques multi vector retrieval</li>
-      <li>RAG pipeline python example production github</li>
-      <li>deploy RAG system docker kubernetes LLM</li>
-      <li>end to end RAG system tutorial enterprise</li>
-      <li>RAG architecture site:github.com</li>
-      <li>RAG pipeline site:arxiv.org</li>
-      <li>RAG system design site:medium.com OR site:substack.com</li>
-      <li>Show HN RAG project site:news.ycombinator.com</li>
-      <li>AI coding agents CLI tools 2026 Claude Code alternatives</li>
-      <li>developer AI assistant self hosted coding tools 2026</li>
-      <li>AI pair programming tools enterprise secure 2026</li>
-      <li>best AI coding tools for teams enterprise 2026</li>
-      <li>LLM CLI tools local workflow developers 2026</li>
-      <li>Ollama use cases developers local LLM workflow</li>
-      <li>run LLM locally developer tools open source 2026</li>
-      <li>AI terminal assistant tools developers 2026</li>
-      <li>LLM inference engines comparison vLLM TensorRT Triton 2026</li>
-      <li>high performance LLM serving open source 2026</li>
-      <li>optimize LLM inference GPU batching vLLM guide</li>
-      <li>LLM gateway tools OpenRouter alternatives enterprise</li>
-      <li>multi model LLM routing tools developers 2026</li>
-      <li>AI API orchestration layer LLM tools comparison</li>
-      <li>autonomous coding agents frameworks 2026 open source</li>
-      <li>AI dev agents workflows code generation automation</li>
-      <li>agentic coding tools multi step development AI</li>
-      <li>LLM developer platform self hosted enterprise stack</li>
-      <li>AI dev platform internal tools engineering teams 2026</li>
-      <li>build internal AI dev platform company LLM stack</li>
-      <li>secure AI coding tools enterprise GDPR privacy</li>
-      <li>on premise AI developer tools LLM enterprise</li>
-      <li>private AI coding assistant company data protection</li>
-      <li>AI developer tools site:github.com LLM CLI OR agent</li>
-      <li>LLM dev tools open source trending github 2026</li>
-      <li>self hosted AI dev tools repository github</li>
-      <li>Show HN AI dev tool CLI agent site:news.ycombinator.com</li>
-      <li>developer AI tool discussion LLM site:news.ycombinator.com</li>
-      <li>AI coding tools benchmark 2026 developer productivity</li>
-      <li>LLM coding assistants comparison Claude vs Gemini vs open source</li>
-      <li>outils IA dev entreprise open source Europe 2026</li>
-      <li>plateforme IA développeur entreprise self hosted</li>
+      <li>production RAG architecture patterns 2026</li>
+      <li>RAG developer tools evaluation framework 2026</li>
+      <li>RAG ingestion pipeline tooling doc parsing chunking 2026</li>
+      <li>RAG retrieval and reranking stack comparison 2026</li>
+      <li>RAG observability and evaluation tools 2026</li>
+      <li>RAG framework alternatives LangChain LlamaIndex 2026</li>
+      <li>RAG vector database benchmarking for dev teams 2026</li>
+      <li>agentic RAG workflows for software teams 2026</li>
+      <li>secure RAG deployment for enterprise dev environments 2026</li>
+      <li>outils RAG pro developpeur architecture 2026</li>
     </ol>
   </div>
 </div>
@@ -955,11 +943,6 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date">2026-04-15 02:00:36.993</td>
-          <td class="history-count">40</td>
-          <td>-</td>
-        </tr>
-        <tr>
           <td class="history-date">2026-04-15 02:01:58.481</td>
           <td class="history-count">88</td>
           <td>-</td>
@@ -995,9 +978,19 @@
           <td><a href="snapshots/ragdev/2026-04-15_02-29-49-421.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-15_02-29-49-421.html&amp;right=ragdev.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/ragdev/2026-04-16_01-19-19-960.html" target="_blank">2026-04-16 01:19:19.960</a></td>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-16_01-23-21-645.html" target="_blank">2026-04-16 01:23:21.645</a></td>
           <td class="history-count">16</td>
-          <td><a href="snapshots/ragdev/2026-04-16_01-19-19-960.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-16_01-19-19-960.html&amp;right=ragdev.html">Comparer</a></td>
+          <td><a href="snapshots/ragdev/2026-04-16_01-23-21-645.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-16_01-23-21-645.html&amp;right=ragdev.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-16_01-27-20-657.html" target="_blank">2026-04-16 01:27:20.657</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-16_01-27-20-657.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-16_01-27-20-657.html&amp;right=ragdev.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-16_01-28-23-958.html" target="_blank">2026-04-16 01:28:23.958</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-16_01-28-23-958.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-16_01-28-23-958.html&amp;right=ragdev.html">Comparer</a></td>
         </tr>
         <tr>
           <td class="history-date"><a href="snapshots/ragdev/2026-04-15_23-28-01-556.html" target="_blank">2026-04-15 23:28:01.556</a></td>

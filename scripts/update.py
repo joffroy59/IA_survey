@@ -188,6 +188,22 @@ EXCLUDED_SEARCH_HOSTS = {
     "producthunt.com",
 }
 
+DISALLOWED_TOOL_HOSTS = EXCLUDED_SEARCH_HOSTS | {
+    "example.com",
+    "localhost",
+    "127.0.0.1",
+}
+
+GENERIC_TOOL_NAME_TOKENS = {
+    "best",
+    "top",
+    "guide",
+    "comparison",
+    "comparatif",
+    "news",
+    "ranking",
+}
+
 KNOWN_CLI_TOOL_CATALOG = [
     {
         "name": "Claude Code",
@@ -280,7 +296,16 @@ def load_search_queries() -> dict[str, list[str]]:
         profile_queries = profiles.get(profile_name, {}).get("queries", [])
         if not isinstance(profile_queries, list) or not profile_queries:
             raise ValueError(f"No queries configured for profile '{profile_name}'")
-        query_map[profile_name] = [q for q in profile_queries if isinstance(q, str) and q.strip()]
+
+        cleaned = [q.strip() for q in profile_queries if isinstance(q, str) and q.strip()]
+        if len(cleaned) != 10:
+            raise ValueError(
+                f"Profile '{profile_name}' must define exactly 10 queries, found {len(cleaned)}"
+            )
+        if len(set(q.lower() for q in cleaned)) != len(cleaned):
+            raise ValueError(f"Profile '{profile_name}' contains duplicate queries")
+
+        query_map[profile_name] = cleaned
 
     return query_map
 
@@ -469,6 +494,44 @@ def is_likely_tool_name(name: str) -> bool:
     if any(token in lowered for token in ["best", "top", "guide", "comparatif", "comparison", "how to", "news", "meilleur", "les "]):
         return False
     if sum(1 for c in name if c.isspace()) > 4:
+        return False
+    if any(token in lowered for token in GENERIC_TOOL_NAME_TOKENS):
+        return False
+    return True
+
+
+def is_valid_tool_url(url: str) -> bool:
+    if not url:
+        return False
+    try:
+        parsed = urlparse(url)
+    except ValueError:
+        return False
+
+    if parsed.scheme not in {"http", "https"}:
+        return False
+
+    host = (parsed.hostname or "").lower().removeprefix("www.")
+    if not host or "." not in host:
+        return False
+
+    if host in DISALLOWED_TOOL_HOSTS:
+        return False
+
+    lowered_url = url.lower()
+    if any(marker in lowered_url for marker in ["/search?", "?q=", "duckduckgo.com", "google.com/search"]):
+        return False
+
+    return True
+
+
+def passes_tool_quality_gate(tool: dict) -> bool:
+    name = normalize_tool_name(tool.get("name", ""))
+    url = (tool.get("url") or "").strip()
+
+    if not is_likely_tool_name(name):
+        return False
+    if not is_valid_tool_url(url):
         return False
     return True
 
@@ -667,6 +730,10 @@ def add_tools_to_data(data: dict, new_tools: list[dict], profile: str) -> int:
         name = tool.get("name", "").strip()
 
         if not name or name.lower() in existing_names:
+            continue
+
+        if not passes_tool_quality_gate(tool):
+            print(f"Skipped low-confidence candidate: {name or '[no-name]'}")
             continue
 
         target_cat, sub_name = resolve_category_and_subcategory(data, tool, profile)

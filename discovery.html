@@ -198,6 +198,38 @@
       flex-wrap: wrap;
       justify-content: center;
     }
+    .audience-brief {
+      margin: 18px auto 0;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .reader-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .reader-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+    .reader-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .reader-text {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
     .history-table {
       width: 100%;
       border-collapse: collapse;
@@ -455,6 +487,7 @@
     @media (max-width: 600px) {
       .tools-grid { grid-template-columns: 1fr 1fr; }
       .page-meta { grid-template-columns: 1fr; }
+      .audience-brief { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -490,6 +523,18 @@
       <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
       <button class="info-btn" type="button" id="export-all-zip">ZIP All</button>
     </div>
+  </div>
+  <div class="audience-brief">
+    <article class="reader-card reader-dev">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les developpeurs</div>
+      <div class="reader-text">Utilisez cette page comme radar technologique pour preselectionner des outils testables rapidement.</div>
+    </article>
+    <article class="reader-card reader-manager">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les managers</div>
+      <div class="reader-text">Identifiez les tendances, puis priorisez les experimentations selon l&#x27;impact metier attendu.</div>
+    </article>
   </div>
 </header>
 
@@ -911,21 +956,16 @@
     </div>
     <div class="modal-meta">Page: Panorama Decouverte · Dernière mise à jour: 2026-04-16</div>
     <ol class="query-list">
-      <li>latest AI tools 2026 site:theresanaiforthat.com OR site:futurepedia.io</li>
-      <li>new AI startups tools 2026 site:producthunt.com AI</li>
-      <li>trending AI tools this week 2026 site:theresanaiforthat.com</li>
-      <li>best new AI tools April 2026 site:futurepedia.io</li>
-      <li>trending AI repositories 2026 site:github.com stars &gt;100</li>
-      <li>AI agent open source projects 2026 site:github.com</li>
-      <li>Show HN AI tool 2026 site:news.ycombinator.com</li>
-      <li>AI agent discussion 2026 site:news.ycombinator.com</li>
-      <li>AI coding assistant tools 2026</li>
-      <li>AI video generation tools 2026</li>
-      <li>AI automation agent tools 2026</li>
-      <li>meilleurs outils IA 2026 nouveautés</li>
-      <li>outils IA productivité 2026</li>
-      <li>state of the art AI tools 2026 blog</li>
-      <li>new AI workflows automation tools 2026</li>
+      <li>new AI tools discovery this week 2026</li>
+      <li>emerging AI startups tools 2026</li>
+      <li>AI tool launches 2026 producthunt alternatives</li>
+      <li>AI discovery radar for dev teams 2026</li>
+      <li>AI discovery landscape 2026 open source and SaaS</li>
+      <li>trending AI repos for discovery 2026 site:github.com</li>
+      <li>meilleurs nouveaux outils IA decouverte 2026</li>
+      <li>AI discovery newsletter top picks 2026</li>
+      <li>breakthrough AI discovery tools by category 2026</li>
+      <li>AI workflow discovery and experimentation tools 2026</li>
     </ol>
   </div>
 </div>
@@ -947,11 +987,6 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date">2026-04-15 02:00:36.991</td>
-          <td class="history-count">40</td>
-          <td>-</td>
-        </tr>
-        <tr>
           <td class="history-date">2026-04-15 02:01:58.479</td>
           <td class="history-count">88</td>
           <td>-</td>
@@ -987,9 +1022,19 @@
           <td><a href="snapshots/discovery/2026-04-15_02-29-49-418.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-15_02-29-49-418.html&amp;right=discovery.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/discovery/2026-04-16_01-19-19-946.html" target="_blank">2026-04-16 01:19:19.946</a></td>
+          <td class="history-date"><a href="snapshots/discovery/2026-04-16_01-23-21-636.html" target="_blank">2026-04-16 01:23:21.636</a></td>
           <td class="history-count">24</td>
-          <td><a href="snapshots/discovery/2026-04-16_01-19-19-946.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-16_01-19-19-946.html&amp;right=discovery.html">Comparer</a></td>
+          <td><a href="snapshots/discovery/2026-04-16_01-23-21-636.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-16_01-23-21-636.html&amp;right=discovery.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/discovery/2026-04-16_01-27-20-655.html" target="_blank">2026-04-16 01:27:20.655</a></td>
+          <td class="history-count">24</td>
+          <td><a href="snapshots/discovery/2026-04-16_01-27-20-655.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-16_01-27-20-655.html&amp;right=discovery.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/discovery/2026-04-16_01-28-23-956.html" target="_blank">2026-04-16 01:28:23.956</a></td>
+          <td class="history-count">24</td>
+          <td><a href="snapshots/discovery/2026-04-16_01-28-23-956.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-16_01-28-23-956.html&amp;right=discovery.html">Comparer</a></td>
         </tr>
         <tr>
           <td class="history-date"><a href="snapshots/discovery/2026-04-15_23-28-01-554.html" target="_blank">2026-04-15 23:28:01.554</a></td>

@@ -80,6 +80,75 @@ PAGE_CONFIGS = [
     },
 ]
 
+PAGE_AUDIENCE_GUIDE = {
+  "general": {
+    "dev_title": "Pour les developpeurs",
+    "dev_text": "Priorisez les outils avec API claire, documentation maintenue et integration CI/CD avant toute adoption.",
+    "mgr_title": "Pour les managers",
+    "mgr_text": "Comparez la valeur business, les risques de conformite et le cout total avant de lancer un pilote.",
+  },
+  "enterprise": {
+    "dev_title": "Pour les developpeurs",
+    "dev_text": "Validez l'architecture, la securite et l'observabilite des stacks IA enterprise en conditions de production.",
+    "mgr_title": "Pour les managers",
+    "mgr_text": "Cadrez le ROI, la gouvernance des donnees et les exigences de conformite pour un deploiement durable.",
+  },
+  "discovery": {
+    "dev_title": "Pour les developpeurs",
+    "dev_text": "Utilisez cette page comme radar technologique pour preselectionner des outils testables rapidement.",
+    "mgr_title": "Pour les managers",
+    "mgr_text": "Identifiez les tendances, puis priorisez les experimentations selon l'impact metier attendu.",
+  },
+  "ragdev": {
+    "dev_title": "Pour les developpeurs",
+    "dev_text": "Concentrez-vous sur la qualite retrieval, l'evaluation et la stabilite de la pipeline RAG en production.",
+    "mgr_title": "Pour les managers",
+    "mgr_text": "Suivez les gains de precision, de productivite et de reduction des risques sur les workflows metier.",
+  },
+  "agentdev": {
+    "dev_title": "Pour les developpeurs",
+    "dev_text": "Evaluez les frameworks d'agents selon la fiabilite, la debuggabilite et la maintenabilite du code.",
+    "mgr_title": "Pour les managers",
+    "mgr_text": "Selectionnez des solutions agentiques avec trajectoire claire de passage du POC a la production.",
+  },
+  "vscode": {
+    "dev_title": "Pour les developpeurs",
+    "dev_text": "Choisissez les extensions VS Code qui accelerent revue, refactor et tests sans degrade la qualite.",
+    "mgr_title": "Pour les managers",
+    "mgr_text": "Encadrez l'usage des extensions IA avec standards d'equipe, securite et mesure de productivite.",
+  },
+  "newrag": {
+    "dev_title": "Pour les developpeurs",
+    "dev_text": "Explorez les approches RAG de nouvelle generation et comparez leurs compromis techniques.",
+    "mgr_title": "Pour les managers",
+    "mgr_text": "Reperez les innovations applicables a court terme avec un risque d'integration maitrise.",
+  },
+  "cowork": {
+    "dev_title": "Pour les developpeurs",
+    "dev_text": "Analysez les integrations techniques pour fluidifier collaboration, documentation et execution equipe.",
+    "mgr_title": "Pour les managers",
+    "mgr_text": "Suivez l'impact sur coordination transverse, vitesse de livraison et qualite des decisions.",
+  },
+  "ocr": {
+    "dev_title": "Pour les developpeurs",
+    "dev_text": "Testez precision OCR, extraction structuree et robustesse multi-formats avant industrialisation.",
+    "mgr_title": "Pour les managers",
+    "mgr_text": "Priorisez les solutions OCR qui reduisent les taches manuelles et les erreurs operationnelles.",
+  },
+  "dococr": {
+    "dev_title": "Pour les developpeurs",
+    "dev_text": "Validez chaque etape du pipeline documentaire: ingestion, OCR, classification et orchestration.",
+    "mgr_title": "Pour les managers",
+    "mgr_text": "Pilotez la transformation documentaire avec des KPI de delai, qualite et conformite.",
+  },
+  "aicliapps": {
+    "dev_title": "Pour les developpeurs",
+    "dev_text": "Selectionnez des apps CLI IA stables, scriptables et compatibles avec vos workflows d'equipe.",
+    "mgr_title": "Pour les managers",
+    "mgr_text": "Evaluez l'equilibre entre vitesse d'execution, securite et cout de possession des outils CLI.",
+  },
+}
+
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -279,6 +348,38 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       gap: 8px;
       flex-wrap: wrap;
       justify-content: center;
+    }}
+    .audience-brief {{
+      margin: 18px auto 0;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }}
+    .reader-card {{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 14px 16px;
+      text-align: left;
+    }}
+    .reader-label {{
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }}
+    .reader-title {{
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }}
+    .reader-text {{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
     }}
     .history-table {{
       width: 100%;
@@ -537,6 +638,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     @media (max-width: 600px) {{
       .tools-grid {{ grid-template-columns: 1fr 1fr; }}
       .page-meta {{ grid-template-columns: 1fr; }}
+      .audience-brief {{ grid-template-columns: 1fr; }}
     }}
   </style>
 </head>
@@ -562,6 +664,18 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
       <button class="info-btn" type="button" id="export-all-zip">ZIP All</button>
     </div>
+  </div>
+  <div class="audience-brief">
+    <article class="reader-card reader-dev">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">{dev_reader_title}</div>
+      <div class="reader-text">{dev_reader_text}</div>
+    </article>
+    <article class="reader-card reader-manager">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">{manager_reader_title}</div>
+      <div class="reader-text">{manager_reader_text}</div>
+    </article>
   </div>
 </header>
 
@@ -887,6 +1001,21 @@ def build_export_manifest() -> str:
     return json.dumps({"pages": pages}, ensure_ascii=False)
 
 
+def load_search_query_map() -> dict[str, list[str]]:
+    queries_file = ROOT / "data" / "search_queries.json"
+    if not queries_file.exists():
+        return {}
+    with open(queries_file, "r", encoding="utf-8") as f:
+        payload = json.load(f)
+    profiles = payload.get("profiles", {})
+
+    query_map: dict[str, list[str]] = {}
+    for slug, block in profiles.items():
+        queries = block.get("queries", []) if isinstance(block, dict) else []
+        query_map[slug] = [q.strip() for q in queries if isinstance(q, str) and q.strip()]
+    return query_map
+
+
 def generate_compare_view_page():
     compare_html = """<!DOCTYPE html>
 <html lang=\"fr\">
@@ -926,7 +1055,7 @@ def generate_compare_view_page():
     (ROOT / "compare-view.html").write_text(compare_html, encoding="utf-8")
 
 
-def generate_page(page_cfg: dict):
+def generate_page(page_cfg: dict, search_query_map: dict[str, list[str]]):
     data_file = page_cfg["data_file"]
     output_file = page_cfg["output"]
     if not data_file.exists():
@@ -988,7 +1117,11 @@ def generate_page(page_cfg: dict):
         "page_description",
         "Vue complete des outils detectes par veille automatique.",
     )
-    search_queries_html = render_search_queries(meta.get("search_queries", []))
+    page_name = meta.get("page_name", page_cfg["slug"])
+    authoritative_queries = search_query_map.get(page_name, meta.get("search_queries", []))
+    meta["search_queries"] = authoritative_queries
+    audience = PAGE_AUDIENCE_GUIDE.get(meta.get("page_name", "general"), PAGE_AUDIENCE_GUIDE["general"])
+    search_queries_html = render_search_queries(authoritative_queries)
     history_html = render_history(page_history, output_file.name)
 
     repo_name = "joffroy59/IA_survey"  # remplacer
@@ -1005,6 +1138,10 @@ def generate_page(page_cfg: dict):
         page_switcher=render_page_switcher(meta.get("page_name", "general")),
         page_label=escape(page_label),
         page_description=escape(page_description),
+        dev_reader_title=escape(audience["dev_title"]),
+        dev_reader_text=escape(audience["dev_text"]),
+        manager_reader_title=escape(audience["mgr_title"]),
+        manager_reader_text=escape(audience["mgr_text"]),
         search_queries_html=search_queries_html,
         history_html=history_html,
         nav_tabs=nav_tabs,
@@ -1023,9 +1160,10 @@ def generate_page(page_cfg: dict):
 
 
 def generate():
+    search_query_map = load_search_query_map()
     generate_compare_view_page()
     for page_cfg in PAGE_CONFIGS:
-        generate_page(page_cfg)
+        generate_page(page_cfg, search_query_map)
 
 
 if __name__ == "__main__":

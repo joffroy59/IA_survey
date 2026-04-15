@@ -198,6 +198,38 @@
       flex-wrap: wrap;
       justify-content: center;
     }
+    .audience-brief {
+      margin: 18px auto 0;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .reader-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .reader-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+    .reader-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .reader-text {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
     .history-table {
       width: 100%;
       border-collapse: collapse;
@@ -455,6 +487,7 @@
     @media (max-width: 600px) {
       .tools-grid { grid-template-columns: 1fr 1fr; }
       .page-meta { grid-template-columns: 1fr; }
+      .audience-brief { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -490,6 +523,18 @@
       <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
       <button class="info-btn" type="button" id="export-all-zip">ZIP All</button>
     </div>
+  </div>
+  <div class="audience-brief">
+    <article class="reader-card reader-dev">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les developpeurs</div>
+      <div class="reader-text">Testez precision OCR, extraction structuree et robustesse multi-formats avant industrialisation.</div>
+    </article>
+    <article class="reader-card reader-manager">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les managers</div>
+      <div class="reader-text">Priorisez les solutions OCR qui reduisent les taches manuelles et les erreurs operationnelles.</div>
+    </article>
   </div>
 </header>
 
@@ -674,20 +719,16 @@
     </div>
     <div class="modal-meta">Page: Panorama OCR · Dernière mise à jour: 2026-04-16</div>
     <ol class="query-list">
-      <li>best OCR tools 2026</li>
-      <li>open source OCR engine comparison 2026</li>
-      <li>handwriting OCR ai tools 2026</li>
-      <li>invoice OCR extraction tools 2026</li>
-      <li>multilingual OCR tools enterprise 2026</li>
-      <li>OCR API cloud self hosted 2026</li>
-      <li>document text extraction ai 2026</li>
-      <li>table OCR extraction tools 2026</li>
-      <li>pdf OCR pipeline tools 2026</li>
-      <li>image to text ai OCR benchmark 2026</li>
-      <li>docling document parsing OCR python 2026</li>
-      <li>docling IBM open source document processing</li>
-      <li>outils OCR IA 2026</li>
-      <li>OCR reconnaissance de texte entreprise</li>
+      <li>best OCR tools for enterprise documents 2026</li>
+      <li>open source OCR engine benchmark 2026</li>
+      <li>OCR API cloud versus self hosted comparison 2026</li>
+      <li>invoice OCR extraction automation tools 2026</li>
+      <li>multilingual OCR for regulated industries 2026</li>
+      <li>OCR table extraction quality tools 2026</li>
+      <li>OCR handwriting recognition AI tools 2026</li>
+      <li>PDF OCR pipeline tooling for developers 2026</li>
+      <li>OCR document parsing with docling 2026</li>
+      <li>outils OCR IA reconnaissance texte professionnelle 2026</li>
     </ol>
   </div>
 </div>
@@ -709,11 +750,6 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date">2026-04-16 01:18:36.498</td>
-          <td class="history-count">16</td>
-          <td>-</td>
-        </tr>
-        <tr>
           <td class="history-date">2026-04-16 01:18:16.828</td>
           <td class="history-count">24</td>
           <td>-</td>
@@ -749,9 +785,19 @@
           <td><a href="snapshots/ocr/2026-04-16_01-18-36-731.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ocr/2026-04-16_01-18-36-731.html&amp;right=ocr.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/ocr/2026-04-16_01-19-20-015.html" target="_blank">2026-04-16 01:19:20.015</a></td>
+          <td class="history-date"><a href="snapshots/ocr/2026-04-16_01-23-21-691.html" target="_blank">2026-04-16 01:23:21.691</a></td>
           <td class="history-count">16</td>
-          <td><a href="snapshots/ocr/2026-04-16_01-19-20-015.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ocr/2026-04-16_01-19-20-015.html&amp;right=ocr.html">Comparer</a></td>
+          <td><a href="snapshots/ocr/2026-04-16_01-23-21-691.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ocr/2026-04-16_01-23-21-691.html&amp;right=ocr.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ocr/2026-04-16_01-27-20-668.html" target="_blank">2026-04-16 01:27:20.668</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ocr/2026-04-16_01-27-20-668.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ocr/2026-04-16_01-27-20-668.html&amp;right=ocr.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ocr/2026-04-16_01-28-23-969.html" target="_blank">2026-04-16 01:28:23.969</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ocr/2026-04-16_01-28-23-969.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ocr/2026-04-16_01-28-23-969.html&amp;right=ocr.html">Comparer</a></td>
         </tr>
         <tr>
           <td class="history-date"><a href="snapshots/ocr/2026-04-15_23-28-01-563.html" target="_blank">2026-04-15 23:28:01.563</a></td>

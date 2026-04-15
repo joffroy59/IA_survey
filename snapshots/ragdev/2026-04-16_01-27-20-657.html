@@ -198,6 +198,38 @@
       flex-wrap: wrap;
       justify-content: center;
     }
+    .audience-brief {
+      margin: 18px auto 0;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .reader-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .reader-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+    .reader-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .reader-text {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
     .history-table {
       width: 100%;
       border-collapse: collapse;
@@ -455,6 +487,7 @@
     @media (max-width: 600px) {
       .tools-grid { grid-template-columns: 1fr 1fr; }
       .page-meta { grid-template-columns: 1fr; }
+      .audience-brief { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -465,12 +498,12 @@
   <div class="header-badge">🤖 Auto-updated by AI · 16/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
   <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
-  <p class="update-info">Dernière mise à jour : <span>2026-04-15</span></p>
-  <p class="update-info">Outils : <span>92</span> · Nouveaux : <span>2</span></p>
+  <p class="update-info">Dernière mise à jour : <span>2026-04-16</span></p>
+  <p class="update-info">Outils : <span>16</span> · Nouveaux : <span>0</span></p>
   <div class="page-switcher"><a class="page-link" href="index.html">Vue Generale</a>
-    <a class="page-link active" href="enterprise.html">Vue Enterprise</a>
+    <a class="page-link" href="enterprise.html">Vue Enterprise</a>
     <a class="page-link" href="discovery.html">Vue Decouverte</a>
-    <a class="page-link" href="ragdev.html">Vue RAG Pro + DevTools</a>
+    <a class="page-link active" href="ragdev.html">Vue RAG Pro + DevTools</a>
     <a class="page-link" href="agentdev.html">Vue Agent Dev + IDE Tools</a>
     <a class="page-link" href="vscode.html">Vue VS Code</a>
     <a class="page-link" href="newrag.html">Vue New RAG</a>
@@ -481,8 +514,8 @@
   <div class="page-meta">
     <div>
       <div class="page-meta-label">Type de page</div>
-      <div class="page-meta-title">Panorama Enterprise</div>
-      <div class="page-meta-desc">Focus RAG, agents, infra, securite et cas d&#x27;usage entreprise.</div>
+      <div class="page-meta-title">Panorama RAG Pro + DevTools</div>
+      <div class="page-meta-desc">Focus architecture RAG production et outils IA pour developpeurs.</div>
     </div>
     <div class="button-group">
       <button class="info-btn" type="button" id="open-search-info">Sources</button>
@@ -490,6 +523,18 @@
       <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
       <button class="info-btn" type="button" id="export-all-zip">ZIP All</button>
     </div>
+  </div>
+  <div class="audience-brief">
+    <article class="reader-card reader-dev">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les developpeurs</div>
+      <div class="reader-text">Concentrez-vous sur la qualite retrieval, l&#x27;evaluation et la stabilite de la pipeline RAG en production.</div>
+    </article>
+    <article class="reader-card reader-manager">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les managers</div>
+      <div class="reader-text">Suivez les gains de precision, de productivite et de reduction des risques sur les workflows metier.</div>
+    </article>
   </div>
 </header>
 
@@ -515,22 +560,16 @@
       <div class="subcategory-title">📌 Indispensables</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://chatgpt.com/" target="_blank" rel="noopener">
-        <div class="tool-name">ChatGPT</div>
-        <div class="tool-provider">OpenAI</div>
-        <div class="tool-desc">Le plus populaire</div>
+      <a class="tool-card" href="https://cursor.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Cursor</div>
+        <div class="tool-provider">Anysphere</div>
+        
       </a>
 
-      <a class="tool-card" href="https://claude.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Claude</div>
-        <div class="tool-provider">Anthropic</div>
-        <div class="tool-desc">Excellent pour l'analyse</div>
-      </a>
-
-      <a class="tool-card" href="https://gemini.google.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Gemini</div>
-        <div class="tool-provider">Google</div>
-        <div class="tool-desc">Intégré à Google</div>
+      <a class="tool-card" href="https://elevenlabs.io" target="_blank" rel="noopener">
+        <div class="tool-name">ElevenLabs</div>
+        
+        <div class="tool-desc">Leader voix réaliste</div>
       </a>
       </div>
     </div>
@@ -539,16 +578,28 @@
       <div class="subcategory-title">⭐ Importantes</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://copilot.microsoft.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Copilot</div>
-        <div class="tool-provider">Microsoft</div>
-        <div class="tool-desc">Intégré à Windows</div>
+      <a class="tool-card" href="https://gamma.app/" target="_blank" rel="noopener">
+        <div class="tool-name">Gamma</div>
+        
+        <div class="tool-desc">Présentations IA</div>
       </a>
 
-      <a class="tool-card" href="https://www.perplexity.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Perplexity</div>
+      <a class="tool-card" href="https://www.grok.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Grok</div>
+        <div class="tool-provider">xAI</div>
+        <div class="tool-desc">IA d'Elon Musk</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🔬 Avancées - Veille</div>
+      <div class="tools-grid">
         
-        <div class="tool-desc">Recherche IA</div>
+      <a class="tool-card" href="https://gemini.google.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Imagen (Gemini)</div>
+        <div class="tool-provider">Google</div>
+        <div class="tool-desc">Gratuit</div>
       </a>
 
       <a class="tool-card" href="https://chat.mistral.ai/" target="_blank" rel="noopener">
@@ -560,47 +611,17 @@
     </div>
 
     <div class="subcategory">
-      <div class="subcategory-title">🔬 Avancées - Veille</div>
+      <div class="subcategory-title"> Productivité / Email</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://www.grok.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Grok</div>
-        <div class="tool-provider">xAI</div>
-        <div class="tool-desc">IA d'Elon Musk</div>
-      </a>
-
       <a class="tool-card" href="https://meta.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Meta AI</div>
         <div class="tool-provider">Meta</div>
         <div class="tool-desc">IA de Meta</div>
       </a>
 
-      <a class="tool-card" href="https://chat.deepseek.com/" target="_blank" rel="noopener">
-        <div class="tool-name">DeepSeek</div>
-        
-        <div class="tool-desc">IA chinoise open source</div>
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Productivité / Email</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://chat.qwen.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Qwen</div>
-        <div class="tool-provider">Alibaba</div>
-        
-      </a>
-
-      <a class="tool-card" href="https://www.kimi.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Kimi</div>
-        <div class="tool-provider">Moonshot</div>
-        
-      </a>
-
-      <a class="tool-card" href="https://agent.minimax.io/" target="_blank" rel="noopener">
-        <div class="tool-name">MiniMax</div>
+      <a class="tool-card" href="https://murf.ai" target="_blank" rel="noopener">
+        <div class="tool-name">Murf AI</div>
         
         
       </a>
@@ -618,22 +639,16 @@
       <div class="subcategory-title">🎙️ Réunions & Audio</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://www.notta.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Notta</div>
-        
-        <div class="tool-desc">Réunion App Mobile</div>
-      </a>
-
-      <a class="tool-card" href="https://fireflies.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Fireflies.ai</div>
-        
-        <div class="tool-desc">Transcription réunions</div>
-      </a>
-
       <a class="tool-card" href="https://otter.ai/" target="_blank" rel="noopener">
         <div class="tool-name">Otter.ai</div>
         
         <div class="tool-desc">Prise de notes IA</div>
+      </a>
+
+      <a class="tool-card" href="https://chat.qwen.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Qwen</div>
+        <div class="tool-provider">Alibaba</div>
+        
       </a>
       </div>
     </div>
@@ -642,22 +657,16 @@
       <div class="subcategory-title">📊 Productivité & Présentation</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://plaud.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Plaud AI</div>
+      <a class="tool-card" href="https://www.songr.ai" target="_blank" rel="noopener">
+        <div class="tool-name">SongR</div>
         
         
       </a>
 
-      <a class="tool-card" href="https://gamma.app/" target="_blank" rel="noopener">
-        <div class="tool-name">Gamma</div>
+      <a class="tool-card" href="https://suno.com" target="_blank" rel="noopener">
+        <div class="tool-name">Suno</div>
         
-        <div class="tool-desc">Présentations IA</div>
-      </a>
-
-      <a class="tool-card" href="https://www.canva.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Canva AI</div>
-        <div class="tool-provider">Canva</div>
-        <div class="tool-desc">Design IA</div>
+        
       </a>
       </div>
     </div>
@@ -666,40 +675,10 @@
       <div class="subcategory-title"> Gestion des connaissances</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://notebooklm.google/" target="_blank" rel="noopener">
-        <div class="tool-name">NotebookLM</div>
+      <a class="tool-card" href="https://deepmind.google/models/veo/" target="_blank" rel="noopener">
+        <div class="tool-name">Veo</div>
         <div class="tool-provider">Google</div>
-        <div class="tool-desc">FAQ, Podcast IA</div>
-      </a>
-
-      <a class="tool-card" href="https://sora.chatgpt.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Sora</div>
-        <div class="tool-provider">OpenAI</div>
-        <div class="tool-desc">Gratuit</div>
-      </a>
-
-      <a class="tool-card" href="https://gemini.google.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Imagen (Gemini)</div>
-        <div class="tool-provider">Google</div>
-        <div class="tool-desc">Gratuit</div>
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Infrastructure IA</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://www.bing.com/images/create" target="_blank" rel="noopener">
-        <div class="tool-name">Bing Creator</div>
-        <div class="tool-provider">Microsoft</div>
-        <div class="tool-desc">Gratuit</div>
-      </a>
-
-      <a class="tool-card" href="https://www.midjourney.com/" target="_blank" rel="noopener">
-        <div class="tool-name">MidJourney</div>
-        
-        <div class="tool-desc">Référence qualité</div>
+        <div class="tool-desc">Ultra réaliste</div>
       </a>
 
       <a class="tool-card" href="https://firefly.adobe.com/" target="_blank" rel="noopener">
@@ -711,103 +690,7 @@
     </div>
 
     <div class="subcategory">
-      <div class="subcategory-title"> Prise de notes de réunions</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://stablediffusionweb.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Stable Diffusion</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://www.recraft.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Recraft</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://leonardo.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Leonardo AI</div>
-        
-        
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Synthèse de réunions</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://ideogram.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Ideogram</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://flux-ai.io/" target="_blank" rel="noopener">
-        <div class="tool-name">Flux</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://github.com/copilot" target="_blank" rel="noopener">
-        <div class="tool-name">GitHub Copilot</div>
-        <div class="tool-provider">Microsoft</div>
-        
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Présentations / Idées</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://cursor.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Cursor</div>
-        <div class="tool-provider">Anysphere</div>
-        
-      </a>
-
-      <a class="tool-card" href="https://claude.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Claude</div>
-        <div class="tool-provider">Anthropic</div>
-        
-      </a>
-
-      <a class="tool-card" href="https://claude.ai/download" target="_blank" rel="noopener">
-        <div class="tool-name">Claude Code</div>
-        <div class="tool-provider">Anthropic</div>
-        <div class="tool-desc">Agent terminal</div>
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Voyage</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://suno.com" target="_blank" rel="noopener">
-        <div class="tool-name">Suno</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://www.udio.com" target="_blank" rel="noopener">
-        <div class="tool-name">Udio</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://www.songr.ai" target="_blank" rel="noopener">
-        <div class="tool-name">SongR</div>
-        
-        
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title"> Notetaker</div>
+      <div class="subcategory-title"> Infrastructure IA</div>
       <div class="tools-grid">
         
       <a class="tool-card" href="https://boomy.com" target="_blank" rel="noopener">
@@ -816,17 +699,46 @@
         
       </a>
 
-      <a class="tool-card" href="https://elevenlabs.io" target="_blank" rel="noopener">
-        <div class="tool-name">ElevenLabs</div>
-        
-        <div class="tool-desc">Leader voix réaliste</div>
+      <a class="tool-card" href="https://claude.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Claude</div>
+        <div class="tool-provider">Anthropic</div>
+        <div class="tool-desc">Excellent pour l'analyse</div>
       </a>
+      </div>
+    </div>
 
-      <a class="tool-card" href="https://murf.ai" target="_blank" rel="noopener">
-        <div class="tool-name">Murf AI</div>
+    <div class="subcategory">
+      <div class="subcategory-title"> Prise de notes de réunions</div>
+      <div class="tools-grid">
         
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Synthèse de réunions</div>
+      <div class="tools-grid">
         
-      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Présentations / Idées</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Voyage</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Notetaker</div>
+      <div class="tools-grid">
+        
       </div>
     </div>
 
@@ -834,23 +746,6 @@
       <div class="subcategory-title"> Dictée vocale</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://www.descript.com" target="_blank" rel="noopener">
-        <div class="tool-name">Descript</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://deepmind.google/models/veo/" target="_blank" rel="noopener">
-        <div class="tool-name">Veo</div>
-        <div class="tool-provider">Google</div>
-        <div class="tool-desc">Ultra réaliste</div>
-      </a>
-
-      <a class="tool-card" href="https://klingai.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Kling</div>
-        
-        
-      </a>
       </div>
     </div>
 
@@ -858,23 +753,6 @@
       <div class="subcategory-title"> Orchestration AI</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://app.runwayml.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Runway</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://lumalabs.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Luma Dream Machine</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://sora.chatgpt.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Sora</div>
-        <div class="tool-provider">OpenAI</div>
-        
-      </a>
       </div>
     </div>
   </section>
@@ -889,23 +767,6 @@
       <div class="subcategory-title">🎨 Gratuit & accessible</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://www.heygen.com/" target="_blank" rel="noopener">
-        <div class="tool-name">HeyGen</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://www.synthesia.io/" target="_blank" rel="noopener">
-        <div class="tool-name">Synthesia</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://www.colossyan.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Colossyan</div>
-        
-        
-      </a>
       </div>
     </div>
 
@@ -913,17 +774,6 @@
       <div class="subcategory-title">💎 Usages pro</div>
       <div class="tools-grid">
         
-      <a class="tool-card is-new" href="https://www.atlabs.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Atlabs</div>
-        <div class="tool-provider">Atlabs</div>
-        <div class="tool-desc">Plateforme IA pour génération images et vidéos</div>
-      </a>
-
-      <a class="tool-card is-new" href="https://www.vo3ai.com/" target="_blank" rel="noopener">
-        <div class="tool-name">VO3AI</div>
-        <div class="tool-provider">VO3AI</div>
-        <div class="tool-desc">Crée des vidéos à partir d'images statiques</div>
-      </a>
       </div>
     </div>
 
@@ -931,23 +781,6 @@
       <div class="subcategory-title">🛠️ Open Source & expérimentaux</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://claude.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Claude</div>
-        <div class="tool-provider">Anthropic</div>
-        <div class="tool-desc">Excellent pour l'analyse</div>
-      </a>
-
-      <a class="tool-card" href="https://gemini.google.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Gemini</div>
-        <div class="tool-provider">Google</div>
-        <div class="tool-desc">Intégré à Google</div>
-      </a>
-
-      <a class="tool-card" href="https://copilot.microsoft.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Copilot</div>
-        <div class="tool-provider">Microsoft</div>
-        <div class="tool-desc">Intégré à Windows</div>
-      </a>
       </div>
     </div>
 
@@ -955,23 +788,6 @@
       <div class="subcategory-title"> Edition photo & vidéo IA</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://www.perplexity.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Perplexity</div>
-        
-        <div class="tool-desc">Recherche IA</div>
-      </a>
-
-      <a class="tool-card" href="https://chat.mistral.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Le Chat</div>
-        <div class="tool-provider">Mistral</div>
-        <div class="tool-desc">IA française</div>
-      </a>
-
-      <a class="tool-card" href="https://www.grok.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Grok</div>
-        <div class="tool-provider">xAI</div>
-        <div class="tool-desc">IA d'Elon Musk</div>
-      </a>
       </div>
     </div>
   </section>
@@ -986,23 +802,6 @@
       <div class="subcategory-title">⌨️ Assistants code</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://meta.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Meta AI</div>
-        <div class="tool-provider">Meta</div>
-        <div class="tool-desc">IA de Meta</div>
-      </a>
-
-      <a class="tool-card" href="https://chat.deepseek.com/" target="_blank" rel="noopener">
-        <div class="tool-name">DeepSeek</div>
-        
-        <div class="tool-desc">IA chinoise open source</div>
-      </a>
-
-      <a class="tool-card" href="https://chat.qwen.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Qwen</div>
-        <div class="tool-provider">Alibaba</div>
-        
-      </a>
       </div>
     </div>
 
@@ -1010,23 +809,6 @@
       <div class="subcategory-title"> Création d'apps No-code</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://www.kimi.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Kimi</div>
-        <div class="tool-provider">Moonshot</div>
-        
-      </a>
-
-      <a class="tool-card" href="https://agent.minimax.io/" target="_blank" rel="noopener">
-        <div class="tool-name">MiniMax</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://www.notta.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Notta</div>
-        
-        <div class="tool-desc">Réunion App Mobile</div>
-      </a>
       </div>
     </div>
 
@@ -1034,23 +816,6 @@
       <div class="subcategory-title"> Prompt Engineering</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://fireflies.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Fireflies.ai</div>
-        
-        <div class="tool-desc">Transcription réunions</div>
-      </a>
-
-      <a class="tool-card" href="https://otter.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Otter.ai</div>
-        
-        <div class="tool-desc">Prise de notes IA</div>
-      </a>
-
-      <a class="tool-card" href="https://plaud.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Plaud AI</div>
-        
-        
-      </a>
       </div>
     </div>
 
@@ -1058,23 +823,6 @@
       <div class="subcategory-title"> Agent AI</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://gamma.app/" target="_blank" rel="noopener">
-        <div class="tool-name">Gamma</div>
-        
-        <div class="tool-desc">Présentations IA</div>
-      </a>
-
-      <a class="tool-card" href="https://www.canva.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Canva AI</div>
-        <div class="tool-provider">Canva</div>
-        <div class="tool-desc">Design IA</div>
-      </a>
-
-      <a class="tool-card" href="https://notebooklm.google/" target="_blank" rel="noopener">
-        <div class="tool-name">NotebookLM</div>
-        <div class="tool-provider">Google</div>
-        <div class="tool-desc">FAQ, Podcast IA</div>
-      </a>
       </div>
     </div>
 
@@ -1082,23 +830,6 @@
       <div class="subcategory-title"> Code Review</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://sora.chatgpt.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Sora</div>
-        <div class="tool-provider">OpenAI</div>
-        <div class="tool-desc">Gratuit</div>
-      </a>
-
-      <a class="tool-card" href="https://gemini.google.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Imagen (Gemini)</div>
-        <div class="tool-provider">Google</div>
-        <div class="tool-desc">Gratuit</div>
-      </a>
-
-      <a class="tool-card" href="https://www.bing.com/images/create" target="_blank" rel="noopener">
-        <div class="tool-name">Bing Creator</div>
-        <div class="tool-provider">Microsoft</div>
-        <div class="tool-desc">Gratuit</div>
-      </a>
       </div>
     </div>
   </section>
@@ -1113,23 +844,6 @@
       <div class="subcategory-title">🎵 Génération musicale</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://www.midjourney.com/" target="_blank" rel="noopener">
-        <div class="tool-name">MidJourney</div>
-        
-        <div class="tool-desc">Référence qualité</div>
-      </a>
-
-      <a class="tool-card" href="https://firefly.adobe.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Adobe Firefly</div>
-        <div class="tool-provider">Adobe</div>
-        <div class="tool-desc">Pro créatif</div>
-      </a>
-
-      <a class="tool-card" href="https://stablediffusionweb.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Stable Diffusion</div>
-        
-        
-      </a>
       </div>
     </div>
 
@@ -1137,23 +851,6 @@
       <div class="subcategory-title">🎤 Voix & clonage vocal</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://www.recraft.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Recraft</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://leonardo.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Leonardo AI</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://ideogram.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Ideogram</div>
-        
-        
-      </a>
       </div>
     </div>
   </section>
@@ -1168,23 +865,6 @@
       <div class="subcategory-title">🎬 Text-to-Video PRO</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://flux-ai.io/" target="_blank" rel="noopener">
-        <div class="tool-name">Flux</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://github.com/copilot" target="_blank" rel="noopener">
-        <div class="tool-name">GitHub Copilot</div>
-        <div class="tool-provider">Microsoft</div>
-        
-      </a>
-
-      <a class="tool-card" href="https://cursor.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Cursor</div>
-        <div class="tool-provider">Anysphere</div>
-        
-      </a>
       </div>
     </div>
 
@@ -1192,23 +872,6 @@
       <div class="subcategory-title">🧍 Avatar IA</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://claude.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Claude</div>
-        <div class="tool-provider">Anthropic</div>
-        
-      </a>
-
-      <a class="tool-card" href="https://claude.ai/download" target="_blank" rel="noopener">
-        <div class="tool-name">Claude Code</div>
-        <div class="tool-provider">Anthropic</div>
-        <div class="tool-desc">Agent terminal</div>
-      </a>
-
-      <a class="tool-card" href="https://suno.com" target="_blank" rel="noopener">
-        <div class="tool-name">Suno</div>
-        
-        
-      </a>
       </div>
     </div>
 
@@ -1216,23 +879,6 @@
       <div class="subcategory-title">🆕 Génération vidéo et image</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://www.udio.com" target="_blank" rel="noopener">
-        <div class="tool-name">Udio</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://www.songr.ai" target="_blank" rel="noopener">
-        <div class="tool-name">SongR</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://boomy.com" target="_blank" rel="noopener">
-        <div class="tool-name">Boomy</div>
-        
-        
-      </a>
       </div>
     </div>
 
@@ -1240,23 +886,6 @@
       <div class="subcategory-title">🆕 Image-to-Video</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://elevenlabs.io" target="_blank" rel="noopener">
-        <div class="tool-name">ElevenLabs</div>
-        
-        <div class="tool-desc">Leader voix réaliste</div>
-      </a>
-
-      <a class="tool-card" href="https://murf.ai" target="_blank" rel="noopener">
-        <div class="tool-name">Murf AI</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://www.descript.com" target="_blank" rel="noopener">
-        <div class="tool-name">Descript</div>
-        
-        
-      </a>
       </div>
     </div>
 
@@ -1264,23 +893,6 @@
       <div class="subcategory-title"> Présentations vidéo</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://deepmind.google/models/veo/" target="_blank" rel="noopener">
-        <div class="tool-name">Veo</div>
-        <div class="tool-provider">Google</div>
-        <div class="tool-desc">Ultra réaliste</div>
-      </a>
-
-      <a class="tool-card" href="https://klingai.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Kling</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://app.runwayml.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Runway</div>
-        
-        
-      </a>
       </div>
     </div>
   </section>
@@ -1298,32 +910,75 @@
       <div class="modal-title">Requêtes de recherche utilisées</div>
       <button class="close-btn" type="button" id="close-search-info">Fermer</button>
     </div>
-    <div class="modal-meta">Page: Panorama Enterprise · Dernière mise à jour: 2026-04-15</div>
+    <div class="modal-meta">Page: Panorama RAG Pro + DevTools · Dernière mise à jour: 2026-04-16</div>
     <ol class="query-list">
-      <li>RAG architecture tools enterprise 2026</li>
-      <li>retrieval augmented generation frameworks production 2026</li>
-      <li>best RAG tools open source vector database 2026</li>
-      <li>LLM RAG pipeline production stack 2026</li>
-      <li>AI agents frameworks enterprise automation 2026</li>
-      <li>agentic workflows tools production AI agents 2026</li>
-      <li>multi agent systems frameworks 2026 open source</li>
-      <li>AI orchestration tools LangChain alternatives 2026</li>
-      <li>AI developer tools enterprise coding assistant self hosted 2026</li>
-      <li>secure AI coding tools for companies 2026</li>
-      <li>on premise AI dev tools LLM enterprise 2026</li>
-      <li>LLM infrastructure tools enterprise deployment 2026</li>
-      <li>self hosted LLM stack enterprise vector db embedding 2026</li>
-      <li>AI platform enterprise stack comparison 2026</li>
-      <li>AI use cases enterprise automation internal tools 2026</li>
-      <li>AI for business process automation tools 2026</li>
-      <li>LLM internal knowledge base chatbot enterprise 2026</li>
-      <li>secure AI tools enterprise GDPR LLM privacy 2026</li>
-      <li>on premise AI tools Europe compliance 2026</li>
-      <li>AI tools enterprise site:github.com RAG OR agent</li>
-      <li>AI infrastructure blog LLM stack 2026 site:medium.com OR site:substack.com</li>
-      <li>Show HN enterprise AI tool RAG agent site:news.ycombinator.com</li>
-      <li>outils IA entreprise RAG agentique France 2026</li>
-      <li>plateforme IA entreprise Europe LLM open source</li>
+      <li>enterprise RAG architecture best practices 2026</li>
+      <li>production RAG pipeline design patterns LLM 2026</li>
+      <li>scalable retrieval augmented generation architecture</li>
+      <li>RAG system design chunking embedding retrieval strategies</li>
+      <li>RAG frameworks comparison LangChain LlamaIndex Haystack 2026</li>
+      <li>best RAG tools open source production ready</li>
+      <li>RAG orchestration frameworks enterprise AI</li>
+      <li>LangChain alternatives RAG pipelines 2026</li>
+      <li>vector database comparison enterprise RAG Pinecone Weaviate Qdrant 2026</li>
+      <li>hybrid search BM25 vector search RAG implementation</li>
+      <li>best embedding models for RAG 2026 benchmark</li>
+      <li>agentic RAG workflows multi step retrieval LLM</li>
+      <li>AI agents with RAG memory tools frameworks 2026</li>
+      <li>tool calling RAG agents enterprise workflows</li>
+      <li>enterprise knowledge base chatbot RAG implementation</li>
+      <li>RAG for internal documentation search company</li>
+      <li>AI document processing RAG pipeline enterprise</li>
+      <li>docling document parsing RAG ingestion pipeline 2026</li>
+      <li>RAG use cases enterprise automation support IT</li>
+      <li>secure RAG architecture enterprise GDPR privacy LLM</li>
+      <li>on premise RAG deployment enterprise secure AI</li>
+      <li>data governance in RAG systems enterprise</li>
+      <li>RAG latency optimization caching retrieval pipeline</li>
+      <li>improving RAG accuracy reranking evaluation methods</li>
+      <li>RAG evaluation metrics benchmark retrieval quality</li>
+      <li>state of the art RAG research paper 2026</li>
+      <li>RAG benchmark leaderboard retrieval augmented generation</li>
+      <li>advanced RAG techniques multi vector retrieval</li>
+      <li>RAG pipeline python example production github</li>
+      <li>deploy RAG system docker kubernetes LLM</li>
+      <li>end to end RAG system tutorial enterprise</li>
+      <li>RAG architecture site:github.com</li>
+      <li>RAG pipeline site:arxiv.org</li>
+      <li>RAG system design site:medium.com OR site:substack.com</li>
+      <li>Show HN RAG project site:news.ycombinator.com</li>
+      <li>AI coding agents CLI tools 2026 Claude Code alternatives</li>
+      <li>developer AI assistant self hosted coding tools 2026</li>
+      <li>AI pair programming tools enterprise secure 2026</li>
+      <li>best AI coding tools for teams enterprise 2026</li>
+      <li>LLM CLI tools local workflow developers 2026</li>
+      <li>Ollama use cases developers local LLM workflow</li>
+      <li>run LLM locally developer tools open source 2026</li>
+      <li>AI terminal assistant tools developers 2026</li>
+      <li>LLM inference engines comparison vLLM TensorRT Triton 2026</li>
+      <li>high performance LLM serving open source 2026</li>
+      <li>optimize LLM inference GPU batching vLLM guide</li>
+      <li>LLM gateway tools OpenRouter alternatives enterprise</li>
+      <li>multi model LLM routing tools developers 2026</li>
+      <li>AI API orchestration layer LLM tools comparison</li>
+      <li>autonomous coding agents frameworks 2026 open source</li>
+      <li>AI dev agents workflows code generation automation</li>
+      <li>agentic coding tools multi step development AI</li>
+      <li>LLM developer platform self hosted enterprise stack</li>
+      <li>AI dev platform internal tools engineering teams 2026</li>
+      <li>build internal AI dev platform company LLM stack</li>
+      <li>secure AI coding tools enterprise GDPR privacy</li>
+      <li>on premise AI developer tools LLM enterprise</li>
+      <li>private AI coding assistant company data protection</li>
+      <li>AI developer tools site:github.com LLM CLI OR agent</li>
+      <li>LLM dev tools open source trending github 2026</li>
+      <li>self hosted AI dev tools repository github</li>
+      <li>Show HN AI dev tool CLI agent site:news.ycombinator.com</li>
+      <li>developer AI tool discussion LLM site:news.ycombinator.com</li>
+      <li>AI coding tools benchmark 2026 developer productivity</li>
+      <li>LLM coding assistants comparison Claude vs Gemini vs open source</li>
+      <li>outils IA dev entreprise open source Europe 2026</li>
+      <li>plateforme IA développeur entreprise self hosted</li>
     </ol>
   </div>
 </div>
@@ -1334,7 +989,7 @@
       <div class="modal-title">Historique des versions</div>
       <button class="close-btn" type="button" id="close-history-info">Fermer</button>
     </div>
-    <div class="modal-meta">Page: Panorama Enterprise · Dernières 10 générations</div>
+    <div class="modal-meta">Page: Panorama RAG Pro + DevTools · Dernières 10 générations</div>
     <table class="history-table">
       <thead>
         <tr>
@@ -1345,54 +1000,54 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date">2026-04-15 02:00:36.990</td>
+          <td class="history-date">2026-04-15 02:00:36.993</td>
           <td class="history-count">40</td>
           <td>-</td>
         </tr>
         <tr>
-          <td class="history-date">2026-04-15 02:01:58.477</td>
+          <td class="history-date">2026-04-15 02:01:58.481</td>
           <td class="history-count">88</td>
           <td>-</td>
         </tr>
         <tr>
-          <td class="history-date">2026-04-15 02:03:43.826</td>
+          <td class="history-date">2026-04-15 02:03:43.830</td>
           <td class="history-count">88</td>
           <td>-</td>
         </tr>
         <tr>
-          <td class="history-date">2026-04-15 02:11:18.582</td>
+          <td class="history-date">2026-04-15 02:11:18.586</td>
           <td class="history-count">88</td>
           <td>-</td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/enterprise/2026-04-15_02-17-46-941.html" target="_blank">2026-04-15 02:17:46.941</a></td>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-15_02-17-46-945.html" target="_blank">2026-04-15 02:17:46.945</a></td>
           <td class="history-count">88</td>
-          <td><a href="snapshots/enterprise/2026-04-15_02-17-46-941.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-15_02-17-46-941.html&amp;right=enterprise.html">Comparer</a></td>
+          <td><a href="snapshots/ragdev/2026-04-15_02-17-46-945.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-15_02-17-46-945.html&amp;right=ragdev.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/enterprise/2026-04-15_02-20-30-762.html" target="_blank">2026-04-15 02:20:30.762</a></td>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-15_02-20-30-767.html" target="_blank">2026-04-15 02:20:30.767</a></td>
           <td class="history-count">88</td>
-          <td><a href="snapshots/enterprise/2026-04-15_02-20-30-762.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-15_02-20-30-762.html&amp;right=enterprise.html">Comparer</a></td>
+          <td><a href="snapshots/ragdev/2026-04-15_02-20-30-767.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-15_02-20-30-767.html&amp;right=ragdev.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/enterprise/2026-04-15_02-21-30-266.html" target="_blank">2026-04-15 02:21:30.266</a></td>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-15_02-21-30-271.html" target="_blank">2026-04-15 02:21:30.271</a></td>
           <td class="history-count">88</td>
-          <td><a href="snapshots/enterprise/2026-04-15_02-21-30-266.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-15_02-21-30-266.html&amp;right=enterprise.html">Comparer</a></td>
+          <td><a href="snapshots/ragdev/2026-04-15_02-21-30-271.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-15_02-21-30-271.html&amp;right=ragdev.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/enterprise/2026-04-15_02-29-49-416.html" target="_blank">2026-04-15 02:29:49.416</a></td>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-15_02-29-49-421.html" target="_blank">2026-04-15 02:29:49.421</a></td>
           <td class="history-count">88</td>
-          <td><a href="snapshots/enterprise/2026-04-15_02-29-49-416.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-15_02-29-49-416.html&amp;right=enterprise.html">Comparer</a></td>
+          <td><a href="snapshots/ragdev/2026-04-15_02-29-49-421.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-15_02-29-49-421.html&amp;right=ragdev.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/enterprise/2026-04-15_15-57-44-275.html" target="_blank">2026-04-15 15:57:44.275</a></td>
-          <td class="history-count">92</td>
-          <td><a href="snapshots/enterprise/2026-04-15_15-57-44-275.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-15_15-57-44-275.html&amp;right=enterprise.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-16_01-23-21-645.html" target="_blank">2026-04-16 01:23:21.645</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-16_01-23-21-645.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-16_01-23-21-645.html&amp;right=ragdev.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/enterprise/2026-04-16_00-59-11-119.html" target="_blank">2026-04-16 00:59:11.119</a></td>
-          <td class="history-count">92</td>
-          <td><a href="snapshots/enterprise/2026-04-16_00-59-11-119.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-16_00-59-11-119.html&amp;right=enterprise.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-16_01-27-20-657.html" target="_blank">2026-04-16 01:27:20.657</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-16_01-27-20-657.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-16_01-27-20-657.html&amp;right=ragdev.html">Comparer</a></td>
         </tr>
       </tbody>
     </table>
@@ -1411,7 +1066,7 @@
   const closeHistoryInfo = document.getElementById('close-history-info');
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
-  const currentPageFile = 'enterprise.html';
+  const currentPageFile = 'ragdev.html';
   const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}]};
 
   async function fetchAsText(path) {

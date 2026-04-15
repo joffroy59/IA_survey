@@ -198,6 +198,38 @@
       flex-wrap: wrap;
       justify-content: center;
     }
+    .audience-brief {
+      margin: 18px auto 0;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .reader-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .reader-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+    .reader-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .reader-text {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
     .history-table {
       width: 100%;
       border-collapse: collapse;
@@ -455,6 +487,7 @@
     @media (max-width: 600px) {
       .tools-grid { grid-template-columns: 1fr 1fr; }
       .page-meta { grid-template-columns: 1fr; }
+      .audience-brief { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -490,6 +523,18 @@
       <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
       <button class="info-btn" type="button" id="export-all-zip">ZIP All</button>
     </div>
+  </div>
+  <div class="audience-brief">
+    <article class="reader-card reader-dev">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les developpeurs</div>
+      <div class="reader-text">Choisissez les extensions VS Code qui accelerent revue, refactor et tests sans degrade la qualite.</div>
+    </article>
+    <article class="reader-card reader-manager">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les managers</div>
+      <div class="reader-text">Encadrez l&#x27;usage des extensions IA avec standards d&#x27;equipe, securite et mesure de productivite.</div>
+    </article>
   </div>
 </header>
 
@@ -674,18 +719,16 @@
     </div>
     <div class="modal-meta">Page: Panorama VS Code + Extensions IA · Dernière mise à jour: 2026-04-16</div>
     <ol class="query-list">
-      <li>best VS Code AI extensions 2026</li>
-      <li>VS Code Copilot alternatives 2026</li>
-      <li>open source vscode ai extension github 2026</li>
-      <li>vscode extension for prompt engineering</li>
-      <li>vscode ai code review extension</li>
-      <li>vscode terminal ai assistant tools</li>
-      <li>vscode extension autonomous coding agent</li>
-      <li>vscode extension documentation generation ai</li>
-      <li>cursor vs vscode ai workflow 2026</li>
-      <li>vscode ai refactoring extension</li>
-      <li>meilleures extensions IA VS Code 2026</li>
-      <li>vscode extension team productivity ai</li>
+      <li>best VS Code AI extensions for developers 2026</li>
+      <li>VS Code coding assistant extensions comparison 2026</li>
+      <li>open source VS Code AI extension ecosystem 2026</li>
+      <li>VS Code agent extension for code automation 2026</li>
+      <li>VS Code AI code review extension professional teams 2026</li>
+      <li>VS Code AI refactoring productivity extensions 2026</li>
+      <li>VS Code AI terminal assistant extension 2026</li>
+      <li>VS Code enterprise AI extension governance 2026</li>
+      <li>meilleures extensions IA VS Code usage pro 2026</li>
+      <li>VS Code extension development with AI copilots 2026</li>
     </ol>
   </div>
 </div>
@@ -707,11 +750,6 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date">2026-04-15 15:57:24.575</td>
-          <td class="history-count">24</td>
-          <td>-</td>
-        </tr>
-        <tr>
           <td class="history-date"><a href="snapshots/vscode/2026-04-15_02-17-46-951.html" target="_blank">2026-04-15 02:17:46.951</a></td>
           <td class="history-count">0</td>
           <td><a href="snapshots/vscode/2026-04-15_02-17-46-951.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-15_02-17-46-951.html&amp;right=vscode.html">Comparer</a></td>
@@ -747,9 +785,19 @@
           <td><a href="snapshots/vscode/2026-04-16_01-18-17-019.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-16_01-18-17-019.html&amp;right=vscode.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/vscode/2026-04-16_01-19-19-988.html" target="_blank">2026-04-16 01:19:19.988</a></td>
+          <td class="history-date"><a href="snapshots/vscode/2026-04-16_01-23-21-664.html" target="_blank">2026-04-16 01:23:21.664</a></td>
           <td class="history-count">16</td>
-          <td><a href="snapshots/vscode/2026-04-16_01-19-19-988.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-16_01-19-19-988.html&amp;right=vscode.html">Comparer</a></td>
+          <td><a href="snapshots/vscode/2026-04-16_01-23-21-664.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-16_01-23-21-664.html&amp;right=vscode.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/vscode/2026-04-16_01-27-20-662.html" target="_blank">2026-04-16 01:27:20.662</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/vscode/2026-04-16_01-27-20-662.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-16_01-27-20-662.html&amp;right=vscode.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/vscode/2026-04-16_01-28-23-962.html" target="_blank">2026-04-16 01:28:23.962</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/vscode/2026-04-16_01-28-23-962.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-16_01-28-23-962.html&amp;right=vscode.html">Comparer</a></td>
         </tr>
         <tr>
           <td class="history-date"><a href="snapshots/vscode/2026-04-15_23-28-01-559.html" target="_blank">2026-04-15 23:28:01.559</a></td>

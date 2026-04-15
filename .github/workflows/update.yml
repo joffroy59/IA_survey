@@ -50,6 +50,9 @@ jobs:
       - name: Generate pages
         run: python scripts/generate.py
 
+      - name: Validate pages and datasets
+        run: python scripts/check_pages.py
+
       - name: Commit & push if changed
         run: |
           git config user.name  "github-actions[bot]"
