@@ -34,10 +34,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-15 02:01:58.477",
-        "tool_count": 88
-      },
-      {
         "generated_at": "2026-04-15 02:03:43.826",
         "tool_count": 88
       },
@@ -79,6 +75,11 @@
         "generated_at": "2026-04-16 01:28:23.954",
         "tool_count": 48,
         "snapshot_file": "snapshots/enterprise/2026-04-16_01-28-23-954.html"
+      },
+      {
+        "generated_at": "2026-04-15 23:44:42.714",
+        "tool_count": 48,
+        "snapshot_file": "snapshots/enterprise/2026-04-15_23-44-42-714.html"
       }
     ]
   },
