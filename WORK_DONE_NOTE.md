@@ -3,6 +3,36 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## FIX) Seed missing profiles — vscode, newrag, cowork, ocr, dococr
+
+### Changed
+- Fixed `scripts/seed_profiles.py`: added the 5 missing profiles (vscode, newrag, cowork, ocr, dococr) to the seeding list and removed duplicated script code.
+- Ran seeding to populate all 5 JSON data files with tools from the general profile (24 tools each: 3 per subcategory × 8 subcategories).
+- Regenerated all 5 HTML pages via `generate.py` so tool cards are now rendered.
+- Verified locally: all categories/subcategories match between JSON and HTML, all pages pass.
+
+### Why
+- The 5 views (VS Code, New RAG, Cowork, OCR, OCR Système Complet) displayed 0 tools because their JSON files had empty `tools: []` arrays — `seed_profiles.py` only seeded 4 profiles out of 9.
+
+### Files touched
+- `scripts/seed_profiles.py`
+- `data/tools-vscode.json`
+- `data/tools-newrag.json`
+- `data/tools-cowork.json`
+- `data/tools-ocr.json`
+- `data/tools-dococr.json`
+- `vscode.html`
+- `newrag.html`
+- `cowork.html`
+- `ocr.html`
+- `dococr.html`
+- `WORK_DONE_NOTE.md`
+
+---
+
+Date: 2026-04-15
+Repository: IA_survey
+
 ## RELEASE) Merge and release prep refresh
 
 ### Changed

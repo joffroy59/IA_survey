@@ -22,6 +22,10 @@
     ],
     "page_history": [
       {
+        "generated_at": "2026-04-15 15:57:24.598",
+        "tool_count": 24
+      },
+      {
         "generated_at": "2026-04-15 02:17:46.953",
         "tool_count": 0,
         "snapshot_file": "snapshots/newrag/2026-04-15_02-17-46-953.html"
@@ -45,6 +49,11 @@
         "generated_at": "2026-04-15 06:18:23.533",
         "tool_count": 0,
         "snapshot_file": "snapshots/newrag/2026-04-15_06-18-23-533.html"
+      },
+      {
+        "generated_at": "2026-04-15 15:57:44.532",
+        "tool_count": 24,
+        "snapshot_file": "snapshots/newrag/2026-04-15_15-57-44-532.html"
       }
     ]
   },
@@ -57,22 +66,98 @@
         {
           "name": "Graph RAG",
           "icon": "🕸️",
-          "tools": []
+          "tools": [
+            {
+              "name": "ChatGPT",
+              "provider": "OpenAI",
+              "url": "https://chatgpt.com/",
+              "desc": "Le plus populaire"
+            },
+            {
+              "name": "Claude",
+              "provider": "Anthropic",
+              "url": "https://claude.ai/",
+              "desc": "Excellent pour l'analyse"
+            },
+            {
+              "name": "Gemini",
+              "provider": "Google",
+              "url": "https://gemini.google.com/",
+              "desc": "Intégré à Google"
+            }
+          ]
         },
         {
           "name": "Agentic RAG",
           "icon": "🤖",
-          "tools": []
+          "tools": [
+            {
+              "name": "Copilot",
+              "provider": "Microsoft",
+              "url": "https://copilot.microsoft.com/",
+              "desc": "Intégré à Windows"
+            },
+            {
+              "name": "Perplexity",
+              "provider": "",
+              "url": "https://www.perplexity.ai/",
+              "desc": "Recherche IA"
+            },
+            {
+              "name": "Le Chat",
+              "provider": "Mistral",
+              "url": "https://chat.mistral.ai/",
+              "desc": "IA française"
+            }
+          ]
         },
         {
           "name": "Multimodal RAG",
           "icon": "🖼️",
-          "tools": []
+          "tools": [
+            {
+              "name": "Grok",
+              "provider": "xAI",
+              "url": "https://www.grok.com/",
+              "desc": "IA d'Elon Musk"
+            },
+            {
+              "name": "Meta AI",
+              "provider": "Meta",
+              "url": "https://meta.ai/",
+              "desc": "IA de Meta"
+            },
+            {
+              "name": "DeepSeek",
+              "provider": "",
+              "url": "https://chat.deepseek.com/",
+              "desc": "IA chinoise open source"
+            }
+          ]
         },
         {
           "name": "Orchestration",
           "icon": "🔗",
-          "tools": []
+          "tools": [
+            {
+              "name": "Qwen",
+              "provider": "Alibaba",
+              "url": "https://chat.qwen.ai/",
+              "desc": ""
+            },
+            {
+              "name": "Kimi",
+              "provider": "Moonshot",
+              "url": "https://www.kimi.com/",
+              "desc": ""
+            },
+            {
+              "name": "MiniMax",
+              "provider": "",
+              "url": "https://agent.minimax.io/",
+              "desc": ""
+            }
+          ]
         }
       ]
     },
@@ -84,22 +169,98 @@
         {
           "name": "Évaluation",
           "icon": "✅",
-          "tools": []
+          "tools": [
+            {
+              "name": "Notta",
+              "provider": "",
+              "url": "https://www.notta.ai/",
+              "desc": "Réunion App Mobile"
+            },
+            {
+              "name": "Fireflies.ai",
+              "provider": "",
+              "url": "https://fireflies.ai/",
+              "desc": "Transcription réunions"
+            },
+            {
+              "name": "Otter.ai",
+              "provider": "",
+              "url": "https://otter.ai/",
+              "desc": "Prise de notes IA"
+            }
+          ]
         },
         {
           "name": "Observabilité",
           "icon": "📊",
-          "tools": []
+          "tools": [
+            {
+              "name": "Plaud AI",
+              "provider": "",
+              "url": "https://plaud.ai/",
+              "desc": ""
+            },
+            {
+              "name": "Gamma",
+              "provider": "",
+              "url": "https://gamma.app/",
+              "desc": "Présentations IA"
+            },
+            {
+              "name": "Canva AI",
+              "provider": "Canva",
+              "url": "https://www.canva.com/",
+              "desc": "Design IA"
+            }
+          ]
         },
         {
           "name": "Retrieval Tuning",
           "icon": "🎯",
-          "tools": []
+          "tools": [
+            {
+              "name": "NotebookLM",
+              "provider": "Google",
+              "url": "https://notebooklm.google/",
+              "desc": "FAQ, Podcast IA"
+            },
+            {
+              "name": "Sora",
+              "provider": "OpenAI",
+              "url": "https://sora.chatgpt.com/",
+              "desc": "Gratuit"
+            },
+            {
+              "name": "Imagen (Gemini)",
+              "provider": "Google",
+              "url": "https://gemini.google.com/",
+              "desc": "Gratuit"
+            }
+          ]
         },
         {
           "name": "Security & Governance",
           "icon": "🔒",
-          "tools": []
+          "tools": [
+            {
+              "name": "Bing Creator",
+              "provider": "Microsoft",
+              "url": "https://www.bing.com/images/create",
+              "desc": "Gratuit"
+            },
+            {
+              "name": "MidJourney",
+              "provider": "",
+              "url": "https://www.midjourney.com/",
+              "desc": "Référence qualité"
+            },
+            {
+              "name": "Adobe Firefly",
+              "provider": "Adobe",
+              "url": "https://firefly.adobe.com/",
+              "desc": "Pro créatif"
+            }
+          ]
         }
       ]
     }
