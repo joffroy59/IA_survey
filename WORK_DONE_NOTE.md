@@ -3,6 +3,23 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## ADD) Query/Page/JSON custom agent for subject-driven DuckDuckGo workflow
+
+### Changed
+- Created `.github/agents/query-page-json-builder.agent.md`.
+- Added a dedicated custom agent that asks the user for a subject, proposes DuckDuckGo queries, and guides JSON/page generation steps for this repository.
+
+### Why
+- User requested an agent that helps create a new JSON and page from a subject, with explicit user prompting and DuckDuckGo query generation.
+- This makes the workflow repeatable and consistent for future profile additions.
+
+### Files touched
+- `.github/agents/query-page-json-builder.agent.md`
+- `WORK_DONE_NOTE.md`
+
+Date: 2026-04-16
+Repository: IA_survey
+
 ## ADD) Mandatory GitFlow branch rule in repository instructions
 
 ### Changed
