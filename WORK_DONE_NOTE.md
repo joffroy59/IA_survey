@@ -3,6 +3,27 @@
 Date: 2026-04-15
 Repository: IA_survey
 
+## RELEASE PREP) Refresh pages/datasets before v1.3.0
+
+### Changed
+- Regenerated all pages and datasets prior to release merge.
+- Updated all `data/tools*.json` files and page outputs:
+  - `index.html`, `enterprise.html`, `discovery.html`, `ragdev.html`, `agentdev.html`, `vscode.html`, `newrag.html`, `cowork.html`
+- Added new snapshot versions under `snapshots/*` for history/compare continuity.
+
+### Why
+- Ensure release is published with latest generated state and synchronized history snapshots.
+
+### Files touched
+- `data/tools*.json`
+- `*.html`
+- `snapshots/*`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/update.py scripts/generate.py`
+- `python scripts/generate.py`
+
 ## FEATURE) VS Code, New RAG, Cowork pages + history compare + ZIP export
 
 ### Changed
