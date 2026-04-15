@@ -3,6 +3,100 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## CI) Run auto update workflow on develop like main
+
+### Changed
+- Updated `.github/workflows/update.yml` trigger to run on `push` for both `main` and `develop` branches.
+
+### Why
+- User requested automatic build/deploy-style action execution on `develop` the same way as `main`.
+
+### Files touched
+- `.github/workflows/update.yml`
+- `WORK_DONE_NOTE.md`
+
+## FIX) Clean AI CLI JSON regeneration from query-only evidence + category validation rule
+
+### Changed
+- Refactored `scripts/update.py` for profile `aicliapps` to rebuild dataset from query-only evidence instead of cloning general tools.
+- Added dedicated CLI category taxonomy and category/subcategory validation before tool insertion.
+- Added fallback extraction improvements:
+  - structured DuckDuckGo result parsing
+  - known CLI tool detection from query evidence
+  - stricter filtering to avoid article-title noise
+- Regenerated `data/tools-aicliapps.json` from the defined query set using the new logic.
+- Updated `.github/agents/query-page-json-builder.agent.md` with a strict rule to always validate category/subcategory consistency with query evidence.
+
+### Why
+- User requested a clean CLI JSON regenerated from queries only and stronger category correctness.
+- Validation rules and cleaner extraction reduce misclassified and noisy entries.
+
+### Files touched
+- `scripts/update.py`
+- `data/tools-aicliapps.json`
+- `.github/agents/query-page-json-builder.agent.md`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python scripts/update.py --profile aicliapps`
+- Checked resulting `data/tools-aicliapps.json` structure and category assignments.
+
+Date: 2026-04-16
+Repository: IA_survey
+
+## FEATURE) New subject page AI CLI Applications
+
+### Changed
+- Added new subject profile `aicliapps` in `data/search_queries.json` with 10 DuckDuckGo queries in French.
+- Registered `aicliapps` in `scripts/update.py` and `scripts/generate.py` so dataset updates and HTML generation support the new profile.
+- Updated workflow matrices/options/path mappings in:
+  - `.github/workflows/update.yml`
+  - `.github/workflows/update-profile-unit.yml`
+  - `.github/workflows/update-consumer-example.yml`
+- Ran `python scripts/update.py --profile aicliapps` to create `data/tools-aicliapps.json` and apply profile metadata.
+- Ran `python scripts/generate.py` to generate `aicliapps.html` and refresh linked pages/data/snapshots/history.
+
+### Why
+- User requested creation of a page for a new subject.
+- The subject-driven profile and workflow wiring ensure the page is generated now and maintained by existing automation later.
+
+### Files touched
+- `data/search_queries.json`
+- `scripts/update.py`
+- `scripts/generate.py`
+- `.github/workflows/update.yml`
+- `.github/workflows/update-profile-unit.yml`
+- `.github/workflows/update-consumer-example.yml`
+- `data/tools-aicliapps.json`
+- `aicliapps.html`
+- Regenerated data/pages/snapshots for existing profiles via `scripts/generate.py`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -m py_compile scripts/update.py scripts/generate.py`
+- `python scripts/update.py --profile aicliapps`
+- `python scripts/generate.py`
+
+Date: 2026-04-16
+Repository: IA_survey
+
+## ADD) Query/Page/JSON custom agent for subject-driven DuckDuckGo workflow
+
+### Changed
+- Created `.github/agents/query-page-json-builder.agent.md`.
+- Added a dedicated custom agent that asks the user for a subject, proposes DuckDuckGo queries, and guides JSON/page generation steps for this repository.
+
+### Why
+- User requested an agent that helps create a new JSON and page from a subject, with explicit user prompting and DuckDuckGo query generation.
+- This makes the workflow repeatable and consistent for future profile additions.
+
+### Files touched
+- `.github/agents/query-page-json-builder.agent.md`
+- `WORK_DONE_NOTE.md`
+
+Date: 2026-04-16
+Repository: IA_survey
+
 ## ADD) Mandatory GitFlow branch rule in repository instructions
 
 ### Changed

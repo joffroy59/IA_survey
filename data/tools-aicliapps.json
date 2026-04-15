@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "title": "Boîte à outils IA Génératives",
+    "subtitle": "Applications IA CLI, mis à jour automatiquement",
+    "last_updated": "2026-04-16",
+    "page_history": [
+      {
+        "generated_at": "2026-04-15 23:17:27.361",
+        "tool_count": 2,
+        "snapshot_file": "snapshots/aicliapps/2026-04-15_23-17-27-361.html"
+      }
+    ],
+    "page_name": "aicliapps",
+    "page_label": "Panorama AI CLI Applications",
+    "page_description": "Applications IA en ligne de commande pour developpeurs, DevOps et automatisation.",
+    "search_queries": [
+      "applications IA en ligne de commande 2026",
+      "meilleures applications CLI IA pour développeurs 2026",
+      "assistant IA terminal open source 2026",
+      "outils CLI IA productivité développeur 2026",
+      "comparatif outils IA CLI open source vs SaaS 2026",
+      "workflow local avec applications IA CLI 2026",
+      "agent IA en terminal pour automatisation scripting 2026",
+      "alternatives à Claude Code en CLI 2026",
+      "sécurité et conformité des outils IA CLI en entreprise 2026",
+      "applications IA CLI pour DevOps et SRE 2026"
+    ]
+  },
+  "categories": [
+    {
+      "id": "cli_agents",
+      "name": "Agents et assistants CLI",
+      "icon": "🤖",
+      "subcategories": [
+        {
+          "name": "Assistants terminal",
+          "icon": "💻",
+          "tools": []
+        },
+        {
+          "name": "Agents autonomes CLI",
+          "icon": "🧭",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "cli_dev",
+      "name": "Dev et code en CLI",
+      "icon": "🛠️",
+      "subcategories": [
+        {
+          "name": "Code generation et refactor",
+          "icon": "🧩",
+          "tools": [
+            {
+              "name": "Claude Code",
+              "provider": "Anthropic",
+              "url": "https://www.anthropic.com/claude-code",
+              "desc": "Detecte via resultats DuckDuckGo CLI",
+              "new": true
+            },
+            {
+              "name": "Aider",
+              "provider": "Aider",
+              "url": "https://aider.chat/",
+              "desc": "Detecte via resultats DuckDuckGo CLI",
+              "new": true
+            }
+          ]
+        },
+        {
+          "name": "Qualite et tests",
+          "icon": "✅",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "cli_ops",
+      "name": "DevOps et automatisation",
+      "icon": "⚙️",
+      "subcategories": [
+        {
+          "name": "Infra et pipeline",
+          "icon": "🏗️",
+          "tools": []
+        },
+        {
+          "name": "Automatisation shell",
+          "icon": "📟",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "cli_local",
+      "name": "Local LLM et self-hosted",
+      "icon": "🖥️",
+      "subcategories": [
+        {
+          "name": "Inference locale",
+          "icon": "📦",
+          "tools": []
+        },
+        {
+          "name": "Tooling self-hosted",
+          "icon": "🔒",
+          "tools": []
+        }
+      ]
+    },
+    {
+      "id": "cli_security",
+      "name": "Securite et gouvernance",
+      "icon": "🛡️",
+      "subcategories": [
+        {
+          "name": "Conformite entreprise",
+          "icon": "🏢",
+          "tools": []
+        },
+        {
+          "name": "Controle des acces",
+          "icon": "🔐",
+          "tools": []
+        }
+      ]
+    }
+  ]
+}
