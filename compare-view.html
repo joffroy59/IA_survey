@@ -5,54 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Comparaison des versions</title>
   <style>
-    :root {
-      --bg: #0f1116;
-      --text: #f2f4f8;
-      --border: #2d3440;
-      --accent: #5cc8ff;
-      --surface: #fff;
-    }
-
-    /* Light mode */
-    html[data-theme="light"] {
-      --bg: #ffffff;
-      --text: #1a1620;
-      --border: #e0d9f0;
-      --accent: #0066cc;
-      --surface: #f8f7fc;
-    }
-
-    body { font-family: Arial, sans-serif; margin: 0; background: var(--bg); color: var(--text); }
-    header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: center; position: relative; }
-    .theme-toggle {
-      position: absolute;
-      right: 16px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      width: 32px;
-      height: 32px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text);
-      font-size: 16px;
-      transition: all 0.2s;
-    }
-    .theme-toggle:hover {
-      border-color: var(--accent);
-      transform: scale(1.1);
-    }
+    body { font-family: Arial, sans-serif; margin: 0; background: #0f1116; color: #f2f4f8; }
+    header { padding: 12px 16px; border-bottom: 1px solid #2d3440; display: flex; gap: 12px; align-items: center; }
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; height: calc(100vh - 58px); padding: 8px; }
-    iframe { width: 100%; height: 100%; border: 1px solid var(--border); background: var(--surface); }
-    a { color: var(--accent); }
+    iframe { width: 100%; height: 100%; border: 1px solid #2d3440; background: #fff; }
+    a { color: #5cc8ff; }
     @media (max-width: 900px) { .grid { grid-template-columns: 1fr; height: auto; } iframe { min-height: 60vh; } }
   </style>
 </head>
 <body>
   <header>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
     <strong>Comparaison</strong>
     <a href="javascript:history.back()">Retour</a>
     <span id="meta"></span>
@@ -68,28 +30,6 @@
     if (left) document.getElementById('left').src = left;
     if (right) document.getElementById('right').src = right;
     document.getElementById('meta').textContent = `Historique: ${left || '-'} | Actuelle: ${right || '-'}`;
-
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
-    const storedTheme = localStorage.getItem('theme') || 'dark';
-
-    // Set initial theme
-    htmlElement.setAttribute('data-theme', storedTheme);
-    updateThemeIcon();
-
-    function updateThemeIcon() {
-      const currentTheme = htmlElement.getAttribute('data-theme');
-      themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = htmlElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      htmlElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateThemeIcon();
-    });
   </script>
 </body>
 </html>
