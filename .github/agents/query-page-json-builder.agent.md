@@ -38,6 +38,7 @@ You are a specialized agent for adding a new subject profile to this repository 
 - Do not skip user subject confirmation.
 - Do not invent unrelated profile names.
 - Do not overwrite existing profiles without stating the impact.
+- Always validate that each found tool category/subcategory is consistent with query evidence and exists in the dataset taxonomy before saving.
 
 ## Output Format
 - Subject and assumptions.

@@ -3,6 +3,35 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## FIX) Clean AI CLI JSON regeneration from query-only evidence + category validation rule
+
+### Changed
+- Refactored `scripts/update.py` for profile `aicliapps` to rebuild dataset from query-only evidence instead of cloning general tools.
+- Added dedicated CLI category taxonomy and category/subcategory validation before tool insertion.
+- Added fallback extraction improvements:
+  - structured DuckDuckGo result parsing
+  - known CLI tool detection from query evidence
+  - stricter filtering to avoid article-title noise
+- Regenerated `data/tools-aicliapps.json` from the defined query set using the new logic.
+- Updated `.github/agents/query-page-json-builder.agent.md` with a strict rule to always validate category/subcategory consistency with query evidence.
+
+### Why
+- User requested a clean CLI JSON regenerated from queries only and stronger category correctness.
+- Validation rules and cleaner extraction reduce misclassified and noisy entries.
+
+### Files touched
+- `scripts/update.py`
+- `data/tools-aicliapps.json`
+- `.github/agents/query-page-json-builder.agent.md`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python scripts/update.py --profile aicliapps`
+- Checked resulting `data/tools-aicliapps.json` structure and category assignments.
+
+Date: 2026-04-16
+Repository: IA_survey
+
 ## FEATURE) New subject page AI CLI Applications
 
 ### Changed
