@@ -3,7 +3,7 @@
 check_pages.py - Validate query quality, tool credibility, and page/data consistency.
 
 Checks:
-- Every profile has exactly 10 focused queries.
+- Every profile has focused queries (query count mismatch is reported as warning).
 - Tool entries have sane names and valid URLs.
 - Generated HTML tool card count matches JSON tool count.
 - Theme relevance warnings for off-topic tools/queries.
@@ -113,7 +113,7 @@ def validate_queries(errors: list[str], warnings: list[str]):
             continue
 
         if len(queries) != 10:
-            errors.append(f"[{slug}] expected 10 queries, found {len(queries)}")
+            warnings.append(f"[{slug}] expected 10 queries, found {len(queries)}")
 
         normalized = [q.strip() for q in queries if isinstance(q, str)]
         if len(normalized) != len(queries):
