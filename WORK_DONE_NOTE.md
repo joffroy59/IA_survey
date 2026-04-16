@@ -3,6 +3,25 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## DOC) Require feature branches from develop, keep hotfix from main
+
+### Changed
+- Updated GitFlow requirements in `.github/copilot-instructions.md` to explicitly require creating every `feature/...` branch from `develop`.
+- Kept hotfix flow unchanged: `hotfix/...` branches must still be created from `main`.
+- Renumbered the GitFlow checklist items after inserting the new explicit feature branch origin rule.
+
+### Why
+- User requested a clear, explicit rule: feature branches from `develop`, while hotfix branches remain from `main`.
+
+### Files touched
+- `.github/copilot-instructions.md`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Manual review of `GitFlow Branch Rule (Required)` in `.github/copilot-instructions.md` confirms:
+  - feature branch origin is `develop`
+  - hotfix branch origin is `main`
+
 ## FIX) Rename cowork view label and adjust cowork query wording
 
 ### Changed
