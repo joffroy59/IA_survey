@@ -115,6 +115,12 @@ MAX_SEARCH_RESULTS = 15  # par requête
 GEMINI_RETRY_WAIT_SECONDS = 60
 MAX_SEARCH_CONTEXT_LINES = 80
 
+# Ordered list of Gemini models to try. On quota exhaustion the next model is used.
+GEMINI_MODELS = [
+    "gemini-2.5-pro",
+    "gemini-2.5-flash",
+]
+
 AICLIAPPS_CATEGORIES = [
     {
         "id": "cli_agents",
@@ -537,44 +543,58 @@ def passes_tool_quality_gate(tool: dict) -> bool:
 
 
 def ask_gemini(prompt: str) -> str:
-    """Appel Gemini Flash — free tier: 1500 req/day."""
+    """Appel Gemini avec fallback automatique entre modèles (voir GEMINI_MODELS)."""
     if not GEMINI_API_KEY:
         print("GEMINI_API_KEY not set. Skipping LLM step.")
         return "[]"
 
     genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel("gemini-2.5-flash")
 
-    def _generate_once() -> str:
-        response = model.generate_content(prompt)
-        return response.text
+    for idx, model_name in enumerate(GEMINI_MODELS):
+        is_last = idx == len(GEMINI_MODELS) - 1
+        print(f"Trying model {model_name} ({idx + 1}/{len(GEMINI_MODELS)})...")
+        model = genai.GenerativeModel(model_name)
 
-    try:
-        return _generate_once()
-    except google_api_exceptions.ResourceExhausted as e:
-        print(
-            "Gemini quota exceeded (ResourceExhausted). "
-            f"Waiting {GEMINI_RETRY_WAIT_SECONDS}s before one retry: {e}"
-        )
-        time.sleep(GEMINI_RETRY_WAIT_SECONDS)
+        def _generate_once() -> str:
+            response = model.generate_content(prompt)
+            return response.text
+
         try:
             return _generate_once()
-        except google_api_exceptions.ResourceExhausted as retry_error:
-            print(f"Gemini quota still exceeded after retry. Skipping LLM step: {retry_error}")
-            return "[]"
-        except google_api_exceptions.GoogleAPICallError as retry_error:
-            print(f"Gemini API call failed after retry. Skipping LLM step: {retry_error}")
-            return "[]"
-        except Exception as retry_error:
-            print(f"Unexpected Gemini error after retry. Skipping LLM step: {retry_error}")
-            return "[]"
-    except google_api_exceptions.GoogleAPICallError as e:
-        print(f"Gemini API call failed. Skipping LLM step: {e}")
-        return "[]"
-    except Exception as e:
-        # Keep update jobs resilient when Gemini is temporarily unavailable.
-        print(f"Unexpected Gemini error. Skipping LLM step: {e}")
-        return "[]"
+        except google_api_exceptions.ResourceExhausted as e:
+            print(
+                f"Gemini quota exceeded for {model_name} (ResourceExhausted). "
+                f"Waiting {GEMINI_RETRY_WAIT_SECONDS}s before one retry: {e}"
+            )
+            time.sleep(GEMINI_RETRY_WAIT_SECONDS)
+            try:
+                return _generate_once()
+            except google_api_exceptions.ResourceExhausted:
+                if is_last:
+                    print(f"All models exhausted. Skipping LLM step.")
+                    return "[]"
+                print(f"Quota still exceeded for {model_name}. Falling back to next model.")
+                continue
+            except (google_api_exceptions.GoogleAPICallError, Exception) as retry_err:
+                if is_last:
+                    print(f"Error after retry on {model_name}: {retry_err}. Skipping LLM step.")
+                    return "[]"
+                print(f"Error after retry on {model_name}: {retry_err}. Falling back to next model.")
+                continue
+        except google_api_exceptions.GoogleAPICallError as e:
+            if is_last:
+                print(f"Gemini API call failed on {model_name}: {e}. Skipping LLM step.")
+                return "[]"
+            print(f"Gemini API call failed on {model_name}: {e}. Falling back to next model.")
+            continue
+        except Exception as e:
+            if is_last:
+                print(f"Unexpected error on {model_name}: {e}. Skipping LLM step.")
+                return "[]"
+            print(f"Unexpected error on {model_name}: {e}. Falling back to next model.")
+            continue
+
+    return "[]"
 
 
 def extract_new_tools(search_results: str, existing_names: list[str], data: dict = None) -> list[dict]:
