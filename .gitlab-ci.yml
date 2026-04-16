@@ -1,0 +1,207 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# GitLab CI/CD — Build, Deploy Pages & Update AI Toolbox
+# ──────────────────────────────────────────────────────────────────────────────
+# Equivalent of the GitHub Actions workflows:
+#   - pages-build-deployment  → stages: build + pages
+#   - update.yml              → stages: update + generate + pages
+#   - update-consumer-example → manual trigger via "Run pipeline" with variables
+# ──────────────────────────────────────────────────────────────────────────────
+
+stages:
+  - update
+  - generate
+  - build
+  - deploy
+
+variables:
+  PYTHON_VERSION: "3.11"
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
+
+# ── Cache pip packages across jobs ────────────────────────────────────────────
+.python_setup: &python_setup
+  image: python:${PYTHON_VERSION}-slim
+  cache:
+    key: pip-cache
+    paths:
+      - .pip-cache/
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  STAGE 1: UPDATE — Search & update tool datasets (one job per profile)
+# ══════════════════════════════════════════════════════════════════════════════
+
+.update-profile:
+  <<: *python_setup
+  stage: update
+  script:
+    - pip install --quiet ddgs google-generativeai
+    - python scripts/update.py --profile "$PROFILE"
+  artifacts:
+    paths:
+      - data/tools${DATASET_SUFFIX}.json
+    expire_in: 1 hour
+  rules:
+    # Run on schedule (weekly) or manual trigger with UPDATE_PROFILES set
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_PIPELINE_SOURCE == "web" && $UPDATE_PROFILES
+    # Single profile mode
+    - if: $CI_PIPELINE_SOURCE == "web" && $UPDATE_SINGLE_PROFILE == $PROFILE
+
+update-general:
+  extends: .update-profile
+  variables:
+    PROFILE: general
+    DATASET_SUFFIX: ""
+
+update-enterprise:
+  extends: .update-profile
+  variables:
+    PROFILE: enterprise
+    DATASET_SUFFIX: "-enterprise"
+
+update-discovery:
+  extends: .update-profile
+  variables:
+    PROFILE: discovery
+    DATASET_SUFFIX: "-discovery"
+
+update-ragdev:
+  extends: .update-profile
+  variables:
+    PROFILE: ragdev
+    DATASET_SUFFIX: "-ragdev"
+
+update-agentdev:
+  extends: .update-profile
+  variables:
+    PROFILE: agentdev
+    DATASET_SUFFIX: "-agentdev"
+
+update-vscode:
+  extends: .update-profile
+  variables:
+    PROFILE: vscode
+    DATASET_SUFFIX: "-vscode"
+
+update-newrag:
+  extends: .update-profile
+  variables:
+    PROFILE: newrag
+    DATASET_SUFFIX: "-newrag"
+
+update-cowork:
+  extends: .update-profile
+  variables:
+    PROFILE: cowork
+    DATASET_SUFFIX: "-cowork"
+
+update-ocr:
+  extends: .update-profile
+  variables:
+    PROFILE: ocr
+    DATASET_SUFFIX: "-ocr"
+
+update-dococr:
+  extends: .update-profile
+  variables:
+    PROFILE: dococr
+    DATASET_SUFFIX: "-dococr"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  STAGE 2: GENERATE — Regenerate HTML pages from updated JSON datasets
+# ══════════════════════════════════════════════════════════════════════════════
+
+generate-pages:
+  <<: *python_setup
+  stage: generate
+  needs:
+    - job: update-general
+      optional: true
+    - job: update-enterprise
+      optional: true
+    - job: update-discovery
+      optional: true
+    - job: update-ragdev
+      optional: true
+    - job: update-agentdev
+      optional: true
+    - job: update-vscode
+      optional: true
+    - job: update-newrag
+      optional: true
+    - job: update-cowork
+      optional: true
+    - job: update-ocr
+      optional: true
+    - job: update-dococr
+      optional: true
+  script:
+    - python scripts/generate.py
+    - |
+      git config user.name "gitlab-ci[bot]"
+      git config user.email "gitlab-ci[bot]@${CI_SERVER_HOST}"
+      git remote set-url origin "https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+      git add data/ *.html snapshots/ compare-view.html
+      git diff --staged --quiet || {
+        git commit -m "🤖 Auto-update: $(date '+%Y-%m-%d')"
+        git push origin HEAD:${CI_COMMIT_REF_NAME}
+      }
+  artifacts:
+    paths:
+      - "*.html"
+      - data/
+      - snapshots/
+    expire_in: 1 hour
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_PIPELINE_SOURCE == "web" && $UPDATE_PROFILES
+    - if: $CI_PIPELINE_SOURCE == "web" && $UPDATE_SINGLE_PROFILE
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  STAGE 3: BUILD — Prepare the public/ directory for GitLab Pages
+# ══════════════════════════════════════════════════════════════════════════════
+
+build-pages:
+  <<: *python_setup
+  stage: build
+  script:
+    # If no update was run, regenerate from current data
+    - python scripts/generate.py
+    - mkdir -p public/data public/snapshots
+    - cp *.html public/
+    - cp -r data/*.json public/data/
+    - cp -r snapshots/* public/snapshots/ 2>/dev/null || true
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 hour
+  rules:
+    # Build on every push to main/master
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    # Also build after an update pipeline
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_PIPELINE_SOURCE == "web" && $UPDATE_PROFILES
+    - if: $CI_PIPELINE_SOURCE == "web" && $UPDATE_SINGLE_PROFILE
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  STAGE 4: DEPLOY — Publish to GitLab Pages
+# ══════════════════════════════════════════════════════════════════════════════
+
+pages:
+  stage: deploy
+  needs:
+    - job: build-pages
+  script:
+    - echo "Deploying to GitLab Pages..."
+    - ls -la public/
+    - echo "Total HTML files:" && ls public/*.html | wc -l
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_PIPELINE_SOURCE == "web" && $UPDATE_PROFILES
+    - if: $CI_PIPELINE_SOURCE == "web" && $UPDATE_SINGLE_PROFILE
+  environment:
+    name: production
+    url: https://${CI_PROJECT_NAMESPACE}.${CI_PAGES_DOMAIN}/${CI_PROJECT_NAME}
