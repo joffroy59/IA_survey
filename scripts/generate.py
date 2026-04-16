@@ -56,7 +56,7 @@ PAGE_CONFIGS = [
     },
     {
       "slug": "cowork",
-      "label": "Vue Cowork",
+      "label": "vue Claude Cowork",
       "data_file": ROOT / "data" / "tools-cowork.json",
       "output": ROOT / "cowork.html",
     },

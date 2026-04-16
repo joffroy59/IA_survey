@@ -3,6 +3,37 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## FIX) Rename cowork view label and adjust cowork query wording
+
+### Changed
+- Renamed the cowork navigation/page label from `Vue Cowork` to `vue Claude Cowork` in the page generation config.
+- Updated generated root HTML pages so the visible navigation now shows `vue Claude Cowork`.
+- Updated cowork query metadata label from `Cowork AI` to `Claude Cowork AI`.
+- Updated the first cowork query text from `AI cowork collaboration platforms for teams 2026` to `Claude cowork collaboration platforms for teams 2026`.
+
+### Why
+- User requested renaming `Vue Cowork` to `vue Claude Cowork` and also asked to change the query wording accordingly.
+
+### Files touched
+- `scripts/generate.py`
+- `data/search_queries.json`
+- `index.html`
+- `enterprise.html`
+- `discovery.html`
+- `ragdev.html`
+- `agentdev.html`
+- `vscode.html`
+- `newrag.html`
+- `cowork.html`
+- `ocr.html`
+- `dococr.html`
+- `aicliapps.html`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `rg -n "Vue Cowork|Claude cowork collaboration platforms for teams 2026|vue Claude Cowork" -g "*.html" -g "!snapshots/**" .`
+- Verified no `Vue Cowork` remains in root HTML pages, and new label/query text are present.
+
 ## FIX) Add GitFlow hotfix exception flow (main first, then develop)
 
 ### Changed
