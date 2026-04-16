@@ -3,6 +3,23 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## FIX) Disable blocking on query-count mismatch in page checker
+
+### Changed
+- Updated `scripts/check_pages.py` query validation so `expected 10 queries, found N` is now reported as a warning instead of an error.
+- Updated checker header comment to reflect non-blocking behavior for query-count mismatch.
+
+### Why
+- User requested that this specific validation issue must not block execution/CI when profiles contain more than 10 queries.
+
+### Files touched
+- `scripts/check_pages.py`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python scripts/check_pages.py`
+- Confirmed output shows `Errors: 0` and query-count mismatches listed under warnings.
+
 ## DOC) Require feature branches from develop, keep hotfix from main
 
 ### Changed
