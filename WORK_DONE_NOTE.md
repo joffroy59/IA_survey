@@ -3,6 +3,25 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## FIX) Accept expanded per-profile query lists in update loader
+
+### Changed
+- Updated `scripts/update.py` query validation rule in `load_search_queries()`:
+  - replaced strict `exactly 10` requirement with `at least 10`.
+- Kept existing protections for empty lists and duplicate queries.
+
+### Why
+- The pipeline failed with `ValueError: Profile 'general' must define exactly 10 queries, found 13` after query enrichment.
+- Allowing 10+ queries preserves enriched profiles while still enforcing a minimum quality baseline.
+
+### Files touched
+- `scripts/update.py`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- `python -c "import importlib.util, pathlib; p=pathlib.Path('d:/dev-data/githome/github/joffroy59/IA_survey/scripts/update.py'); s=importlib.util.spec_from_file_location('upd', p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); q=m.load_search_queries(); print('general', len(q['general'])); print('agentdev', len(q['agentdev'])); print('ok')"`
+- `python -m py_compile scripts/update.py`
+
 ## CI) Add page checker to update pipeline
 
 ### Changed
