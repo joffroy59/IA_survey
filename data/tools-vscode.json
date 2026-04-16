@@ -22,11 +22,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-15 06:18:23.532",
-        "tool_count": 0,
-        "snapshot_file": "snapshots/vscode/2026-04-15_06-18-23-532.html"
-      },
-      {
         "generated_at": "2026-04-15 15:57:44.467",
         "tool_count": 24,
         "snapshot_file": "snapshots/vscode/2026-04-15_15-57-44-467.html"
@@ -70,6 +65,11 @@
         "generated_at": "2026-04-16 07:25:52.206",
         "tool_count": 16,
         "snapshot_file": "snapshots/vscode/2026-04-16_07-25-52-206.html"
+      },
+      {
+        "generated_at": "2026-04-16 09:04:05.930",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/vscode/2026-04-16_09-04-05-930.html"
       }
     ]
   },
