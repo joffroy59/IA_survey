@@ -3,6 +3,29 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## FIX) Add GitFlow hotfix exception flow (main first, then develop)
+
+### Changed
+- Updated `.github/copilot-instructions.md` GitFlow requirements to define a dedicated hotfix path:
+  - hotfix branch must be created from `main`,
+  - first PR must be hotfix branch -> `main`,
+  - second PR must be `main` -> `develop` after the hotfix merge.
+- Kept feature flow as develop-first and clarified the split between feature and hotfix behavior.
+- Added a hotfix note in the `"Finish Feature"` section so hotfix completion uses the hotfix sequence.
+
+### Why
+- User requested an exception to the previous rule for hotfixes: branch from `main`, then PR to `main` and to `develop` as GitFlow hotfix.
+- This matches standard GitFlow hotfix promotion while preserving develop-first flow for feature work.
+
+### Files touched
+- `.github/copilot-instructions.md`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Manual review of `.github/copilot-instructions.md` sections:
+  - `GitFlow Branch Rule (Required)`
+  - `"Finish Feature" Rule (Required)`
+
 ## FIX) Enforce develop-first PR workflow before main
 
 ### Changed
