@@ -61,10 +61,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-15 02:11:18.587",
-        "tool_count": 48
-      },
-      {
         "generated_at": "2026-04-15 02:17:46.948",
         "tool_count": 48,
         "snapshot_file": "snapshots/agentdev/2026-04-15_02-17-46-948.html"
@@ -108,6 +104,11 @@
         "generated_at": "2026-04-15 23:53:26.240",
         "tool_count": 12,
         "snapshot_file": "snapshots/agentdev/2026-04-15_23-53-26-240.html"
+      },
+      {
+        "generated_at": "2026-04-16 07:10:46.803",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/agentdev/2026-04-16_07-10-46-803.html"
       }
     ]
   },
