@@ -3,6 +3,28 @@
 Date: 2026-04-16
 Repository: IA_survey
 
+## FIX) Enforce develop-first PR workflow before main
+
+### Changed
+- Updated `.github/copilot-instructions.md` GitFlow requirements to enforce:
+  - first PR from feature/hotfix branch to `develop`,
+  - second PR from `develop` to `main` only after the first merge,
+  - no direct feature/hotfix PR to `main`.
+- Updated the `"Finish Feature"` rule to follow the same two-step merge sequence.
+
+### Why
+- User requested a strict merge-request flow: always merge into `develop` first, then promote `develop` to `main` after the first PR is done.
+- This keeps release promotion explicit and aligned with GitFlow.
+
+### Files touched
+- `.github/copilot-instructions.md`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Manual review of `.github/copilot-instructions.md` sections:
+  - `GitFlow Branch Rule (Required)`
+  - `"Finish Feature" Rule (Required)`
+
 ## FIX) Accept expanded per-profile query lists in update loader
 
 ### Changed
