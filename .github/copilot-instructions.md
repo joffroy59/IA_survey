@@ -38,9 +38,12 @@ GitFlow requirements:
 2. Never work directly on `develop`.
 3. Create a branch that matches GitFlow intent (for example: `feature/...`, `hotfix/...`, `release/...`).
 4. Keep commits scoped to the branch purpose.
-5. For feature/hotfix work, always open the first pull request to `develop`.
-6. Only after the first pull request is merged into `develop`, open the next pull request from `develop` to `main`.
-7. Do not open a direct feature/hotfix pull request to `main`.
+5. For feature work, always open the first pull request to `develop`.
+6. Only after the feature pull request is merged into `develop`, open the next pull request from `develop` to `main`.
+7. For hotfix work, always create the hotfix branch from `main`.
+8. For hotfix work, open and merge the first pull request from the hotfix branch to `main`.
+9. After the hotfix is merged into `main`, open and merge the next pull request from `main` to `develop`.
+10. Do not open a direct feature pull request to `main`.
 
 ## "Finish Feature" Rule (Required)
 
@@ -50,5 +53,6 @@ When the user says "finish feature", always do all steps below in order:
 3. Push the branch.
 4. Open and merge a pull request from the task branch to `develop`.
 5. Open and merge a pull request from `develop` to `main`.
+6. For hotfix tasks, use hotfix flow instead: hotfix branch from `main` -> PR to `main` -> PR from `main` to `develop`.
 
 Do not stop at a partial state when this command is used.
