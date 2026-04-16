@@ -298,9 +298,9 @@ def load_search_queries() -> dict[str, list[str]]:
             raise ValueError(f"No queries configured for profile '{profile_name}'")
 
         cleaned = [q.strip() for q in profile_queries if isinstance(q, str) and q.strip()]
-        if len(cleaned) != 10:
+        if len(cleaned) < 10:
             raise ValueError(
-                f"Profile '{profile_name}' must define exactly 10 queries, found {len(cleaned)}"
+                f"Profile '{profile_name}' must define at least 10 queries, found {len(cleaned)}"
             )
         if len(set(q.lower() for q in cleaned)) != len(cleaned):
             raise ValueError(f"Profile '{profile_name}' contains duplicate queries")
