@@ -252,10 +252,26 @@ GENERIC_TOOL_NAME_TOKENS = {
 
 KNOWN_CLI_TOOL_CATALOG = [
     {
+        "name": "Gemini CLI",
+        "provider": "Google",
+        "url": "https://github.com/google-gemini/gemini-cli",
+        "keywords": ["gemini cli", "google-gemini/gemini-cli", "@google/gemini-cli"],
+        "category_id": "cli_agents",
+        "subcategory_name": "Assistants terminal",
+    },
+    {
         "name": "Claude Code",
         "provider": "Anthropic",
         "url": "https://www.anthropic.com/claude-code",
         "keywords": ["claude code", "anthropic cli"],
+        "category_id": "cli_dev",
+        "subcategory_name": "Code generation et refactor",
+    },
+    {
+        "name": "Codex CLI",
+        "provider": "OpenAI",
+        "url": "https://github.com/openai/codex",
+        "keywords": ["codex cli", "openai codex", "openai/codex"],
         "category_id": "cli_dev",
         "subcategory_name": "Code generation et refactor",
     },
@@ -1044,6 +1060,23 @@ def extract_tools_from_results_fallback(search_results: list[dict], existing_nam
     return extracted
 
 
+def merge_tool_candidates(primary: list[dict], secondary: list[dict], limit: int = 10) -> list[dict]:
+    """Merge candidates with de-duplication by normalized name while preserving order priority."""
+    merged: list[dict] = []
+    seen: set[str] = set()
+
+    for source in [primary, secondary]:
+        for tool in source:
+            name = normalize_tool_name(tool.get("name", "")).lower()
+            if not name or name in seen:
+                continue
+            merged.append(tool)
+            seen.add(name)
+            if len(merged) >= limit:
+                return merged
+    return merged
+
+
 def add_tools_to_data(data: dict, new_tools: list[dict], profile: str) -> int:
     """Ajoute les nouveaux outils dans la structure JSON."""
     tracer = get_tracer()
@@ -1149,8 +1182,20 @@ def main():
 
     print("Asking configured LLM provider to identify new tools...")
     new_tools = extract_new_tools(search_context, existing, global_settings, data)
+
+    if profile == "aicliapps":
+        known_cli_tools = extract_tools_from_results_fallback(search_results, existing, profile)
+        if known_cli_tools:
+            new_tools = merge_tool_candidates(known_cli_tools, new_tools, limit=10)
+            tracer.log(
+                "INFO",
+                "EXTRACTION",
+                "Merged known CLI detections with LLM extraction",
+                {"known": len(known_cli_tools), "merged": len(new_tools)},
+            )
+
     if new_tools:
-        tracer.trace_tool_extraction("gemini_extraction", new_tools)
+        tracer.trace_tool_extraction("llm_extraction", new_tools)
     else:
         print("No valid LLM extraction. Falling back to query-only extraction...")
         new_tools = extract_tools_from_results_fallback(search_results, existing, profile)

@@ -3,6 +3,31 @@
 Date: 2026-04-18
 Repository: IA_survey
 
+## FIX) Ensure aicliapps keeps canonical CLI tools when LLM output is noisy
+
+### Changed
+- Extended `KNOWN_CLI_TOOL_CATALOG` in `scripts/update.py` with:
+  - `Gemini CLI`
+  - `Codex CLI`
+- Added candidate merge helper in `scripts/update.py` to deduplicate and prioritize known tools.
+- Updated `main()` extraction flow in `scripts/update.py` for profile `aicliapps`:
+  - Always enrich/merge LLM extraction with known CLI detections from search evidence.
+  - Use provider-neutral extraction label `llm_extraction`.
+
+### Why
+- User observed missing key tools (Gemini CLI, Claude Code, Codex) despite relevant search evidence.
+- Previously, when LLM returned any valid list, fallback known-tool detection was skipped.
+- Merge step now keeps canonical tools even when LLM returns noisy blog-derived entries.
+
+### Files touched
+- `scripts/update.py`
+- `WORK_DONE_NOTE.md`
+
+---
+
+Date: 2026-04-18
+Repository: IA_survey
+
 ## FEATURE) Add Ollama Gemma4 models and select gemma4:e4b
 
 ### Changed
