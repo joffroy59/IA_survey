@@ -3,6 +3,26 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FIX) Set scope defaults (all=1, single=3) and keep UI control only for Tout voir
+
+### Changed
+- Split grid layout persistence into two keys:
+  - `gridColumnsAll` default `1` for `Tout voir`
+  - `gridColumnsSingle` default `3` for selected-category view
+- Kept UI toggle action only for `Tout voir` scope.
+- In selected-category scope, tools layout uses `gridColumnsSingle` and the toggle is disabled in UI.
+- Added helper `setSingleGridColumnsLayout(layoutValue)` as a future hook to change single-category columns without exposing a new control yet.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested default mode `1` for `Tous` and `3` for specific selected category.
+- User requested that, for now, UI mode control works only when `Tous` is selected, while keeping the code ready for future specific-category mode control.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
 ## FIX) Use context-aware column mode (Tout voir vs selected category)
 
 ### Changed

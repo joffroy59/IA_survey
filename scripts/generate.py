@@ -1087,44 +1087,74 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   }});
 
   // Category columns toggle button (cycles through: 1 -> 2 -> 3 -> 1)
+  // UI controls only the "all" scope for now.
   const validGridLayouts = ['1', '2', '3'];
-  const storedGridColumns = localStorage.getItem('gridColumnsLayout') || '1';
+  const storedGridColumnsAll = localStorage.getItem('gridColumnsAll') || '1';
+  const storedGridColumnsSingle = localStorage.getItem('gridColumnsSingle') || '3';
 
-  function applyGridColumnsLayout(layoutValue) {{
-    document.body.setAttribute('data-grid-columns', layoutValue);
+  function getGridLayoutForScope(scope) {{
+    return scope === 'all'
+      ? (localStorage.getItem('gridColumnsAll') || '1')
+      : (localStorage.getItem('gridColumnsSingle') || '3');
+  }}
+
+  function applyGridColumnsLayoutForScope(scope) {{
+    document.body.setAttribute('data-grid-columns', getGridLayoutForScope(scope));
+  }}
+
+  // Future hook: keep single-category mode configurable without exposing UI yet.
+  function setSingleGridColumnsLayout(layoutValue) {{
+    if (!validGridLayouts.includes(layoutValue)) return;
+    localStorage.setItem('gridColumnsSingle', layoutValue);
+    if ((document.body.getAttribute('data-grid-scope') || 'all') === 'single') {{
+      applyGridColumnsLayoutForScope('single');
+      updateLayoutToggle();
+    }}
   }}
 
   function updateGridScope(selectedCategory) {{
     const scope = selectedCategory === 'all' ? 'all' : 'single';
     document.body.setAttribute('data-grid-scope', scope);
+    applyGridColumnsLayoutForScope(scope);
     updateLayoutToggle();
   }}
 
   function updateLayoutToggle() {{
-    const currentLayout = localStorage.getItem('gridColumnsLayout') || '1';
     const currentScope = document.body.getAttribute('data-grid-scope') || 'all';
+    const currentLayout = getGridLayoutForScope(currentScope);
     const targetLabel = currentScope === 'all' ? 'categories' : 'outils';
     layoutColumnsToggle.textContent = currentLayout;
-    layoutColumnsToggle.setAttribute('aria-pressed', 'true');
-    layoutColumnsToggle.setAttribute('aria-label', `Changer le nombre de colonnes de ${{targetLabel}} (actuel: ${{currentLayout}})`);
-    layoutColumnsToggle.setAttribute('title', `Colonnes ${{targetLabel}}: ${{currentLayout}}`);
+    const canChangeFromUi = currentScope === 'all';
+    layoutColumnsToggle.disabled = !canChangeFromUi;
+    layoutColumnsToggle.setAttribute('aria-pressed', String(canChangeFromUi));
+    if (canChangeFromUi) {{
+      layoutColumnsToggle.setAttribute('aria-label', `Changer le nombre de colonnes de categories (actuel: ${{currentLayout}})`);
+      layoutColumnsToggle.setAttribute('title', `Colonnes categories: ${{currentLayout}}`);
+    }} else {{
+      layoutColumnsToggle.setAttribute('aria-label', `Colonnes outils fixes (actuel: ${{currentLayout}})`);
+      layoutColumnsToggle.setAttribute('title', `Colonnes outils: ${{currentLayout}} (fixe pour l'instant)`);
+    }}
     updateAllButtonStates();
   }}
 
   function cycleLayoutColumns() {{
-    const currentLayout = localStorage.getItem('gridColumnsLayout') || '1';
+    const currentScope = document.body.getAttribute('data-grid-scope') || 'all';
+    if (currentScope !== 'all') return;
+    const currentLayout = localStorage.getItem('gridColumnsAll') || '1';
     const currentIndex = validGridLayouts.indexOf(currentLayout);
     const safeIndex = currentIndex === -1 ? 0 : currentIndex;
     const nextIndex = (safeIndex + 1) % validGridLayouts.length;
     const nextLayout = validGridLayouts[nextIndex];
-    applyGridColumnsLayout(nextLayout);
-    localStorage.setItem('gridColumnsLayout', nextLayout);
+    localStorage.setItem('gridColumnsAll', nextLayout);
+    applyGridColumnsLayoutForScope('all');
     updateLayoutToggle();
   }}
 
-  const initialGridLayout = validGridLayouts.includes(storedGridColumns) ? storedGridColumns : '1';
-  applyGridColumnsLayout(initialGridLayout);
-  localStorage.setItem('gridColumnsLayout', initialGridLayout);
+  const initialGridLayoutAll = validGridLayouts.includes(storedGridColumnsAll) ? storedGridColumnsAll : '1';
+  const initialGridLayoutSingle = validGridLayouts.includes(storedGridColumnsSingle) ? storedGridColumnsSingle : '3';
+  localStorage.setItem('gridColumnsAll', initialGridLayoutAll);
+  localStorage.setItem('gridColumnsSingle', initialGridLayoutSingle);
+  applyGridColumnsLayoutForScope('all');
   updateLayoutToggle();
 
   layoutColumnsToggle.addEventListener('click', cycleLayoutColumns);
