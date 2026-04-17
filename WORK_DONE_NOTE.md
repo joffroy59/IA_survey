@@ -3,6 +3,23 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FIX) Apply column mode to top-level categories
+
+### Changed
+- Moved column layout target from subcategory groups to top-level categories.
+- Added a new `.categories-grid` wrapper in the page template and mapped `data-grid-columns` (`1|2|3`) to this grid.
+- Removed the previous `.category-columns` wrapper/layout from category rendering.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested that `2` column mode places major categories side by side (for example: `IA Generiques` and `IA Specialisees`).
+- Previous implementation was splitting subcategories instead of main categories.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
 ## FIX) Remove now mode and apply columns to categories
 
 ### Changed

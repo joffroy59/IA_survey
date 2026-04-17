@@ -606,6 +606,21 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     }}
 
     /* ── Category section ── */
+    .categories-grid {{
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 24px;
+    }}
+    body[data-grid-columns="1"] .categories-grid {{
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }}
+    body[data-grid-columns="2"] .categories-grid {{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }}
+    body[data-grid-columns="3"] .categories-grid {{
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }}
+
     .category {{
       margin-bottom: 48px;
       display: none;
@@ -635,22 +650,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       font-size: 22px;
       font-weight: 700;
       letter-spacing: -0.01em;
-    }}
-
-    /* ── Subcategory layout ── */
-    .category-columns {{
-      display: grid;
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-      gap: 18px;
-    }}
-    body[data-grid-columns="1"] .category-columns {{
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-    }}
-    body[data-grid-columns="2"] .category-columns {{
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }}
-    body[data-grid-columns="3"] .category-columns {{
-      grid-template-columns: repeat(3, minmax(0, 1fr));
     }}
 
     /* ── Subcategory ── */
@@ -808,7 +807,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     @media (max-width: 600px) {{
       .tools-grid {{ grid-template-columns: 1fr 1fr; }}
-      .category-columns {{ grid-template-columns: 1fr; }}
+      .categories-grid {{ grid-template-columns: 1fr; }}
       .page-meta {{ grid-template-columns: 1fr; }}
       .audience-brief {{ grid-template-columns: 1fr; }}
     }}
@@ -864,7 +863,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </nav>
 
 <main>
-  {categories_html}
+  <div class="categories-grid">
+    {categories_html}
+  </div>
 </main>
 
 <footer>
@@ -1255,9 +1256,7 @@ def render_category(cat: dict) -> str:
       <div class="category-icon">{cat['icon']}</div>
       <div class="category-title">{cat['name']}</div>
     </div>
-    <div class="category-columns">
-      {subs_html}
-    </div>
+    {subs_html}
   </section>"""
 
 
