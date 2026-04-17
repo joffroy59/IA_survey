@@ -1144,7 +1144,7 @@ def main():
     if new_tools:
         tracer.trace_tool_extraction("gemini_extraction", new_tools)
     else:
-        print("No valid Gemini extraction. Falling back to query-only extraction...")
+        print("No valid LLM extraction. Falling back to query-only extraction...")
         new_tools = extract_tools_from_results_fallback(search_results, existing, profile)
         tracer.trace_tool_extraction("fallback_extraction", new_tools)
     print(f"   {len(new_tools)} candidates found")

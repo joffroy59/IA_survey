@@ -3,6 +3,27 @@
 Date: 2026-04-18
 Repository: IA_survey
 
+## FIX) Restore valid search query JSON and unblock CLI profile runs
+
+### Changed
+- Removed invalid JavaScript-style comment lines from `data/search_queries.json` under `profiles.aicliapps.queries`.
+- Updated `scripts/update.py` fallback message from `No valid Gemini extraction` to `No valid LLM extraction`.
+
+### Why
+- User run crashed with `JSONDecodeError` when loading `data/search_queries.json`.
+- JSON format does not allow `//` comments, so query loading failed before any provider logic.
+- Provider-neutral fallback messaging avoids confusion when using Ollama/OpenAI/OpenRouter/LM Studio.
+
+### Files touched
+- `data/search_queries.json`
+- `scripts/update.py`
+- `WORK_DONE_NOTE.md`
+
+---
+
+Date: 2026-04-18
+Repository: IA_survey
+
 ## FIX) Trace explicit provider used during LLM extraction
 
 ### Changed
