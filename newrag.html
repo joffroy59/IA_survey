@@ -78,6 +78,28 @@
       background: var(--surface);
       transform: scale(1.05);
     }
+    .panel-toggle {
+      position: absolute;
+      top: 24px;
+      right: 70px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .panel-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
     header::after {
       content: '';
       display: block;
@@ -172,6 +194,10 @@
       gap: 12px;
       align-items: center;
       padding: 14px 16px;
+      transition: all 0.3s ease;
+    }
+    .page-meta.hidden {
+      display: none;
     }
     .page-meta-label {
       font-family: 'JetBrains Mono', monospace;
@@ -219,6 +245,10 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
+      transition: all 0.3s ease;
+    }
+    .audience-brief.hidden {
+      display: none;
     }
     .reader-card {
       border: 1px solid var(--border);
@@ -509,6 +539,7 @@
 <body>
 
 <header>
+  <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · 17/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
@@ -526,7 +557,7 @@
     <a class="page-link" href="ocr.html">Vue OCR</a>
     <a class="page-link" href="dococr.html">Vue OCR Système Complet</a>
     <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a>
-    <a class="page-link" href="ia-resources.html">Ressources IA</a></div>
+    <a class="page-link-static" href="ia-resources.html">Ressources IA</a></div>
   <div class="page-meta">
     <div>
       <div class="page-meta-label">Type de page</div>
@@ -767,11 +798,6 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date"><a href="snapshots/newrag/2026-04-16_01-23-21-673.html" target="_blank">2026-04-16 01:23:21.673</a></td>
-          <td class="history-count">16</td>
-          <td><a href="snapshots/newrag/2026-04-16_01-23-21-673.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-16_01-23-21-673.html&amp;right=newrag.html">Comparer</a></td>
-        </tr>
-        <tr>
           <td class="history-date"><a href="snapshots/newrag/2026-04-16_01-27-20-664.html" target="_blank">2026-04-16 01:27:20.664</a></td>
           <td class="history-count">16</td>
           <td><a href="snapshots/newrag/2026-04-16_01-27-20-664.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-16_01-27-20-664.html&amp;right=newrag.html">Comparer</a></td>
@@ -816,6 +842,11 @@
           <td class="history-count">16</td>
           <td><a href="snapshots/newrag/2026-04-17_20-25-36-261.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-17_20-25-36-261.html&amp;right=newrag.html">Comparer</a></td>
         </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/newrag/2026-04-17_20-41-30-273.html" target="_blank">2026-04-17 20:41:30.273</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/newrag/2026-04-17_20-41-30-273.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-17_20-41-30-273.html&amp;right=newrag.html">Comparer</a></td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -835,6 +866,9 @@
   const exportAllZipBtn = document.getElementById('export-all-zip');
   const currentPageFile = 'newrag.html';
   const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}, {"slug": "ia-resources", "html": "ia-resources.html", "data": "data/tools-ia-resources.json"}]};
+  const panelToggle = document.getElementById('panel-toggle');
+  const pageMeta = document.querySelector('.page-meta');
+  const audienceBrief = document.querySelector('.audience-brief');
 
   async function fetchAsText(path) {
     const res = await fetch(path, { cache: 'no-store' });
@@ -973,6 +1007,40 @@
     localStorage.setItem('theme', newTheme);
     updateThemeToggle();
   });
+
+  // Panel toggle functionality
+  const storedPanelState = localStorage.getItem('panelsVisible');
+  const panelsVisible = storedPanelState === null ? true : storedPanelState === 'true';
+
+  function updatePanelToggle() {
+    const isVisible = !pageMeta.classList.contains('hidden');
+    panelToggle.setAttribute('aria-pressed', String(isVisible));
+    panelToggle.setAttribute('aria-label', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
+    panelToggle.setAttribute('title', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
+  }
+
+  function togglePanels() {
+    const isHidden = pageMeta.classList.contains('hidden');
+    if (isHidden) {
+      pageMeta.classList.remove('hidden');
+      audienceBrief.classList.remove('hidden');
+      localStorage.setItem('panelsVisible', 'true');
+    } else {
+      pageMeta.classList.add('hidden');
+      audienceBrief.classList.add('hidden');
+      localStorage.setItem('panelsVisible', 'false');
+    }
+    updatePanelToggle();
+  }
+
+  // Initialize panel state
+  if (!panelsVisible) {
+    pageMeta.classList.add('hidden');
+    audienceBrief.classList.add('hidden');
+  }
+  updatePanelToggle();
+
+  panelToggle.addEventListener('click', togglePanels);
 </script>
 
 </body>

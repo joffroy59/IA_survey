@@ -78,6 +78,28 @@
       background: var(--surface);
       transform: scale(1.05);
     }
+    .panel-toggle {
+      position: absolute;
+      top: 24px;
+      right: 70px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .panel-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
     header::after {
       content: '';
       display: block;
@@ -146,6 +168,21 @@
       border-color: var(--accent);
       background: var(--accent);
     }
+    .page-link-static {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .page-link-static.active, .page-link-static:hover {
+      color: #fff;
+      border-color: var(--accent2);
+      background: var(--accent2);
+    }
     .page-meta {
       margin: 20px auto 0;
       max-width: 820px;
@@ -157,6 +194,10 @@
       gap: 12px;
       align-items: center;
       padding: 14px 16px;
+      transition: all 0.3s ease;
+    }
+    .page-meta.hidden {
+      display: none;
     }
     .page-meta-label {
       font-family: 'JetBrains Mono', monospace;
@@ -197,6 +238,42 @@
       gap: 8px;
       flex-wrap: wrap;
       justify-content: center;
+    }
+    .audience-brief {
+      margin: 18px auto 0;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      transition: all 0.3s ease;
+    }
+    .audience-brief.hidden {
+      display: none;
+    }
+    .reader-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .reader-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+    .reader-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .reader-text {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
     }
     .history-table {
       width: 100%;
@@ -455,14 +532,16 @@
     @media (max-width: 600px) {
       .tools-grid { grid-template-columns: 1fr 1fr; }
       .page-meta { grid-template-columns: 1fr; }
+      .audience-brief { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
 <header>
+  <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
-  <div class="header-badge">🤖 Auto-updated by AI · 16/04/2026</div>
+  <div class="header-badge">🤖 Auto-updated by AI · 17/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
   <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
   <p class="update-info">Dernière mise à jour : <span>2026-04-16</span></p>
@@ -474,10 +553,11 @@
     <a class="page-link" href="agentdev.html">Vue Agent Dev + IDE Tools</a>
     <a class="page-link" href="vscode.html">Vue VS Code</a>
     <a class="page-link" href="newrag.html">Vue New RAG</a>
-    <a class="page-link" href="cowork.html">Vue Cowork</a>
+    <a class="page-link" href="cowork.html">vue Claude Cowork</a>
     <a class="page-link" href="ocr.html">Vue OCR</a>
     <a class="page-link" href="dococr.html">Vue OCR Système Complet</a>
-    <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a></div>
+    <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a>
+    <a class="page-link-static" href="ia-resources.html">Ressources IA</a></div>
   <div class="page-meta">
     <div>
       <div class="page-meta-label">Type de page</div>
@@ -490,6 +570,18 @@
       <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
       <button class="info-btn" type="button" id="export-all-zip">ZIP All</button>
     </div>
+  </div>
+  <div class="audience-brief">
+    <article class="reader-card reader-dev">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les developpeurs</div>
+      <div class="reader-text">Utilisez cette page comme radar technologique pour preselectionner des outils testables rapidement.</div>
+    </article>
+    <article class="reader-card reader-manager">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les managers</div>
+      <div class="reader-text">Identifiez les tendances, puis priorisez les experimentations selon l&#x27;impact metier attendu.</div>
+    </article>
   </div>
 </header>
 
@@ -911,21 +1003,16 @@
     </div>
     <div class="modal-meta">Page: Panorama Decouverte · Dernière mise à jour: 2026-04-16</div>
     <ol class="query-list">
-      <li>latest AI tools 2026 site:theresanaiforthat.com OR site:futurepedia.io</li>
-      <li>new AI startups tools 2026 site:producthunt.com AI</li>
-      <li>trending AI tools this week 2026 site:theresanaiforthat.com</li>
-      <li>best new AI tools April 2026 site:futurepedia.io</li>
-      <li>trending AI repositories 2026 site:github.com stars &gt;100</li>
-      <li>AI agent open source projects 2026 site:github.com</li>
-      <li>Show HN AI tool 2026 site:news.ycombinator.com</li>
-      <li>AI agent discussion 2026 site:news.ycombinator.com</li>
-      <li>AI coding assistant tools 2026</li>
-      <li>AI video generation tools 2026</li>
-      <li>AI automation agent tools 2026</li>
-      <li>meilleurs outils IA 2026 nouveautés</li>
-      <li>outils IA productivité 2026</li>
-      <li>state of the art AI tools 2026 blog</li>
-      <li>new AI workflows automation tools 2026</li>
+      <li>new AI tools discovery this week 2026</li>
+      <li>emerging AI startups tools 2026</li>
+      <li>AI tool launches 2026 producthunt alternatives</li>
+      <li>AI discovery radar for dev teams 2026</li>
+      <li>AI discovery landscape 2026 open source and SaaS</li>
+      <li>trending AI repos for discovery 2026 site:github.com</li>
+      <li>best newly launched AI tools discovery 2026</li>
+      <li>AI discovery newsletter top picks 2026</li>
+      <li>breakthrough AI discovery tools by category 2026</li>
+      <li>AI workflow discovery and experimentation tools 2026</li>
     </ol>
   </div>
 </div>
@@ -947,54 +1034,54 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date">2026-04-15 01:59:48.384</td>
-          <td class="history-count">0</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td class="history-date">2026-04-15 02:00:36.991</td>
-          <td class="history-count">40</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td class="history-date">2026-04-15 02:01:58.479</td>
-          <td class="history-count">88</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td class="history-date">2026-04-15 02:03:43.828</td>
-          <td class="history-count">88</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td class="history-date">2026-04-15 02:11:18.584</td>
-          <td class="history-count">88</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td class="history-date"><a href="snapshots/discovery/2026-04-15_02-17-46-943.html" target="_blank">2026-04-15 02:17:46.943</a></td>
-          <td class="history-count">88</td>
-          <td><a href="snapshots/discovery/2026-04-15_02-17-46-943.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-15_02-17-46-943.html&amp;right=discovery.html">Comparer</a></td>
-        </tr>
-        <tr>
-          <td class="history-date"><a href="snapshots/discovery/2026-04-15_02-20-30-765.html" target="_blank">2026-04-15 02:20:30.765</a></td>
-          <td class="history-count">88</td>
-          <td><a href="snapshots/discovery/2026-04-15_02-20-30-765.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-15_02-20-30-765.html&amp;right=discovery.html">Comparer</a></td>
-        </tr>
-        <tr>
-          <td class="history-date"><a href="snapshots/discovery/2026-04-15_02-21-30-268.html" target="_blank">2026-04-15 02:21:30.268</a></td>
-          <td class="history-count">88</td>
-          <td><a href="snapshots/discovery/2026-04-15_02-21-30-268.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-15_02-21-30-268.html&amp;right=discovery.html">Comparer</a></td>
-        </tr>
-        <tr>
-          <td class="history-date"><a href="snapshots/discovery/2026-04-15_02-29-49-418.html" target="_blank">2026-04-15 02:29:49.418</a></td>
-          <td class="history-count">88</td>
-          <td><a href="snapshots/discovery/2026-04-15_02-29-49-418.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-15_02-29-49-418.html&amp;right=discovery.html">Comparer</a></td>
-        </tr>
-        <tr>
-          <td class="history-date"><a href="snapshots/discovery/2026-04-16_01-23-21-636.html" target="_blank">2026-04-16 01:23:21.636</a></td>
+          <td class="history-date"><a href="snapshots/discovery/2026-04-16_01-27-20-655.html" target="_blank">2026-04-16 01:27:20.655</a></td>
           <td class="history-count">24</td>
-          <td><a href="snapshots/discovery/2026-04-16_01-23-21-636.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-16_01-23-21-636.html&amp;right=discovery.html">Comparer</a></td>
+          <td><a href="snapshots/discovery/2026-04-16_01-27-20-655.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-16_01-27-20-655.html&amp;right=discovery.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/discovery/2026-04-16_01-28-23-956.html" target="_blank">2026-04-16 01:28:23.956</a></td>
+          <td class="history-count">24</td>
+          <td><a href="snapshots/discovery/2026-04-16_01-28-23-956.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-16_01-28-23-956.html&amp;right=discovery.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/discovery/2026-04-15_23-44-42-716.html" target="_blank">2026-04-15 23:44:42.716</a></td>
+          <td class="history-count">24</td>
+          <td><a href="snapshots/discovery/2026-04-15_23-44-42-716.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-15_23-44-42-716.html&amp;right=discovery.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/discovery/2026-04-15_23-53-26-237.html" target="_blank">2026-04-15 23:53:26.237</a></td>
+          <td class="history-count">24</td>
+          <td><a href="snapshots/discovery/2026-04-15_23-53-26-237.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-15_23-53-26-237.html&amp;right=discovery.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/discovery/2026-04-16_07-10-46-800.html" target="_blank">2026-04-16 07:10:46.800</a></td>
+          <td class="history-count">24</td>
+          <td><a href="snapshots/discovery/2026-04-16_07-10-46-800.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-16_07-10-46-800.html&amp;right=discovery.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/discovery/2026-04-16_07-25-52-201.html" target="_blank">2026-04-16 07:25:52.201</a></td>
+          <td class="history-count">24</td>
+          <td><a href="snapshots/discovery/2026-04-16_07-25-52-201.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-16_07-25-52-201.html&amp;right=discovery.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/discovery/2026-04-16_09-04-05-925.html" target="_blank">2026-04-16 09:04:05.925</a></td>
+          <td class="history-count">24</td>
+          <td><a href="snapshots/discovery/2026-04-16_09-04-05-925.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-16_09-04-05-925.html&amp;right=discovery.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/discovery/2026-04-16_09-41-12-305.html" target="_blank">2026-04-16 09:41:12.305</a></td>
+          <td class="history-count">24</td>
+          <td><a href="snapshots/discovery/2026-04-16_09-41-12-305.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-16_09-41-12-305.html&amp;right=discovery.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/discovery/2026-04-17_20-25-36-251.html" target="_blank">2026-04-17 20:25:36.251</a></td>
+          <td class="history-count">24</td>
+          <td><a href="snapshots/discovery/2026-04-17_20-25-36-251.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-17_20-25-36-251.html&amp;right=discovery.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/discovery/2026-04-17_20-41-30-264.html" target="_blank">2026-04-17 20:41:30.264</a></td>
+          <td class="history-count">24</td>
+          <td><a href="snapshots/discovery/2026-04-17_20-41-30-264.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/discovery/2026-04-17_20-41-30-264.html&amp;right=discovery.html">Comparer</a></td>
         </tr>
       </tbody>
     </table>
@@ -1014,7 +1101,10 @@
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
   const currentPageFile = 'discovery.html';
-  const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}]};
+  const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}, {"slug": "ia-resources", "html": "ia-resources.html", "data": "data/tools-ia-resources.json"}]};
+  const panelToggle = document.getElementById('panel-toggle');
+  const pageMeta = document.querySelector('.page-meta');
+  const audienceBrief = document.querySelector('.audience-brief');
 
   async function fetchAsText(path) {
     const res = await fetch(path, { cache: 'no-store' });
@@ -1153,6 +1243,40 @@
     localStorage.setItem('theme', newTheme);
     updateThemeToggle();
   });
+
+  // Panel toggle functionality
+  const storedPanelState = localStorage.getItem('panelsVisible');
+  const panelsVisible = storedPanelState === null ? true : storedPanelState === 'true';
+
+  function updatePanelToggle() {
+    const isVisible = !pageMeta.classList.contains('hidden');
+    panelToggle.setAttribute('aria-pressed', String(isVisible));
+    panelToggle.setAttribute('aria-label', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
+    panelToggle.setAttribute('title', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
+  }
+
+  function togglePanels() {
+    const isHidden = pageMeta.classList.contains('hidden');
+    if (isHidden) {
+      pageMeta.classList.remove('hidden');
+      audienceBrief.classList.remove('hidden');
+      localStorage.setItem('panelsVisible', 'true');
+    } else {
+      pageMeta.classList.add('hidden');
+      audienceBrief.classList.add('hidden');
+      localStorage.setItem('panelsVisible', 'false');
+    }
+    updatePanelToggle();
+  }
+
+  // Initialize panel state
+  if (!panelsVisible) {
+    pageMeta.classList.add('hidden');
+    audienceBrief.classList.add('hidden');
+  }
+  updatePanelToggle();
+
+  panelToggle.addEventListener('click', togglePanels);
 </script>
 
 </body>

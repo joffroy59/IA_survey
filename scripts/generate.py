@@ -236,6 +236,28 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       background: var(--surface);
       transform: scale(1.05);
     }}
+    .panel-toggle {{
+      position: absolute;
+      top: 24px;
+      right: 70px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }}
+    .panel-toggle:hover {{
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }}
     header::after {{
       content: '';
       display: block;
@@ -330,6 +352,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       gap: 12px;
       align-items: center;
       padding: 14px 16px;
+      transition: all 0.3s ease;
+    }}
+    .page-meta.hidden {{
+      display: none;
     }}
     .page-meta-label {{
       font-family: 'JetBrains Mono', monospace;
@@ -377,6 +403,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
+      transition: all 0.3s ease;
+    }}
+    .audience-brief.hidden {{
+      display: none;
     }}
     .reader-card {{
       border: 1px solid var(--border);
@@ -667,6 +697,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
 
 <header>
+  <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · {today}</div>
   <h1>{title}</h1>
@@ -765,6 +796,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   const exportAllZipBtn = document.getElementById('export-all-zip');
   const currentPageFile = '{history_page_file}';
   const exportManifest = {export_manifest_json};
+  const panelToggle = document.getElementById('panel-toggle');
+  const pageMeta = document.querySelector('.page-meta');
+  const audienceBrief = document.querySelector('.audience-brief');
 
   async function fetchAsText(path) {{
     const res = await fetch(path, {{ cache: 'no-store' }});
@@ -903,6 +937,40 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     localStorage.setItem('theme', newTheme);
     updateThemeToggle();
   }});
+
+  // Panel toggle functionality
+  const storedPanelState = localStorage.getItem('panelsVisible');
+  const panelsVisible = storedPanelState === null ? true : storedPanelState === 'true';
+
+  function updatePanelToggle() {{
+    const isVisible = !pageMeta.classList.contains('hidden');
+    panelToggle.setAttribute('aria-pressed', String(isVisible));
+    panelToggle.setAttribute('aria-label', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
+    panelToggle.setAttribute('title', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
+  }}
+
+  function togglePanels() {{
+    const isHidden = pageMeta.classList.contains('hidden');
+    if (isHidden) {{
+      pageMeta.classList.remove('hidden');
+      audienceBrief.classList.remove('hidden');
+      localStorage.setItem('panelsVisible', 'true');
+    }} else {{
+      pageMeta.classList.add('hidden');
+      audienceBrief.classList.add('hidden');
+      localStorage.setItem('panelsVisible', 'false');
+    }}
+    updatePanelToggle();
+  }}
+
+  // Initialize panel state
+  if (!panelsVisible) {{
+    pageMeta.classList.add('hidden');
+    audienceBrief.classList.add('hidden');
+  }}
+  updatePanelToggle();
+
+  panelToggle.addEventListener('click', togglePanels);
 </script>
 
 </body>
