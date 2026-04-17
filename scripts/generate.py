@@ -611,13 +611,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       grid-template-columns: repeat(1, minmax(0, 1fr));
       gap: 24px;
     }}
-    body[data-grid-columns="1"] .categories-grid {{
+    body[data-grid-scope="all"][data-grid-columns="1"] .categories-grid {{
       grid-template-columns: repeat(1, minmax(0, 1fr));
     }}
-    body[data-grid-columns="2"] .categories-grid {{
+    body[data-grid-scope="all"][data-grid-columns="2"] .categories-grid {{
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }}
-    body[data-grid-columns="3"] .categories-grid {{
+    body[data-grid-scope="all"][data-grid-columns="3"] .categories-grid {{
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }}
 
@@ -679,6 +679,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 10px;
+    }}
+    body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid {{
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }}
+    body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid {{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }}
+    body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid {{
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }}
     .tool-card {{
       display: flex;
@@ -808,6 +817,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     @media (max-width: 600px) {{
       .tools-grid {{ grid-template-columns: 1fr 1fr; }}
       .categories-grid {{ grid-template-columns: 1fr; }}
+      body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid {{ grid-template-columns: 1fr; }}
+      body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid {{ grid-template-columns: 1fr 1fr; }}
+      body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid {{ grid-template-columns: 1fr 1fr; }}
       .page-meta {{ grid-template-columns: 1fr; }}
       .audience-brief {{ grid-template-columns: 1fr; }}
     }}
@@ -996,11 +1008,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       categories.forEach(c => {{
         c.classList.toggle('visible', cat === 'all' || c.dataset.id === cat);
       }});
+      updateGridScope(cat);
     }});
   }});
 
   // Show all on load
   categories.forEach(c => c.classList.add('visible'));
+  updateGridScope('all');
 
   // Search modal handlers
   openSearchInfo.addEventListener('click', () => {{
@@ -1080,12 +1094,20 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     document.body.setAttribute('data-grid-columns', layoutValue);
   }}
 
+  function updateGridScope(selectedCategory) {{
+    const scope = selectedCategory === 'all' ? 'all' : 'single';
+    document.body.setAttribute('data-grid-scope', scope);
+    updateLayoutToggle();
+  }}
+
   function updateLayoutToggle() {{
     const currentLayout = localStorage.getItem('gridColumnsLayout') || '1';
+    const currentScope = document.body.getAttribute('data-grid-scope') || 'all';
+    const targetLabel = currentScope === 'all' ? 'categories' : 'outils';
     layoutColumnsToggle.textContent = currentLayout;
     layoutColumnsToggle.setAttribute('aria-pressed', 'true');
-    layoutColumnsToggle.setAttribute('aria-label', `Changer le nombre de colonnes de categories (actuel: ${{currentLayout}})`);
-    layoutColumnsToggle.setAttribute('title', `Colonnes categories: ${{currentLayout}}`);
+    layoutColumnsToggle.setAttribute('aria-label', `Changer le nombre de colonnes de ${{targetLabel}} (actuel: ${{currentLayout}})`);
+    layoutColumnsToggle.setAttribute('title', `Colonnes ${{targetLabel}}: ${{currentLayout}}`);
     updateAllButtonStates();
   }}
 

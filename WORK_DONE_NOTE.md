@@ -3,6 +3,25 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FIX) Use context-aware column mode (Tout voir vs selected category)
+
+### Changed
+- Added a column scope switch controlled by active tab:
+  - `Tout voir` (`all`) applies `1|2|3` columns to top-level categories via `.categories-grid`.
+  - Any specific category tab applies `1|2|3` columns to tools inside the visible category via `.category.visible .tools-grid`.
+- Added `data-grid-scope` management in JavaScript (`all` or `single`) when tabs change.
+- Updated column toggle title/label text so it reflects current target (`categories` or `outils`).
+- Kept responsive behavior on mobile for both scopes.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested mixed behavior: keep current column mode for `Tout voir`, but when a category is selected, use column mode for that category's tools content.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
 ## FIX) Apply column mode to top-level categories
 
 ### Changed
