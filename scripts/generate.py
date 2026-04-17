@@ -236,6 +236,28 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       background: var(--surface);
       transform: scale(1.05);
     }}
+    .summary-toggle {{
+      position: absolute;
+      top: 24px;
+      right: 116px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }}
+    .summary-toggle:hover {{
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }}
     .panel-toggle {{
       position: absolute;
       top: 24px;
@@ -300,6 +322,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       color: var(--muted);
     }}
     .update-info span {{ color: var(--accent2); }}
+    .header-summary.hidden {{
+      display: none;
+    }}
     .page-switcher {{
       margin-top: 20px;
       display: inline-flex;
@@ -697,13 +722,16 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
 
 <header>
+  <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
   <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · {today}</div>
   <h1>{title}</h1>
-  <p class="subtitle">{subtitle}</p>
-  <p class="update-info">Dernière mise à jour : <span>{last_updated}</span></p>
-  <p class="update-info">Outils : <span>{tool_count}</span> · Nouveaux : <span>{new_tool_count}</span></p>
+  <div class="header-summary" id="header-summary">
+    <p class="subtitle">{subtitle}</p>
+    <p class="update-info">Dernière mise à jour : <span>{last_updated}</span></p>
+    <p class="update-info">Outils : <span>{tool_count}</span> · Nouveaux : <span>{new_tool_count}</span></p>
+  </div>
   <div class="page-switcher">{page_switcher}</div>
   <div class="page-meta">
     <div>
@@ -796,6 +824,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   const exportAllZipBtn = document.getElementById('export-all-zip');
   const currentPageFile = '{history_page_file}';
   const exportManifest = {export_manifest_json};
+  const summaryToggle = document.getElementById('summary-toggle');
+  const headerSummary = document.getElementById('header-summary');
   const panelToggle = document.getElementById('panel-toggle');
   const pageMeta = document.querySelector('.page-meta');
   const audienceBrief = document.querySelector('.audience-brief');
@@ -937,6 +967,35 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     localStorage.setItem('theme', newTheme);
     updateThemeToggle();
   }});
+
+  // Header summary toggle (subtitle + stats)
+  const storedSummaryState = localStorage.getItem('headerSummaryVisible');
+  const summaryVisible = storedSummaryState === null ? true : storedSummaryState === 'true';
+
+  function updateSummaryToggle() {{
+    const isVisible = !headerSummary.classList.contains('hidden');
+    summaryToggle.setAttribute('aria-pressed', String(isVisible));
+    summaryToggle.setAttribute('aria-label', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
+    summaryToggle.setAttribute('title', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
+  }}
+
+  function toggleHeaderSummary() {{
+    const isHidden = headerSummary.classList.contains('hidden');
+    if (isHidden) {{
+      headerSummary.classList.remove('hidden');
+      localStorage.setItem('headerSummaryVisible', 'true');
+    }} else {{
+      headerSummary.classList.add('hidden');
+      localStorage.setItem('headerSummaryVisible', 'false');
+    }}
+    updateSummaryToggle();
+  }}
+
+  if (!summaryVisible) {{
+    headerSummary.classList.add('hidden');
+  }}
+  updateSummaryToggle();
+  summaryToggle.addEventListener('click', toggleHeaderSummary);
 
   // Panel toggle functionality
   const storedPanelState = localStorage.getItem('panelsVisible');
