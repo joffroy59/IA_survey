@@ -2,73 +2,15 @@
   "meta": {
     "title": "Boîte à outils IA Génératives",
     "subtitle": "Applications IA CLI, mis à jour automatiquement",
-    "last_updated": "2026-04-16",
-    "page_history": [
-      {
-        "generated_at": "2026-04-17 21:45:54.906",
-        "tool_count": 2,
-        "snapshot_file": "snapshots/aicliapps/2026-04-17_21-45-54-906.html"
-      },
-      {
-        "generated_at": "2026-04-17 21:48:56.355",
-        "tool_count": 2,
-        "snapshot_file": "snapshots/aicliapps/2026-04-17_21-48-56-355.html"
-      },
-      {
-        "generated_at": "2026-04-17 21:55:47.671",
-        "tool_count": 2,
-        "snapshot_file": "snapshots/aicliapps/2026-04-17_21-55-47-671.html"
-      },
-      {
-        "generated_at": "2026-04-17 21:58:52.415",
-        "tool_count": 2,
-        "snapshot_file": "snapshots/aicliapps/2026-04-17_21-58-52-415.html"
-      },
-      {
-        "generated_at": "2026-04-17 21:59:48.600",
-        "tool_count": 2,
-        "snapshot_file": "snapshots/aicliapps/2026-04-17_21-59-48-600.html"
-      },
-      {
-        "generated_at": "2026-04-17 22:00:34.327",
-        "tool_count": 2,
-        "snapshot_file": "snapshots/aicliapps/2026-04-17_22-00-34-327.html"
-      },
-      {
-        "generated_at": "2026-04-17 22:01:37.668",
-        "tool_count": 2,
-        "snapshot_file": "snapshots/aicliapps/2026-04-17_22-01-37-668.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:28:23.493",
-        "tool_count": 2,
-        "snapshot_file": "snapshots/aicliapps/2026-04-17_20-28-23-493.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:37:21.916",
-        "tool_count": 2,
-        "snapshot_file": "snapshots/aicliapps/2026-04-17_20-37-21-916.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:41:35.223",
-        "tool_count": 2,
-        "snapshot_file": "snapshots/aicliapps/2026-04-17_20-41-35-223.html"
-      }
-    ],
+    "last_updated": "2026-04-18",
+    "page_history": [],
     "page_name": "aicliapps",
     "page_label": "Panorama AI CLI Applications",
     "page_description": "Applications IA en ligne de commande pour developpeurs, DevOps et automatisation.",
     "search_queries": [
-      "applications IA en ligne de commande 2026",
-      "meilleures applications CLI IA pour développeurs 2026",
-      "assistant IA terminal open source 2026",
-      "outils CLI IA productivité développeur 2026",
-      "comparatif outils IA CLI open source vs SaaS 2026",
-      "workflow local avec applications IA CLI 2026",
-      "agent IA en terminal pour automatisation scripting 2026",
-      "alternatives à Claude Code en CLI 2026",
-      "sécurité et conformité des outils IA CLI en entreprise 2026",
-      "applications IA CLI pour DevOps et SRE 2026"
+      "AI CLI applications for developers 2026",
+      "best AI command line tools for coding 2026",
+      "10 best ai cli in 206"
     ]
   },
   "categories": [
@@ -97,22 +39,7 @@
         {
           "name": "Code generation et refactor",
           "icon": "🧩",
-          "tools": [
-            {
-              "name": "Claude Code",
-              "provider": "Anthropic",
-              "url": "https://www.anthropic.com/claude-code",
-              "desc": "Detecte via resultats DuckDuckGo CLI",
-              "new": true
-            },
-            {
-              "name": "Aider",
-              "provider": "Aider",
-              "url": "https://aider.chat/",
-              "desc": "Detecte via resultats DuckDuckGo CLI",
-              "new": true
-            }
-          ]
+          "tools": []
         },
         {
           "name": "Qualite et tests",
@@ -129,12 +56,84 @@
         {
           "name": "Infra et pipeline",
           "icon": "🏗️",
-          "tools": []
+          "tools": [
+            {
+              "name": "SFDX CLI",
+              "provider": "Salesforce",
+              "url": "https://salesforce.stackexchange.com/questions/402146/sfdx-cli-create-package-version-fails-in-ci-cd",
+              "desc": "Detecte explicitement dans les resultats CLI",
+              "new": true
+            }
+          ]
         },
         {
           "name": "Automatisation shell",
           "icon": "📟",
-          "tools": []
+          "tools": [
+            {
+              "name": "Gemini CLI",
+              "provider": "Codeant",
+              "url": "https://www.codeant.ai/blogs/claude-code-cli-vs-codex-cli-vs-gemini-cli-best-ai-cli-tool-for-developers-in-2025",
+              "desc": "Detecte explicitement dans les resultats CLI",
+              "new": true
+            },
+            {
+              "name": "Claude Code",
+              "provider": "Buildfastwithai",
+              "url": "https://www.buildfastwithai.com/blogs/claude-code-auto-mode-2026",
+              "desc": "Detecte explicitement dans les resultats CLI",
+              "new": true
+            },
+            {
+              "name": "Azure Developer CLI",
+              "provider": "Members",
+              "url": "https://members.build5nines.com/tag/azure-developer-cli/",
+              "desc": "Detecte explicitement dans les resultats CLI",
+              "new": true
+            },
+            {
+              "name": "GitHub Copilot CLI",
+              "provider": "Freeacademy",
+              "url": "https://freeacademy.ai/blog/github-copilot-cli-vs-gemini-cli-2026",
+              "desc": "Detecte explicitement dans les resultats CLI",
+              "new": true
+            },
+            {
+              "name": "CodeLM CLI",
+              "provider": "Geeky-gadgets",
+              "url": "https://www.geeky-gadgets.com/code-cli-ai-agentic-coder/",
+              "desc": "Detecte explicitement dans les resultats CLI",
+              "new": true
+            },
+            {
+              "name": "Codex CLI",
+              "provider": "Codeant",
+              "url": "https://www.codeant.ai/blogs/claude-code-cli-vs-codex-cli-vs-gemini-cli-best-ai-cli-tool-for-developers-in-2025",
+              "desc": "Detecte explicitement dans les resultats CLI",
+              "new": true
+            },
+            {
+              "name": "Cosine CLI",
+              "provider": "Bestaitoolfinder",
+              "url": "https://bestaitoolfinder.com/cosine-cli/",
+              "desc": "Detecte explicitement dans les resultats CLI",
+              "new": true
+            },
+            {
+              "name": "Knowns CLI",
+              "provider": "Bestaitoolfinder",
+              "url": "https://bestaitoolfinder.com/knowns-cli/",
+              "desc": "Detecte explicitement dans les resultats CLI",
+              "new": true
+            },
+            {
+              "name": "Open-Source CLI",
+              "provider": "Forums",
+              "url": "https://forums.developer.nvidia.com/t/open-source-cli-agent-framework-for-nvidia-ai-endpoints-seeking-feedback/363030",
+              "desc": "Detecte explicitement dans les resultats CLI",
+              "new": true
+            }
+          ]
         }
       ]
     },
