@@ -146,6 +146,21 @@
       border-color: var(--accent);
       background: var(--accent);
     }
+    .page-link-static {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .page-link-static.active, .page-link-static:hover {
+      color: #fff;
+      border-color: var(--accent2);
+      background: var(--accent2);
+    }
     .page-meta {
       margin: 20px auto 0;
       max-width: 820px;
@@ -495,7 +510,7 @@
 
 <header>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
-  <div class="header-badge">🤖 Auto-updated by AI · 16/04/2026</div>
+  <div class="header-badge">🤖 Auto-updated by AI · 17/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
   <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
   <p class="update-info">Dernière mise à jour : <span>2026-04-16</span></p>
@@ -510,7 +525,8 @@
     <a class="page-link" href="cowork.html">vue Claude Cowork</a>
     <a class="page-link" href="ocr.html">Vue OCR</a>
     <a class="page-link" href="dococr.html">Vue OCR Système Complet</a>
-    <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a></div>
+    <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a>
+    <a class="page-link" href="ia-resources.html">Ressources IA</a></div>
   <div class="page-meta">
     <div>
       <div class="page-meta-label">Type de page</div>
@@ -944,11 +960,6 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date"><a href="snapshots/ragdev/2026-04-15_02-29-49-421.html" target="_blank">2026-04-15 02:29:49.421</a></td>
-          <td class="history-count">88</td>
-          <td><a href="snapshots/ragdev/2026-04-15_02-29-49-421.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-15_02-29-49-421.html&amp;right=ragdev.html">Comparer</a></td>
-        </tr>
-        <tr>
           <td class="history-date"><a href="snapshots/ragdev/2026-04-16_01-23-21-645.html" target="_blank">2026-04-16 01:23:21.645</a></td>
           <td class="history-count">16</td>
           <td><a href="snapshots/ragdev/2026-04-16_01-23-21-645.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-16_01-23-21-645.html&amp;right=ragdev.html">Comparer</a></td>
@@ -993,6 +1004,11 @@
           <td class="history-count">16</td>
           <td><a href="snapshots/ragdev/2026-04-16_09-41-12-307.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-16_09-41-12-307.html&amp;right=ragdev.html">Comparer</a></td>
         </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-17_20-25-36-254.html" target="_blank">2026-04-17 20:25:36.254</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-17_20-25-36-254.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-17_20-25-36-254.html&amp;right=ragdev.html">Comparer</a></td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -1011,7 +1027,7 @@
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
   const currentPageFile = 'ragdev.html';
-  const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}]};
+  const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}, {"slug": "ia-resources", "html": "ia-resources.html", "data": "data/tools-ia-resources.json"}]};
 
   async function fetchAsText(path) {
     const res = await fetch(path, { cache: 'no-store' });

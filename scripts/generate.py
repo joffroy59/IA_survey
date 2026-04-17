@@ -83,6 +83,7 @@ PAGE_CONFIGS = [
       "label": "Ressources IA",
       "data_file": ROOT / "data" / "tools-ia-resources.json",
       "output": ROOT / "ia-resources.html",
+      "static": True
     },
 ]
 
@@ -302,6 +303,21 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       color: #fff;
       border-color: var(--accent);
       background: var(--accent);
+    }}
+    .page-link-static {{
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }}
+    .page-link-static.active, .page-link-static:hover {{
+      color: #fff;
+      border-color: var(--accent2);
+      background: var(--accent2);
     }}
     .page-meta {{
       margin: 20px auto 0;
@@ -932,8 +948,12 @@ def render_category(cat: dict) -> str:
 def render_page_switcher(active_slug: str) -> str:
     links = []
     for cfg in PAGE_CONFIGS:
+        base_style = "page-link"
         href = cfg["output"].name
-        classes = "page-link active" if cfg["slug"] == active_slug else "page-link"
+
+        if cfg.get("static"):
+            base_style = "page-link-static"
+        classes = base_style + (" active" if cfg["slug"] == active_slug else "")
         links.append(f'<a class="{classes}" href="{href}">{escape(cfg["label"])}</a>')
     return "\n    ".join(links)
 
