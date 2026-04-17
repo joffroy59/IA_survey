@@ -1,5 +1,27 @@
 # Work Done Note
 
+Date: 2026-04-18
+Repository: IA_survey
+
+## FEATURE) Improve Gemini prompt to recognize tool variants as distinct offerings
+
+### Changed
+- Enhanced Gemini extraction prompt in `scripts/update.py` (lines 652-690)
+- Added dedicated "IMPORTANT" section clarifying that tool variants (CLI, extensions, plugins) are distinct from the main product
+- Updated deduplication rules to only exclude strict duplicates (same name AND same access type)
+- Provides concrete examples: "Gemini CLI" vs "Gemini" web, "Claude for VSCode" vs "Claude" main product
+
+### Why
+- User reported that the system was ignoring variants like "Gemini CLI" when "Gemini" was already in the tools list
+- Tool variants represent distinct value propositions and should be tracked separately
+- Improved prompt instructs Gemini to be more nuanced about what constitutes a duplicate
+
+### Files touched
+- `scripts/update.py`
+- `WORK_DONE_NOTE.md`
+
+---
+
 Date: 2026-04-17
 Repository: IA_survey
 
