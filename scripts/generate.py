@@ -236,6 +236,28 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       background: var(--surface);
       transform: scale(1.05);
     }}
+    .menu-toggle {{
+      position: absolute;
+      top: 24px;
+      right: 162px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }}
+    .menu-toggle:hover {{
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }}
     .summary-toggle {{
       position: absolute;
       top: 24px;
@@ -335,6 +357,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       border-radius: 999px;
       border: 1px solid var(--border);
       background: var(--surface);
+    }}
+    .page-switcher.hidden {{
+      display: none;
     }}
     .page-link {{
       text-decoration: none;
@@ -501,6 +526,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       padding: 0 24px 32px;
       max-width: 900px;
       margin: 0 auto;
+    }}
+    nav.hidden {{
+      display: none;
     }}
     .nav-tab {{
       font-size: 13px;
@@ -722,6 +750,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
 
 <header>
+  <button class="menu-toggle" id="menu-toggle" aria-label="Masquer le menu" aria-pressed="true" title="Masquer le menu">🧭</button>
   <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
   <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
@@ -760,7 +789,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   </div>
 </header>
 
-<nav>
+<nav id="category-nav">
   <a class="nav-tab active" href="#" data-cat="all">Tout voir</a>
   {nav_tabs}
 </nav>
@@ -824,6 +853,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   const exportAllZipBtn = document.getElementById('export-all-zip');
   const currentPageFile = '{history_page_file}';
   const exportManifest = {export_manifest_json};
+  const menuToggle = document.getElementById('menu-toggle');
+  const pageSwitcher = document.querySelector('.page-switcher');
+  const categoryNav = document.getElementById('category-nav');
   const summaryToggle = document.getElementById('summary-toggle');
   const headerSummary = document.getElementById('header-summary');
   const panelToggle = document.getElementById('panel-toggle');
@@ -967,6 +999,38 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     localStorage.setItem('theme', newTheme);
     updateThemeToggle();
   }});
+
+  // Menu toggle (page switcher + category nav)
+  const storedMenuState = localStorage.getItem('menuVisible');
+  const menuVisible = storedMenuState === null ? true : storedMenuState === 'true';
+
+  function updateMenuToggle() {{
+    const isVisible = !pageSwitcher.classList.contains('hidden') && !categoryNav.classList.contains('hidden');
+    menuToggle.setAttribute('aria-pressed', String(isVisible));
+    menuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu' : 'Afficher le menu');
+    menuToggle.setAttribute('title', isVisible ? 'Masquer le menu' : 'Afficher le menu');
+  }}
+
+  function toggleMenu() {{
+    const isHidden = pageSwitcher.classList.contains('hidden') || categoryNav.classList.contains('hidden');
+    if (isHidden) {{
+      pageSwitcher.classList.remove('hidden');
+      categoryNav.classList.remove('hidden');
+      localStorage.setItem('menuVisible', 'true');
+    }} else {{
+      pageSwitcher.classList.add('hidden');
+      categoryNav.classList.add('hidden');
+      localStorage.setItem('menuVisible', 'false');
+    }}
+    updateMenuToggle();
+  }}
+
+  if (!menuVisible) {{
+    pageSwitcher.classList.add('hidden');
+    categoryNav.classList.add('hidden');
+  }}
+  updateMenuToggle();
+  menuToggle.addEventListener('click', toggleMenu);
 
   // Header summary toggle (subtitle + stats)
   const storedSummaryState = localStorage.getItem('headerSummaryVisible');
