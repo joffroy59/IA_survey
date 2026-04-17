@@ -3,6 +3,20 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## RULE) Require complete usable site artifact in releases
+
+### Changed
+- Updated `.github/copilot-instructions.md` with a new mandatory section: `Release Artifacts Rule (Required)`.
+- Added requirements to always publish a `complete-site` ZIP artifact for each release, including generated pages and required data files.
+- Added explicit validation step to open the extracted package from `index.html`.
+
+### Why
+- User requested that each release include an artifact containing the complete usable site.
+
+### Files touched
+- `.github/copilot-instructions.md`
+- `WORK_DONE_NOTE.md`
+
 ## PLAN) Add branch triage rule in backlog
 
 ### Changed
