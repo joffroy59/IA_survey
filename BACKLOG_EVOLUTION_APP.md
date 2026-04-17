@@ -123,11 +123,25 @@ Critieres d'acceptation:
 - [ ] Configuration endpoint/modeles locale depuis settings.
 - [ ] Fallback vers provider secondaire si indisponible (optionnel configurable).
 
+## Epic 6 - Hygiene branches et reprise de travaux
+
+### US-014 - Verifier les branches existantes avant nouveau dev (P0)
+Description: En tant que mainteneur, je veux detecter les branches existantes qui contiennent deja des travaux lies a un item du backlog pour soit continuer dessus, soit la supprimer proprement.
+
+Critieres d'acceptation:
+- [ ] Avant de commencer un item backlog, le process inspecte les branches locales et distantes pour trouver des correspondances (nom de feature, mots-cles, commits recents, fichiers touches).
+- [ ] Si une branche pertinente est trouvee avec progression utile, la decision par defaut est de continuer sur cette branche.
+- [ ] Si une branche est obsolete ou non pertinente, le process cree d'abord une archive de sauvegarde au format `.tga` dans un dossier `backup/`.
+- [ ] La suppression de branche (locale et/ou distante) n'est autorisee qu'apres creation et verification de la sauvegarde.
+- [ ] Le resultat (continuer/supprimer + chemin de backup) est trace dans la note de travail.
+
 ## Sprint propose (ordre de livraison)
 - Sprint 1: US-004, US-005, US-006, US-009
 - Sprint 2: US-007, US-008, US-010
 - Sprint 3: US-011, US-012, US-013
 - Sprint 4: US-001, US-002, US-003
+
+Note processus transverse: US-014 s'applique en pre-check avant chaque sprint.
 
 ## Risques et points d'attention
 - Migration JSON -> DB: risque de perte de donnees sans procedure de backup.

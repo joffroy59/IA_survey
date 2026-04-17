@@ -3,6 +3,19 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## PLAN) Add branch triage rule in backlog
+
+### Changed
+- Updated `BACKLOG_EVOLUTION_APP.md` with US-014 in a new epic about branch hygiene and work continuation.
+- Added explicit rule: check existing branches for in-progress backlog work, continue if relevant, otherwise backup to `backup/*.tga` before deletion.
+
+### Why
+- User requested a standard process to avoid duplicate work and enforce safe branch cleanup.
+
+### Files touched
+- `BACKLOG_EVOLUTION_APP.md`
+- `WORK_DONE_NOTE.md`
+
 ## PLAN) Backlog structure pour evolutions majeures
 
 ### Changed
