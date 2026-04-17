@@ -61,11 +61,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-17 21:06:28.601",
-        "tool_count": 12,
-        "snapshot_file": "snapshots/agentdev/2026-04-17_21-06-28-601.html"
-      },
-      {
         "generated_at": "2026-04-17 21:08:33.427",
         "tool_count": 12,
         "snapshot_file": "snapshots/agentdev/2026-04-17_21-08-33-427.html"
@@ -109,6 +104,11 @@
         "generated_at": "2026-04-17 21:59:48.581",
         "tool_count": 12,
         "snapshot_file": "snapshots/agentdev/2026-04-17_21-59-48-581.html"
+      },
+      {
+        "generated_at": "2026-04-17 22:00:34.312",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/agentdev/2026-04-17_22-00-34-312.html"
       }
     ]
   },

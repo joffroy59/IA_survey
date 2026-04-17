@@ -78,7 +78,29 @@
       background: var(--surface);
       transform: scale(1.05);
     }
-    .menu-toggle {
+    .main-menu-toggle {
+      position: absolute;
+      top: 24px;
+      right: 208px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .main-menu-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
+    .submenu-toggle {
       position: absolute;
       top: 24px;
       right: 162px;
@@ -95,7 +117,7 @@
       font-size: 18px;
       transition: all 0.2s;
     }
-    .menu-toggle:hover {
+    .submenu-toggle:hover {
       border-color: var(--accent2);
       background: var(--surface);
       transform: scale(1.05);
@@ -144,6 +166,57 @@
       background: var(--surface);
       transform: scale(1.05);
     }
+    .layout-columns-toggle {
+      position: absolute;
+      top: 24px;
+      right: 254px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .layout-columns-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
+    button[aria-pressed="false"] {
+      opacity: 0.5;
+      filter: brightness(0.7);
+    }
+    button[aria-pressed="false"]:hover {
+      opacity: 0.8;
+      filter: brightness(0.85);
+    }
+    .current-page-label {
+      position: absolute;
+      top: 24px;
+      right: 300px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent2);
+      letter-spacing: 0.01em;
+      text-transform: none;
+      text-align: center;
+      min-width: 60px;
+      transition: all 0.2s;
+    }
+    .current-page-label.hidden {
+      display: none;
+    }
     header::after {
       content: '';
       display: block;
@@ -154,25 +227,31 @@
     }
     .header-badge {
       display: inline-block;
+      position: absolute;
+      top: 72px;
+      right: 24px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
+      font-size: 9px;
       color: var(--accent2);
       background: rgba(0,212,170,0.1);
       border: 1px solid rgba(0,212,170,0.25);
       padding: 4px 12px;
       border-radius: 20px;
-      margin-bottom: 20px;
+      margin-bottom: 0;
       letter-spacing: 0.08em;
     }
     h1 {
-      font-size: clamp(28px, 5vw, 48px);
-      font-weight: 700;
+      font-size: clamp(26px, 4.6vw, 42px);
+      font-weight: 650;
       letter-spacing: -0.02em;
       background: linear-gradient(135deg, var(--text) 30%, var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       line-height: 1.15;
+      text-align: left;
+      max-width: 1100px;
+      margin: 0 auto;
     }
     .subtitle {
       margin-top: 12px;
@@ -289,38 +368,6 @@
       flex-wrap: wrap;
       justify-content: center;
     }
-    .layout-selector-wrap {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid var(--border);
-      background: var(--surface2);
-      color: var(--muted);
-      border-radius: 10px;
-      padding: 0 8px;
-      height: 36px;
-    }
-    .layout-selector-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--accent2);
-    }
-    .layout-select {
-      border: 0;
-      outline: none;
-      background: transparent;
-      color: var(--text);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      cursor: pointer;
-      min-width: 64px;
-    }
-    .layout-select option {
-      background: var(--surface);
-      color: var(--text);
-    }
     .audience-brief {
       margin: 18px auto 0;
       max-width: 980px;
@@ -430,6 +477,21 @@
     }
 
     /* ── Category section ── */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 24px;
+    }
+    body[data-grid-scope="all"][data-grid-columns="1"] .categories-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    body[data-grid-scope="all"][data-grid-columns="2"] .categories-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    body[data-grid-scope="all"][data-grid-columns="3"] .categories-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .category {
       margin-bottom: 48px;
       display: none;
@@ -489,13 +551,13 @@
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 10px;
     }
-    body[data-grid-columns="1"] .tools-grid {
+    body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid {
       grid-template-columns: repeat(1, minmax(0, 1fr));
     }
-    body[data-grid-columns="2"] .tools-grid {
+    body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    body[data-grid-columns="3"] .tools-grid {
+    body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
     .tool-card {
@@ -625,9 +687,11 @@
 
     @media (max-width: 600px) {
       .tools-grid { grid-template-columns: 1fr 1fr; }
-      body[data-grid-columns="1"] .tools-grid { grid-template-columns: 1fr; }
-      body[data-grid-columns="2"] .tools-grid { grid-template-columns: 1fr 1fr; }
-      body[data-grid-columns="3"] .tools-grid { grid-template-columns: 1fr 1fr; }
+      .categories-grid { grid-template-columns: 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid { grid-template-columns: 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid { grid-template-columns: 1fr 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid { grid-template-columns: 1fr 1fr; }
+      .header-badge { position: static; margin-bottom: 16px; }
       .page-meta { grid-template-columns: 1fr; }
       .audience-brief { grid-template-columns: 1fr; }
     }
@@ -636,9 +700,12 @@
 <body>
 
 <header>
-  <button class="menu-toggle" id="menu-toggle" aria-label="Masquer le menu" aria-pressed="true" title="Masquer le menu">🧭</button>
+  <div class="current-page-label" id="current-page-label">Ressources IA</div>
+  <button class="submenu-toggle" id="submenu-toggle" aria-label="Masquer le menu des sous-categories" aria-pressed="true" title="Masquer le menu des sous-categories">🗂️</button>
+  <button class="main-menu-toggle" id="main-menu-toggle" aria-label="Masquer le menu principal" aria-pressed="true" title="Masquer le menu principal">🧭</button>
   <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
   <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
+  <button class="layout-columns-toggle" id="layout-columns-toggle" aria-label="Changer le nombre de colonnes de categories" aria-pressed="true" title="Colonnes categories: 1">1</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · 17/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
@@ -666,15 +733,6 @@
       <div class="page-meta-desc">Ressources IA et liens importants mis à jour manuellement.</div>
     </div>
     <div class="button-group">
-      <div class="layout-selector-wrap">
-        <label class="layout-selector-label" for="layout-columns-select">Colonnes</label>
-        <select class="layout-select" id="layout-columns-select" aria-label="Selection du nombre de colonnes">
-          <option value="1">1</option>
-          <option value="now">now</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>
-      </div>
       <button class="info-btn" type="button" id="open-search-info">Sources</button>
       <button class="info-btn" type="button" id="open-history-info">Historique</button>
       <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
@@ -701,7 +759,8 @@
 </nav>
 
 <main>
-  
+  <div class="categories-grid">
+    
   <section class="category" data-id="ressources-principales">
     <div class="category-header">
       <div class="category-icon">📚</div>
@@ -720,6 +779,7 @@
       </div>
     </div>
   </section>
+  </div>
 </main>
 
 <footer>
@@ -758,34 +818,54 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_19-05-26-163.html" target="_blank">2026-04-17 19:05:26.163</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-08-33-441.html" target="_blank">2026-04-17 21:08:33.441</a></td>
           <td class="history-count">1</td>
-          <td><a href="snapshots/ia-resources/2026-04-17_19-05-26-163.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_19-05-26-163.html&amp;right=ia-resources.html">Comparer</a></td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-08-33-441.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-08-33-441.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_20-25-36-273.html" target="_blank">2026-04-17 20:25:36.273</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-18-02-101.html" target="_blank">2026-04-17 21:18:02.101</a></td>
           <td class="history-count">1</td>
-          <td><a href="snapshots/ia-resources/2026-04-17_20-25-36-273.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_20-25-36-273.html&amp;right=ia-resources.html">Comparer</a></td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-18-02-101.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-18-02-101.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_20-41-30-285.html" target="_blank">2026-04-17 20:41:30.285</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-40-48-014.html" target="_blank">2026-04-17 21:40:48.014</a></td>
           <td class="history-count">1</td>
-          <td><a href="snapshots/ia-resources/2026-04-17_20-41-30-285.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_20-41-30-285.html&amp;right=ia-resources.html">Comparer</a></td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-40-48-014.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-40-48-014.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_20-56-53-998.html" target="_blank">2026-04-17 20:56:53.998</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-43-42-694.html" target="_blank">2026-04-17 21:43:42.694</a></td>
           <td class="history-count">1</td>
-          <td><a href="snapshots/ia-resources/2026-04-17_20-56-53-998.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_20-56-53-998.html&amp;right=ia-resources.html">Comparer</a></td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-43-42-694.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-43-42-694.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_20-58-33-498.html" target="_blank">2026-04-17 20:58:33.498</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-45-54-909.html" target="_blank">2026-04-17 21:45:54.909</a></td>
           <td class="history-count">1</td>
-          <td><a href="snapshots/ia-resources/2026-04-17_20-58-33-498.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_20-58-33-498.html&amp;right=ia-resources.html">Comparer</a></td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-45-54-909.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-45-54-909.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-06-28-616.html" target="_blank">2026-04-17 21:06:28.616</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-48-56-357.html" target="_blank">2026-04-17 21:48:56.357</a></td>
           <td class="history-count">1</td>
-          <td><a href="snapshots/ia-resources/2026-04-17_21-06-28-616.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-06-28-616.html&amp;right=ia-resources.html">Comparer</a></td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-48-56-357.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-48-56-357.html&amp;right=ia-resources.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-55-47-673.html" target="_blank">2026-04-17 21:55:47.673</a></td>
+          <td class="history-count">1</td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-55-47-673.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-55-47-673.html&amp;right=ia-resources.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-58-52-418.html" target="_blank">2026-04-17 21:58:52.418</a></td>
+          <td class="history-count">1</td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-58-52-418.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-58-52-418.html&amp;right=ia-resources.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-59-48-602.html" target="_blank">2026-04-17 21:59:48.602</a></td>
+          <td class="history-count">1</td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-59-48-602.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-59-48-602.html&amp;right=ia-resources.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_22-00-34-329.html" target="_blank">2026-04-17 22:00:34.329</a></td>
+          <td class="history-count">1</td>
+          <td><a href="snapshots/ia-resources/2026-04-17_22-00-34-329.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_22-00-34-329.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
       </tbody>
     </table>
@@ -804,10 +884,12 @@
   const closeHistoryInfo = document.getElementById('close-history-info');
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
-  const layoutColumnsSelect = document.getElementById('layout-columns-select');
+  const layoutColumnsToggle = document.getElementById('layout-columns-toggle');
+  const currentPageLabel = document.getElementById('current-page-label');
   const currentPageFile = 'ia-resources.html';
   const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}, {"slug": "ia-resources", "html": "ia-resources.html", "data": "data/tools-ia-resources.json"}]};
-  const menuToggle = document.getElementById('menu-toggle');
+  const mainMenuToggle = document.getElementById('main-menu-toggle');
+  const submenuToggle = document.getElementById('submenu-toggle');
   const pageSwitcher = document.querySelector('.page-switcher');
   const categoryNav = document.getElementById('category-nav');
   const summaryToggle = document.getElementById('summary-toggle');
@@ -878,11 +960,13 @@
       categories.forEach(c => {
         c.classList.toggle('visible', cat === 'all' || c.dataset.id === cat);
       });
+      updateGridScope(cat);
     });
   });
 
   // Show all on load
   categories.forEach(c => c.classList.add('visible'));
+  updateGridScope('all');
 
   // Search modal handlers
   openSearchInfo.addEventListener('click', () => {
@@ -954,59 +1038,138 @@
     updateThemeToggle();
   });
 
-  // Layout columns selector (1, now, 2, 3)
-  const storedGridColumns = localStorage.getItem('gridColumnsLayout') || 'now';
+  // Category columns toggle button (cycles through: 1 -> 2 -> 3 -> 1)
+  // UI controls only the "all" scope for now.
+  const validGridLayouts = ['1', '2', '3'];
+  const storedGridColumnsAll = localStorage.getItem('gridColumnsAll') || '1';
+  const storedGridColumnsSingle = localStorage.getItem('gridColumnsSingle') || '3';
 
-  function applyGridColumnsLayout(layoutValue) {
-    if (layoutValue === 'now') {
-      document.body.removeAttribute('data-grid-columns');
-      return;
+  function getGridLayoutForScope(scope) {
+    return scope === 'all'
+      ? (localStorage.getItem('gridColumnsAll') || '1')
+      : (localStorage.getItem('gridColumnsSingle') || '3');
+  }
+
+  function applyGridColumnsLayoutForScope(scope) {
+    document.body.setAttribute('data-grid-columns', getGridLayoutForScope(scope));
+  }
+
+  // Future hook: keep single-category mode configurable without exposing UI yet.
+  function setSingleGridColumnsLayout(layoutValue) {
+    if (!validGridLayouts.includes(layoutValue)) return;
+    localStorage.setItem('gridColumnsSingle', layoutValue);
+    if ((document.body.getAttribute('data-grid-scope') || 'all') === 'single') {
+      applyGridColumnsLayoutForScope('single');
+      updateLayoutToggle();
     }
-    document.body.setAttribute('data-grid-columns', layoutValue);
   }
 
-  const validGridLayouts = ['1', 'now', '2', '3'];
-  const initialGridLayout = validGridLayouts.includes(storedGridColumns) ? storedGridColumns : 'now';
-  layoutColumnsSelect.value = initialGridLayout;
-  applyGridColumnsLayout(initialGridLayout);
-
-  layoutColumnsSelect.addEventListener('change', () => {
-    const nextLayout = layoutColumnsSelect.value;
-    applyGridColumnsLayout(nextLayout);
-    localStorage.setItem('gridColumnsLayout', nextLayout);
-  });
-
-  // Menu toggle (page switcher + category nav)
-  const storedMenuState = localStorage.getItem('menuVisible');
-  const menuVisible = storedMenuState === null ? true : storedMenuState === 'true';
-
-  function updateMenuToggle() {
-    const isVisible = !pageSwitcher.classList.contains('hidden') && !categoryNav.classList.contains('hidden');
-    menuToggle.setAttribute('aria-pressed', String(isVisible));
-    menuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu' : 'Afficher le menu');
-    menuToggle.setAttribute('title', isVisible ? 'Masquer le menu' : 'Afficher le menu');
+  function updateGridScope(selectedCategory) {
+    const scope = selectedCategory === 'all' ? 'all' : 'single';
+    document.body.setAttribute('data-grid-scope', scope);
+    applyGridColumnsLayoutForScope(scope);
+    updateLayoutToggle();
   }
 
-  function toggleMenu() {
-    const isHidden = pageSwitcher.classList.contains('hidden') || categoryNav.classList.contains('hidden');
+  function updateLayoutToggle() {
+    const currentScope = document.body.getAttribute('data-grid-scope') || 'all';
+    const currentLayout = getGridLayoutForScope(currentScope);
+    const targetLabel = currentScope === 'all' ? 'categories' : 'outils';
+    layoutColumnsToggle.textContent = currentLayout;
+    const canChangeFromUi = currentScope === 'all';
+    layoutColumnsToggle.disabled = !canChangeFromUi;
+    layoutColumnsToggle.setAttribute('aria-pressed', String(canChangeFromUi));
+    if (canChangeFromUi) {
+      layoutColumnsToggle.setAttribute('aria-label', `Changer le nombre de colonnes de categories (actuel: ${currentLayout})`);
+      layoutColumnsToggle.setAttribute('title', `Colonnes categories: ${currentLayout}`);
+    } else {
+      layoutColumnsToggle.setAttribute('aria-label', `Colonnes outils fixes (actuel: ${currentLayout})`);
+      layoutColumnsToggle.setAttribute('title', `Colonnes outils: ${currentLayout} (fixe pour l'instant)`);
+    }
+    updateAllButtonStates();
+  }
+
+  function cycleLayoutColumns() {
+    const currentScope = document.body.getAttribute('data-grid-scope') || 'all';
+    if (currentScope !== 'all') return;
+    const currentLayout = localStorage.getItem('gridColumnsAll') || '1';
+    const currentIndex = validGridLayouts.indexOf(currentLayout);
+    const safeIndex = currentIndex === -1 ? 0 : currentIndex;
+    const nextIndex = (safeIndex + 1) % validGridLayouts.length;
+    const nextLayout = validGridLayouts[nextIndex];
+    localStorage.setItem('gridColumnsAll', nextLayout);
+    applyGridColumnsLayoutForScope('all');
+    updateLayoutToggle();
+  }
+
+  const initialGridLayoutAll = validGridLayouts.includes(storedGridColumnsAll) ? storedGridColumnsAll : '1';
+  const initialGridLayoutSingle = validGridLayouts.includes(storedGridColumnsSingle) ? storedGridColumnsSingle : '3';
+  localStorage.setItem('gridColumnsAll', initialGridLayoutAll);
+  localStorage.setItem('gridColumnsSingle', initialGridLayoutSingle);
+  applyGridColumnsLayoutForScope('all');
+  updateLayoutToggle();
+
+  layoutColumnsToggle.addEventListener('click', cycleLayoutColumns);
+
+  // Main menu toggle (page switcher only)
+  const storedMainMenuState = localStorage.getItem('mainMenuVisible');
+  const mainMenuVisible = storedMainMenuState === null ? true : storedMainMenuState === 'true';
+
+  function updateMainMenuToggle() {
+    const isVisible = !pageSwitcher.classList.contains('hidden');
+    mainMenuToggle.setAttribute('aria-pressed', String(isVisible));
+    mainMenuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu principal' : 'Afficher le menu principal');
+    mainMenuToggle.setAttribute('title', isVisible ? 'Masquer le menu principal' : 'Afficher le menu principal');
+    updateAllButtonStates();
+  }
+
+  function toggleMainMenu() {
+    const isHidden = pageSwitcher.classList.contains('hidden');
     if (isHidden) {
       pageSwitcher.classList.remove('hidden');
-      categoryNav.classList.remove('hidden');
-      localStorage.setItem('menuVisible', 'true');
+      localStorage.setItem('mainMenuVisible', 'true');
     } else {
       pageSwitcher.classList.add('hidden');
-      categoryNav.classList.add('hidden');
-      localStorage.setItem('menuVisible', 'false');
+      localStorage.setItem('mainMenuVisible', 'false');
     }
-    updateMenuToggle();
+    updateMainMenuToggle();
   }
 
-  if (!menuVisible) {
+  if (!mainMenuVisible) {
     pageSwitcher.classList.add('hidden');
+  }
+  updateMainMenuToggle();
+  mainMenuToggle.addEventListener('click', toggleMainMenu);
+
+  // Subcategory menu toggle (category tabs only)
+  const storedSubmenuState = localStorage.getItem('subcategoryMenuVisible');
+  const submenuVisible = storedSubmenuState === null ? true : storedSubmenuState === 'true';
+
+  function updateSubmenuToggle() {
+    const isVisible = !categoryNav.classList.contains('hidden');
+    submenuToggle.setAttribute('aria-pressed', String(isVisible));
+    submenuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu des sous-categories' : 'Afficher le menu des sous-categories');
+    submenuToggle.setAttribute('title', isVisible ? 'Masquer le menu des sous-categories' : 'Afficher le menu des sous-categories');
+    updateAllButtonStates();
+  }
+
+  function toggleSubmenu() {
+    const isHidden = categoryNav.classList.contains('hidden');
+    if (isHidden) {
+      categoryNav.classList.remove('hidden');
+      localStorage.setItem('subcategoryMenuVisible', 'true');
+    } else {
+      categoryNav.classList.add('hidden');
+      localStorage.setItem('subcategoryMenuVisible', 'false');
+    }
+    updateSubmenuToggle();
+  }
+
+  if (!submenuVisible) {
     categoryNav.classList.add('hidden');
   }
-  updateMenuToggle();
-  menuToggle.addEventListener('click', toggleMenu);
+  updateSubmenuToggle();
+  submenuToggle.addEventListener('click', toggleSubmenu);
 
   // Header summary toggle (subtitle + stats)
   const storedSummaryState = localStorage.getItem('headerSummaryVisible');
@@ -1017,6 +1180,7 @@
     summaryToggle.setAttribute('aria-pressed', String(isVisible));
     summaryToggle.setAttribute('aria-label', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
     summaryToggle.setAttribute('title', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
+    updateAllButtonStates();
   }
 
   function toggleHeaderSummary() {
@@ -1046,6 +1210,7 @@
     panelToggle.setAttribute('aria-pressed', String(isVisible));
     panelToggle.setAttribute('aria-label', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
     panelToggle.setAttribute('title', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
+    updateAllButtonStates();
   }
 
   function togglePanels() {
@@ -1070,6 +1235,20 @@
   updatePanelToggle();
 
   panelToggle.addEventListener('click', togglePanels);
+
+  // Master function to sync all button aria-pressed states and page label visibility
+  function updateAllButtonStates() {
+    // Update page label visibility: show when menu is hidden, hide when menu is visible
+    const isMenuVisible = !pageSwitcher.classList.contains('hidden');
+    if (isMenuVisible) {
+      currentPageLabel.classList.add('hidden');
+    } else {
+      currentPageLabel.classList.remove('hidden');
+    }
+  }
+
+  // Initialize all button states
+  updateAllButtonStates();
 </script>
 
 </body>

@@ -3,6 +3,20 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FIX) Reduce header badge text size
+
+### Changed
+- Reduced `header-badge` font size from `11px` to `9px` for the text `🤖 Auto-updated by AI · {date}`.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested a smaller visual size for the auto-updated badge text.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
 ## FIX) Left-align main page title
 
 ### Changed

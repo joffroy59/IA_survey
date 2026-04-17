@@ -34,11 +34,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-17 21:06:28.593",
-        "tool_count": 48,
-        "snapshot_file": "snapshots/enterprise/2026-04-17_21-06-28-593.html"
-      },
-      {
         "generated_at": "2026-04-17 21:08:33.421",
         "tool_count": 48,
         "snapshot_file": "snapshots/enterprise/2026-04-17_21-08-33-421.html"
@@ -82,6 +77,11 @@
         "generated_at": "2026-04-17 21:59:48.571",
         "tool_count": 48,
         "snapshot_file": "snapshots/enterprise/2026-04-17_21-59-48-571.html"
+      },
+      {
+        "generated_at": "2026-04-17 22:00:34.304",
+        "tool_count": 48,
+        "snapshot_file": "snapshots/enterprise/2026-04-17_22-00-34-304.html"
       }
     ]
   },

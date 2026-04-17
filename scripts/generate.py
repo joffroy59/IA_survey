@@ -389,7 +389,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       top: 72px;
       right: 24px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
+      font-size: 9px;
       color: var(--accent2);
       background: rgba(0,212,170,0.1);
       border: 1px solid rgba(0,212,170,0.25);
