@@ -3,6 +3,33 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FEATURE) Add toggle to hide page-meta and audience-brief panels
+
+### Changed
+- Added `.panel-toggle` button in header next to theme toggle button
+- Added CSS `.hidden` class for `.page-meta` and `.audience-brief` with `display: none`
+- Implemented JavaScript functionality to toggle panel visibility
+- Persists visibility preference in localStorage with key `panelsVisible`
+- Added smooth transitions (0.3s) on panel visibility changes
+- Proper ARIA labels for accessibility
+
+### Why
+- Users requested ability to hide the "Type de page" and "Public cible" panels for a cleaner view
+- Allows customization while maintaining default visible state
+- Preference saved across page refreshes
+
+### Files touched
+- `scripts/generate.py` - Added CSS, HTML button, and JavaScript logic
+- All generated HTML pages with the new toggle feature
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Ran `python scripts/generate.py` - all pages generated successfully
+- Verified toggle button appears in header (📋 icon)
+- Verified panels hide/show on toggle click
+- Checked localStorage persistence works correctly
+- Verified accessibility attributes (aria-pressed, aria-label) update on toggle
+
 ## FIX) Use boolean for static page config and fix class name concatenation
 
 ### Changed
