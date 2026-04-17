@@ -729,6 +729,13 @@ def ask_gemini(prompt: str, settings: dict) -> str:
         gemini_models = GEMINI_MODELS
     retry_wait_seconds = int(gemini_cfg.get("retry_wait_seconds", GEMINI_RETRY_WAIT_SECONDS))
 
+    tracer.trace_llm_provider(
+        provider="gemini",
+        model=",".join(gemini_models),
+        endpoint="google.generativeai",
+        auth_used=bool(GEMINI_API_KEY),
+    )
+
     if tracer.is_dry_run:
         print("\n[DRY-RUN] Skipping Gemini API call.")
         tracer.log("DRY_RUN", "GEMINI", "Skipped Gemini call in dry-run mode", {})
@@ -806,6 +813,7 @@ def ask_openai_compatible(prompt: str, settings: dict, provider_name: str) -> st
         api_key_env = ""
 
     api_key = os.environ.get(api_key_env, "") if api_key_env else ""
+    auth_used = bool(api_key)
 
     if not base_url or not model:
         print(f"{provider_name} settings invalid (base_url/model). Skipping LLM step.")
@@ -829,6 +837,18 @@ def ask_openai_compatible(prompt: str, settings: dict, provider_name: str) -> st
     }
 
     endpoint = f"{base_url}/chat/completions"
+    tracer.trace_llm_provider(
+        provider=provider_name,
+        model=model,
+        endpoint=endpoint,
+        auth_used=auth_used,
+    )
+
+    if tracer.is_dry_run:
+        print(f"\n[DRY-RUN] Skipping {provider_name} API call.")
+        tracer.log("DRY_RUN", "LLM", "Skipped provider call in dry-run mode", {"provider": provider_name})
+        return "[]"
+
     try:
         response = requests.post(endpoint, headers=headers, json=payload, timeout=HTTP_TIMEOUT_SECONDS)
         response.raise_for_status()
@@ -847,6 +867,8 @@ def ask_openai_compatible(prompt: str, settings: dict, provider_name: str) -> st
 
 def ask_llm(prompt: str, settings: dict) -> str:
     provider = settings.get("llm", {}).get("provider", "gemini")
+    tracer = get_tracer()
+    tracer.log("INFO", "LLM_PROVIDER", "Provider selected from settings", {"provider": provider})
     if provider == "gemini":
         return ask_gemini(prompt, settings)
     if provider in {"openai", "openrouter", "ollama", "lmstudio"}:

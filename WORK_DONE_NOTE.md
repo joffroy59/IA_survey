@@ -3,6 +3,32 @@
 Date: 2026-04-18
 Repository: IA_survey
 
+## FIX) Trace explicit provider used during LLM extraction
+
+### Changed
+- Added `trace_llm_provider(...)` in `scripts/trace.py` to log and print provider details.
+- Updated `scripts/update.py` to trace selected provider and runtime call details:
+  - Provider name
+  - Model
+  - Endpoint
+  - Whether Authorization header is used
+- Updated `scripts/update.py` so dry-run mode skips API calls for OpenAI-compatible providers too (OpenAI/OpenRouter/Ollama/LM Studio), not only Gemini.
+- Updated `scripts/update.py` so Gemini provider is traced even in dry-run mode.
+
+### Why
+- User requested explicit trace of the provider actually used.
+- Improves debugging when switching between Gemini/OpenAI/OpenRouter/Ollama/LM Studio.
+
+### Files touched
+- `scripts/trace.py`
+- `scripts/update.py`
+- `WORK_DONE_NOTE.md`
+
+---
+
+Date: 2026-04-18
+Repository: IA_survey
+
 ## FIX) Prevent Ollama from using Gemini API key
 
 ### Changed

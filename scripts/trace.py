@@ -132,6 +132,24 @@ class Tracer:
             print(f"{COLORS['RESET']}")
             print(f"\n{COLORS['GREEN']}[Total lines: {len(lines)}]{COLORS['RESET']}")
 
+    def trace_llm_provider(self, provider: str, model: str = "", endpoint: str = "", auth_used: bool = False):
+        """Trace active LLM provider and call settings."""
+        self.log("INFO", "LLM_PROVIDER", f"Using provider: {provider}", {
+            "provider": provider,
+            "model": model,
+            "endpoint": endpoint,
+            "auth_used": auth_used,
+        })
+
+        if self.enabled:
+            print(self._format_section("LLM PROVIDER", "", "CYAN"))
+            print(f"  Provider: {provider}")
+            if model:
+                print(f"  Model: {model}")
+            if endpoint:
+                print(f"  Endpoint: {endpoint}")
+            print(f"  Authorization header: {'YES' if auth_used else 'NO'}")
+
     def trace_tool_extraction(self, extraction_method: str, candidates: list[dict], skipped_count: int = 0):
         """Trace tool extraction results."""
         self.log("DEBUG", "EXTRACTION", f"Extracted {len(candidates)} tools via {extraction_method}", {
