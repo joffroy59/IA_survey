@@ -14,6 +14,9 @@ from datetime import date
 from pathlib import Path
 from urllib.parse import urlparse
 
+# ── Trace module (local) ──────────────────────────────────────────────────────
+from trace import get_tracer, initialize_tracer
+
 # ── Dépendances ──────────────────────────────────────────────────────────────
 try:
     from ddgs import DDGS
@@ -286,6 +289,22 @@ def parse_args() -> argparse.Namespace:
         default="general",
         help="Dataset profile to update",
     )
+    parser.add_argument(
+        "--trace",
+        action="store_true",
+        help="Enable verbose trace mode (logs all operations)",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Dry-run mode: trace operations without executing AI calls or writing files",
+    )
+    parser.add_argument(
+        "--trace-output",
+        type=Path,
+        default=None,
+        help="Save trace log to JSON file (e.g., trace_output.json)",
+    )
     return parser.parse_args()
 
 
@@ -436,6 +455,7 @@ def get_existing_names(data: dict) -> list[str]:
 
 def search_new_tools(search_queries: list[str]) -> list[dict]:
     """DuckDuckGo search — no API key required."""
+    tracer = get_tracer()
     results: list[dict] = []
     with DDGS() as ddgs:
         for query in search_queries:
@@ -450,9 +470,11 @@ def search_new_tools(search_queries: list[str]) -> list[dict]:
                         "body": h.get("body", "").strip(),
                         "url": h.get("href", "").strip(),
                     })
+                tracer.trace_search_query(query, len(hits), results[-len(hits):] if hits else [])
                 time.sleep(1)  # rate limit courtesy
             except Exception as e:
                 print(f"Search error for '{query}': {e}")
+                tracer.log("ERROR", "SEARCH", f"Search failed: {e}", {"query": query})
     return results[:MAX_SEARCH_CONTEXT_LINES]
 
 
@@ -544,8 +566,17 @@ def passes_tool_quality_gate(tool: dict) -> bool:
 
 def ask_gemini(prompt: str) -> str:
     """Appel Gemini avec fallback automatique entre modèles (voir GEMINI_MODELS)."""
+    tracer = get_tracer()
+    tracer.trace_gemini_prompt(prompt)
+
+    if tracer.is_dry_run:
+        print("\n[DRY-RUN] Skipping Gemini API call.")
+        tracer.log("DRY_RUN", "GEMINI", "Skipped Gemini call in dry-run mode", {})
+        return "[]"
+
     if not GEMINI_API_KEY:
         print("GEMINI_API_KEY not set. Skipping LLM step.")
+        tracer.log("ERROR", "GEMINI", "GEMINI_API_KEY not set", {})
         return "[]"
 
     genai.configure(api_key=GEMINI_API_KEY)
@@ -566,30 +597,35 @@ def ask_gemini(prompt: str) -> str:
                 f"Gemini quota exceeded for {model_name} (ResourceExhausted). "
                 f"Waiting {GEMINI_RETRY_WAIT_SECONDS}s before one retry: {e}"
             )
+            tracer.log("WARNING", "GEMINI", "Quota exceeded, retrying", {"model": model_name})
             time.sleep(GEMINI_RETRY_WAIT_SECONDS)
             try:
                 return _generate_once()
             except google_api_exceptions.ResourceExhausted:
                 if is_last:
                     print(f"All models exhausted. Skipping LLM step.")
+                    tracer.log("ERROR", "GEMINI", "All models exhausted", {})
                     return "[]"
                 print(f"Quota still exceeded for {model_name}. Falling back to next model.")
                 continue
             except (google_api_exceptions.GoogleAPICallError, Exception) as retry_err:
                 if is_last:
                     print(f"Error after retry on {model_name}: {retry_err}. Skipping LLM step.")
+                    tracer.log("ERROR", "GEMINI", f"Error after retry: {retry_err}", {})
                     return "[]"
                 print(f"Error after retry on {model_name}: {retry_err}. Falling back to next model.")
                 continue
         except google_api_exceptions.GoogleAPICallError as e:
             if is_last:
                 print(f"Gemini API call failed on {model_name}: {e}. Skipping LLM step.")
+                tracer.log("ERROR", "GEMINI", f"API call failed: {e}", {})
                 return "[]"
             print(f"Gemini API call failed on {model_name}: {e}. Falling back to next model.")
             continue
         except Exception as e:
             if is_last:
                 print(f"Unexpected error on {model_name}: {e}. Skipping LLM step.")
+                tracer.log("ERROR", "GEMINI", f"Unexpected error: {e}", {})
                 return "[]"
             print(f"Unexpected error on {model_name}: {e}. Falling back to next model.")
             continue
@@ -599,6 +635,7 @@ def ask_gemini(prompt: str) -> str:
 
 def extract_new_tools(search_results: str, existing_names: list[str], data: dict = None) -> list[dict]:
     """Demande à Gemini d'identifier les nouveaux outils."""
+    tracer = get_tracer()
     existing_str = ", ".join(existing_names[:50])
 
     # Build category reference from actual data structure
@@ -657,13 +694,16 @@ Règles :
     try:
         tools = json.loads(raw)
         if isinstance(tools, list):
+            tracer.log("SUCCESS", "EXTRACTION", f"Extracted {len(tools)} tools via Gemini", {"count": len(tools)})
             return tools
     except json.JSONDecodeError as e:
         print(f"JSON parse error: {e}\nRaw: {raw[:300]}")
+        tracer.log("ERROR", "EXTRACTION", f"JSON parse error: {e}", {})
     return []
 
 
 def extract_tools_from_results_fallback(search_results: list[dict], existing_names: list[str], profile: str) -> list[dict]:
+    tracer = get_tracer()
     extracted: list[dict] = []
     seen = set(existing_names)
 
@@ -687,6 +727,7 @@ def extract_tools_from_results_fallback(search_results: list[dict], existing_nam
                     "subcategory_name": known_tool["subcategory_name"],
                     "source_text": corpus,
                 })
+                tracer.log("DEBUG", "FALLBACK_DETECTION", f"Detected known CLI tool: {known_tool['name']}", {})
                 seen.add(lowered_name)
             if len(extracted) >= 10:
                 return extracted
@@ -694,6 +735,7 @@ def extract_tools_from_results_fallback(search_results: list[dict], existing_nam
         # Keep CLI profile clean: if at least one known CLI tool was detected,
         # stop here instead of adding noisy article titles.
         if extracted:
+            tracer.log("INFO", "FALLBACK_EXTRACTION", f"Found {len(extracted)} CLI tools via keyword matching", {"count": len(extracted)})
             return extracted
 
     for hit in search_results:
@@ -738,11 +780,13 @@ def extract_tools_from_results_fallback(search_results: list[dict], existing_nam
         if len(extracted) >= 10:
             break
 
+    tracer.log("INFO", "FALLBACK_EXTRACTION", f"Extracted {len(extracted)} tools via title/body parsing", {"count": len(extracted)})
     return extracted
 
 
 def add_tools_to_data(data: dict, new_tools: list[dict], profile: str) -> int:
     """Ajoute les nouveaux outils dans la structure JSON."""
+    tracer = get_tracer()
     added = 0
     existing_names = get_existing_names(data)
 
@@ -750,13 +794,16 @@ def add_tools_to_data(data: dict, new_tools: list[dict], profile: str) -> int:
         name = tool.get("name", "").strip()
 
         if not name or name.lower() in existing_names:
+            tracer.trace_tool_skipped(name, "duplicate")
             continue
 
         if not passes_tool_quality_gate(tool):
             print(f"Skipped low-confidence candidate: {name or '[no-name]'}")
+            tracer.trace_tool_skipped(name or "[no-name]", "quality_gate_failed")
             continue
 
         target_cat, sub_name = resolve_category_and_subcategory(data, tool, profile)
+        tracer.trace_category_resolution(name, target_cat.get("name", ""), sub_name)
 
         # Trouver la sous-catégorie valide
         target_sub = None
@@ -786,6 +833,7 @@ def add_tools_to_data(data: dict, new_tools: list[dict], profile: str) -> int:
         existing_names.append(name.lower())
         added += 1
         print(f"Added: {name} -> {target_cat['name']} / {target_sub['name']}")
+        tracer.trace_tool_added(name, target_cat.get("name", ""), target_sub.get("name", ""))
 
     return added
 
@@ -793,10 +841,24 @@ def add_tools_to_data(data: dict, new_tools: list[dict], profile: str) -> int:
 def main():
     args = parse_args()
     profile = args.profile
+
+    # Initialize tracer
+    tracer = initialize_tracer(
+        enabled=args.trace or args.dry_run,
+        output_file=args.trace_output,
+        dry_run=args.dry_run
+    )
+
+    tracer.trace_start(profile, [])  # Will be updated with queries below
+
     cfg = PROFILE_CONFIG[profile]
     tools_file = cfg["tools_file"]
     query_map = load_search_queries()
     search_queries = query_map[profile]
+
+    # Update trace start with actual queries
+    tracer.trace_log.clear()  # Clear placeholder
+    tracer.trace_start(profile, search_queries)
 
     if profile == "aicliapps":
         # For CLI apps, rebuild from query evidence only.
@@ -813,21 +875,42 @@ def main():
     search_results = search_new_tools(search_queries)
     print(f"   {len(search_results)} search results collected")
     search_context = format_search_results_for_llm(search_results)
+    tracer.trace_search_results_formatted(search_context)
 
     print("Asking Gemini to identify new tools...")
     new_tools = extract_new_tools(search_context, existing, data)
-    if not new_tools:
+    if new_tools:
+        tracer.trace_tool_extraction("gemini_extraction", new_tools)
+    else:
         print("No valid Gemini extraction. Falling back to query-only extraction...")
         new_tools = extract_tools_from_results_fallback(search_results, existing, profile)
+        tracer.trace_tool_extraction("fallback_extraction", new_tools)
     print(f"   {len(new_tools)} candidates found")
 
+    added = 0
     if new_tools:
         added = add_tools_to_data(data, new_tools, profile)
         print(f"{added} new tools added")
-        save_tools(data, profile, tools_file, search_queries)
+        tracer.trace_json_update_summary(added, len(existing))
+
+        # Skip save in dry-run mode
+        if not tracer.is_dry_run:
+            save_tools(data, profile, tools_file, search_queries)
+        else:
+            print(f"\n[DRY-RUN] Would save {added} new tools to {tools_file.name}")
+            tracer.log("DRY_RUN", "SAVE", f"Would save to {tools_file.name}", {"added": added})
     else:
         print("No new tools to add, updating date only")
-        save_tools(data, profile, tools_file, search_queries)
+        tracer.trace_json_update_summary(0, len(existing))
+
+        if not tracer.is_dry_run:
+            save_tools(data, profile, tools_file, search_queries)
+        else:
+            print(f"\n[DRY-RUN] Would update metadata in {tools_file.name}")
+            tracer.log("DRY_RUN", "SAVE", f"Would update {tools_file.name}", {})
+
+    tracer.trace_end(added, profile)
+    tracer.print_summary()
 
 
 if __name__ == "__main__":
