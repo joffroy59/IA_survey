@@ -3,6 +3,19 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## RULE) Require changelog for every future release
+
+### Changed
+- Updated `.github/copilot-instructions.md` with a new mandatory section: `Release Changelog Rule (Required)`.
+- Added requirements to always include version/date, grouped change summary, PR/commit references, impacted areas, migration note when needed, and release notes publication.
+
+### Why
+- User requested a persistent rule so every future release includes a proper changelog.
+
+### Files touched
+- `.github/copilot-instructions.md`
+- `WORK_DONE_NOTE.md`
+
 ## PLAN) Add branch triage rule in backlog
 
 ### Changed

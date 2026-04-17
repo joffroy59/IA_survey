@@ -57,3 +57,15 @@ When the user says "finish feature", always do all steps below in order:
 6. For hotfix tasks, use hotfix flow instead: hotfix branch from `main` -> PR to `main` -> PR from `main` to `develop`.
 
 Do not stop at a partial state when this command is used.
+
+## Release Changelog Rule (Required)
+
+For every new release you create in this repository, always generate a changelog entry.
+
+Release changelog requirements:
+1. Include the release version/tag and release date.
+2. Summarize the main changes grouped by type (for example: Features, Fixes, Docs, Chore).
+3. Reference merged pull requests and/or key commits included in the release.
+4. List notable files or areas impacted when relevant.
+5. Include a short migration/compatibility note if there is any breaking or operational impact.
+6. Publish this changelog in the GitHub release notes body when creating the release.
