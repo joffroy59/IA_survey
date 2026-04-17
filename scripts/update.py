@@ -651,7 +651,13 @@ def extract_new_tools(search_results: str, existing_names: list[str], data: dict
 
     prompt = f"""Tu es un expert en outils IA. Analyse ces résultats de recherche et identifie des outils IA qui ne sont PAS déjà dans la liste existante.
 
-LISTE EXISTANTE (noms à exclure) :
+IMPORTANT : Les variantes d'un produit existant sont des OUTILS DISTINCTS :
+- Si "Gemini" existe, "Gemini CLI" est un nouvel outil (variante CLI/terminal)
+- Si "Claude" existe, "Claude for VSCode" est un nouvel outil (extension/intégration)
+- Les applications web, CLI, extensions, plugins d'une même plateforme sont des outils différents
+- Inclus les variantes même si le produit principal est connu
+
+LISTE EXISTANTE (noms à exclure - ne pas ignorer les variantes) :
 {existing_str}
 
 RÉSULTATS DE RECHERCHE :
@@ -674,7 +680,8 @@ Retourne UNIQUEMENT un tableau JSON valide (sans markdown, sans commentaire) ave
 Règles :
 - Maximum 10 outils les plus pertinents
 - Uniquement des outils réels avec URL valide et fonctionnel
-- Pas de doublons avec la liste existante
+- Les variantes, extensions, CLI, plugins d'un produit connu = nouveaux outils (ne pas les exclure)
+- Les doublons stricts à exclure : même nom ET même type d'accès
 - Utilise les noms de sous-catégories existants si possible
 - category_id doit correspondre à une catégorie existante
 - subcategory_name doit correspondre à une sous-catégorie existante pour le category_id choisi
