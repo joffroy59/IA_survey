@@ -338,7 +338,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       align-items: center;
       justify-content: center;
       color: var(--text);
-      font-size: 18px;
+      font-size: 14px;
+      font-weight: 600;
       transition: all 0.2s;
     }}
     .layout-columns-toggle:hover {{

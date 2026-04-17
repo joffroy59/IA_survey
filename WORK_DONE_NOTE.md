@@ -3,6 +3,21 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FIX) Reduce column mode label text size
+
+### Changed
+- Reduced `.layout-columns-toggle` text size from `18px` to `14px`.
+- Added `font-weight: 600` to keep readability for `1/2/3` values at smaller size.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested smaller text for the column mode label/button.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
 ## FIX) Reduce header badge text size
 
 ### Changed
