@@ -78,6 +78,12 @@ PAGE_CONFIGS = [
       "data_file": ROOT / "data" / "tools-aicliapps.json",
       "output": ROOT / "aicliapps.html",
     },
+    {
+      "slug": "ia-resources",
+      "label": "Ressources IA",
+      "data_file": ROOT / "data" / "tools-ia-resources.json",
+      "output": ROOT / "ia-resources.html",
+    },
 ]
 
 PAGE_AUDIENCE_GUIDE = {

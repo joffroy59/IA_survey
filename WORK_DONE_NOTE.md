@@ -1,7 +1,27 @@
 # Work Done Note
 
-Date: 2026-04-16
+Date: 2026-04-17
 Repository: IA_survey
+
+## FEATURE) Add IA Resources page with static links
+
+### Changed
+- Created `data/tools-ia-resources.json` with static links configuration
+- Updated `scripts/generate.py` to include new page configuration for IA Resources
+- Generated `ia-resources.html` page from the JSON configuration
+
+### Why
+- User requested a new page to display static links (IA Models: https://models.dev/) with easy management through JSON file
+- Follows the existing pattern of other pages in the project for consistency
+
+### Files touched
+- `data/tools-ia-resources.json` (new file)
+- `scripts/generate.py`
+- `ia-resources.html` (generated)
+
+### Verification
+- Ran `python scripts/generate.py` - all pages generated successfully including the new `ia-resources.html`
+- Verified the new page is accessible and displays the link correctly
 
 ## FIX) Disable blocking on query-count mismatch in page checker
 
