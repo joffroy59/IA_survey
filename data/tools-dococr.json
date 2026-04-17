@@ -24,11 +24,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-16 01:23:21.700",
-        "tool_count": 12,
-        "snapshot_file": "snapshots/dococr/2026-04-16_01-23-21-700.html"
-      },
-      {
         "generated_at": "2026-04-16 01:27:20.670",
         "tool_count": 12,
         "snapshot_file": "snapshots/dococr/2026-04-16_01-27-20-670.html"
@@ -72,6 +67,11 @@
         "generated_at": "2026-04-17 20:25:36.269",
         "tool_count": 12,
         "snapshot_file": "snapshots/dococr/2026-04-17_20-25-36-269.html"
+      },
+      {
+        "generated_at": "2026-04-17 20:50:25.080",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/dococr/2026-04-17_20-50-25-080.html"
       }
     ]
   },

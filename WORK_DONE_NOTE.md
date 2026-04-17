@@ -3,6 +3,30 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FEATURE) Add toggle to hide subtitle and header stats
+
+### Changed
+- Updated `scripts/generate.py` template to wrap subtitle and update lines in a dedicated `header-summary` block.
+- Added a new header button (`summary-toggle`) to show/hide:
+  - `Les meilleurs outils IA, mis a jour automatiquement`
+  - `Derniere mise a jour : ...`
+  - `Outils : ... · Nouveaux : ...`
+- Added JavaScript state management with `localStorage` key `headerSummaryVisible`.
+- Regenerated all HTML pages so the new toggle is available everywhere.
+
+### Why
+- User requested a cleaner header view with the ability to hide subtitle and summary metrics on demand.
+- Persisting state improves usability by keeping user preference across reloads.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages: `index.html`, `enterprise.html`, `discovery.html`, `ragdev.html`, `agentdev.html`, `vscode.html`, `newrag.html`, `cowork.html`, `ocr.html`, `dococr.html`, `aicliapps.html`, `ia-resources.html`
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Ran `python scripts/generate.py` successfully for all pages.
+- Verified generated output contains `summary-toggle`, `header-summary`, and `headerSummaryVisible` logic.
+
 ## FIX) Use boolean for static page config and fix class name concatenation
 
 ### Changed

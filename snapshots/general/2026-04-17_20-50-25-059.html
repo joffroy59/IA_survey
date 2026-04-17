@@ -78,6 +78,28 @@
       background: var(--surface);
       transform: scale(1.05);
     }
+    .summary-toggle {
+      position: absolute;
+      top: 24px;
+      right: 70px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .summary-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
     header::after {
       content: '';
       display: block;
@@ -120,6 +142,9 @@
       color: var(--muted);
     }
     .update-info span { color: var(--accent2); }
+    .header-summary.hidden {
+      display: none;
+    }
     .page-switcher {
       margin-top: 20px;
       display: inline-flex;
@@ -145,6 +170,21 @@
       color: #fff;
       border-color: var(--accent);
       background: var(--accent);
+    }
+    .page-link-static {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .page-link-static.active, .page-link-static:hover {
+      color: #fff;
+      border-color: var(--accent2);
+      background: var(--accent2);
     }
     .page-meta {
       margin: 20px auto 0;
@@ -197,6 +237,38 @@
       gap: 8px;
       flex-wrap: wrap;
       justify-content: center;
+    }
+    .audience-brief {
+      margin: 18px auto 0;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .reader-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .reader-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+    .reader-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .reader-text {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
     }
     .history-table {
       width: 100%;
@@ -455,18 +527,22 @@
     @media (max-width: 600px) {
       .tools-grid { grid-template-columns: 1fr 1fr; }
       .page-meta { grid-template-columns: 1fr; }
+      .audience-brief { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
 <header>
+  <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tête" aria-pressed="true" title="Masquer les infos d'en-tête">ℹ️</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
-  <div class="header-badge">🤖 Auto-updated by AI · 16/04/2026</div>
+  <div class="header-badge">🤖 Auto-updated by AI · 17/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
-  <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
-  <p class="update-info">Dernière mise à jour : <span>2026-04-15</span></p>
-  <p class="update-info">Outils : <span>50</span> · Nouveaux : <span>2</span></p>
+  <div class="header-summary" id="header-summary">
+    <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
+    <p class="update-info">Dernière mise à jour : <span>2026-04-15</span></p>
+    <p class="update-info">Outils : <span>50</span> · Nouveaux : <span>2</span></p>
+  </div>
   <div class="page-switcher"><a class="page-link active" href="index.html">Vue Generale</a>
     <a class="page-link" href="enterprise.html">Vue Enterprise</a>
     <a class="page-link" href="discovery.html">Vue Decouverte</a>
@@ -474,10 +550,11 @@
     <a class="page-link" href="agentdev.html">Vue Agent Dev + IDE Tools</a>
     <a class="page-link" href="vscode.html">Vue VS Code</a>
     <a class="page-link" href="newrag.html">Vue New RAG</a>
-    <a class="page-link" href="cowork.html">Vue Cowork</a>
+    <a class="page-link" href="cowork.html">vue Claude Cowork</a>
     <a class="page-link" href="ocr.html">Vue OCR</a>
     <a class="page-link" href="dococr.html">Vue OCR Système Complet</a>
-    <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a></div>
+    <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a>
+    <a class="page-link-static" href="ia-resources.html">Ressources IA</a></div>
   <div class="page-meta">
     <div>
       <div class="page-meta-label">Type de page</div>
@@ -490,6 +567,18 @@
       <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
       <button class="info-btn" type="button" id="export-all-zip">ZIP All</button>
     </div>
+  </div>
+  <div class="audience-brief">
+    <article class="reader-card reader-dev">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les developpeurs</div>
+      <div class="reader-text">Priorisez les outils avec API claire, documentation maintenue et integration CI/CD avant toute adoption.</div>
+    </article>
+    <article class="reader-card reader-manager">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les managers</div>
+      <div class="reader-text">Comparez la valeur business, les risques de conformite et le cout total avant de lancer un pilote.</div>
+    </article>
   </div>
 </header>
 
@@ -952,15 +1041,19 @@
     </div>
     <div class="modal-meta">Page: Panorama Generaliste · Dernière mise à jour: 2026-04-15</div>
     <ol class="query-list">
-      <li>new AI tools 2026 site:producthunt.com OR site:theresanaiforthat.com</li>
-      <li>new AI tools 2026 site:futurepedia.io OR site:uneed.best</li>
-      <li>new AI agentic workflows site:news.ycombinator.com 2026</li>
-      <li>best new AI coding tools 2026 site:tldr.tech</li>
-      <li>trending AI repositories 2026 site:github.com</li>
-      <li>new AI image video audio tools 2026 site:the-decoder.com</li>
-      <li>meilleurs outils IA agentique 2026</li>
-      <li>state-of-the-art AI benchmarks April 2026</li>
-      <li>best professional AI tools for developers 2026</li>
+      <li>best AI tools 2026 practical use cases</li>
+      <li>new AI platforms 2026 product teams and developers</li>
+      <li>trending AI tools 2026 site:github.com</li>
+      <li>AI productivity tools 2026 business and engineering</li>
+      <li>AI workflow automation tools 2026</li>
+      <li>generative AI tools comparison 2026</li>
+      <li>open source AI tools 2026 production ready</li>
+      <li>best professional AI tools 2026 for engineering teams</li>
+      <li>AI tools with API integration 2026</li>
+      <li>state of AI tooling ecosystem 2026</li>
+      <li>OpenAI Codex CLI capabilities 2026</li>
+      <li>Claude and Claude Code for developers 2026</li>
+      <li>GitHub Copilot and Gemini Code Assist comparison 2026</li>
     </ol>
   </div>
 </div>
@@ -982,54 +1075,54 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date"><a href="snapshots/general/2026-04-15_02-17-46-938.html" target="_blank">2026-04-15 02:17:46.938</a></td>
+          <td class="history-date"><a href="snapshots/general/2026-04-16_01-27-20-649.html" target="_blank">2026-04-16 01:27:20.649</a></td>
           <td class="history-count">50</td>
-          <td><a href="snapshots/general/2026-04-15_02-17-46-938.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-15_02-17-46-938.html&amp;right=index.html">Comparer</a></td>
+          <td><a href="snapshots/general/2026-04-16_01-27-20-649.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-16_01-27-20-649.html&amp;right=index.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/general/2026-04-15_02-20-30-759.html" target="_blank">2026-04-15 02:20:30.759</a></td>
+          <td class="history-date"><a href="snapshots/general/2026-04-16_01-28-23-951.html" target="_blank">2026-04-16 01:28:23.951</a></td>
           <td class="history-count">50</td>
-          <td><a href="snapshots/general/2026-04-15_02-20-30-759.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-15_02-20-30-759.html&amp;right=index.html">Comparer</a></td>
+          <td><a href="snapshots/general/2026-04-16_01-28-23-951.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-16_01-28-23-951.html&amp;right=index.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/general/2026-04-15_02-21-30-263.html" target="_blank">2026-04-15 02:21:30.263</a></td>
+          <td class="history-date"><a href="snapshots/general/2026-04-15_23-44-42-710.html" target="_blank">2026-04-15 23:44:42.710</a></td>
           <td class="history-count">50</td>
-          <td><a href="snapshots/general/2026-04-15_02-21-30-263.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-15_02-21-30-263.html&amp;right=index.html">Comparer</a></td>
+          <td><a href="snapshots/general/2026-04-15_23-44-42-710.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-15_23-44-42-710.html&amp;right=index.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/general/2026-04-15_02-29-49-413.html" target="_blank">2026-04-15 02:29:49.413</a></td>
+          <td class="history-date"><a href="snapshots/general/2026-04-15_23-53-26-234.html" target="_blank">2026-04-15 23:53:26.234</a></td>
           <td class="history-count">50</td>
-          <td><a href="snapshots/general/2026-04-15_02-29-49-413.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-15_02-29-49-413.html&amp;right=index.html">Comparer</a></td>
+          <td><a href="snapshots/general/2026-04-15_23-53-26-234.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-15_23-53-26-234.html&amp;right=index.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/general/2026-04-15_06-18-23-521.html" target="_blank">2026-04-15 06:18:23.521</a></td>
+          <td class="history-date"><a href="snapshots/general/2026-04-16_07-10-46-795.html" target="_blank">2026-04-16 07:10:46.795</a></td>
           <td class="history-count">50</td>
-          <td><a href="snapshots/general/2026-04-15_06-18-23-521.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-15_06-18-23-521.html&amp;right=index.html">Comparer</a></td>
+          <td><a href="snapshots/general/2026-04-16_07-10-46-795.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-16_07-10-46-795.html&amp;right=index.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/general/2026-04-15_15-57-44-231.html" target="_blank">2026-04-15 15:57:44.231</a></td>
+          <td class="history-date"><a href="snapshots/general/2026-04-16_07-25-52-197.html" target="_blank">2026-04-16 07:25:52.197</a></td>
           <td class="history-count">50</td>
-          <td><a href="snapshots/general/2026-04-15_15-57-44-231.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-15_15-57-44-231.html&amp;right=index.html">Comparer</a></td>
+          <td><a href="snapshots/general/2026-04-16_07-25-52-197.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-16_07-25-52-197.html&amp;right=index.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/general/2026-04-16_00-59-11-116.html" target="_blank">2026-04-16 00:59:11.116</a></td>
+          <td class="history-date"><a href="snapshots/general/2026-04-16_09-04-05-921.html" target="_blank">2026-04-16 09:04:05.921</a></td>
           <td class="history-count">50</td>
-          <td><a href="snapshots/general/2026-04-16_00-59-11-116.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-16_00-59-11-116.html&amp;right=index.html">Comparer</a></td>
+          <td><a href="snapshots/general/2026-04-16_09-04-05-921.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-16_09-04-05-921.html&amp;right=index.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/general/2026-04-15_23-17-27-344.html" target="_blank">2026-04-15 23:17:27.344</a></td>
+          <td class="history-date"><a href="snapshots/general/2026-04-16_09-41-12-301.html" target="_blank">2026-04-16 09:41:12.301</a></td>
           <td class="history-count">50</td>
-          <td><a href="snapshots/general/2026-04-15_23-17-27-344.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-15_23-17-27-344.html&amp;right=index.html">Comparer</a></td>
+          <td><a href="snapshots/general/2026-04-16_09-41-12-301.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-16_09-41-12-301.html&amp;right=index.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/general/2026-04-16_01-23-09-339.html" target="_blank">2026-04-16 01:23:09.339</a></td>
+          <td class="history-date"><a href="snapshots/general/2026-04-17_20-25-36-245.html" target="_blank">2026-04-17 20:25:36.245</a></td>
           <td class="history-count">50</td>
-          <td><a href="snapshots/general/2026-04-16_01-23-09-339.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-16_01-23-09-339.html&amp;right=index.html">Comparer</a></td>
+          <td><a href="snapshots/general/2026-04-17_20-25-36-245.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-17_20-25-36-245.html&amp;right=index.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/general/2026-04-16_01-23-21-609.html" target="_blank">2026-04-16 01:23:21.609</a></td>
+          <td class="history-date"><a href="snapshots/general/2026-04-17_20-50-25-059.html" target="_blank">2026-04-17 20:50:25.059</a></td>
           <td class="history-count">50</td>
-          <td><a href="snapshots/general/2026-04-16_01-23-21-609.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-16_01-23-21-609.html&amp;right=index.html">Comparer</a></td>
+          <td><a href="snapshots/general/2026-04-17_20-50-25-059.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/general/2026-04-17_20-50-25-059.html&amp;right=index.html">Comparer</a></td>
         </tr>
       </tbody>
     </table>
@@ -1049,7 +1142,9 @@
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
   const currentPageFile = 'index.html';
-  const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}]};
+  const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}, {"slug": "ia-resources", "html": "ia-resources.html", "data": "data/tools-ia-resources.json"}]};
+  const summaryToggle = document.getElementById('summary-toggle');
+  const headerSummary = document.getElementById('header-summary');
 
   async function fetchAsText(path) {
     const res = await fetch(path, { cache: 'no-store' });
@@ -1188,6 +1283,35 @@
     localStorage.setItem('theme', newTheme);
     updateThemeToggle();
   });
+
+  // Header summary toggle (subtitle + stats)
+  const storedSummaryState = localStorage.getItem('headerSummaryVisible');
+  const summaryVisible = storedSummaryState === null ? true : storedSummaryState === 'true';
+
+  function updateSummaryToggle() {
+    const isVisible = !headerSummary.classList.contains('hidden');
+    summaryToggle.setAttribute('aria-pressed', String(isVisible));
+    summaryToggle.setAttribute('aria-label', isVisible ? "Masquer les infos d'en-tête" : "Afficher les infos d'en-tête");
+    summaryToggle.setAttribute('title', isVisible ? "Masquer les infos d'en-tête" : "Afficher les infos d'en-tête");
+  }
+
+  function toggleHeaderSummary() {
+    const isHidden = headerSummary.classList.contains('hidden');
+    if (isHidden) {
+      headerSummary.classList.remove('hidden');
+      localStorage.setItem('headerSummaryVisible', 'true');
+    } else {
+      headerSummary.classList.add('hidden');
+      localStorage.setItem('headerSummaryVisible', 'false');
+    }
+    updateSummaryToggle();
+  }
+
+  if (!summaryVisible) {
+    headerSummary.classList.add('hidden');
+  }
+  updateSummaryToggle();
+  summaryToggle.addEventListener('click', toggleHeaderSummary);
 </script>
 
 </body>

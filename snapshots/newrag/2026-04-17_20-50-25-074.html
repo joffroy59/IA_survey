@@ -78,6 +78,28 @@
       background: var(--surface);
       transform: scale(1.05);
     }
+    .summary-toggle {
+      position: absolute;
+      top: 24px;
+      right: 70px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .summary-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
     header::after {
       content: '';
       display: block;
@@ -120,6 +142,9 @@
       color: var(--muted);
     }
     .update-info span { color: var(--accent2); }
+    .header-summary.hidden {
+      display: none;
+    }
     .page-switcher {
       margin-top: 20px;
       display: inline-flex;
@@ -145,6 +170,21 @@
       color: #fff;
       border-color: var(--accent);
       background: var(--accent);
+    }
+    .page-link-static {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .page-link-static.active, .page-link-static:hover {
+      color: #fff;
+      border-color: var(--accent2);
+      background: var(--accent2);
     }
     .page-meta {
       margin: 20px auto 0;
@@ -197,6 +237,38 @@
       gap: 8px;
       flex-wrap: wrap;
       justify-content: center;
+    }
+    .audience-brief {
+      margin: 18px auto 0;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .reader-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .reader-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+    .reader-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .reader-text {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
     }
     .history-table {
       width: 100%;
@@ -455,34 +527,39 @@
     @media (max-width: 600px) {
       .tools-grid { grid-template-columns: 1fr 1fr; }
       .page-meta { grid-template-columns: 1fr; }
+      .audience-brief { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
 <header>
+  <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tête" aria-pressed="true" title="Masquer les infos d'en-tête">ℹ️</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
-  <div class="header-badge">🤖 Auto-updated by AI · 16/04/2026</div>
+  <div class="header-badge">🤖 Auto-updated by AI · 17/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
-  <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
-  <p class="update-info">Dernière mise à jour : <span>2026-04-16</span></p>
-  <p class="update-info">Outils : <span>12</span> · Nouveaux : <span>1</span></p>
+  <div class="header-summary" id="header-summary">
+    <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
+    <p class="update-info">Dernière mise à jour : <span>2026-04-16</span></p>
+    <p class="update-info">Outils : <span>16</span> · Nouveaux : <span>0</span></p>
+  </div>
   <div class="page-switcher"><a class="page-link" href="index.html">Vue Generale</a>
     <a class="page-link" href="enterprise.html">Vue Enterprise</a>
     <a class="page-link" href="discovery.html">Vue Decouverte</a>
     <a class="page-link" href="ragdev.html">Vue RAG Pro + DevTools</a>
     <a class="page-link" href="agentdev.html">Vue Agent Dev + IDE Tools</a>
     <a class="page-link" href="vscode.html">Vue VS Code</a>
-    <a class="page-link" href="newrag.html">Vue New RAG</a>
-    <a class="page-link" href="cowork.html">Vue Cowork</a>
+    <a class="page-link active" href="newrag.html">Vue New RAG</a>
+    <a class="page-link" href="cowork.html">vue Claude Cowork</a>
     <a class="page-link" href="ocr.html">Vue OCR</a>
-    <a class="page-link active" href="dococr.html">Vue OCR Système Complet</a>
-    <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a></div>
+    <a class="page-link" href="dococr.html">Vue OCR Système Complet</a>
+    <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a>
+    <a class="page-link-static" href="ia-resources.html">Ressources IA</a></div>
   <div class="page-meta">
     <div>
       <div class="page-meta-label">Type de page</div>
-      <div class="page-meta-title">Panorama Système OCR Complet</div>
-      <div class="page-meta-desc">Plateformes complètes pour ingestion, OCR, classification et workflow documentaire.</div>
+      <div class="page-meta-title">Panorama New RAG</div>
+      <div class="page-meta-desc">Nouveaux frameworks, patterns et plateformes RAG 2026.</div>
     </div>
     <div class="button-group">
       <button class="info-btn" type="button" id="open-search-info">Sources</button>
@@ -491,103 +568,36 @@
       <button class="info-btn" type="button" id="export-all-zip">ZIP All</button>
     </div>
   </div>
+  <div class="audience-brief">
+    <article class="reader-card reader-dev">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les developpeurs</div>
+      <div class="reader-text">Explorez les approches RAG de nouvelle generation et comparez leurs compromis techniques.</div>
+    </article>
+    <article class="reader-card reader-manager">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les managers</div>
+      <div class="reader-text">Reperez les innovations applicables a court terme avec un risque d&#x27;integration maitrise.</div>
+    </article>
+  </div>
 </header>
 
 <nav>
   <a class="nav-tab active" href="#" data-cat="all">Tout voir</a>
-  <a class="nav-tab" href="#" data-cat="dococr-pipeline">🏗️ 🏗️ Pipeline Documentaire</a>
-  <a class="nav-tab" href="#" data-cat="dococr-workflow">🔁 🔁 Workflow Complet</a>
+  <a class="nav-tab" href="#" data-cat="new-rag-frameworks">🧱 🧱 Frameworks New RAG</a>
+  <a class="nav-tab" href="#" data-cat="new-rag-quality">📈 📈 Qualité & Ops</a>
 </nav>
 
 <main>
   
-  <section class="category" data-id="dococr-pipeline">
+  <section class="category" data-id="new-rag-frameworks">
     <div class="category-header">
-      <div class="category-icon">🏗️</div>
-      <div class="category-title">🏗️ Pipeline Documentaire</div>
+      <div class="category-icon">🧱</div>
+      <div class="category-title">🧱 Frameworks New RAG</div>
     </div>
     
     <div class="subcategory">
-      <div class="subcategory-title">📥 Ingestion</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://www.songr.ai" target="_blank" rel="noopener">
-        <div class="tool-name">SongR</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://www.synthesia.io/" target="_blank" rel="noopener">
-        <div class="tool-name">Synthesia</div>
-        
-        
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">🔤 OCR & Parsing</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card is-new" href="https://www.atlabs.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Atlabs</div>
-        <div class="tool-provider">Atlabs</div>
-        <div class="tool-desc">Plateforme IA pour génération images et vidéos</div>
-      </a>
-
-      <a class="tool-card" href="https://www.canva.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Canva AI</div>
-        <div class="tool-provider">Canva</div>
-        <div class="tool-desc">Design IA</div>
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">🧠 Classification</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://www.colossyan.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Colossyan</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://www.descript.com" target="_blank" rel="noopener">
-        <div class="tool-name">Descript</div>
-        
-        
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">🏷️ Extraction Entités</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://gamma.app/" target="_blank" rel="noopener">
-        <div class="tool-name">Gamma</div>
-        
-        <div class="tool-desc">Présentations IA</div>
-      </a>
-
-      <a class="tool-card" href="https://www.heygen.com/" target="_blank" rel="noopener">
-        <div class="tool-name">HeyGen</div>
-        
-        
-      </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="category" data-id="dococr-workflow">
-    <div class="category-header">
-      <div class="category-icon">🔁</div>
-      <div class="category-title">🔁 Workflow Complet</div>
-    </div>
-    
-    <div class="subcategory">
-      <div class="subcategory-title">👀 Validation Humaine</div>
+      <div class="subcategory-title">🕸️ Graph RAG</div>
       <div class="tools-grid">
         
       <a class="tool-card" href="https://klingai.com/" target="_blank" rel="noopener">
@@ -596,22 +606,101 @@
         
       </a>
 
-      <a class="tool-card" href="https://meta.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Meta AI</div>
-        <div class="tool-provider">Meta</div>
-        <div class="tool-desc">IA de Meta</div>
+      <a class="tool-card" href="https://chat.mistral.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Le Chat</div>
+        <div class="tool-provider">Mistral</div>
+        <div class="tool-desc">IA française</div>
       </a>
       </div>
     </div>
 
     <div class="subcategory">
-      <div class="subcategory-title">🔌 RPA & Intégrations</div>
+      <div class="subcategory-title">🤖 Agentic RAG</div>
       <div class="tools-grid">
         
+      <a class="tool-card" href="https://leonardo.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Leonardo AI</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://lumalabs.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Luma Dream Machine</div>
+        
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🖼️ Multimodal RAG</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://meta.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Meta AI</div>
+        <div class="tool-provider">Meta</div>
+        <div class="tool-desc">IA de Meta</div>
+      </a>
+
+      <a class="tool-card" href="https://www.midjourney.com/" target="_blank" rel="noopener">
+        <div class="tool-name">MidJourney</div>
+        
+        <div class="tool-desc">Référence qualité</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🔗 Orchestration</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://murf.ai" target="_blank" rel="noopener">
+        <div class="tool-name">Murf AI</div>
+        
+        
+      </a>
+
       <a class="tool-card" href="https://notebooklm.google/" target="_blank" rel="noopener">
         <div class="tool-name">NotebookLM</div>
         <div class="tool-provider">Google</div>
         <div class="tool-desc">FAQ, Podcast IA</div>
+      </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="category" data-id="new-rag-quality">
+    <div class="category-header">
+      <div class="category-icon">📈</div>
+      <div class="category-title">📈 Qualité & Ops</div>
+    </div>
+    
+    <div class="subcategory">
+      <div class="subcategory-title">✅ Évaluation</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://www.notta.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Notta</div>
+        
+        <div class="tool-desc">Réunion App Mobile</div>
+      </a>
+
+      <a class="tool-card" href="https://otter.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Otter.ai</div>
+        
+        <div class="tool-desc">Prise de notes IA</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">📊 Observabilité</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://www.perplexity.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Perplexity</div>
+        
+        <div class="tool-desc">Recherche IA</div>
       </a>
 
       <a class="tool-card" href="https://plaud.ai/" target="_blank" rel="noopener">
@@ -623,16 +712,38 @@
     </div>
 
     <div class="subcategory">
-      <div class="subcategory-title">🗄️ Stockage & Recherche</div>
+      <div class="subcategory-title">🎯 Retrieval Tuning</div>
       <div class="tools-grid">
         
+      <a class="tool-card" href="https://chat.qwen.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Qwen</div>
+        <div class="tool-provider">Alibaba</div>
+        
+      </a>
+
+      <a class="tool-card" href="https://www.recraft.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Recraft</div>
+        
+        
+      </a>
       </div>
     </div>
 
     <div class="subcategory">
-      <div class="subcategory-title">🛡️ Gouvernance & Audit</div>
+      <div class="subcategory-title">🔒 Security & Governance</div>
       <div class="tools-grid">
         
+      <a class="tool-card" href="https://app.runwayml.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Runway</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://www.songr.ai" target="_blank" rel="noopener">
+        <div class="tool-name">SongR</div>
+        
+        
+      </a>
       </div>
     </div>
   </section>
@@ -650,22 +761,19 @@
       <div class="modal-title">Requêtes de recherche utilisées</div>
       <button class="close-btn" type="button" id="close-search-info">Fermer</button>
     </div>
-    <div class="modal-meta">Page: Panorama Système OCR Complet · Dernière mise à jour: 2026-04-16</div>
+    <div class="modal-meta">Page: Panorama New RAG · Dernière mise à jour: 2026-04-16</div>
     <ol class="query-list">
-      <li>end to end document processing OCR platform 2026</li>
-      <li>document ingestion OCR classification workflow 2026</li>
-      <li>IDP intelligent document processing tools 2026</li>
-      <li>invoice processing OCR complete system 2026</li>
-      <li>enterprise document automation OCR ai 2026</li>
-      <li>document management with OCR and RPA 2026</li>
-      <li>contract analysis OCR NLP platform 2026</li>
-      <li>knowledge extraction from scanned documents 2026</li>
-      <li>full stack OCR document pipeline open source</li>
-      <li>docling document processing pipeline OCR parsing 2026</li>
-      <li>docling vs unstructured document ai comparison</li>
-      <li>document ai workflow orchestration OCR 2026</li>
-      <li>système complet OCR documentaire 2026</li>
-      <li>plateforme OCR gestion documentaire entreprise</li>
+      <li>new RAG frameworks and stacks 2026</li>
+      <li>next generation RAG techniques reranking and routing 2026</li>
+      <li>graph RAG and hybrid retrieval tools 2026</li>
+      <li>multimodal RAG platforms 2026 comparison</li>
+      <li>RAG observability and quality monitoring new tools 2026</li>
+      <li>RAG benchmark leaders and evaluation suites 2026</li>
+      <li>RAG chunking and ingestion innovation 2026</li>
+      <li>Docling and modern document parsers for new RAG 2026</li>
+      <li>agentic RAG systems state of practice 2026</li>
+      <li>open source new RAG repositories 2026 site:github.com</li>
+      <li>new generation RAG tools for production 2026</li>
     </ol>
   </div>
 </div>
@@ -676,7 +784,7 @@
       <div class="modal-title">Historique des versions</div>
       <button class="close-btn" type="button" id="close-history-info">Fermer</button>
     </div>
-    <div class="modal-meta">Page: Panorama Système OCR Complet · Dernières 10 générations</div>
+    <div class="modal-meta">Page: Panorama New RAG · Dernières 10 générations</div>
     <table class="history-table">
       <thead>
         <tr>
@@ -687,54 +795,54 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date">2026-04-16 01:18:54.057</td>
+          <td class="history-date"><a href="snapshots/newrag/2026-04-16_01-27-20-664.html" target="_blank">2026-04-16 01:27:20.664</a></td>
           <td class="history-count">16</td>
-          <td>-</td>
+          <td><a href="snapshots/newrag/2026-04-16_01-27-20-664.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-16_01-27-20-664.html&amp;right=newrag.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date">2026-04-16 01:18:36.506</td>
+          <td class="history-date"><a href="snapshots/newrag/2026-04-16_01-28-23-965.html" target="_blank">2026-04-16 01:28:23.965</a></td>
           <td class="history-count">16</td>
-          <td>-</td>
+          <td><a href="snapshots/newrag/2026-04-16_01-28-23-965.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-16_01-28-23-965.html&amp;right=newrag.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date">2026-04-16 01:18:16.829</td>
-          <td class="history-count">24</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td class="history-date">2026-04-15 15:57:24.681</td>
-          <td class="history-count">24</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td class="history-date"><a href="snapshots/dococr/2026-04-15_02-29-49-434.html" target="_blank">2026-04-15 02:29:49.434</a></td>
-          <td class="history-count">0</td>
-          <td><a href="snapshots/dococr/2026-04-15_02-29-49-434.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/dococr/2026-04-15_02-29-49-434.html&amp;right=dococr.html">Comparer</a></td>
-        </tr>
-        <tr>
-          <td class="history-date"><a href="snapshots/dococr/2026-04-15_06-18-23-535.html" target="_blank">2026-04-15 06:18:23.535</a></td>
-          <td class="history-count">0</td>
-          <td><a href="snapshots/dococr/2026-04-15_06-18-23-535.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/dococr/2026-04-15_06-18-23-535.html&amp;right=dococr.html">Comparer</a></td>
-        </tr>
-        <tr>
-          <td class="history-date"><a href="snapshots/dococr/2026-04-15_15-57-44-663.html" target="_blank">2026-04-15 15:57:44.663</a></td>
-          <td class="history-count">24</td>
-          <td><a href="snapshots/dococr/2026-04-15_15-57-44-663.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/dococr/2026-04-15_15-57-44-663.html&amp;right=dococr.html">Comparer</a></td>
-        </tr>
-        <tr>
-          <td class="history-date"><a href="snapshots/dococr/2026-04-16_01-18-17-062.html" target="_blank">2026-04-16 01:18:17.062</a></td>
-          <td class="history-count">24</td>
-          <td><a href="snapshots/dococr/2026-04-16_01-18-17-062.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/dococr/2026-04-16_01-18-17-062.html&amp;right=dococr.html">Comparer</a></td>
-        </tr>
-        <tr>
-          <td class="history-date"><a href="snapshots/dococr/2026-04-16_01-18-36-742.html" target="_blank">2026-04-16 01:18:36.742</a></td>
+          <td class="history-date"><a href="snapshots/newrag/2026-04-15_23-44-42-722.html" target="_blank">2026-04-15 23:44:42.722</a></td>
           <td class="history-count">16</td>
-          <td><a href="snapshots/dococr/2026-04-16_01-18-36-742.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/dococr/2026-04-16_01-18-36-742.html&amp;right=dococr.html">Comparer</a></td>
+          <td><a href="snapshots/newrag/2026-04-15_23-44-42-722.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-15_23-44-42-722.html&amp;right=newrag.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/dococr/2026-04-16_01-23-21-700.html" target="_blank">2026-04-16 01:23:21.700</a></td>
-          <td class="history-count">12</td>
-          <td><a href="snapshots/dococr/2026-04-16_01-23-21-700.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/dococr/2026-04-16_01-23-21-700.html&amp;right=dococr.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/newrag/2026-04-15_23-53-26-242.html" target="_blank">2026-04-15 23:53:26.242</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/newrag/2026-04-15_23-53-26-242.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-15_23-53-26-242.html&amp;right=newrag.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/newrag/2026-04-16_07-10-46-806.html" target="_blank">2026-04-16 07:10:46.806</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/newrag/2026-04-16_07-10-46-806.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-16_07-10-46-806.html&amp;right=newrag.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/newrag/2026-04-16_07-25-52-207.html" target="_blank">2026-04-16 07:25:52.207</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/newrag/2026-04-16_07-25-52-207.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-16_07-25-52-207.html&amp;right=newrag.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/newrag/2026-04-16_09-04-05-931.html" target="_blank">2026-04-16 09:04:05.931</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/newrag/2026-04-16_09-04-05-931.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-16_09-04-05-931.html&amp;right=newrag.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/newrag/2026-04-16_09-41-12-312.html" target="_blank">2026-04-16 09:41:12.312</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/newrag/2026-04-16_09-41-12-312.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-16_09-41-12-312.html&amp;right=newrag.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/newrag/2026-04-17_20-25-36-261.html" target="_blank">2026-04-17 20:25:36.261</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/newrag/2026-04-17_20-25-36-261.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-17_20-25-36-261.html&amp;right=newrag.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/newrag/2026-04-17_20-50-25-074.html" target="_blank">2026-04-17 20:50:25.074</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/newrag/2026-04-17_20-50-25-074.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-17_20-50-25-074.html&amp;right=newrag.html">Comparer</a></td>
         </tr>
       </tbody>
     </table>
@@ -753,8 +861,10 @@
   const closeHistoryInfo = document.getElementById('close-history-info');
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
-  const currentPageFile = 'dococr.html';
-  const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}]};
+  const currentPageFile = 'newrag.html';
+  const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}, {"slug": "ia-resources", "html": "ia-resources.html", "data": "data/tools-ia-resources.json"}]};
+  const summaryToggle = document.getElementById('summary-toggle');
+  const headerSummary = document.getElementById('header-summary');
 
   async function fetchAsText(path) {
     const res = await fetch(path, { cache: 'no-store' });
@@ -893,6 +1003,35 @@
     localStorage.setItem('theme', newTheme);
     updateThemeToggle();
   });
+
+  // Header summary toggle (subtitle + stats)
+  const storedSummaryState = localStorage.getItem('headerSummaryVisible');
+  const summaryVisible = storedSummaryState === null ? true : storedSummaryState === 'true';
+
+  function updateSummaryToggle() {
+    const isVisible = !headerSummary.classList.contains('hidden');
+    summaryToggle.setAttribute('aria-pressed', String(isVisible));
+    summaryToggle.setAttribute('aria-label', isVisible ? "Masquer les infos d'en-tête" : "Afficher les infos d'en-tête");
+    summaryToggle.setAttribute('title', isVisible ? "Masquer les infos d'en-tête" : "Afficher les infos d'en-tête");
+  }
+
+  function toggleHeaderSummary() {
+    const isHidden = headerSummary.classList.contains('hidden');
+    if (isHidden) {
+      headerSummary.classList.remove('hidden');
+      localStorage.setItem('headerSummaryVisible', 'true');
+    } else {
+      headerSummary.classList.add('hidden');
+      localStorage.setItem('headerSummaryVisible', 'false');
+    }
+    updateSummaryToggle();
+  }
+
+  if (!summaryVisible) {
+    headerSummary.classList.add('hidden');
+  }
+  updateSummaryToggle();
+  summaryToggle.addEventListener('click', toggleHeaderSummary);
 </script>
 
 </body>
