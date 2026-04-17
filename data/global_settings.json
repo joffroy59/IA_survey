@@ -23,7 +23,8 @@
       "model": "gemma4:e4b",
       "models": [
         "gemma4:e4b",
-        "gemma4:26b"
+        "gemma4:26b",
+        "llama3.1: 8b"
       ],
       "api_key_env": ""
     },
