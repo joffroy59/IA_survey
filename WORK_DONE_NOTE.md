@@ -3,6 +3,52 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FEATURE) Add trace/verbose mode for debugging without AI execution
+
+### Changed
+- Created new `scripts/trace.py` module with `Tracer` class for comprehensive logging and debugging.
+- Added `--trace` flag to enable verbose trace mode (logs all operations with colored output).
+- Added `--dry-run` flag for trace-only execution (no API calls, no file writes).
+- Added `--trace-output FILE` flag to save structured trace logs to JSON.
+- Integrated trace calls throughout `scripts/update.py` in search, extraction, and categorization functions.
+- Fixed Unicode encoding issues for Windows terminal compatibility (ASCII fallbacks for box-drawing characters).
+- Created comprehensive documentation in `TRACE_MODE_DEBUG.md` with usage examples and troubleshooting.
+
+### Trace Features
+- **Search tracing**: Logs each query, result count, and formatted results preview
+- **Gemini tracing**: Shows complete prompt that would be sent (dry-run: no actual API call)
+- **Extraction tracing**: Logs tool candidates, quality gate decisions, and extraction method
+- **Categorization tracing**: Shows category resolution for each tool (inferred or existing)
+- **JSON update tracing**: Logs tools added vs. existing, with DRY-RUN warnings
+- **Structured logging**: Each event includes timestamp, level, category, message, and structured data
+- **Windows-friendly**: Automatic ASCII fallbacks for terminal output, UTF-8 JSON export
+
+### Why
+- User requested a debug mode to trace operations without executing AI model calls.
+- Helps understand the pipeline flow: search → extraction → categorization → JSON update.
+- Enables debugging without consuming Gemini API quotas.
+- Provides reproducible traces for issue diagnosis.
+- JSON export allows programmatic analysis of pipeline behavior.
+
+### Files touched
+- `scripts/trace.py` (new)
+- `scripts/update.py` (integrated trace calls)
+- `TRACE_MODE_DEBUG.md` (new documentation)
+- `WORK_DONE_NOTE.md`
+
+## RULE) Require changelog for every future release
+
+### Changed
+- Updated `.github/copilot-instructions.md` with a new mandatory section: `Release Changelog Rule (Required)`.
+- Added requirements to always include version/date, grouped change summary, PR/commit references, impacted areas, migration note when needed, and release notes publication.
+
+### Why
+- User requested a persistent rule so every future release includes a proper changelog.
+
+### Files touched
+- `.github/copilot-instructions.md`
+- `WORK_DONE_NOTE.md`
+
 ## RELEASE) Publish v1.6.1 with complete-site artifact
 
 ### Changed
