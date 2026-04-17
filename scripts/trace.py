@@ -117,12 +117,18 @@ class Tracer:
                 preview += f"\n    ... ({len(lines) - 10} more lines)"
             print(self._format_section("FORMATTED SEARCH RESULTS", preview, "BLUE"))
 
-    def trace_gemini_prompt(self, prompt: str):
-        """Trace Gemini prompt (without executing)."""
-        self.log("DEBUG", "GEMINI", "Prompt prepared for Gemini", {"prompt": prompt[:500]})
+    def trace_llm_query(self, provider: str, prompt: str, dry_run: bool = False):
+        """Trace query/prompt sent to LLM provider."""
+        self.log("DEBUG", "LLM_QUERY", f"Query prepared for provider '{provider}'", {
+            "provider": provider,
+            "prompt": prompt[:1000],
+        })
 
         if self.enabled:
-            print(self._format_header("GEMINI PROMPT (DRY-RUN - NOT EXECUTED)", "═"))
+            title = f"LLM QUERY ({provider})"
+            if dry_run:
+                title += " (DRY-RUN - NOT EXECUTED)"
+            print(self._format_header(title, "═"))
             print(f"\n{COLORS['DIM']}")
             lines = prompt.split("\n")
             for i, line in enumerate(lines[:50], 1):
@@ -131,6 +137,27 @@ class Tracer:
                 print(f"  {'...':3s} | ({len(lines) - 50} more lines)")
             print(f"{COLORS['RESET']}")
             print(f"\n{COLORS['GREEN']}[Total lines: {len(lines)}]{COLORS['RESET']}")
+
+    def trace_llm_response(self, provider: str, response_text: str):
+        """Trace response received from LLM provider."""
+        self.log("DEBUG", "LLM_RESPONSE", f"Response received from provider '{provider}'", {
+            "provider": provider,
+            "response": response_text[:1000],
+            "length": len(response_text),
+        })
+
+        if self.enabled:
+            print(self._format_section(f"LLM RESPONSE ({provider})", "", "CYAN"))
+            lines = response_text.split("\n")
+            for i, line in enumerate(lines[:20], 1):
+                print(f"  {i:2d} | {line}")
+            if len(lines) > 20:
+                print(f"  .. | ({len(lines) - 20} more lines)")
+            print(f"  Length: {len(response_text)} chars")
+
+    def trace_gemini_prompt(self, prompt: str):
+        """Backward-compatible wrapper for existing Gemini prompt tracing."""
+        self.trace_llm_query("gemini", prompt, dry_run=self.is_dry_run)
 
     def trace_llm_provider(self, provider: str, model: str = "", endpoint: str = "", auth_used: bool = False):
         """Trace active LLM provider and call settings."""

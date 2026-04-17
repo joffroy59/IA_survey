@@ -721,7 +721,7 @@ def passes_tool_quality_gate(tool: dict) -> bool:
 def ask_gemini(prompt: str, settings: dict) -> str:
     """Appel Gemini avec fallback automatique entre modèles."""
     tracer = get_tracer()
-    tracer.trace_gemini_prompt(prompt)
+    tracer.trace_llm_query("gemini", prompt, dry_run=tracer.is_dry_run)
     llm_cfg = settings.get("llm", {})
     gemini_cfg = llm_cfg.get("gemini", {})
     gemini_models = gemini_cfg.get("models", GEMINI_MODELS)
@@ -755,7 +755,9 @@ def ask_gemini(prompt: str, settings: dict) -> str:
 
         def _generate_once() -> str:
             response = model.generate_content(prompt)
-            return response.text
+            text = response.text or ""
+            tracer.trace_llm_response("gemini", text)
+            return text
 
         try:
             return _generate_once()
@@ -836,6 +838,8 @@ def ask_openai_compatible(prompt: str, settings: dict, provider_name: str) -> st
         "temperature": 0.2,
     }
 
+    tracer.trace_llm_query(provider_name, prompt, dry_run=tracer.is_dry_run)
+
     endpoint = f"{base_url}/chat/completions"
     tracer.trace_llm_provider(
         provider=provider_name,
@@ -847,6 +851,7 @@ def ask_openai_compatible(prompt: str, settings: dict, provider_name: str) -> st
     if tracer.is_dry_run:
         print(f"\n[DRY-RUN] Skipping {provider_name} API call.")
         tracer.log("DRY_RUN", "LLM", "Skipped provider call in dry-run mode", {"provider": provider_name})
+        tracer.trace_llm_response(provider_name, "[DRY-RUN] No response (request skipped).")
         return "[]"
 
     try:
@@ -858,7 +863,9 @@ def ask_openai_compatible(prompt: str, settings: dict, provider_name: str) -> st
             tracer.log("ERROR", "LLM", "No choices returned", {"provider": provider_name})
             return "[]"
         message = choices[0].get("message", {})
-        return str(message.get("content", "[]"))
+        content = str(message.get("content", "[]"))
+        tracer.trace_llm_response(provider_name, content)
+        return content
     except requests.RequestException as e:
         print(f"{provider_name} API call failed: {e}. Skipping LLM step.")
         tracer.log("ERROR", "LLM", f"Provider API call failed: {e}", {"provider": provider_name})

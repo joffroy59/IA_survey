@@ -3,6 +3,30 @@
 Date: 2026-04-18
 Repository: IA_survey
 
+## FEATURE) Trace LLM query and response in trace mode
+
+### Changed
+- Added generic LLM query tracing in `scripts/trace.py` via `trace_llm_query(...)`.
+- Added generic LLM response tracing in `scripts/trace.py` via `trace_llm_response(...)`.
+- Updated `scripts/update.py` to emit query/response traces for:
+  - Gemini provider
+  - OpenAI-compatible providers (OpenAI, OpenRouter, Ollama, LM Studio)
+- Added explicit dry-run response trace marker (`[DRY-RUN] No response (request skipped).`).
+
+### Why
+- User requested tracing both the request query and IA response in trace mode.
+- Provides clear observability of what is sent to and returned by the selected provider.
+
+### Files touched
+- `scripts/trace.py`
+- `scripts/update.py`
+- `WORK_DONE_NOTE.md`
+
+---
+
+Date: 2026-04-18
+Repository: IA_survey
+
 ## FIX) Restore valid search query JSON and unblock CLI profile runs
 
 ### Changed
