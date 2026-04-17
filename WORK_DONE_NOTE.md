@@ -3,6 +3,26 @@
 Date: 2026-04-18
 Repository: IA_survey
 
+## FEATURE) Add Ollama Gemma4 models and select gemma4:e4b
+
+### Changed
+- Updated `data/global_settings.json` to add Ollama models list: `gemma4:e4b`, `gemma4:26b`.
+- Set active Ollama model to `gemma4:e4b` in `data/global_settings.json`.
+- Updated default settings in `scripts/update.py` to use `gemma4:e4b` and include the same models list.
+
+### Why
+- User requested adding models `gemma4:e4b` and `gemma4:26b` and selecting `gemma4:e4b`.
+
+### Files touched
+- `data/global_settings.json`
+- `scripts/update.py`
+- `WORK_DONE_NOTE.md`
+
+---
+
+Date: 2026-04-18
+Repository: IA_survey
+
 ## FEATURE) Trace LLM query and response in trace mode
 
 ### Changed

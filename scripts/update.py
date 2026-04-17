@@ -149,7 +149,8 @@ DEFAULT_GLOBAL_SETTINGS = {
         },
         "ollama": {
             "base_url": "http://localhost:11434/v1",
-            "model": "llama3.1:8b",
+            "model": "gemma4:e4b",
+            "models": ["gemma4:e4b", "gemma4:26b"],
             "api_key_env": "",
         },
         "lmstudio": {
