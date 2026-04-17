@@ -236,7 +236,29 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       background: var(--surface);
       transform: scale(1.05);
     }}
-    .menu-toggle {{
+    .main-menu-toggle {{
+      position: absolute;
+      top: 24px;
+      right: 208px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }}
+    .main-menu-toggle:hover {{
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }}
+    .submenu-toggle {{
       position: absolute;
       top: 24px;
       right: 162px;
@@ -253,7 +275,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       font-size: 18px;
       transition: all 0.2s;
     }}
-    .menu-toggle:hover {{
+    .submenu-toggle:hover {{
       border-color: var(--accent2);
       background: var(--surface);
       transform: scale(1.05);
@@ -305,7 +327,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     .layout-columns-toggle {{
       position: absolute;
       top: 24px;
-      right: 208px;
+      right: 254px;
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -316,7 +338,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       align-items: center;
       justify-content: center;
       color: var(--text);
-      font-size: 18px;
+      font-size: 14px;
+      font-weight: 600;
       transition: all 0.2s;
     }}
     .layout-columns-toggle:hover {{
@@ -335,16 +358,17 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     .current-page-label {{
       position: absolute;
       top: 24px;
-      right: 254px;
+      right: 300px;
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 8px 12px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
       color: var(--accent2);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      text-transform: none;
       text-align: center;
       min-width: 60px;
       transition: all 0.2s;
@@ -362,25 +386,31 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     }}
     .header-badge {{
       display: inline-block;
+      position: absolute;
+      top: 72px;
+      right: 24px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
+      font-size: 9px;
       color: var(--accent2);
       background: rgba(0,212,170,0.1);
       border: 1px solid rgba(0,212,170,0.25);
       padding: 4px 12px;
       border-radius: 20px;
-      margin-bottom: 20px;
+      margin-bottom: 0;
       letter-spacing: 0.08em;
     }}
     h1 {{
-      font-size: clamp(28px, 5vw, 48px);
-      font-weight: 700;
+      font-size: clamp(26px, 4.6vw, 42px);
+      font-weight: 650;
       letter-spacing: -0.02em;
       background: linear-gradient(135deg, var(--text) 30%, var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       line-height: 1.15;
+      text-align: left;
+      max-width: 1100px;
+      margin: 0 auto;
     }}
     .subtitle {{
       margin-top: 12px;
@@ -820,6 +850,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid {{ grid-template-columns: 1fr; }}
       body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid {{ grid-template-columns: 1fr 1fr; }}
       body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid {{ grid-template-columns: 1fr 1fr; }}
+      .header-badge {{ position: static; margin-bottom: 16px; }}
       .page-meta {{ grid-template-columns: 1fr; }}
       .audience-brief {{ grid-template-columns: 1fr; }}
     }}
@@ -828,8 +859,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
 
 <header>
-  <div class="current-page-label" id="current-page-label">{page_slug}</div>
-  <button class="menu-toggle" id="menu-toggle" aria-label="Masquer le menu" aria-pressed="true" title="Masquer le menu">🧭</button>
+  <div class="current-page-label" id="current-page-label">{current_page_menu_label}</div>
+  <button class="submenu-toggle" id="submenu-toggle" aria-label="Masquer le menu des sous-categories" aria-pressed="true" title="Masquer le menu des sous-categories">🗂️</button>
+  <button class="main-menu-toggle" id="main-menu-toggle" aria-label="Masquer le menu principal" aria-pressed="true" title="Masquer le menu principal">🧭</button>
   <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
   <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
   <button class="layout-columns-toggle" id="layout-columns-toggle" aria-label="Changer le nombre de colonnes de categories" aria-pressed="true" title="Colonnes categories: 1">1</button>
@@ -937,7 +969,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   const currentPageLabel = document.getElementById('current-page-label');
   const currentPageFile = '{history_page_file}';
   const exportManifest = {export_manifest_json};
-  const menuToggle = document.getElementById('menu-toggle');
+  const mainMenuToggle = document.getElementById('main-menu-toggle');
+  const submenuToggle = document.getElementById('submenu-toggle');
   const pageSwitcher = document.querySelector('.page-switcher');
   const categoryNav = document.getElementById('category-nav');
   const summaryToggle = document.getElementById('summary-toggle');
@@ -1159,38 +1192,65 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   layoutColumnsToggle.addEventListener('click', cycleLayoutColumns);
 
-  // Menu toggle (page switcher + category nav)
-  const storedMenuState = localStorage.getItem('menuVisible');
-  const menuVisible = storedMenuState === null ? true : storedMenuState === 'true';
+  // Main menu toggle (page switcher only)
+  const storedMainMenuState = localStorage.getItem('mainMenuVisible');
+  const mainMenuVisible = storedMainMenuState === null ? true : storedMainMenuState === 'true';
 
-  function updateMenuToggle() {{
-    const isVisible = !pageSwitcher.classList.contains('hidden') && !categoryNav.classList.contains('hidden');
-    menuToggle.setAttribute('aria-pressed', String(isVisible));
-    menuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu' : 'Afficher le menu');
-    menuToggle.setAttribute('title', isVisible ? 'Masquer le menu' : 'Afficher le menu');
+  function updateMainMenuToggle() {{
+    const isVisible = !pageSwitcher.classList.contains('hidden');
+    mainMenuToggle.setAttribute('aria-pressed', String(isVisible));
+    mainMenuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu principal' : 'Afficher le menu principal');
+    mainMenuToggle.setAttribute('title', isVisible ? 'Masquer le menu principal' : 'Afficher le menu principal');
     updateAllButtonStates();
   }}
 
-  function toggleMenu() {{
-    const isHidden = pageSwitcher.classList.contains('hidden') || categoryNav.classList.contains('hidden');
+  function toggleMainMenu() {{
+    const isHidden = pageSwitcher.classList.contains('hidden');
     if (isHidden) {{
       pageSwitcher.classList.remove('hidden');
-      categoryNav.classList.remove('hidden');
-      localStorage.setItem('menuVisible', 'true');
+      localStorage.setItem('mainMenuVisible', 'true');
     }} else {{
       pageSwitcher.classList.add('hidden');
-      categoryNav.classList.add('hidden');
-      localStorage.setItem('menuVisible', 'false');
+      localStorage.setItem('mainMenuVisible', 'false');
     }}
-    updateMenuToggle();
+    updateMainMenuToggle();
   }}
 
-  if (!menuVisible) {{
+  if (!mainMenuVisible) {{
     pageSwitcher.classList.add('hidden');
+  }}
+  updateMainMenuToggle();
+  mainMenuToggle.addEventListener('click', toggleMainMenu);
+
+  // Subcategory menu toggle (category tabs only)
+  const storedSubmenuState = localStorage.getItem('subcategoryMenuVisible');
+  const submenuVisible = storedSubmenuState === null ? true : storedSubmenuState === 'true';
+
+  function updateSubmenuToggle() {{
+    const isVisible = !categoryNav.classList.contains('hidden');
+    submenuToggle.setAttribute('aria-pressed', String(isVisible));
+    submenuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu des sous-categories' : 'Afficher le menu des sous-categories');
+    submenuToggle.setAttribute('title', isVisible ? 'Masquer le menu des sous-categories' : 'Afficher le menu des sous-categories');
+    updateAllButtonStates();
+  }}
+
+  function toggleSubmenu() {{
+    const isHidden = categoryNav.classList.contains('hidden');
+    if (isHidden) {{
+      categoryNav.classList.remove('hidden');
+      localStorage.setItem('subcategoryMenuVisible', 'true');
+    }} else {{
+      categoryNav.classList.add('hidden');
+      localStorage.setItem('subcategoryMenuVisible', 'false');
+    }}
+    updateSubmenuToggle();
+  }}
+
+  if (!submenuVisible) {{
     categoryNav.classList.add('hidden');
   }}
-  updateMenuToggle();
-  menuToggle.addEventListener('click', toggleMenu);
+  updateSubmenuToggle();
+  submenuToggle.addEventListener('click', toggleSubmenu);
 
   // Header summary toggle (subtitle + stats)
   const storedSummaryState = localStorage.getItem('headerSummaryVisible');
@@ -1529,6 +1589,7 @@ def generate_page(page_cfg: dict, search_query_map: dict[str, list[str]]):
         history_page_file=output_file.name,
         export_manifest_json=build_export_manifest(),
         page_slug=escape(page_cfg["slug"]),
+      current_page_menu_label=escape(page_cfg["label"]),
         page_switcher=render_page_switcher(meta.get("page_name", "general")),
         page_label=escape(page_label),
         page_description=escape(page_description),

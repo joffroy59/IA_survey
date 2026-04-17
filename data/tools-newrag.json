@@ -23,31 +23,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-17 20:41:30.273",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/newrag/2026-04-17_20-41-30-273.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:56:53.986",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/newrag/2026-04-17_20-56-53-986.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:58:33.487",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/newrag/2026-04-17_20-58-33-487.html"
-      },
-      {
-        "generated_at": "2026-04-17 21:06:28.606",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/newrag/2026-04-17_21-06-28-606.html"
-      },
-      {
-        "generated_at": "2026-04-17 21:08:33.432",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/newrag/2026-04-17_21-08-33-432.html"
-      },
-      {
         "generated_at": "2026-04-17 21:18:02.090",
         "tool_count": 16,
         "snapshot_file": "snapshots/newrag/2026-04-17_21-18-02-090.html"
@@ -71,6 +46,31 @@
         "generated_at": "2026-04-17 21:48:56.346",
         "tool_count": 16,
         "snapshot_file": "snapshots/newrag/2026-04-17_21-48-56-346.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:55:47.661",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-17_21-55-47-661.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:58:52.406",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-17_21-58-52-406.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:59:48.589",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-17_21-59-48-589.html"
+      },
+      {
+        "generated_at": "2026-04-17 22:00:34.318",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-17_22-00-34-318.html"
+      },
+      {
+        "generated_at": "2026-04-17 22:01:37.658",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-17_22-01-37-658.html"
       }
     ]
   },

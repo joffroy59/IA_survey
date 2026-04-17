@@ -25,31 +25,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-17 20:41:30.264",
-        "tool_count": 24,
-        "snapshot_file": "snapshots/discovery/2026-04-17_20-41-30-264.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:56:53.977",
-        "tool_count": 24,
-        "snapshot_file": "snapshots/discovery/2026-04-17_20-56-53-977.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:58:33.477",
-        "tool_count": 24,
-        "snapshot_file": "snapshots/discovery/2026-04-17_20-58-33-477.html"
-      },
-      {
-        "generated_at": "2026-04-17 21:06:28.596",
-        "tool_count": 24,
-        "snapshot_file": "snapshots/discovery/2026-04-17_21-06-28-596.html"
-      },
-      {
-        "generated_at": "2026-04-17 21:08:33.423",
-        "tool_count": 24,
-        "snapshot_file": "snapshots/discovery/2026-04-17_21-08-33-423.html"
-      },
-      {
         "generated_at": "2026-04-17 21:18:02.080",
         "tool_count": 24,
         "snapshot_file": "snapshots/discovery/2026-04-17_21-18-02-080.html"
@@ -73,6 +48,31 @@
         "generated_at": "2026-04-17 21:48:56.336",
         "tool_count": 24,
         "snapshot_file": "snapshots/discovery/2026-04-17_21-48-56-336.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:55:47.652",
+        "tool_count": 24,
+        "snapshot_file": "snapshots/discovery/2026-04-17_21-55-47-652.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:58:52.396",
+        "tool_count": 24,
+        "snapshot_file": "snapshots/discovery/2026-04-17_21-58-52-396.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:59:48.575",
+        "tool_count": 24,
+        "snapshot_file": "snapshots/discovery/2026-04-17_21-59-48-575.html"
+      },
+      {
+        "generated_at": "2026-04-17 22:00:34.307",
+        "tool_count": 24,
+        "snapshot_file": "snapshots/discovery/2026-04-17_22-00-34-307.html"
+      },
+      {
+        "generated_at": "2026-04-17 22:01:37.643",
+        "tool_count": 24,
+        "snapshot_file": "snapshots/discovery/2026-04-17_22-01-37-643.html"
       }
     ]
   },
