@@ -144,56 +144,6 @@
       background: var(--surface);
       transform: scale(1.05);
     }
-    .layout-columns-toggle {
-      position: absolute;
-      top: 24px;
-      right: 208px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text);
-      font-size: 18px;
-      transition: all 0.2s;
-    }
-    .layout-columns-toggle:hover {
-      border-color: var(--accent2);
-      background: var(--surface);
-      transform: scale(1.05);
-    }
-    button[aria-pressed="false"] {
-      opacity: 0.5;
-      filter: brightness(0.7);
-    }
-    button[aria-pressed="false"]:hover {
-      opacity: 0.8;
-      filter: brightness(0.85);
-    }
-    .current-page-label {
-      position: absolute;
-      top: 24px;
-      right: 254px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px 12px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--accent2);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      text-align: center;
-      min-width: 60px;
-      transition: all 0.2s;
-    }
-    .current-page-label.hidden {
-      display: none;
-    }
     header::after {
       content: '';
       display: block;
@@ -338,6 +288,38 @@
       gap: 8px;
       flex-wrap: wrap;
       justify-content: center;
+    }
+    .layout-selector-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--muted);
+      border-radius: 10px;
+      padding: 0 8px;
+      height: 36px;
+    }
+    .layout-selector-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent2);
+    }
+    .layout-select {
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      cursor: pointer;
+      min-width: 64px;
+    }
+    .layout-select option {
+      background: var(--surface);
+      color: var(--text);
     }
     .audience-brief {
       margin: 18px auto 0;
@@ -654,11 +636,9 @@
 <body>
 
 <header>
-  <div class="current-page-label" id="current-page-label">dococr</div>
   <button class="menu-toggle" id="menu-toggle" aria-label="Masquer le menu" aria-pressed="true" title="Masquer le menu">🧭</button>
   <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
   <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
-  <button class="layout-columns-toggle" id="layout-columns-toggle" aria-label="Changer le nombre de colonnes" aria-pressed="true" title="Changer le nombre de colonnes">⊞</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · 17/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
@@ -686,6 +666,15 @@
       <div class="page-meta-desc">Plateformes complètes pour ingestion, OCR, classification et workflow documentaire.</div>
     </div>
     <div class="button-group">
+      <div class="layout-selector-wrap">
+        <label class="layout-selector-label" for="layout-columns-select">Colonnes</label>
+        <select class="layout-select" id="layout-columns-select" aria-label="Selection du nombre de colonnes">
+          <option value="1">1</option>
+          <option value="now">now</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
       <button class="info-btn" type="button" id="open-search-info">Sources</button>
       <button class="info-btn" type="button" id="open-history-info">Historique</button>
       <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
@@ -896,6 +885,11 @@
       </thead>
       <tbody>
                 <tr>
+          <td class="history-date"><a href="snapshots/dococr/2026-04-16_07-10-46-810.html" target="_blank">2026-04-16 07:10:46.810</a></td>
+          <td class="history-count">12</td>
+          <td><a href="snapshots/dococr/2026-04-16_07-10-46-810.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/dococr/2026-04-16_07-10-46-810.html&amp;right=dococr.html">Comparer</a></td>
+        </tr>
+        <tr>
           <td class="history-date"><a href="snapshots/dococr/2026-04-16_07-25-52-211.html" target="_blank">2026-04-16 07:25:52.211</a></td>
           <td class="history-count">12</td>
           <td><a href="snapshots/dococr/2026-04-16_07-25-52-211.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/dococr/2026-04-16_07-25-52-211.html&amp;right=dococr.html">Comparer</a></td>
@@ -940,11 +934,6 @@
           <td class="history-count">12</td>
           <td><a href="snapshots/dococr/2026-04-17_21-08-33-438.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/dococr/2026-04-17_21-08-33-438.html&amp;right=dococr.html">Comparer</a></td>
         </tr>
-        <tr>
-          <td class="history-date"><a href="snapshots/dococr/2026-04-17_21-18-02-097.html" target="_blank">2026-04-17 21:18:02.097</a></td>
-          <td class="history-count">12</td>
-          <td><a href="snapshots/dococr/2026-04-17_21-18-02-097.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/dococr/2026-04-17_21-18-02-097.html&amp;right=dococr.html">Comparer</a></td>
-        </tr>
       </tbody>
     </table>
   </div>
@@ -962,8 +951,7 @@
   const closeHistoryInfo = document.getElementById('close-history-info');
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
-  const layoutColumnsToggle = document.getElementById('layout-columns-toggle');
-  const currentPageLabel = document.getElementById('current-page-label');
+  const layoutColumnsSelect = document.getElementById('layout-columns-select');
   const currentPageFile = 'dococr.html';
   const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}, {"slug": "ia-resources", "html": "ia-resources.html", "data": "data/tools-ia-resources.json"}]};
   const menuToggle = document.getElementById('menu-toggle');
@@ -1113,8 +1101,7 @@
     updateThemeToggle();
   });
 
-  // Layout columns toggle button (cycles through: 1 -> now -> 2 -> 3 -> 1)
-  const validGridLayouts = ['1', 'now', '2', '3'];
+  // Layout columns selector (1, now, 2, 3)
   const storedGridColumns = localStorage.getItem('gridColumnsLayout') || 'now';
 
   function applyGridColumnsLayout(layoutValue) {
@@ -1125,29 +1112,16 @@
     document.body.setAttribute('data-grid-columns', layoutValue);
   }
 
-  function updateLayoutToggle() {
-    const currentLayout = localStorage.getItem('gridColumnsLayout') || 'now';
-    const isDefault = currentLayout === 'now';
-    layoutColumnsToggle.setAttribute('aria-pressed', String(isDefault));
-    layoutColumnsToggle.setAttribute('title', `Colonnes: ${currentLayout}`);
-    updateAllButtonStates();
-  }
+  const validGridLayouts = ['1', 'now', '2', '3'];
+  const initialGridLayout = validGridLayouts.includes(storedGridColumns) ? storedGridColumns : 'now';
+  layoutColumnsSelect.value = initialGridLayout;
+  applyGridColumnsLayout(initialGridLayout);
 
-  function cycleLayoutColumns() {
-    const currentLayout = localStorage.getItem('gridColumnsLayout') || 'now';
-    const currentIndex = validGridLayouts.indexOf(currentLayout);
-    const nextIndex = (currentIndex + 1) % validGridLayouts.length;
-    const nextLayout = validGridLayouts[nextIndex];
+  layoutColumnsSelect.addEventListener('change', () => {
+    const nextLayout = layoutColumnsSelect.value;
     applyGridColumnsLayout(nextLayout);
     localStorage.setItem('gridColumnsLayout', nextLayout);
-    updateLayoutToggle();
-  }
-
-  const initialGridLayout = validGridLayouts.includes(storedGridColumns) ? storedGridColumns : 'now';
-  applyGridColumnsLayout(initialGridLayout);
-  updateLayoutToggle();
-
-  layoutColumnsToggle.addEventListener('click', cycleLayoutColumns);
+  });
 
   // Menu toggle (page switcher + category nav)
   const storedMenuState = localStorage.getItem('menuVisible');
@@ -1158,7 +1132,6 @@
     menuToggle.setAttribute('aria-pressed', String(isVisible));
     menuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu' : 'Afficher le menu');
     menuToggle.setAttribute('title', isVisible ? 'Masquer le menu' : 'Afficher le menu');
-    updateAllButtonStates();
   }
 
   function toggleMenu() {
@@ -1191,7 +1164,6 @@
     summaryToggle.setAttribute('aria-pressed', String(isVisible));
     summaryToggle.setAttribute('aria-label', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
     summaryToggle.setAttribute('title', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
-    updateAllButtonStates();
   }
 
   function toggleHeaderSummary() {
@@ -1221,7 +1193,6 @@
     panelToggle.setAttribute('aria-pressed', String(isVisible));
     panelToggle.setAttribute('aria-label', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
     panelToggle.setAttribute('title', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
-    updateAllButtonStates();
   }
 
   function togglePanels() {
@@ -1246,20 +1217,6 @@
   updatePanelToggle();
 
   panelToggle.addEventListener('click', togglePanels);
-
-  // Master function to sync all button aria-pressed states and page label visibility
-  function updateAllButtonStates() {
-    // Update page label visibility: show when menu is hidden, hide when menu is visible
-    const isMenuVisible = !pageSwitcher.classList.contains('hidden');
-    if (isMenuVisible) {
-      currentPageLabel.classList.add('hidden');
-    } else {
-      currentPageLabel.classList.remove('hidden');
-    }
-  }
-
-  // Initialize all button states
-  updateAllButtonStates();
 </script>
 
 </body>

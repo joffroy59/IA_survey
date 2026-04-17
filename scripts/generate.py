@@ -302,6 +302,56 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       background: var(--surface);
       transform: scale(1.05);
     }}
+    .layout-columns-toggle {{
+      position: absolute;
+      top: 24px;
+      right: 208px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }}
+    .layout-columns-toggle:hover {{
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }}
+    button[aria-pressed="false"] {{
+      opacity: 0.5;
+      filter: brightness(0.7);
+    }}
+    button[aria-pressed="false"]:hover {{
+      opacity: 0.8;
+      filter: brightness(0.85);
+    }}
+    .current-page-label {{
+      position: absolute;
+      top: 24px;
+      right: 254px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent2);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align: center;
+      min-width: 60px;
+      transition: all 0.2s;
+    }}
+    .current-page-label.hidden {{
+      display: none;
+    }}
     header::after {{
       content: '';
       display: block;
@@ -446,38 +496,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       gap: 8px;
       flex-wrap: wrap;
       justify-content: center;
-    }}
-    .layout-selector-wrap {{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid var(--border);
-      background: var(--surface2);
-      color: var(--muted);
-      border-radius: 10px;
-      padding: 0 8px;
-      height: 36px;
-    }}
-    .layout-selector-label {{
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--accent2);
-    }}
-    .layout-select {{
-      border: 0;
-      outline: none;
-      background: transparent;
-      color: var(--text);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      cursor: pointer;
-      min-width: 64px;
-    }}
-    .layout-select option {{
-      background: var(--surface);
-      color: var(--text);
     }}
     .audience-brief {{
       margin: 18px auto 0;
@@ -794,9 +812,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
 
 <header>
+  <div class="current-page-label" id="current-page-label">{page_slug}</div>
   <button class="menu-toggle" id="menu-toggle" aria-label="Masquer le menu" aria-pressed="true" title="Masquer le menu">🧭</button>
   <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
   <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
+  <button class="layout-columns-toggle" id="layout-columns-toggle" aria-label="Changer le nombre de colonnes" aria-pressed="true" title="Changer le nombre de colonnes">⊞</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · {today}</div>
   <h1>{title}</h1>
@@ -813,15 +833,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <div class="page-meta-desc">{page_description}</div>
     </div>
     <div class="button-group">
-      <div class="layout-selector-wrap">
-        <label class="layout-selector-label" for="layout-columns-select">Colonnes</label>
-        <select class="layout-select" id="layout-columns-select" aria-label="Selection du nombre de colonnes">
-          <option value="1">1</option>
-          <option value="now">now</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>
-      </div>
       <button class="info-btn" type="button" id="open-search-info">Sources</button>
       <button class="info-btn" type="button" id="open-history-info">Historique</button>
       <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
@@ -904,7 +915,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   const closeHistoryInfo = document.getElementById('close-history-info');
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
-  const layoutColumnsSelect = document.getElementById('layout-columns-select');
+  const layoutColumnsToggle = document.getElementById('layout-columns-toggle');
+  const currentPageLabel = document.getElementById('current-page-label');
   const currentPageFile = '{history_page_file}';
   const exportManifest = {export_manifest_json};
   const menuToggle = document.getElementById('menu-toggle');
@@ -1054,7 +1066,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     updateThemeToggle();
   }});
 
-  // Layout columns selector (1, now, 2, 3)
+  // Layout columns toggle button (cycles through: 1 -> now -> 2 -> 3 -> 1)
+  const validGridLayouts = ['1', 'now', '2', '3'];
   const storedGridColumns = localStorage.getItem('gridColumnsLayout') || 'now';
 
   function applyGridColumnsLayout(layoutValue) {{
@@ -1065,16 +1078,29 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     document.body.setAttribute('data-grid-columns', layoutValue);
   }}
 
-  const validGridLayouts = ['1', 'now', '2', '3'];
-  const initialGridLayout = validGridLayouts.includes(storedGridColumns) ? storedGridColumns : 'now';
-  layoutColumnsSelect.value = initialGridLayout;
-  applyGridColumnsLayout(initialGridLayout);
+  function updateLayoutToggle() {{
+    const currentLayout = localStorage.getItem('gridColumnsLayout') || 'now';
+    const isDefault = currentLayout === 'now';
+    layoutColumnsToggle.setAttribute('aria-pressed', String(isDefault));
+    layoutColumnsToggle.setAttribute('title', `Colonnes: ${{currentLayout}}`);
+    updateAllButtonStates();
+  }}
 
-  layoutColumnsSelect.addEventListener('change', () => {{
-    const nextLayout = layoutColumnsSelect.value;
+  function cycleLayoutColumns() {{
+    const currentLayout = localStorage.getItem('gridColumnsLayout') || 'now';
+    const currentIndex = validGridLayouts.indexOf(currentLayout);
+    const nextIndex = (currentIndex + 1) % validGridLayouts.length;
+    const nextLayout = validGridLayouts[nextIndex];
     applyGridColumnsLayout(nextLayout);
     localStorage.setItem('gridColumnsLayout', nextLayout);
-  }});
+    updateLayoutToggle();
+  }}
+
+  const initialGridLayout = validGridLayouts.includes(storedGridColumns) ? storedGridColumns : 'now';
+  applyGridColumnsLayout(initialGridLayout);
+  updateLayoutToggle();
+
+  layoutColumnsToggle.addEventListener('click', cycleLayoutColumns);
 
   // Menu toggle (page switcher + category nav)
   const storedMenuState = localStorage.getItem('menuVisible');
@@ -1085,6 +1111,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     menuToggle.setAttribute('aria-pressed', String(isVisible));
     menuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu' : 'Afficher le menu');
     menuToggle.setAttribute('title', isVisible ? 'Masquer le menu' : 'Afficher le menu');
+    updateAllButtonStates();
   }}
 
   function toggleMenu() {{
@@ -1117,6 +1144,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     summaryToggle.setAttribute('aria-pressed', String(isVisible));
     summaryToggle.setAttribute('aria-label', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
     summaryToggle.setAttribute('title', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
+    updateAllButtonStates();
   }}
 
   function toggleHeaderSummary() {{
@@ -1146,6 +1174,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     panelToggle.setAttribute('aria-pressed', String(isVisible));
     panelToggle.setAttribute('aria-label', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
     panelToggle.setAttribute('title', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
+    updateAllButtonStates();
   }}
 
   function togglePanels() {{
@@ -1170,6 +1199,20 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   updatePanelToggle();
 
   panelToggle.addEventListener('click', togglePanels);
+
+  // Master function to sync all button aria-pressed states and page label visibility
+  function updateAllButtonStates() {{
+    // Update page label visibility: show when menu is hidden, hide when menu is visible
+    const isMenuVisible = !pageSwitcher.classList.contains('hidden');
+    if (isMenuVisible) {{
+      currentPageLabel.classList.add('hidden');
+    }} else {{
+      currentPageLabel.classList.remove('hidden');
+    }}
+  }}
+
+  // Initialize all button states
+  updateAllButtonStates();
 </script>
 
 </body>
@@ -1428,6 +1471,7 @@ def generate_page(page_cfg: dict, search_query_map: dict[str, list[str]]):
         new_tool_count=new_tool_count,
         history_page_file=output_file.name,
         export_manifest_json=build_export_manifest(),
+        page_slug=escape(page_cfg["slug"]),
         page_switcher=render_page_switcher(meta.get("page_name", "general")),
         page_label=escape(page_label),
         page_description=escape(page_description),

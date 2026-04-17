@@ -3,6 +3,32 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FEATURE) Convert column layout to toggle button + add button darkening + add page label indicator
+
+### Changed
+- **Column Layout Toggle**: Converted from `<select>` dropdown to a toggle button (⊞) that cycles through: 1 → now → 2 → 3 → 1.
+- **Button Darkening**: Added CSS `button[aria-pressed="false"]` styling (opacity: 0.5, filter: brightness(0.7)) so toggle buttons appear darkened when their associated elements are hidden.
+- **Page Label Indicator**: Added `.current-page-label` element showing current page slug (e.g., "general", "enterprise") that auto-hides when menu is visible and shows when menu is hidden.
+- Updated `scripts/generate.py`:
+  - Replaced layout selector HTML with layout-columns-toggle button
+  - Added `.layout-columns-toggle` and `.current-page-label` CSS
+  - Added `button[aria-pressed="false"]` CSS for darkened button state
+  - Added `cycleLayoutColumns()` function to cycle through layout options
+  - Added `updateLayoutToggle()` to manage layout button state
+  - Added `updateAllButtonStates()` master function to sync button states and page label visibility
+  - Added `page_slug` template parameter to HTML_TEMPLATE.format()
+  - Removed old `.layout-selector-wrap`, `.layout-selector-label`, `.layout-select` CSS
+
+### Why
+- User requested: column layout as a toggle button (not a dropdown), matching other UI controls
+- Darkening toggle buttons provides visual feedback when associated content is hidden
+- Page label keeps users informed of current page even when menu navigation is hidden for more screen space
+
+### Files touched
+- `scripts/generate.py`
+
+---
+
 ## FEATURE) Add selector for 1/now/2/3 column layout
 
 ### Changed
