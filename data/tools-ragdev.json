@@ -77,41 +77,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-15 23:44:42.718",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/ragdev/2026-04-15_23-44-42-718.html"
-      },
-      {
-        "generated_at": "2026-04-15 23:53:26.239",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/ragdev/2026-04-15_23-53-26-239.html"
-      },
-      {
-        "generated_at": "2026-04-16 07:10:46.802",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/ragdev/2026-04-16_07-10-46-802.html"
-      },
-      {
-        "generated_at": "2026-04-16 07:25:52.203",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/ragdev/2026-04-16_07-25-52-203.html"
-      },
-      {
-        "generated_at": "2026-04-16 09:04:05.927",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/ragdev/2026-04-16_09-04-05-927.html"
-      },
-      {
-        "generated_at": "2026-04-16 09:41:12.307",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/ragdev/2026-04-16_09-41-12-307.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:25:36.254",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/ragdev/2026-04-17_20-25-36-254.html"
-      },
-      {
         "generated_at": "2026-04-17 20:41:30.266",
         "tool_count": 16,
         "snapshot_file": "snapshots/ragdev/2026-04-17_20-41-30-266.html"
@@ -125,6 +90,41 @@
         "generated_at": "2026-04-17 20:58:33.480",
         "tool_count": 16,
         "snapshot_file": "snapshots/ragdev/2026-04-17_20-58-33-480.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:06:28.598",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/ragdev/2026-04-17_21-06-28-598.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:08:33.426",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/ragdev/2026-04-17_21-08-33-426.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:18:02.083",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/ragdev/2026-04-17_21-18-02-083.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:40:47.996",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/ragdev/2026-04-17_21-40-47-996.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:43:42.677",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/ragdev/2026-04-17_21-43-42-677.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:45:54.889",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/ragdev/2026-04-17_21-45-54-889.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:48:56.339",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/ragdev/2026-04-17_21-48-56-339.html"
       }
     ]
   },

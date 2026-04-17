@@ -302,6 +302,56 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       background: var(--surface);
       transform: scale(1.05);
     }}
+    .layout-columns-toggle {{
+      position: absolute;
+      top: 24px;
+      right: 208px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }}
+    .layout-columns-toggle:hover {{
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }}
+    button[aria-pressed="false"] {{
+      opacity: 0.5;
+      filter: brightness(0.7);
+    }}
+    button[aria-pressed="false"]:hover {{
+      opacity: 0.8;
+      filter: brightness(0.85);
+    }}
+    .current-page-label {{
+      position: absolute;
+      top: 24px;
+      right: 254px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent2);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align: center;
+      min-width: 60px;
+      transition: all 0.2s;
+    }}
+    .current-page-label.hidden {{
+      display: none;
+    }}
     header::after {{
       content: '';
       display: block;
@@ -556,6 +606,21 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     }}
 
     /* ── Category section ── */
+    .categories-grid {{
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 24px;
+    }}
+    body[data-grid-scope="all"][data-grid-columns="1"] .categories-grid {{
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }}
+    body[data-grid-scope="all"][data-grid-columns="2"] .categories-grid {{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }}
+    body[data-grid-scope="all"][data-grid-columns="3"] .categories-grid {{
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }}
+
     .category {{
       margin-bottom: 48px;
       display: none;
@@ -614,6 +679,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 10px;
+    }}
+    body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid {{
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }}
+    body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid {{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }}
+    body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid {{
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }}
     .tool-card {{
       display: flex;
@@ -742,6 +816,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     @media (max-width: 600px) {{
       .tools-grid {{ grid-template-columns: 1fr 1fr; }}
+      .categories-grid {{ grid-template-columns: 1fr; }}
+      body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid {{ grid-template-columns: 1fr; }}
+      body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid {{ grid-template-columns: 1fr 1fr; }}
+      body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid {{ grid-template-columns: 1fr 1fr; }}
       .page-meta {{ grid-template-columns: 1fr; }}
       .audience-brief {{ grid-template-columns: 1fr; }}
     }}
@@ -750,9 +828,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
 
 <header>
+  <div class="current-page-label" id="current-page-label">{page_slug}</div>
   <button class="menu-toggle" id="menu-toggle" aria-label="Masquer le menu" aria-pressed="true" title="Masquer le menu">🧭</button>
   <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
   <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
+  <button class="layout-columns-toggle" id="layout-columns-toggle" aria-label="Changer le nombre de colonnes de categories" aria-pressed="true" title="Colonnes categories: 1">1</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · {today}</div>
   <h1>{title}</h1>
@@ -795,7 +875,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </nav>
 
 <main>
-  {categories_html}
+  <div class="categories-grid">
+    {categories_html}
+  </div>
 </main>
 
 <footer>
@@ -851,6 +933,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   const closeHistoryInfo = document.getElementById('close-history-info');
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
+  const layoutColumnsToggle = document.getElementById('layout-columns-toggle');
+  const currentPageLabel = document.getElementById('current-page-label');
   const currentPageFile = '{history_page_file}';
   const exportManifest = {export_manifest_json};
   const menuToggle = document.getElementById('menu-toggle');
@@ -924,11 +1008,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       categories.forEach(c => {{
         c.classList.toggle('visible', cat === 'all' || c.dataset.id === cat);
       }});
+      updateGridScope(cat);
     }});
   }});
 
   // Show all on load
   categories.forEach(c => c.classList.add('visible'));
+  updateGridScope('all');
 
   // Search modal handlers
   openSearchInfo.addEventListener('click', () => {{
@@ -1000,6 +1086,79 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     updateThemeToggle();
   }});
 
+  // Category columns toggle button (cycles through: 1 -> 2 -> 3 -> 1)
+  // UI controls only the "all" scope for now.
+  const validGridLayouts = ['1', '2', '3'];
+  const storedGridColumnsAll = localStorage.getItem('gridColumnsAll') || '1';
+  const storedGridColumnsSingle = localStorage.getItem('gridColumnsSingle') || '3';
+
+  function getGridLayoutForScope(scope) {{
+    return scope === 'all'
+      ? (localStorage.getItem('gridColumnsAll') || '1')
+      : (localStorage.getItem('gridColumnsSingle') || '3');
+  }}
+
+  function applyGridColumnsLayoutForScope(scope) {{
+    document.body.setAttribute('data-grid-columns', getGridLayoutForScope(scope));
+  }}
+
+  // Future hook: keep single-category mode configurable without exposing UI yet.
+  function setSingleGridColumnsLayout(layoutValue) {{
+    if (!validGridLayouts.includes(layoutValue)) return;
+    localStorage.setItem('gridColumnsSingle', layoutValue);
+    if ((document.body.getAttribute('data-grid-scope') || 'all') === 'single') {{
+      applyGridColumnsLayoutForScope('single');
+      updateLayoutToggle();
+    }}
+  }}
+
+  function updateGridScope(selectedCategory) {{
+    const scope = selectedCategory === 'all' ? 'all' : 'single';
+    document.body.setAttribute('data-grid-scope', scope);
+    applyGridColumnsLayoutForScope(scope);
+    updateLayoutToggle();
+  }}
+
+  function updateLayoutToggle() {{
+    const currentScope = document.body.getAttribute('data-grid-scope') || 'all';
+    const currentLayout = getGridLayoutForScope(currentScope);
+    const targetLabel = currentScope === 'all' ? 'categories' : 'outils';
+    layoutColumnsToggle.textContent = currentLayout;
+    const canChangeFromUi = currentScope === 'all';
+    layoutColumnsToggle.disabled = !canChangeFromUi;
+    layoutColumnsToggle.setAttribute('aria-pressed', String(canChangeFromUi));
+    if (canChangeFromUi) {{
+      layoutColumnsToggle.setAttribute('aria-label', `Changer le nombre de colonnes de categories (actuel: ${{currentLayout}})`);
+      layoutColumnsToggle.setAttribute('title', `Colonnes categories: ${{currentLayout}}`);
+    }} else {{
+      layoutColumnsToggle.setAttribute('aria-label', `Colonnes outils fixes (actuel: ${{currentLayout}})`);
+      layoutColumnsToggle.setAttribute('title', `Colonnes outils: ${{currentLayout}} (fixe pour l'instant)`);
+    }}
+    updateAllButtonStates();
+  }}
+
+  function cycleLayoutColumns() {{
+    const currentScope = document.body.getAttribute('data-grid-scope') || 'all';
+    if (currentScope !== 'all') return;
+    const currentLayout = localStorage.getItem('gridColumnsAll') || '1';
+    const currentIndex = validGridLayouts.indexOf(currentLayout);
+    const safeIndex = currentIndex === -1 ? 0 : currentIndex;
+    const nextIndex = (safeIndex + 1) % validGridLayouts.length;
+    const nextLayout = validGridLayouts[nextIndex];
+    localStorage.setItem('gridColumnsAll', nextLayout);
+    applyGridColumnsLayoutForScope('all');
+    updateLayoutToggle();
+  }}
+
+  const initialGridLayoutAll = validGridLayouts.includes(storedGridColumnsAll) ? storedGridColumnsAll : '1';
+  const initialGridLayoutSingle = validGridLayouts.includes(storedGridColumnsSingle) ? storedGridColumnsSingle : '3';
+  localStorage.setItem('gridColumnsAll', initialGridLayoutAll);
+  localStorage.setItem('gridColumnsSingle', initialGridLayoutSingle);
+  applyGridColumnsLayoutForScope('all');
+  updateLayoutToggle();
+
+  layoutColumnsToggle.addEventListener('click', cycleLayoutColumns);
+
   // Menu toggle (page switcher + category nav)
   const storedMenuState = localStorage.getItem('menuVisible');
   const menuVisible = storedMenuState === null ? true : storedMenuState === 'true';
@@ -1009,6 +1168,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     menuToggle.setAttribute('aria-pressed', String(isVisible));
     menuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu' : 'Afficher le menu');
     menuToggle.setAttribute('title', isVisible ? 'Masquer le menu' : 'Afficher le menu');
+    updateAllButtonStates();
   }}
 
   function toggleMenu() {{
@@ -1041,6 +1201,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     summaryToggle.setAttribute('aria-pressed', String(isVisible));
     summaryToggle.setAttribute('aria-label', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
     summaryToggle.setAttribute('title', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
+    updateAllButtonStates();
   }}
 
   function toggleHeaderSummary() {{
@@ -1070,6 +1231,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     panelToggle.setAttribute('aria-pressed', String(isVisible));
     panelToggle.setAttribute('aria-label', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
     panelToggle.setAttribute('title', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
+    updateAllButtonStates();
   }}
 
   function togglePanels() {{
@@ -1094,6 +1256,20 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   updatePanelToggle();
 
   panelToggle.addEventListener('click', togglePanels);
+
+  // Master function to sync all button aria-pressed states and page label visibility
+  function updateAllButtonStates() {{
+    // Update page label visibility: show when menu is hidden, hide when menu is visible
+    const isMenuVisible = !pageSwitcher.classList.contains('hidden');
+    if (isMenuVisible) {{
+      currentPageLabel.classList.add('hidden');
+    }} else {{
+      currentPageLabel.classList.remove('hidden');
+    }}
+  }}
+
+  // Initialize all button states
+  updateAllButtonStates();
 </script>
 
 </body>
@@ -1352,6 +1528,7 @@ def generate_page(page_cfg: dict, search_query_map: dict[str, list[str]]):
         new_tool_count=new_tool_count,
         history_page_file=output_file.name,
         export_manifest_json=build_export_manifest(),
+        page_slug=escape(page_cfg["slug"]),
         page_switcher=render_page_switcher(meta.get("page_name", "general")),
         page_label=escape(page_label),
         page_description=escape(page_description),

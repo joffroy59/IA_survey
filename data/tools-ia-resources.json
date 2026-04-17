@@ -9,16 +9,6 @@
     "search_queries": [],
     "page_history": [
       {
-        "generated_at": "2026-04-17 19:05:26.163",
-        "tool_count": 1,
-        "snapshot_file": "snapshots/ia-resources/2026-04-17_19-05-26-163.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:25:36.273",
-        "tool_count": 1,
-        "snapshot_file": "snapshots/ia-resources/2026-04-17_20-25-36-273.html"
-      },
-      {
         "generated_at": "2026-04-17 20:41:30.285",
         "tool_count": 1,
         "snapshot_file": "snapshots/ia-resources/2026-04-17_20-41-30-285.html"
@@ -32,6 +22,41 @@
         "generated_at": "2026-04-17 20:58:33.498",
         "tool_count": 1,
         "snapshot_file": "snapshots/ia-resources/2026-04-17_20-58-33-498.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:06:28.616",
+        "tool_count": 1,
+        "snapshot_file": "snapshots/ia-resources/2026-04-17_21-06-28-616.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:08:33.441",
+        "tool_count": 1,
+        "snapshot_file": "snapshots/ia-resources/2026-04-17_21-08-33-441.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:18:02.101",
+        "tool_count": 1,
+        "snapshot_file": "snapshots/ia-resources/2026-04-17_21-18-02-101.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:40:48.014",
+        "tool_count": 1,
+        "snapshot_file": "snapshots/ia-resources/2026-04-17_21-40-48-014.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:43:42.694",
+        "tool_count": 1,
+        "snapshot_file": "snapshots/ia-resources/2026-04-17_21-43-42-694.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:45:54.909",
+        "tool_count": 1,
+        "snapshot_file": "snapshots/ia-resources/2026-04-17_21-45-54-909.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:48:56.357",
+        "tool_count": 1,
+        "snapshot_file": "snapshots/ia-resources/2026-04-17_21-48-56-357.html"
       }
     ]
   },
