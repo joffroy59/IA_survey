@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Boîte à outils IA Génératives</title>
-  <meta name="description" content="Les meilleurs outils IA, mis à jour automatiquement">
+  <meta name="description" content="Applications IA CLI, mis à jour automatiquement">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -78,6 +78,50 @@
       background: var(--surface);
       transform: scale(1.05);
     }
+    .main-menu-toggle {
+      position: absolute;
+      top: 24px;
+      right: 208px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .main-menu-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
+    .submenu-toggle {
+      position: absolute;
+      top: 24px;
+      right: 162px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .submenu-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
     .summary-toggle {
       position: absolute;
       top: 24px;
@@ -122,6 +166,57 @@
       background: var(--surface);
       transform: scale(1.05);
     }
+    .layout-columns-toggle {
+      position: absolute;
+      top: 24px;
+      right: 254px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .layout-columns-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
+    button[aria-pressed="false"] {
+      opacity: 0.5;
+      filter: brightness(0.7);
+    }
+    button[aria-pressed="false"]:hover {
+      opacity: 0.8;
+      filter: brightness(0.85);
+    }
+    .current-page-label {
+      position: absolute;
+      top: 24px;
+      right: 300px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent2);
+      letter-spacing: 0.01em;
+      text-transform: none;
+      text-align: center;
+      min-width: 60px;
+      transition: all 0.2s;
+    }
+    .current-page-label.hidden {
+      display: none;
+    }
     header::after {
       content: '';
       display: block;
@@ -132,6 +227,9 @@
     }
     .header-badge {
       display: inline-block;
+      position: absolute;
+      top: 72px;
+      right: 24px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       color: var(--accent2);
@@ -139,12 +237,12 @@
       border: 1px solid rgba(0,212,170,0.25);
       padding: 4px 12px;
       border-radius: 20px;
-      margin-bottom: 20px;
+      margin-bottom: 0;
       letter-spacing: 0.08em;
     }
     h1 {
-      font-size: clamp(28px, 5vw, 48px);
-      font-weight: 700;
+      font-size: clamp(26px, 4.6vw, 42px);
+      font-weight: 650;
       letter-spacing: -0.02em;
       background: linear-gradient(135deg, var(--text) 30%, var(--accent));
       -webkit-background-clip: text;
@@ -177,6 +275,9 @@
       border-radius: 999px;
       border: 1px solid var(--border);
       background: var(--surface);
+    }
+    .page-switcher.hidden {
+      display: none;
     }
     .page-link {
       text-decoration: none;
@@ -344,6 +445,9 @@
       max-width: 900px;
       margin: 0 auto;
     }
+    nav.hidden {
+      display: none;
+    }
     .nav-tab {
       font-size: 13px;
       font-weight: 500;
@@ -370,6 +474,21 @@
     }
 
     /* ── Category section ── */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 24px;
+    }
+    body[data-grid-scope="all"][data-grid-columns="1"] .categories-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    body[data-grid-scope="all"][data-grid-columns="2"] .categories-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    body[data-grid-scope="all"][data-grid-columns="3"] .categories-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .category {
       margin-bottom: 48px;
       display: none;
@@ -428,6 +547,15 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 10px;
+    }
+    body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
     .tool-card {
       display: flex;
@@ -556,6 +684,11 @@
 
     @media (max-width: 600px) {
       .tools-grid { grid-template-columns: 1fr 1fr; }
+      .categories-grid { grid-template-columns: 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid { grid-template-columns: 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid { grid-template-columns: 1fr 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid { grid-template-columns: 1fr 1fr; }
+      .header-badge { position: static; margin-bottom: 16px; }
       .page-meta { grid-template-columns: 1fr; }
       .audience-brief { grid-template-columns: 1fr; }
     }
@@ -564,33 +697,37 @@
 <body>
 
 <header>
+  <div class="current-page-label" id="current-page-label">Vue AI CLI Applications</div>
+  <button class="submenu-toggle" id="submenu-toggle" aria-label="Masquer le menu des sous-categories" aria-pressed="true" title="Masquer le menu des sous-categories">🗂️</button>
+  <button class="main-menu-toggle" id="main-menu-toggle" aria-label="Masquer le menu principal" aria-pressed="true" title="Masquer le menu principal">🧭</button>
   <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
   <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
+  <button class="layout-columns-toggle" id="layout-columns-toggle" aria-label="Changer le nombre de colonnes de categories" aria-pressed="true" title="Colonnes categories: 1">1</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · 17/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
   <div class="header-summary" id="header-summary">
-    <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
+    <p class="subtitle">Applications IA CLI, mis à jour automatiquement</p>
     <p class="update-info">Dernière mise à jour : <span>2026-04-16</span></p>
-    <p class="update-info">Outils : <span>12</span> · Nouveaux : <span>1</span></p>
+    <p class="update-info">Outils : <span>2</span> · Nouveaux : <span>2</span></p>
   </div>
   <div class="page-switcher"><a class="page-link" href="index.html">Vue Generale</a>
     <a class="page-link" href="enterprise.html">Vue Enterprise</a>
     <a class="page-link" href="discovery.html">Vue Decouverte</a>
     <a class="page-link" href="ragdev.html">Vue RAG Pro + DevTools</a>
-    <a class="page-link active" href="agentdev.html">Vue Agent Dev + IDE Tools</a>
+    <a class="page-link" href="agentdev.html">Vue Agent Dev + IDE Tools</a>
     <a class="page-link" href="vscode.html">Vue VS Code</a>
     <a class="page-link" href="newrag.html">Vue New RAG</a>
     <a class="page-link" href="cowork.html">vue Claude Cowork</a>
     <a class="page-link" href="ocr.html">Vue OCR</a>
     <a class="page-link" href="dococr.html">Vue OCR Système Complet</a>
-    <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a>
+    <a class="page-link active" href="aicliapps.html">Vue AI CLI Applications</a>
     <a class="page-link-static" href="ia-resources.html">Ressources IA</a></div>
   <div class="page-meta">
     <div>
       <div class="page-meta-label">Type de page</div>
-      <div class="page-meta-title">Panorama Agent Dev + IDE Tools</div>
-      <div class="page-meta-desc">Outils spécialisés pour développement d&#x27;agents IA autonomes et IDE enrichis d&#x27;IA.</div>
+      <div class="page-meta-title">Panorama AI CLI Applications</div>
+      <div class="page-meta-desc">Applications IA en ligne de commande pour developpeurs, DevOps et automatisation.</div>
     </div>
     <div class="button-group">
       <button class="info-btn" type="button" id="open-search-info">Sources</button>
@@ -603,231 +740,144 @@
     <article class="reader-card reader-dev">
       <div class="reader-label">Public cible</div>
       <div class="reader-title">Pour les developpeurs</div>
-      <div class="reader-text">Evaluez les frameworks d&#x27;agents selon la fiabilite, la debuggabilite et la maintenabilite du code.</div>
+      <div class="reader-text">Selectionnez des apps CLI IA stables, scriptables et compatibles avec vos workflows d&#x27;equipe.</div>
     </article>
     <article class="reader-card reader-manager">
       <div class="reader-label">Public cible</div>
       <div class="reader-title">Pour les managers</div>
-      <div class="reader-text">Selectionnez des solutions agentiques avec trajectoire claire de passage du POC a la production.</div>
+      <div class="reader-text">Evaluez l&#x27;equilibre entre vitesse d&#x27;execution, securite et cout de possession des outils CLI.</div>
     </article>
   </div>
 </header>
 
-<nav>
+<nav id="category-nav">
   <a class="nav-tab active" href="#" data-cat="all">Tout voir</a>
-  <a class="nav-tab" href="#" data-cat="agent-frameworks">🤖 🤖 Agent Frameworks</a>
-  <a class="nav-tab" href="#" data-cat="ide-ai-tools">💻 💻 IDE + AI Tools</a>
-  <a class="nav-tab" href="#" data-cat="agent-tools">🛠️ 🛠️ Agent Tools & Utils</a>
-  <a class="nav-tab" href="#" data-cat="dev-productivity">⚡ ⚡ Developer Productivity</a>
+  <a class="nav-tab" href="#" data-cat="cli_agents">🤖 Agents et assistants CLI</a>
+  <a class="nav-tab" href="#" data-cat="cli_dev">🛠️ Dev et code en CLI</a>
+  <a class="nav-tab" href="#" data-cat="cli_ops">⚙️ DevOps et automatisation</a>
+  <a class="nav-tab" href="#" data-cat="cli_local">🖥️ Local LLM et self-hosted</a>
+  <a class="nav-tab" href="#" data-cat="cli_security">🛡️ Securite et gouvernance</a>
 </nav>
 
 <main>
-  
-  <section class="category" data-id="agent-frameworks">
+  <div class="categories-grid">
+    
+  <section class="category" data-id="cli_agents">
     <div class="category-header">
       <div class="category-icon">🤖</div>
-      <div class="category-title">🤖 Agent Frameworks</div>
+      <div class="category-title">Agents et assistants CLI</div>
     </div>
     
     <div class="subcategory">
-      <div class="subcategory-title">🔗 Multi-Agent Orchestration</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://www.descript.com" target="_blank" rel="noopener">
-        <div class="tool-name">Descript</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://gamma.app/" target="_blank" rel="noopener">
-        <div class="tool-name">Gamma</div>
-        
-        <div class="tool-desc">Présentations IA</div>
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">📚 Single Agent Libraries</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://gemini.google.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Imagen (Gemini)</div>
-        <div class="tool-provider">Google</div>
-        <div class="tool-desc">Gratuit</div>
-      </a>
-
-      <a class="tool-card" href="https://leonardo.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Leonardo AI</div>
-        
-        
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">⛓️ Agent Workflow & Chains</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://murf.ai" target="_blank" rel="noopener">
-        <div class="tool-name">Murf AI</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://www.perplexity.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Perplexity</div>
-        
-        <div class="tool-desc">Recherche IA</div>
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">🧠 Memory & State Management</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://app.runwayml.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Runway</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://suno.com" target="_blank" rel="noopener">
-        <div class="tool-name">Suno</div>
-        
-        
-      </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="category" data-id="ide-ai-tools">
-    <div class="category-header">
-      <div class="category-icon">💻</div>
-      <div class="category-title">💻 IDE + AI Tools</div>
-    </div>
-    
-    <div class="subcategory">
-      <div class="subcategory-title">✏️ AI-Powered Editors</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card is-new" href="https://www.vo3ai.com/" target="_blank" rel="noopener">
-        <div class="tool-name">VO3AI</div>
-        <div class="tool-provider">VO3AI</div>
-        <div class="tool-desc">Crée des vidéos à partir d'images statiques</div>
-      </a>
-
-      <a class="tool-card" href="https://copilot.microsoft.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Copilot</div>
-        <div class="tool-provider">Microsoft</div>
-        <div class="tool-desc">Intégré à Windows</div>
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">🔌 VSCode Extensions</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://firefly.adobe.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Adobe Firefly</div>
-        <div class="tool-provider">Adobe</div>
-        <div class="tool-desc">Pro créatif</div>
-      </a>
-
-      <a class="tool-card" href="https://www.canva.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Canva AI</div>
-        <div class="tool-provider">Canva</div>
-        <div class="tool-desc">Design IA</div>
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">🎯 JetBrains Integration</div>
+      <div class="subcategory-title">💻 Assistants terminal</div>
       <div class="tools-grid">
         
       </div>
     </div>
 
     <div class="subcategory">
-      <div class="subcategory-title">👯 Pair Programming AI</div>
+      <div class="subcategory-title">🧭 Agents autonomes CLI</div>
       <div class="tools-grid">
         
       </div>
     </div>
   </section>
 
-  <section class="category" data-id="agent-tools">
+  <section class="category" data-id="cli_dev">
     <div class="category-header">
       <div class="category-icon">🛠️</div>
-      <div class="category-title">🛠️ Agent Tools & Utils</div>
+      <div class="category-title">Dev et code en CLI</div>
     </div>
     
     <div class="subcategory">
-      <div class="subcategory-title">🔍 Debugging & Monitoring</div>
+      <div class="subcategory-title">🧩 Code generation et refactor</div>
       <div class="tools-grid">
         
+      <a class="tool-card is-new" href="https://www.anthropic.com/claude-code" target="_blank" rel="noopener">
+        <div class="tool-name">Claude Code</div>
+        <div class="tool-provider">Anthropic</div>
+        <div class="tool-desc">Detecte via resultats DuckDuckGo CLI</div>
+      </a>
+
+      <a class="tool-card is-new" href="https://aider.chat/" target="_blank" rel="noopener">
+        <div class="tool-name">Aider</div>
+        <div class="tool-provider">Aider</div>
+        <div class="tool-desc">Detecte via resultats DuckDuckGo CLI</div>
+      </a>
       </div>
     </div>
 
     <div class="subcategory">
-      <div class="subcategory-title">✅ Testing & Evaluation</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">🚀 Deployment & Scaling</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">📊 Visualization & UI</div>
+      <div class="subcategory-title">✅ Qualite et tests</div>
       <div class="tools-grid">
         
       </div>
     </div>
   </section>
 
-  <section class="category" data-id="dev-productivity">
+  <section class="category" data-id="cli_ops">
     <div class="category-header">
-      <div class="category-icon">⚡</div>
-      <div class="category-title">⚡ Developer Productivity</div>
+      <div class="category-icon">⚙️</div>
+      <div class="category-title">DevOps et automatisation</div>
     </div>
     
     <div class="subcategory">
-      <div class="subcategory-title">♻️ Code Generation & Refactoring</div>
+      <div class="subcategory-title">🏗️ Infra et pipeline</div>
       <div class="tools-grid">
         
       </div>
     </div>
 
     <div class="subcategory">
-      <div class="subcategory-title">📝 Testing & Documentation</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">🔎 Code Review & Analysis</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">🤝 Collaboration Tools</div>
+      <div class="subcategory-title">📟 Automatisation shell</div>
       <div class="tools-grid">
         
       </div>
     </div>
   </section>
+
+  <section class="category" data-id="cli_local">
+    <div class="category-header">
+      <div class="category-icon">🖥️</div>
+      <div class="category-title">Local LLM et self-hosted</div>
+    </div>
+    
+    <div class="subcategory">
+      <div class="subcategory-title">📦 Inference locale</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🔒 Tooling self-hosted</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+  </section>
+
+  <section class="category" data-id="cli_security">
+    <div class="category-header">
+      <div class="category-icon">🛡️</div>
+      <div class="category-title">Securite et gouvernance</div>
+    </div>
+    
+    <div class="subcategory">
+      <div class="subcategory-title">🏢 Conformite entreprise</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🔐 Controle des acces</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+  </section>
+  </div>
 </main>
 
 <footer>
@@ -842,24 +892,27 @@
       <div class="modal-title">Requêtes de recherche utilisées</div>
       <button class="close-btn" type="button" id="close-search-info">Fermer</button>
     </div>
-    <div class="modal-meta">Page: Panorama Agent Dev + IDE Tools · Dernière mise à jour: 2026-04-16</div>
+    <div class="modal-meta">Page: Panorama AI CLI Applications · Dernière mise à jour: 2026-04-16</div>
     <ol class="query-list">
-      <li>AI agent development frameworks for engineers 2026</li>
-      <li>agent dev toolkit for coding workflows 2026</li>
-      <li>Gemini CLI for agent developers 2026</li>
-      <li>OpenAI Codex CLI for agent development 2026</li>
-      <li>Claude Code agent development workflows 2026</li>
-      <li>OpenCode CLI AI coding assistant 2026</li>
-      <li>OpenClaw AI tool capabilities and CLI usage</li>
-      <li>Hermes AI agent framework capabilities 2026</li>
-      <li>agent orchestration frameworks comparison 2026</li>
-      <li>agent memory and state management libraries 2026</li>
-      <li>AI agent debugging and tracing tools 2026</li>
-      <li>agent evaluation benchmark tools for dev teams 2026</li>
-      <li>agent security sandboxing frameworks 2026</li>
-      <li>multi agent development platform open source 2026</li>
-      <li>agent IDE integration for developers 2026</li>
-      <li>AI agent development tools for engineering teams 2026</li>
+      <li>AI CLI applications for developers 2026</li>
+      <li>best AI command line tools for coding 2026</li>
+      <li>Gemini CLI capabilities and workflows</li>
+      <li>OpenAI Codex CLI capabilities and usage</li>
+      <li>Claude Code CLI capabilities and setup</li>
+      <li>GitHub Copilot CLI and terminal workflow</li>
+      <li>Gemini Code Assist CLI and IDE workflow</li>
+      <li>OpenCode CLI tool capabilities</li>
+      <li>OpenClaw CLI tool capabilities</li>
+      <li>Hermes CLI AI agent capabilities</li>
+      <li>list of AI CLI tools for developers 2026</li>
+      <li>all AI coding CLI tools site:github.com 2026</li>
+      <li>AI terminal assistant open source CLI 2026</li>
+      <li>AI CLI applications for DevOps SRE automation 2026</li>
+      <li>self hosted AI CLI workflow with local LLM 2026</li>
+      <li>AI CLI security and compliance for enterprise 2026</li>
+      <li>agentic AI CLI tools for shell scripting 2026</li>
+      <li>alternatives to Claude Code in CLI 2026</li>
+      <li>AI CLI productivity stack for engineering teams 2026</li>
     </ol>
   </div>
 </div>
@@ -870,7 +923,7 @@
       <div class="modal-title">Historique des versions</div>
       <button class="close-btn" type="button" id="close-history-info">Fermer</button>
     </div>
-    <div class="modal-meta">Page: Panorama Agent Dev + IDE Tools · Dernières 10 générations</div>
+    <div class="modal-meta">Page: Panorama AI CLI Applications · Dernières 10 générations</div>
     <table class="history-table">
       <thead>
         <tr>
@@ -881,54 +934,54 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date"><a href="snapshots/agentdev/2026-04-16_01-28-23-961.html" target="_blank">2026-04-16 01:28:23.961</a></td>
-          <td class="history-count">12</td>
-          <td><a href="snapshots/agentdev/2026-04-16_01-28-23-961.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-16_01-28-23-961.html&amp;right=agentdev.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/aicliapps/2026-04-17_20-58-33-496.html" target="_blank">2026-04-17 20:58:33.496</a></td>
+          <td class="history-count">2</td>
+          <td><a href="snapshots/aicliapps/2026-04-17_20-58-33-496.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-17_20-58-33-496.html&amp;right=aicliapps.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/agentdev/2026-04-15_23-44-42-719.html" target="_blank">2026-04-15 23:44:42.719</a></td>
-          <td class="history-count">12</td>
-          <td><a href="snapshots/agentdev/2026-04-15_23-44-42-719.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-15_23-44-42-719.html&amp;right=agentdev.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/aicliapps/2026-04-17_21-06-28-614.html" target="_blank">2026-04-17 21:06:28.614</a></td>
+          <td class="history-count">2</td>
+          <td><a href="snapshots/aicliapps/2026-04-17_21-06-28-614.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-17_21-06-28-614.html&amp;right=aicliapps.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/agentdev/2026-04-15_23-53-26-240.html" target="_blank">2026-04-15 23:53:26.240</a></td>
-          <td class="history-count">12</td>
-          <td><a href="snapshots/agentdev/2026-04-15_23-53-26-240.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-15_23-53-26-240.html&amp;right=agentdev.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/aicliapps/2026-04-17_21-08-33-439.html" target="_blank">2026-04-17 21:08:33.439</a></td>
+          <td class="history-count">2</td>
+          <td><a href="snapshots/aicliapps/2026-04-17_21-08-33-439.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-17_21-08-33-439.html&amp;right=aicliapps.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/agentdev/2026-04-16_07-10-46-803.html" target="_blank">2026-04-16 07:10:46.803</a></td>
-          <td class="history-count">12</td>
-          <td><a href="snapshots/agentdev/2026-04-16_07-10-46-803.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-16_07-10-46-803.html&amp;right=agentdev.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/aicliapps/2026-04-17_21-18-02-099.html" target="_blank">2026-04-17 21:18:02.099</a></td>
+          <td class="history-count">2</td>
+          <td><a href="snapshots/aicliapps/2026-04-17_21-18-02-099.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-17_21-18-02-099.html&amp;right=aicliapps.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/agentdev/2026-04-16_07-25-52-204.html" target="_blank">2026-04-16 07:25:52.204</a></td>
-          <td class="history-count">12</td>
-          <td><a href="snapshots/agentdev/2026-04-16_07-25-52-204.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-16_07-25-52-204.html&amp;right=agentdev.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/aicliapps/2026-04-17_21-40-48-013.html" target="_blank">2026-04-17 21:40:48.013</a></td>
+          <td class="history-count">2</td>
+          <td><a href="snapshots/aicliapps/2026-04-17_21-40-48-013.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-17_21-40-48-013.html&amp;right=aicliapps.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/agentdev/2026-04-16_09-04-05-929.html" target="_blank">2026-04-16 09:04:05.929</a></td>
-          <td class="history-count">12</td>
-          <td><a href="snapshots/agentdev/2026-04-16_09-04-05-929.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-16_09-04-05-929.html&amp;right=agentdev.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/aicliapps/2026-04-17_21-43-42-692.html" target="_blank">2026-04-17 21:43:42.692</a></td>
+          <td class="history-count">2</td>
+          <td><a href="snapshots/aicliapps/2026-04-17_21-43-42-692.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-17_21-43-42-692.html&amp;right=aicliapps.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/agentdev/2026-04-16_09-41-12-309.html" target="_blank">2026-04-16 09:41:12.309</a></td>
-          <td class="history-count">12</td>
-          <td><a href="snapshots/agentdev/2026-04-16_09-41-12-309.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-16_09-41-12-309.html&amp;right=agentdev.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/aicliapps/2026-04-17_21-45-54-906.html" target="_blank">2026-04-17 21:45:54.906</a></td>
+          <td class="history-count">2</td>
+          <td><a href="snapshots/aicliapps/2026-04-17_21-45-54-906.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-17_21-45-54-906.html&amp;right=aicliapps.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/agentdev/2026-04-17_20-25-36-257.html" target="_blank">2026-04-17 20:25:36.257</a></td>
-          <td class="history-count">12</td>
-          <td><a href="snapshots/agentdev/2026-04-17_20-25-36-257.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-17_20-25-36-257.html&amp;right=agentdev.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/aicliapps/2026-04-17_21-48-56-355.html" target="_blank">2026-04-17 21:48:56.355</a></td>
+          <td class="history-count">2</td>
+          <td><a href="snapshots/aicliapps/2026-04-17_21-48-56-355.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-17_21-48-56-355.html&amp;right=aicliapps.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/agentdev/2026-04-17_20-41-30-269.html" target="_blank">2026-04-17 20:41:30.269</a></td>
-          <td class="history-count">12</td>
-          <td><a href="snapshots/agentdev/2026-04-17_20-41-30-269.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-17_20-41-30-269.html&amp;right=agentdev.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/aicliapps/2026-04-17_21-55-47-671.html" target="_blank">2026-04-17 21:55:47.671</a></td>
+          <td class="history-count">2</td>
+          <td><a href="snapshots/aicliapps/2026-04-17_21-55-47-671.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-17_21-55-47-671.html&amp;right=aicliapps.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/agentdev/2026-04-17_20-56-53-981.html" target="_blank">2026-04-17 20:56:53.981</a></td>
-          <td class="history-count">12</td>
-          <td><a href="snapshots/agentdev/2026-04-17_20-56-53-981.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/agentdev/2026-04-17_20-56-53-981.html&amp;right=agentdev.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/aicliapps/2026-04-17_21-58-52-415.html" target="_blank">2026-04-17 21:58:52.415</a></td>
+          <td class="history-count">2</td>
+          <td><a href="snapshots/aicliapps/2026-04-17_21-58-52-415.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-17_21-58-52-415.html&amp;right=aicliapps.html">Comparer</a></td>
         </tr>
       </tbody>
     </table>
@@ -947,8 +1000,14 @@
   const closeHistoryInfo = document.getElementById('close-history-info');
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
-  const currentPageFile = 'agentdev.html';
+  const layoutColumnsToggle = document.getElementById('layout-columns-toggle');
+  const currentPageLabel = document.getElementById('current-page-label');
+  const currentPageFile = 'aicliapps.html';
   const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}, {"slug": "ia-resources", "html": "ia-resources.html", "data": "data/tools-ia-resources.json"}]};
+  const mainMenuToggle = document.getElementById('main-menu-toggle');
+  const submenuToggle = document.getElementById('submenu-toggle');
+  const pageSwitcher = document.querySelector('.page-switcher');
+  const categoryNav = document.getElementById('category-nav');
   const summaryToggle = document.getElementById('summary-toggle');
   const headerSummary = document.getElementById('header-summary');
   const panelToggle = document.getElementById('panel-toggle');
@@ -1017,11 +1076,13 @@
       categories.forEach(c => {
         c.classList.toggle('visible', cat === 'all' || c.dataset.id === cat);
       });
+      updateGridScope(cat);
     });
   });
 
   // Show all on load
   categories.forEach(c => c.classList.add('visible'));
+  updateGridScope('all');
 
   // Search modal handlers
   openSearchInfo.addEventListener('click', () => {
@@ -1093,6 +1154,139 @@
     updateThemeToggle();
   });
 
+  // Category columns toggle button (cycles through: 1 -> 2 -> 3 -> 1)
+  // UI controls only the "all" scope for now.
+  const validGridLayouts = ['1', '2', '3'];
+  const storedGridColumnsAll = localStorage.getItem('gridColumnsAll') || '1';
+  const storedGridColumnsSingle = localStorage.getItem('gridColumnsSingle') || '3';
+
+  function getGridLayoutForScope(scope) {
+    return scope === 'all'
+      ? (localStorage.getItem('gridColumnsAll') || '1')
+      : (localStorage.getItem('gridColumnsSingle') || '3');
+  }
+
+  function applyGridColumnsLayoutForScope(scope) {
+    document.body.setAttribute('data-grid-columns', getGridLayoutForScope(scope));
+  }
+
+  // Future hook: keep single-category mode configurable without exposing UI yet.
+  function setSingleGridColumnsLayout(layoutValue) {
+    if (!validGridLayouts.includes(layoutValue)) return;
+    localStorage.setItem('gridColumnsSingle', layoutValue);
+    if ((document.body.getAttribute('data-grid-scope') || 'all') === 'single') {
+      applyGridColumnsLayoutForScope('single');
+      updateLayoutToggle();
+    }
+  }
+
+  function updateGridScope(selectedCategory) {
+    const scope = selectedCategory === 'all' ? 'all' : 'single';
+    document.body.setAttribute('data-grid-scope', scope);
+    applyGridColumnsLayoutForScope(scope);
+    updateLayoutToggle();
+  }
+
+  function updateLayoutToggle() {
+    const currentScope = document.body.getAttribute('data-grid-scope') || 'all';
+    const currentLayout = getGridLayoutForScope(currentScope);
+    const targetLabel = currentScope === 'all' ? 'categories' : 'outils';
+    layoutColumnsToggle.textContent = currentLayout;
+    const canChangeFromUi = currentScope === 'all';
+    layoutColumnsToggle.disabled = !canChangeFromUi;
+    layoutColumnsToggle.setAttribute('aria-pressed', String(canChangeFromUi));
+    if (canChangeFromUi) {
+      layoutColumnsToggle.setAttribute('aria-label', `Changer le nombre de colonnes de categories (actuel: ${currentLayout})`);
+      layoutColumnsToggle.setAttribute('title', `Colonnes categories: ${currentLayout}`);
+    } else {
+      layoutColumnsToggle.setAttribute('aria-label', `Colonnes outils fixes (actuel: ${currentLayout})`);
+      layoutColumnsToggle.setAttribute('title', `Colonnes outils: ${currentLayout} (fixe pour l'instant)`);
+    }
+    updateAllButtonStates();
+  }
+
+  function cycleLayoutColumns() {
+    const currentScope = document.body.getAttribute('data-grid-scope') || 'all';
+    if (currentScope !== 'all') return;
+    const currentLayout = localStorage.getItem('gridColumnsAll') || '1';
+    const currentIndex = validGridLayouts.indexOf(currentLayout);
+    const safeIndex = currentIndex === -1 ? 0 : currentIndex;
+    const nextIndex = (safeIndex + 1) % validGridLayouts.length;
+    const nextLayout = validGridLayouts[nextIndex];
+    localStorage.setItem('gridColumnsAll', nextLayout);
+    applyGridColumnsLayoutForScope('all');
+    updateLayoutToggle();
+  }
+
+  const initialGridLayoutAll = validGridLayouts.includes(storedGridColumnsAll) ? storedGridColumnsAll : '1';
+  const initialGridLayoutSingle = validGridLayouts.includes(storedGridColumnsSingle) ? storedGridColumnsSingle : '3';
+  localStorage.setItem('gridColumnsAll', initialGridLayoutAll);
+  localStorage.setItem('gridColumnsSingle', initialGridLayoutSingle);
+  applyGridColumnsLayoutForScope('all');
+  updateLayoutToggle();
+
+  layoutColumnsToggle.addEventListener('click', cycleLayoutColumns);
+
+  // Main menu toggle (page switcher only)
+  const storedMainMenuState = localStorage.getItem('mainMenuVisible');
+  const mainMenuVisible = storedMainMenuState === null ? true : storedMainMenuState === 'true';
+
+  function updateMainMenuToggle() {
+    const isVisible = !pageSwitcher.classList.contains('hidden');
+    mainMenuToggle.setAttribute('aria-pressed', String(isVisible));
+    mainMenuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu principal' : 'Afficher le menu principal');
+    mainMenuToggle.setAttribute('title', isVisible ? 'Masquer le menu principal' : 'Afficher le menu principal');
+    updateAllButtonStates();
+  }
+
+  function toggleMainMenu() {
+    const isHidden = pageSwitcher.classList.contains('hidden');
+    if (isHidden) {
+      pageSwitcher.classList.remove('hidden');
+      localStorage.setItem('mainMenuVisible', 'true');
+    } else {
+      pageSwitcher.classList.add('hidden');
+      localStorage.setItem('mainMenuVisible', 'false');
+    }
+    updateMainMenuToggle();
+  }
+
+  if (!mainMenuVisible) {
+    pageSwitcher.classList.add('hidden');
+  }
+  updateMainMenuToggle();
+  mainMenuToggle.addEventListener('click', toggleMainMenu);
+
+  // Subcategory menu toggle (category tabs only)
+  const storedSubmenuState = localStorage.getItem('subcategoryMenuVisible');
+  const submenuVisible = storedSubmenuState === null ? true : storedSubmenuState === 'true';
+
+  function updateSubmenuToggle() {
+    const isVisible = !categoryNav.classList.contains('hidden');
+    submenuToggle.setAttribute('aria-pressed', String(isVisible));
+    submenuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu des sous-categories' : 'Afficher le menu des sous-categories');
+    submenuToggle.setAttribute('title', isVisible ? 'Masquer le menu des sous-categories' : 'Afficher le menu des sous-categories');
+    updateAllButtonStates();
+  }
+
+  function toggleSubmenu() {
+    const isHidden = categoryNav.classList.contains('hidden');
+    if (isHidden) {
+      categoryNav.classList.remove('hidden');
+      localStorage.setItem('subcategoryMenuVisible', 'true');
+    } else {
+      categoryNav.classList.add('hidden');
+      localStorage.setItem('subcategoryMenuVisible', 'false');
+    }
+    updateSubmenuToggle();
+  }
+
+  if (!submenuVisible) {
+    categoryNav.classList.add('hidden');
+  }
+  updateSubmenuToggle();
+  submenuToggle.addEventListener('click', toggleSubmenu);
+
   // Header summary toggle (subtitle + stats)
   const storedSummaryState = localStorage.getItem('headerSummaryVisible');
   const summaryVisible = storedSummaryState === null ? true : storedSummaryState === 'true';
@@ -1102,6 +1296,7 @@
     summaryToggle.setAttribute('aria-pressed', String(isVisible));
     summaryToggle.setAttribute('aria-label', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
     summaryToggle.setAttribute('title', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
+    updateAllButtonStates();
   }
 
   function toggleHeaderSummary() {
@@ -1131,6 +1326,7 @@
     panelToggle.setAttribute('aria-pressed', String(isVisible));
     panelToggle.setAttribute('aria-label', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
     panelToggle.setAttribute('title', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
+    updateAllButtonStates();
   }
 
   function togglePanels() {
@@ -1155,6 +1351,20 @@
   updatePanelToggle();
 
   panelToggle.addEventListener('click', togglePanels);
+
+  // Master function to sync all button aria-pressed states and page label visibility
+  function updateAllButtonStates() {
+    // Update page label visibility: show when menu is hidden, hide when menu is visible
+    const isMenuVisible = !pageSwitcher.classList.contains('hidden');
+    if (isMenuVisible) {
+      currentPageLabel.classList.add('hidden');
+    } else {
+      currentPageLabel.classList.remove('hidden');
+    }
+  }
+
+  // Initialize all button states
+  updateAllButtonStates();
 </script>
 
 </body>

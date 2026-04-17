@@ -239,7 +239,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     .main-menu-toggle {{
       position: absolute;
       top: 24px;
-      right: 162px;
+      right: 208px;
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -261,7 +261,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     .submenu-toggle {{
       position: absolute;
       top: 24px;
-      right: 208px;
+      right: 162px;
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -362,11 +362,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 8px 12px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
       color: var(--accent2);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      text-transform: none;
       text-align: center;
       min-width: 60px;
       transition: all 0.2s;
@@ -384,6 +385,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     }}
     .header-badge {{
       display: inline-block;
+      position: absolute;
+      top: 72px;
+      right: 24px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       color: var(--accent2);
@@ -391,12 +395,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       border: 1px solid rgba(0,212,170,0.25);
       padding: 4px 12px;
       border-radius: 20px;
-      margin-bottom: 20px;
+      margin-bottom: 0;
       letter-spacing: 0.08em;
     }}
     h1 {{
-      font-size: clamp(28px, 5vw, 48px);
-      font-weight: 700;
+      font-size: clamp(26px, 4.6vw, 42px);
+      font-weight: 650;
       letter-spacing: -0.02em;
       background: linear-gradient(135deg, var(--text) 30%, var(--accent));
       -webkit-background-clip: text;
@@ -842,6 +846,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid {{ grid-template-columns: 1fr; }}
       body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid {{ grid-template-columns: 1fr 1fr; }}
       body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid {{ grid-template-columns: 1fr 1fr; }}
+      .header-badge {{ position: static; margin-bottom: 16px; }}
       .page-meta {{ grid-template-columns: 1fr; }}
       .audience-brief {{ grid-template-columns: 1fr; }}
     }}
@@ -851,8 +856,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
 <header>
   <div class="current-page-label" id="current-page-label">{current_page_menu_label}</div>
-  <button class="main-menu-toggle" id="main-menu-toggle" aria-label="Masquer le menu principal" aria-pressed="true" title="Masquer le menu principal">🧭</button>
   <button class="submenu-toggle" id="submenu-toggle" aria-label="Masquer le menu des sous-categories" aria-pressed="true" title="Masquer le menu des sous-categories">🗂️</button>
+  <button class="main-menu-toggle" id="main-menu-toggle" aria-label="Masquer le menu principal" aria-pressed="true" title="Masquer le menu principal">🧭</button>
   <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
   <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
   <button class="layout-columns-toggle" id="layout-columns-toggle" aria-label="Changer le nombre de colonnes de categories" aria-pressed="true" title="Colonnes categories: 1">1</button>

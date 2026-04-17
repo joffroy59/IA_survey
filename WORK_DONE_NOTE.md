@@ -3,6 +3,27 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FIX) Header polish: menu label, badge position, toggle inversion, title tone
+
+### Changed
+- Confirmed hidden main-menu label uses the same page/menu wording (for example `Vue Generale`).
+- Updated `.current-page-label` styling to match menu-like text better (no forced uppercase, adjusted typography).
+- Moved header badge (`🤖 Auto-updated by AI · {today}`) to the right side under the toggle row, with mobile fallback to normal flow.
+- Inverted main/submenu toggle layout positions (swapped horizontal placement).
+- Reduced main title visual intensity by lowering font size/weight slightly.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested better consistency between hidden-label text and menu text.
+- User requested right-side badge placement under toggles.
+- User requested inversion between main/submenu toggle placement.
+- User requested a slightly less prominent title styling.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
 ## FIX) Hidden main-menu label matches menu text
 
 ### Changed
