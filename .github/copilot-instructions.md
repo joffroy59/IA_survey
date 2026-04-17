@@ -57,3 +57,15 @@ When the user says "finish feature", always do all steps below in order:
 6. For hotfix tasks, use hotfix flow instead: hotfix branch from `main` -> PR to `main` -> PR from `main` to `develop`.
 
 Do not stop at a partial state when this command is used.
+
+## Release Artifacts Rule (Required)
+
+For every new release in this repository, always attach a complete usable site package as a release artifact.
+
+Release artifact requirements:
+1. Include one ZIP artifact named with the release tag and `complete-site` suffix (for example: `v1.6.0-complete-site.zip`).
+2. The artifact must include all generated HTML entry pages required to run and browse the site.
+3. The artifact must include required data files used by the generated pages.
+4. Exclude development-only folders when they are not needed to use the site package.
+5. Validate that the ZIP can be extracted and opened locally starting from `index.html`.
+6. Attach this artifact to the GitHub release before considering the release complete.
