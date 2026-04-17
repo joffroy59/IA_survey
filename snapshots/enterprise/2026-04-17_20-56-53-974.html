@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Boîte à outils IA Génératives</title>
-  <meta name="description" content="Applications IA CLI, mis à jour automatiquement">
+  <meta name="description" content="Les meilleurs outils IA, mis à jour automatiquement">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -75,28 +75,6 @@
     }
     .theme-toggle:hover {
       border-color: var(--accent);
-      background: var(--surface);
-      transform: scale(1.05);
-    }
-    .menu-toggle {
-      position: absolute;
-      top: 24px;
-      right: 162px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text);
-      font-size: 18px;
-      transition: all 0.2s;
-    }
-    .menu-toggle:hover {
-      border-color: var(--accent2);
       background: var(--surface);
       transform: scale(1.05);
     }
@@ -199,9 +177,6 @@
       border-radius: 999px;
       border: 1px solid var(--border);
       background: var(--surface);
-    }
-    .page-switcher.hidden {
-      display: none;
     }
     .page-link {
       text-decoration: none;
@@ -368,9 +343,6 @@
       padding: 0 24px 32px;
       max-width: 900px;
       margin: 0 auto;
-    }
-    nav.hidden {
-      display: none;
     }
     .nav-tab {
       font-size: 13px;
@@ -592,19 +564,18 @@
 <body>
 
 <header>
-  <button class="menu-toggle" id="menu-toggle" aria-label="Masquer le menu" aria-pressed="true" title="Masquer le menu">🧭</button>
   <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
   <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · 17/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
   <div class="header-summary" id="header-summary">
-    <p class="subtitle">Applications IA CLI, mis à jour automatiquement</p>
+    <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
     <p class="update-info">Dernière mise à jour : <span>2026-04-16</span></p>
-    <p class="update-info">Outils : <span>2</span> · Nouveaux : <span>2</span></p>
+    <p class="update-info">Outils : <span>48</span> · Nouveaux : <span>2</span></p>
   </div>
   <div class="page-switcher"><a class="page-link" href="index.html">Vue Generale</a>
-    <a class="page-link" href="enterprise.html">Vue Enterprise</a>
+    <a class="page-link active" href="enterprise.html">Vue Enterprise</a>
     <a class="page-link" href="discovery.html">Vue Decouverte</a>
     <a class="page-link" href="ragdev.html">Vue RAG Pro + DevTools</a>
     <a class="page-link" href="agentdev.html">Vue Agent Dev + IDE Tools</a>
@@ -613,13 +584,13 @@
     <a class="page-link" href="cowork.html">vue Claude Cowork</a>
     <a class="page-link" href="ocr.html">Vue OCR</a>
     <a class="page-link" href="dococr.html">Vue OCR Système Complet</a>
-    <a class="page-link active" href="aicliapps.html">Vue AI CLI Applications</a>
+    <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a>
     <a class="page-link-static" href="ia-resources.html">Ressources IA</a></div>
   <div class="page-meta">
     <div>
       <div class="page-meta-label">Type de page</div>
-      <div class="page-meta-title">Panorama AI CLI Applications</div>
-      <div class="page-meta-desc">Applications IA en ligne de commande pour developpeurs, DevOps et automatisation.</div>
+      <div class="page-meta-title">Panorama Enterprise</div>
+      <div class="page-meta-desc">Focus RAG, agents, infra, securite et cas d&#x27;usage entreprise.</div>
     </div>
     <div class="button-group">
       <button class="info-btn" type="button" id="open-search-info">Sources</button>
@@ -632,137 +603,545 @@
     <article class="reader-card reader-dev">
       <div class="reader-label">Public cible</div>
       <div class="reader-title">Pour les developpeurs</div>
-      <div class="reader-text">Selectionnez des apps CLI IA stables, scriptables et compatibles avec vos workflows d&#x27;equipe.</div>
+      <div class="reader-text">Validez l&#x27;architecture, la securite et l&#x27;observabilite des stacks IA enterprise en conditions de production.</div>
     </article>
     <article class="reader-card reader-manager">
       <div class="reader-label">Public cible</div>
       <div class="reader-title">Pour les managers</div>
-      <div class="reader-text">Evaluez l&#x27;equilibre entre vitesse d&#x27;execution, securite et cout de possession des outils CLI.</div>
+      <div class="reader-text">Cadrez le ROI, la gouvernance des donnees et les exigences de conformite pour un deploiement durable.</div>
     </article>
   </div>
 </header>
 
-<nav id="category-nav">
+<nav>
   <a class="nav-tab active" href="#" data-cat="all">Tout voir</a>
-  <a class="nav-tab" href="#" data-cat="cli_agents">🤖 Agents et assistants CLI</a>
-  <a class="nav-tab" href="#" data-cat="cli_dev">🛠️ Dev et code en CLI</a>
-  <a class="nav-tab" href="#" data-cat="cli_ops">⚙️ DevOps et automatisation</a>
-  <a class="nav-tab" href="#" data-cat="cli_local">🖥️ Local LLM et self-hosted</a>
-  <a class="nav-tab" href="#" data-cat="cli_security">🛡️ Securite et gouvernance</a>
+  <a class="nav-tab" href="#" data-cat="generiques">🧠 IA Génériques</a>
+  <a class="nav-tab" href="#" data-cat="specialisees">📱 IA Spécialisées</a>
+  <a class="nav-tab" href="#" data-cat="images">🎨 IA Images</a>
+  <a class="nav-tab" href="#" data-cat="code">💻 Code & Dev</a>
+  <a class="nav-tab" href="#" data-cat="audio">🎧 IA Audio</a>
+  <a class="nav-tab" href="#" data-cat="video">🎬 IA Vidéo</a>
 </nav>
 
 <main>
   
-  <section class="category" data-id="cli_agents">
+  <section class="category" data-id="generiques">
     <div class="category-header">
-      <div class="category-icon">🤖</div>
-      <div class="category-title">Agents et assistants CLI</div>
+      <div class="category-icon">🧠</div>
+      <div class="category-title">IA Génériques</div>
     </div>
     
     <div class="subcategory">
-      <div class="subcategory-title">💻 Assistants terminal</div>
+      <div class="subcategory-title">📌 Indispensables</div>
       <div class="tools-grid">
         
+      <a class="tool-card" href="https://www.bing.com/images/create" target="_blank" rel="noopener">
+        <div class="tool-name">Bing Creator</div>
+        <div class="tool-provider">Microsoft</div>
+        <div class="tool-desc">Gratuit</div>
+      </a>
+
+      <a class="tool-card" href="https://copilot.microsoft.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Copilot</div>
+        <div class="tool-provider">Microsoft</div>
+        <div class="tool-desc">Intégré à Windows</div>
+      </a>
       </div>
     </div>
 
     <div class="subcategory">
-      <div class="subcategory-title">🧭 Agents autonomes CLI</div>
+      <div class="subcategory-title">⭐ Importantes</div>
       <div class="tools-grid">
         
+      <a class="tool-card" href="https://github.com/copilot" target="_blank" rel="noopener">
+        <div class="tool-name">GitHub Copilot</div>
+        <div class="tool-provider">Microsoft</div>
+        
+      </a>
+
+      <a class="tool-card" href="https://firefly.adobe.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Adobe Firefly</div>
+        <div class="tool-provider">Adobe</div>
+        <div class="tool-desc">Pro créatif</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🔬 Avancées - Veille</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card is-new" href="https://www.atlabs.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Atlabs</div>
+        <div class="tool-provider">Atlabs</div>
+        <div class="tool-desc">Plateforme IA pour génération images et vidéos</div>
+      </a>
+
+      <a class="tool-card" href="https://boomy.com" target="_blank" rel="noopener">
+        <div class="tool-name">Boomy</div>
+        
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Productivité / Email</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://www.canva.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Canva AI</div>
+        <div class="tool-provider">Canva</div>
+        <div class="tool-desc">Design IA</div>
+      </a>
+
+      <a class="tool-card" href="https://chatgpt.com/" target="_blank" rel="noopener">
+        <div class="tool-name">ChatGPT</div>
+        <div class="tool-provider">OpenAI</div>
+        <div class="tool-desc">Le plus populaire</div>
+      </a>
       </div>
     </div>
   </section>
 
-  <section class="category" data-id="cli_dev">
+  <section class="category" data-id="specialisees">
     <div class="category-header">
-      <div class="category-icon">🛠️</div>
-      <div class="category-title">Dev et code en CLI</div>
+      <div class="category-icon">📱</div>
+      <div class="category-title">IA Spécialisées</div>
     </div>
     
     <div class="subcategory">
-      <div class="subcategory-title">🧩 Code generation et refactor</div>
+      <div class="subcategory-title">🎙️ Réunions & Audio</div>
       <div class="tools-grid">
         
-      <a class="tool-card is-new" href="https://www.anthropic.com/claude-code" target="_blank" rel="noopener">
+      <a class="tool-card" href="https://claude.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Claude</div>
+        <div class="tool-provider">Anthropic</div>
+        <div class="tool-desc">Excellent pour l'analyse</div>
+      </a>
+
+      <a class="tool-card" href="https://claude.ai/download" target="_blank" rel="noopener">
         <div class="tool-name">Claude Code</div>
         <div class="tool-provider">Anthropic</div>
-        <div class="tool-desc">Detecte via resultats DuckDuckGo CLI</div>
-      </a>
-
-      <a class="tool-card is-new" href="https://aider.chat/" target="_blank" rel="noopener">
-        <div class="tool-name">Aider</div>
-        <div class="tool-provider">Aider</div>
-        <div class="tool-desc">Detecte via resultats DuckDuckGo CLI</div>
+        <div class="tool-desc">Agent terminal</div>
       </a>
       </div>
     </div>
 
     <div class="subcategory">
-      <div class="subcategory-title">✅ Qualite et tests</div>
+      <div class="subcategory-title">📊 Productivité & Présentation</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://www.colossyan.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Colossyan</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://cursor.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Cursor</div>
+        <div class="tool-provider">Anysphere</div>
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Gestion des connaissances</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://chat.deepseek.com/" target="_blank" rel="noopener">
+        <div class="tool-name">DeepSeek</div>
+        
+        <div class="tool-desc">IA chinoise open source</div>
+      </a>
+
+      <a class="tool-card" href="https://www.descript.com" target="_blank" rel="noopener">
+        <div class="tool-name">Descript</div>
+        
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Infrastructure IA</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://elevenlabs.io" target="_blank" rel="noopener">
+        <div class="tool-name">ElevenLabs</div>
+        
+        <div class="tool-desc">Leader voix réaliste</div>
+      </a>
+
+      <a class="tool-card" href="https://fireflies.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Fireflies.ai</div>
+        
+        <div class="tool-desc">Transcription réunions</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Prise de notes de réunions</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://flux-ai.io/" target="_blank" rel="noopener">
+        <div class="tool-name">Flux</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://gamma.app/" target="_blank" rel="noopener">
+        <div class="tool-name">Gamma</div>
+        
+        <div class="tool-desc">Présentations IA</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Synthèse de réunions</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://gemini.google.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Gemini</div>
+        <div class="tool-provider">Google</div>
+        <div class="tool-desc">Intégré à Google</div>
+      </a>
+
+      <a class="tool-card" href="https://www.grok.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Grok</div>
+        <div class="tool-provider">xAI</div>
+        <div class="tool-desc">IA d'Elon Musk</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Présentations / Idées</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://www.heygen.com/" target="_blank" rel="noopener">
+        <div class="tool-name">HeyGen</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://ideogram.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Ideogram</div>
+        
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Voyage</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://gemini.google.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Imagen (Gemini)</div>
+        <div class="tool-provider">Google</div>
+        <div class="tool-desc">Gratuit</div>
+      </a>
+
+      <a class="tool-card" href="https://www.kimi.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Kimi</div>
+        <div class="tool-provider">Moonshot</div>
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Notetaker</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://klingai.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Kling</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://chat.mistral.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Le Chat</div>
+        <div class="tool-provider">Mistral</div>
+        <div class="tool-desc">IA française</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Dictée vocale</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://leonardo.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Leonardo AI</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://lumalabs.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Luma Dream Machine</div>
+        
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Orchestration AI</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://meta.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Meta AI</div>
+        <div class="tool-provider">Meta</div>
+        <div class="tool-desc">IA de Meta</div>
+      </a>
+
+      <a class="tool-card" href="https://www.midjourney.com/" target="_blank" rel="noopener">
+        <div class="tool-name">MidJourney</div>
+        
+        <div class="tool-desc">Référence qualité</div>
+      </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="category" data-id="images">
+    <div class="category-header">
+      <div class="category-icon">🎨</div>
+      <div class="category-title">IA Images</div>
+    </div>
+    
+    <div class="subcategory">
+      <div class="subcategory-title">🎨 Gratuit & accessible</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://agent.minimax.io/" target="_blank" rel="noopener">
+        <div class="tool-name">MiniMax</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://murf.ai" target="_blank" rel="noopener">
+        <div class="tool-name">Murf AI</div>
+        
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">💎 Usages pro</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://notebooklm.google/" target="_blank" rel="noopener">
+        <div class="tool-name">NotebookLM</div>
+        <div class="tool-provider">Google</div>
+        <div class="tool-desc">FAQ, Podcast IA</div>
+      </a>
+
+      <a class="tool-card" href="https://www.notta.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Notta</div>
+        
+        <div class="tool-desc">Réunion App Mobile</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🛠️ Open Source & expérimentaux</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://otter.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Otter.ai</div>
+        
+        <div class="tool-desc">Prise de notes IA</div>
+      </a>
+
+      <a class="tool-card" href="https://www.perplexity.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Perplexity</div>
+        
+        <div class="tool-desc">Recherche IA</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Edition photo & vidéo IA</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://plaud.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Plaud AI</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://chat.qwen.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Qwen</div>
+        <div class="tool-provider">Alibaba</div>
+        
+      </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="category" data-id="code">
+    <div class="category-header">
+      <div class="category-icon">💻</div>
+      <div class="category-title">Code & Dev</div>
+    </div>
+    
+    <div class="subcategory">
+      <div class="subcategory-title">⌨️ Assistants code</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://www.recraft.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Recraft</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://app.runwayml.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Runway</div>
+        
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Création d'apps No-code</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://www.songr.ai" target="_blank" rel="noopener">
+        <div class="tool-name">SongR</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://sora.chatgpt.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Sora</div>
+        <div class="tool-provider">OpenAI</div>
+        <div class="tool-desc">Gratuit</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Prompt Engineering</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://stablediffusionweb.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Stable Diffusion</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://suno.com" target="_blank" rel="noopener">
+        <div class="tool-name">Suno</div>
+        
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Agent AI</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://www.synthesia.io/" target="_blank" rel="noopener">
+        <div class="tool-name">Synthesia</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://www.udio.com" target="_blank" rel="noopener">
+        <div class="tool-name">Udio</div>
+        
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Code Review</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://deepmind.google/models/veo/" target="_blank" rel="noopener">
+        <div class="tool-name">Veo</div>
+        <div class="tool-provider">Google</div>
+        <div class="tool-desc">Ultra réaliste</div>
+      </a>
+
+      <a class="tool-card is-new" href="https://www.vo3ai.com/" target="_blank" rel="noopener">
+        <div class="tool-name">VO3AI</div>
+        <div class="tool-provider">VO3AI</div>
+        <div class="tool-desc">Crée des vidéos à partir d'images statiques</div>
+      </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="category" data-id="audio">
+    <div class="category-header">
+      <div class="category-icon">🎧</div>
+      <div class="category-title">IA Audio</div>
+    </div>
+    
+    <div class="subcategory">
+      <div class="subcategory-title">🎵 Génération musicale</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🎤 Voix & clonage vocal</div>
       <div class="tools-grid">
         
       </div>
     </div>
   </section>
 
-  <section class="category" data-id="cli_ops">
+  <section class="category" data-id="video">
     <div class="category-header">
-      <div class="category-icon">⚙️</div>
-      <div class="category-title">DevOps et automatisation</div>
+      <div class="category-icon">🎬</div>
+      <div class="category-title">IA Vidéo</div>
     </div>
     
     <div class="subcategory">
-      <div class="subcategory-title">🏗️ Infra et pipeline</div>
+      <div class="subcategory-title">🎬 Text-to-Video PRO</div>
       <div class="tools-grid">
         
       </div>
     </div>
 
     <div class="subcategory">
-      <div class="subcategory-title">📟 Automatisation shell</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-  </section>
-
-  <section class="category" data-id="cli_local">
-    <div class="category-header">
-      <div class="category-icon">🖥️</div>
-      <div class="category-title">Local LLM et self-hosted</div>
-    </div>
-    
-    <div class="subcategory">
-      <div class="subcategory-title">📦 Inference locale</div>
+      <div class="subcategory-title">🧍 Avatar IA</div>
       <div class="tools-grid">
         
       </div>
     </div>
 
     <div class="subcategory">
-      <div class="subcategory-title">🔒 Tooling self-hosted</div>
-      <div class="tools-grid">
-        
-      </div>
-    </div>
-  </section>
-
-  <section class="category" data-id="cli_security">
-    <div class="category-header">
-      <div class="category-icon">🛡️</div>
-      <div class="category-title">Securite et gouvernance</div>
-    </div>
-    
-    <div class="subcategory">
-      <div class="subcategory-title">🏢 Conformite entreprise</div>
+      <div class="subcategory-title">🆕 Génération vidéo et image</div>
       <div class="tools-grid">
         
       </div>
     </div>
 
     <div class="subcategory">
-      <div class="subcategory-title">🔐 Controle des acces</div>
+      <div class="subcategory-title">🆕 Image-to-Video</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Présentations vidéo</div>
       <div class="tools-grid">
         
       </div>
@@ -782,27 +1161,18 @@
       <div class="modal-title">Requêtes de recherche utilisées</div>
       <button class="close-btn" type="button" id="close-search-info">Fermer</button>
     </div>
-    <div class="modal-meta">Page: Panorama AI CLI Applications · Dernière mise à jour: 2026-04-16</div>
+    <div class="modal-meta">Page: Panorama Enterprise · Dernière mise à jour: 2026-04-16</div>
     <ol class="query-list">
-      <li>AI CLI applications for developers 2026</li>
-      <li>best AI command line tools for coding 2026</li>
-      <li>Gemini CLI capabilities and workflows</li>
-      <li>OpenAI Codex CLI capabilities and usage</li>
-      <li>Claude Code CLI capabilities and setup</li>
-      <li>GitHub Copilot CLI and terminal workflow</li>
-      <li>Gemini Code Assist CLI and IDE workflow</li>
-      <li>OpenCode CLI tool capabilities</li>
-      <li>OpenClaw CLI tool capabilities</li>
-      <li>Hermes CLI AI agent capabilities</li>
-      <li>list of AI CLI tools for developers 2026</li>
-      <li>all AI coding CLI tools site:github.com 2026</li>
-      <li>AI terminal assistant open source CLI 2026</li>
-      <li>AI CLI applications for DevOps SRE automation 2026</li>
-      <li>self hosted AI CLI workflow with local LLM 2026</li>
-      <li>AI CLI security and compliance for enterprise 2026</li>
-      <li>agentic AI CLI tools for shell scripting 2026</li>
-      <li>alternatives to Claude Code in CLI 2026</li>
-      <li>AI CLI productivity stack for engineering teams 2026</li>
+      <li>enterprise AI platform architecture 2026</li>
+      <li>enterprise RAG stack production 2026</li>
+      <li>secure enterprise AI tools GDPR compliance 2026</li>
+      <li>on premise enterprise LLM deployment tools 2026</li>
+      <li>enterprise agentic workflow automation tools 2026</li>
+      <li>enterprise AI governance and observability tools 2026</li>
+      <li>enterprise AI developer platform self hosted 2026</li>
+      <li>LLM infrastructure for enterprise teams 2026</li>
+      <li>enterprise AI compliance tools for Europe 2026</li>
+      <li>enterprise knowledge assistant internal data RAG 2026</li>
     </ol>
   </div>
 </div>
@@ -813,7 +1183,7 @@
       <div class="modal-title">Historique des versions</div>
       <button class="close-btn" type="button" id="close-history-info">Fermer</button>
     </div>
-    <div class="modal-meta">Page: Panorama AI CLI Applications · Dernières 10 générations</div>
+    <div class="modal-meta">Page: Panorama Enterprise · Dernières 10 générations</div>
     <table class="history-table">
       <thead>
         <tr>
@@ -824,54 +1194,54 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date"><a href="snapshots/aicliapps/2026-04-15_23-44-42-726.html" target="_blank">2026-04-15 23:44:42.726</a></td>
-          <td class="history-count">2</td>
-          <td><a href="snapshots/aicliapps/2026-04-15_23-44-42-726.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-15_23-44-42-726.html&amp;right=aicliapps.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/enterprise/2026-04-16_01-28-23-954.html" target="_blank">2026-04-16 01:28:23.954</a></td>
+          <td class="history-count">48</td>
+          <td><a href="snapshots/enterprise/2026-04-16_01-28-23-954.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-16_01-28-23-954.html&amp;right=enterprise.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/aicliapps/2026-04-15_23-53-26-246.html" target="_blank">2026-04-15 23:53:26.246</a></td>
-          <td class="history-count">2</td>
-          <td><a href="snapshots/aicliapps/2026-04-15_23-53-26-246.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-15_23-53-26-246.html&amp;right=aicliapps.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/enterprise/2026-04-15_23-44-42-714.html" target="_blank">2026-04-15 23:44:42.714</a></td>
+          <td class="history-count">48</td>
+          <td><a href="snapshots/enterprise/2026-04-15_23-44-42-714.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-15_23-44-42-714.html&amp;right=enterprise.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/aicliapps/2026-04-16_07-10-46-811.html" target="_blank">2026-04-16 07:10:46.811</a></td>
-          <td class="history-count">2</td>
-          <td><a href="snapshots/aicliapps/2026-04-16_07-10-46-811.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-16_07-10-46-811.html&amp;right=aicliapps.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/enterprise/2026-04-15_23-53-26-236.html" target="_blank">2026-04-15 23:53:26.236</a></td>
+          <td class="history-count">48</td>
+          <td><a href="snapshots/enterprise/2026-04-15_23-53-26-236.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-15_23-53-26-236.html&amp;right=enterprise.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/aicliapps/2026-04-16_07-25-52-212.html" target="_blank">2026-04-16 07:25:52.212</a></td>
-          <td class="history-count">2</td>
-          <td><a href="snapshots/aicliapps/2026-04-16_07-25-52-212.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-16_07-25-52-212.html&amp;right=aicliapps.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/enterprise/2026-04-16_07-10-46-798.html" target="_blank">2026-04-16 07:10:46.798</a></td>
+          <td class="history-count">48</td>
+          <td><a href="snapshots/enterprise/2026-04-16_07-10-46-798.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-16_07-10-46-798.html&amp;right=enterprise.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/aicliapps/2026-04-16_09-04-05-936.html" target="_blank">2026-04-16 09:04:05.936</a></td>
-          <td class="history-count">2</td>
-          <td><a href="snapshots/aicliapps/2026-04-16_09-04-05-936.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-16_09-04-05-936.html&amp;right=aicliapps.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/enterprise/2026-04-16_07-25-52-199.html" target="_blank">2026-04-16 07:25:52.199</a></td>
+          <td class="history-count">48</td>
+          <td><a href="snapshots/enterprise/2026-04-16_07-25-52-199.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-16_07-25-52-199.html&amp;right=enterprise.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/aicliapps/2026-04-16_09-41-12-317.html" target="_blank">2026-04-16 09:41:12.317</a></td>
-          <td class="history-count">2</td>
-          <td><a href="snapshots/aicliapps/2026-04-16_09-41-12-317.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-16_09-41-12-317.html&amp;right=aicliapps.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/enterprise/2026-04-16_09-04-05-923.html" target="_blank">2026-04-16 09:04:05.923</a></td>
+          <td class="history-count">48</td>
+          <td><a href="snapshots/enterprise/2026-04-16_09-04-05-923.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-16_09-04-05-923.html&amp;right=enterprise.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/aicliapps/2026-04-17_20-25-36-271.html" target="_blank">2026-04-17 20:25:36.271</a></td>
-          <td class="history-count">2</td>
-          <td><a href="snapshots/aicliapps/2026-04-17_20-25-36-271.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-17_20-25-36-271.html&amp;right=aicliapps.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/enterprise/2026-04-16_09-41-12-303.html" target="_blank">2026-04-16 09:41:12.303</a></td>
+          <td class="history-count">48</td>
+          <td><a href="snapshots/enterprise/2026-04-16_09-41-12-303.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-16_09-41-12-303.html&amp;right=enterprise.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/aicliapps/2026-04-17_20-41-30-283.html" target="_blank">2026-04-17 20:41:30.283</a></td>
-          <td class="history-count">2</td>
-          <td><a href="snapshots/aicliapps/2026-04-17_20-41-30-283.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-17_20-41-30-283.html&amp;right=aicliapps.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/enterprise/2026-04-17_20-25-36-249.html" target="_blank">2026-04-17 20:25:36.249</a></td>
+          <td class="history-count">48</td>
+          <td><a href="snapshots/enterprise/2026-04-17_20-25-36-249.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-17_20-25-36-249.html&amp;right=enterprise.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/aicliapps/2026-04-17_20-56-53-996.html" target="_blank">2026-04-17 20:56:53.996</a></td>
-          <td class="history-count">2</td>
-          <td><a href="snapshots/aicliapps/2026-04-17_20-56-53-996.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-17_20-56-53-996.html&amp;right=aicliapps.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/enterprise/2026-04-17_20-41-30-261.html" target="_blank">2026-04-17 20:41:30.261</a></td>
+          <td class="history-count">48</td>
+          <td><a href="snapshots/enterprise/2026-04-17_20-41-30-261.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-17_20-41-30-261.html&amp;right=enterprise.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/aicliapps/2026-04-17_20-58-33-496.html" target="_blank">2026-04-17 20:58:33.496</a></td>
-          <td class="history-count">2</td>
-          <td><a href="snapshots/aicliapps/2026-04-17_20-58-33-496.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/aicliapps/2026-04-17_20-58-33-496.html&amp;right=aicliapps.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/enterprise/2026-04-17_20-56-53-974.html" target="_blank">2026-04-17 20:56:53.974</a></td>
+          <td class="history-count">48</td>
+          <td><a href="snapshots/enterprise/2026-04-17_20-56-53-974.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/enterprise/2026-04-17_20-56-53-974.html&amp;right=enterprise.html">Comparer</a></td>
         </tr>
       </tbody>
     </table>
@@ -890,11 +1260,8 @@
   const closeHistoryInfo = document.getElementById('close-history-info');
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
-  const currentPageFile = 'aicliapps.html';
+  const currentPageFile = 'enterprise.html';
   const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}, {"slug": "ia-resources", "html": "ia-resources.html", "data": "data/tools-ia-resources.json"}]};
-  const menuToggle = document.getElementById('menu-toggle');
-  const pageSwitcher = document.querySelector('.page-switcher');
-  const categoryNav = document.getElementById('category-nav');
   const summaryToggle = document.getElementById('summary-toggle');
   const headerSummary = document.getElementById('header-summary');
   const panelToggle = document.getElementById('panel-toggle');
@@ -1038,38 +1405,6 @@
     localStorage.setItem('theme', newTheme);
     updateThemeToggle();
   });
-
-  // Menu toggle (page switcher + category nav)
-  const storedMenuState = localStorage.getItem('menuVisible');
-  const menuVisible = storedMenuState === null ? true : storedMenuState === 'true';
-
-  function updateMenuToggle() {
-    const isVisible = !pageSwitcher.classList.contains('hidden') && !categoryNav.classList.contains('hidden');
-    menuToggle.setAttribute('aria-pressed', String(isVisible));
-    menuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu' : 'Afficher le menu');
-    menuToggle.setAttribute('title', isVisible ? 'Masquer le menu' : 'Afficher le menu');
-  }
-
-  function toggleMenu() {
-    const isHidden = pageSwitcher.classList.contains('hidden') || categoryNav.classList.contains('hidden');
-    if (isHidden) {
-      pageSwitcher.classList.remove('hidden');
-      categoryNav.classList.remove('hidden');
-      localStorage.setItem('menuVisible', 'true');
-    } else {
-      pageSwitcher.classList.add('hidden');
-      categoryNav.classList.add('hidden');
-      localStorage.setItem('menuVisible', 'false');
-    }
-    updateMenuToggle();
-  }
-
-  if (!menuVisible) {
-    pageSwitcher.classList.add('hidden');
-    categoryNav.classList.add('hidden');
-  }
-  updateMenuToggle();
-  menuToggle.addEventListener('click', toggleMenu);
 
   // Header summary toggle (subtitle + stats)
   const storedSummaryState = localStorage.getItem('headerSummaryVisible');
