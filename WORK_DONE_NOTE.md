@@ -3,6 +3,29 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FEATURE) Add toggle to hide menu
+
+### Changed
+- Added a new `menu-toggle` button in the header to control menu visibility.
+- Updated `scripts/generate.py` template to hide/show both:
+  - header page switcher (`.page-switcher`)
+  - category navigation tabs (`#category-nav`)
+- Added persisted state in localStorage with key `menuVisible`.
+- Regenerated all HTML pages and related data snapshots.
+
+### Why
+- User requested a toggle to hide the menu for a cleaner page layout.
+- Persisted state keeps user preference across refreshes.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Ran `python scripts/generate.py` successfully.
+- Verified generated template and output include `menu-toggle`, `category-nav`, and `menuVisible` logic.
+
 ## FEATURE) Add toggle to hide page-meta and audience-brief panels
 
 ### Changed
