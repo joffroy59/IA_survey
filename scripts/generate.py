@@ -236,7 +236,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       background: var(--surface);
       transform: scale(1.05);
     }}
-    .menu-toggle {{
+    .main-menu-toggle {{
       position: absolute;
       top: 24px;
       right: 162px;
@@ -253,7 +253,29 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       font-size: 18px;
       transition: all 0.2s;
     }}
-    .menu-toggle:hover {{
+    .main-menu-toggle:hover {{
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }}
+    .submenu-toggle {{
+      position: absolute;
+      top: 24px;
+      right: 208px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }}
+    .submenu-toggle:hover {{
       border-color: var(--accent2);
       background: var(--surface);
       transform: scale(1.05);
@@ -305,7 +327,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     .layout-columns-toggle {{
       position: absolute;
       top: 24px;
-      right: 208px;
+      right: 254px;
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -335,7 +357,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     .current-page-label {{
       position: absolute;
       top: 24px;
-      right: 254px;
+      right: 300px;
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -828,8 +850,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
 
 <header>
-  <div class="current-page-label" id="current-page-label">{page_slug}</div>
-  <button class="menu-toggle" id="menu-toggle" aria-label="Masquer le menu" aria-pressed="true" title="Masquer le menu">🧭</button>
+  <div class="current-page-label" id="current-page-label">{current_page_menu_label}</div>
+  <button class="main-menu-toggle" id="main-menu-toggle" aria-label="Masquer le menu principal" aria-pressed="true" title="Masquer le menu principal">🧭</button>
+  <button class="submenu-toggle" id="submenu-toggle" aria-label="Masquer le menu des sous-categories" aria-pressed="true" title="Masquer le menu des sous-categories">🗂️</button>
   <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
   <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
   <button class="layout-columns-toggle" id="layout-columns-toggle" aria-label="Changer le nombre de colonnes de categories" aria-pressed="true" title="Colonnes categories: 1">1</button>
@@ -937,7 +960,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   const currentPageLabel = document.getElementById('current-page-label');
   const currentPageFile = '{history_page_file}';
   const exportManifest = {export_manifest_json};
-  const menuToggle = document.getElementById('menu-toggle');
+  const mainMenuToggle = document.getElementById('main-menu-toggle');
+  const submenuToggle = document.getElementById('submenu-toggle');
   const pageSwitcher = document.querySelector('.page-switcher');
   const categoryNav = document.getElementById('category-nav');
   const summaryToggle = document.getElementById('summary-toggle');
@@ -1159,38 +1183,65 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   layoutColumnsToggle.addEventListener('click', cycleLayoutColumns);
 
-  // Menu toggle (page switcher + category nav)
-  const storedMenuState = localStorage.getItem('menuVisible');
-  const menuVisible = storedMenuState === null ? true : storedMenuState === 'true';
+  // Main menu toggle (page switcher only)
+  const storedMainMenuState = localStorage.getItem('mainMenuVisible');
+  const mainMenuVisible = storedMainMenuState === null ? true : storedMainMenuState === 'true';
 
-  function updateMenuToggle() {{
-    const isVisible = !pageSwitcher.classList.contains('hidden') && !categoryNav.classList.contains('hidden');
-    menuToggle.setAttribute('aria-pressed', String(isVisible));
-    menuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu' : 'Afficher le menu');
-    menuToggle.setAttribute('title', isVisible ? 'Masquer le menu' : 'Afficher le menu');
+  function updateMainMenuToggle() {{
+    const isVisible = !pageSwitcher.classList.contains('hidden');
+    mainMenuToggle.setAttribute('aria-pressed', String(isVisible));
+    mainMenuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu principal' : 'Afficher le menu principal');
+    mainMenuToggle.setAttribute('title', isVisible ? 'Masquer le menu principal' : 'Afficher le menu principal');
     updateAllButtonStates();
   }}
 
-  function toggleMenu() {{
-    const isHidden = pageSwitcher.classList.contains('hidden') || categoryNav.classList.contains('hidden');
+  function toggleMainMenu() {{
+    const isHidden = pageSwitcher.classList.contains('hidden');
     if (isHidden) {{
       pageSwitcher.classList.remove('hidden');
-      categoryNav.classList.remove('hidden');
-      localStorage.setItem('menuVisible', 'true');
+      localStorage.setItem('mainMenuVisible', 'true');
     }} else {{
       pageSwitcher.classList.add('hidden');
-      categoryNav.classList.add('hidden');
-      localStorage.setItem('menuVisible', 'false');
+      localStorage.setItem('mainMenuVisible', 'false');
     }}
-    updateMenuToggle();
+    updateMainMenuToggle();
   }}
 
-  if (!menuVisible) {{
+  if (!mainMenuVisible) {{
     pageSwitcher.classList.add('hidden');
+  }}
+  updateMainMenuToggle();
+  mainMenuToggle.addEventListener('click', toggleMainMenu);
+
+  // Subcategory menu toggle (category tabs only)
+  const storedSubmenuState = localStorage.getItem('subcategoryMenuVisible');
+  const submenuVisible = storedSubmenuState === null ? true : storedSubmenuState === 'true';
+
+  function updateSubmenuToggle() {{
+    const isVisible = !categoryNav.classList.contains('hidden');
+    submenuToggle.setAttribute('aria-pressed', String(isVisible));
+    submenuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu des sous-categories' : 'Afficher le menu des sous-categories');
+    submenuToggle.setAttribute('title', isVisible ? 'Masquer le menu des sous-categories' : 'Afficher le menu des sous-categories');
+    updateAllButtonStates();
+  }}
+
+  function toggleSubmenu() {{
+    const isHidden = categoryNav.classList.contains('hidden');
+    if (isHidden) {{
+      categoryNav.classList.remove('hidden');
+      localStorage.setItem('subcategoryMenuVisible', 'true');
+    }} else {{
+      categoryNav.classList.add('hidden');
+      localStorage.setItem('subcategoryMenuVisible', 'false');
+    }}
+    updateSubmenuToggle();
+  }}
+
+  if (!submenuVisible) {{
     categoryNav.classList.add('hidden');
   }}
-  updateMenuToggle();
-  menuToggle.addEventListener('click', toggleMenu);
+  updateSubmenuToggle();
+  submenuToggle.addEventListener('click', toggleSubmenu);
 
   // Header summary toggle (subtitle + stats)
   const storedSummaryState = localStorage.getItem('headerSummaryVisible');
@@ -1529,6 +1580,7 @@ def generate_page(page_cfg: dict, search_query_map: dict[str, list[str]]):
         history_page_file=output_file.name,
         export_manifest_json=build_export_manifest(),
         page_slug=escape(page_cfg["slug"]),
+      current_page_menu_label=escape(page_cfg["label"]),
         page_switcher=render_page_switcher(meta.get("page_name", "general")),
         page_label=escape(page_label),
         page_description=escape(page_description),

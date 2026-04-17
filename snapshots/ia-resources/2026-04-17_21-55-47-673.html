@@ -78,6 +78,72 @@
       background: var(--surface);
       transform: scale(1.05);
     }
+    .main-menu-toggle {
+      position: absolute;
+      top: 24px;
+      right: 162px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .main-menu-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
+    .submenu-toggle {
+      position: absolute;
+      top: 24px;
+      right: 208px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .submenu-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
+    .summary-toggle {
+      position: absolute;
+      top: 24px;
+      right: 116px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .summary-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
     .panel-toggle {
       position: absolute;
       top: 24px;
@@ -99,6 +165,56 @@
       border-color: var(--accent2);
       background: var(--surface);
       transform: scale(1.05);
+    }
+    .layout-columns-toggle {
+      position: absolute;
+      top: 24px;
+      right: 254px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .layout-columns-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
+    button[aria-pressed="false"] {
+      opacity: 0.5;
+      filter: brightness(0.7);
+    }
+    button[aria-pressed="false"]:hover {
+      opacity: 0.8;
+      filter: brightness(0.85);
+    }
+    .current-page-label {
+      position: absolute;
+      top: 24px;
+      right: 300px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent2);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align: center;
+      min-width: 60px;
+      transition: all 0.2s;
+    }
+    .current-page-label.hidden {
+      display: none;
     }
     header::after {
       content: '';
@@ -142,6 +258,9 @@
       color: var(--muted);
     }
     .update-info span { color: var(--accent2); }
+    .header-summary.hidden {
+      display: none;
+    }
     .page-switcher {
       margin-top: 20px;
       display: inline-flex;
@@ -152,6 +271,9 @@
       border-radius: 999px;
       border: 1px solid var(--border);
       background: var(--surface);
+    }
+    .page-switcher.hidden {
+      display: none;
     }
     .page-link {
       text-decoration: none;
@@ -319,6 +441,9 @@
       max-width: 900px;
       margin: 0 auto;
     }
+    nav.hidden {
+      display: none;
+    }
     .nav-tab {
       font-size: 13px;
       font-weight: 500;
@@ -345,6 +470,21 @@
     }
 
     /* ── Category section ── */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 24px;
+    }
+    body[data-grid-scope="all"][data-grid-columns="1"] .categories-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    body[data-grid-scope="all"][data-grid-columns="2"] .categories-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    body[data-grid-scope="all"][data-grid-columns="3"] .categories-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .category {
       margin-bottom: 48px;
       display: none;
@@ -403,6 +543,15 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 10px;
+    }
+    body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
     .tool-card {
       display: flex;
@@ -531,6 +680,10 @@
 
     @media (max-width: 600px) {
       .tools-grid { grid-template-columns: 1fr 1fr; }
+      .categories-grid { grid-template-columns: 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid { grid-template-columns: 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid { grid-template-columns: 1fr 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid { grid-template-columns: 1fr 1fr; }
       .page-meta { grid-template-columns: 1fr; }
       .audience-brief { grid-template-columns: 1fr; }
     }
@@ -539,30 +692,37 @@
 <body>
 
 <header>
+  <div class="current-page-label" id="current-page-label">Ressources IA</div>
+  <button class="main-menu-toggle" id="main-menu-toggle" aria-label="Masquer le menu principal" aria-pressed="true" title="Masquer le menu principal">🧭</button>
+  <button class="submenu-toggle" id="submenu-toggle" aria-label="Masquer le menu des sous-categories" aria-pressed="true" title="Masquer le menu des sous-categories">🗂️</button>
+  <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
   <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
+  <button class="layout-columns-toggle" id="layout-columns-toggle" aria-label="Changer le nombre de colonnes de categories" aria-pressed="true" title="Colonnes categories: 1">1</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · 17/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
-  <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
-  <p class="update-info">Dernière mise à jour : <span>2026-04-16</span></p>
-  <p class="update-info">Outils : <span>16</span> · Nouveaux : <span>0</span></p>
+  <div class="header-summary" id="header-summary">
+    <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
+    <p class="update-info">Dernière mise à jour : <span>2026-04-17</span></p>
+    <p class="update-info">Outils : <span>1</span> · Nouveaux : <span>0</span></p>
+  </div>
   <div class="page-switcher"><a class="page-link" href="index.html">Vue Generale</a>
     <a class="page-link" href="enterprise.html">Vue Enterprise</a>
     <a class="page-link" href="discovery.html">Vue Decouverte</a>
     <a class="page-link" href="ragdev.html">Vue RAG Pro + DevTools</a>
     <a class="page-link" href="agentdev.html">Vue Agent Dev + IDE Tools</a>
     <a class="page-link" href="vscode.html">Vue VS Code</a>
-    <a class="page-link active" href="newrag.html">Vue New RAG</a>
+    <a class="page-link" href="newrag.html">Vue New RAG</a>
     <a class="page-link" href="cowork.html">vue Claude Cowork</a>
     <a class="page-link" href="ocr.html">Vue OCR</a>
     <a class="page-link" href="dococr.html">Vue OCR Système Complet</a>
     <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a>
-    <a class="page-link-static" href="ia-resources.html">Ressources IA</a></div>
+    <a class="page-link-static active" href="ia-resources.html">Ressources IA</a></div>
   <div class="page-meta">
     <div>
       <div class="page-meta-label">Type de page</div>
-      <div class="page-meta-title">Panorama New RAG</div>
-      <div class="page-meta-desc">Nouveaux frameworks, patterns et plateformes RAG 2026.</div>
+      <div class="page-meta-title">Ressources IA</div>
+      <div class="page-meta-desc">Ressources IA et liens importants mis à jour manuellement.</div>
     </div>
     <div class="button-group">
       <button class="info-btn" type="button" id="open-search-info">Sources</button>
@@ -575,181 +735,43 @@
     <article class="reader-card reader-dev">
       <div class="reader-label">Public cible</div>
       <div class="reader-title">Pour les developpeurs</div>
-      <div class="reader-text">Explorez les approches RAG de nouvelle generation et comparez leurs compromis techniques.</div>
+      <div class="reader-text">Priorisez les outils avec API claire, documentation maintenue et integration CI/CD avant toute adoption.</div>
     </article>
     <article class="reader-card reader-manager">
       <div class="reader-label">Public cible</div>
       <div class="reader-title">Pour les managers</div>
-      <div class="reader-text">Reperez les innovations applicables a court terme avec un risque d&#x27;integration maitrise.</div>
+      <div class="reader-text">Comparez la valeur business, les risques de conformite et le cout total avant de lancer un pilote.</div>
     </article>
   </div>
 </header>
 
-<nav>
+<nav id="category-nav">
   <a class="nav-tab active" href="#" data-cat="all">Tout voir</a>
-  <a class="nav-tab" href="#" data-cat="new-rag-frameworks">🧱 🧱 Frameworks New RAG</a>
-  <a class="nav-tab" href="#" data-cat="new-rag-quality">📈 📈 Qualité & Ops</a>
+  <a class="nav-tab" href="#" data-cat="ressources-principales">📚 Ressources Principales</a>
 </nav>
 
 <main>
-  
-  <section class="category" data-id="new-rag-frameworks">
+  <div class="categories-grid">
+    
+  <section class="category" data-id="ressources-principales">
     <div class="category-header">
-      <div class="category-icon">🧱</div>
-      <div class="category-title">🧱 Frameworks New RAG</div>
+      <div class="category-icon">📚</div>
+      <div class="category-title">Ressources Principales</div>
     </div>
     
     <div class="subcategory">
-      <div class="subcategory-title">🕸️ Graph RAG</div>
+      <div class="subcategory-title">🤖 Modèles & Plateformes</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://klingai.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Kling</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://chat.mistral.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Le Chat</div>
-        <div class="tool-provider">Mistral</div>
-        <div class="tool-desc">IA française</div>
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">🤖 Agentic RAG</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://leonardo.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Leonardo AI</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://lumalabs.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Luma Dream Machine</div>
-        
-        
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">🖼️ Multimodal RAG</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://meta.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Meta AI</div>
-        <div class="tool-provider">Meta</div>
-        <div class="tool-desc">IA de Meta</div>
-      </a>
-
-      <a class="tool-card" href="https://www.midjourney.com/" target="_blank" rel="noopener">
-        <div class="tool-name">MidJourney</div>
-        
-        <div class="tool-desc">Référence qualité</div>
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">🔗 Orchestration</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://murf.ai" target="_blank" rel="noopener">
-        <div class="tool-name">Murf AI</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://notebooklm.google/" target="_blank" rel="noopener">
-        <div class="tool-name">NotebookLM</div>
-        <div class="tool-provider">Google</div>
-        <div class="tool-desc">FAQ, Podcast IA</div>
+      <a class="tool-card" href="https://models.dev/" target="_blank" rel="noopener">
+        <div class="tool-name">IA Models</div>
+        <div class="tool-provider">Models.dev</div>
+        <div class="tool-desc">Comparateur de modèles IA et plateformes</div>
       </a>
       </div>
     </div>
   </section>
-
-  <section class="category" data-id="new-rag-quality">
-    <div class="category-header">
-      <div class="category-icon">📈</div>
-      <div class="category-title">📈 Qualité & Ops</div>
-    </div>
-    
-    <div class="subcategory">
-      <div class="subcategory-title">✅ Évaluation</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://www.notta.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Notta</div>
-        
-        <div class="tool-desc">Réunion App Mobile</div>
-      </a>
-
-      <a class="tool-card" href="https://otter.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Otter.ai</div>
-        
-        <div class="tool-desc">Prise de notes IA</div>
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">📊 Observabilité</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://www.perplexity.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Perplexity</div>
-        
-        <div class="tool-desc">Recherche IA</div>
-      </a>
-
-      <a class="tool-card" href="https://plaud.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Plaud AI</div>
-        
-        
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">🎯 Retrieval Tuning</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://chat.qwen.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Qwen</div>
-        <div class="tool-provider">Alibaba</div>
-        
-      </a>
-
-      <a class="tool-card" href="https://www.recraft.ai/" target="_blank" rel="noopener">
-        <div class="tool-name">Recraft</div>
-        
-        
-      </a>
-      </div>
-    </div>
-
-    <div class="subcategory">
-      <div class="subcategory-title">🔒 Security & Governance</div>
-      <div class="tools-grid">
-        
-      <a class="tool-card" href="https://app.runwayml.com/" target="_blank" rel="noopener">
-        <div class="tool-name">Runway</div>
-        
-        
-      </a>
-
-      <a class="tool-card" href="https://www.songr.ai" target="_blank" rel="noopener">
-        <div class="tool-name">SongR</div>
-        
-        
-      </a>
-      </div>
-    </div>
-  </section>
+  </div>
 </main>
 
 <footer>
@@ -764,19 +786,9 @@
       <div class="modal-title">Requêtes de recherche utilisées</div>
       <button class="close-btn" type="button" id="close-search-info">Fermer</button>
     </div>
-    <div class="modal-meta">Page: Panorama New RAG · Dernière mise à jour: 2026-04-16</div>
+    <div class="modal-meta">Page: Ressources IA · Dernière mise à jour: 2026-04-17</div>
     <ol class="query-list">
-      <li>new RAG frameworks and stacks 2026</li>
-      <li>next generation RAG techniques reranking and routing 2026</li>
-      <li>graph RAG and hybrid retrieval tools 2026</li>
-      <li>multimodal RAG platforms 2026 comparison</li>
-      <li>RAG observability and quality monitoring new tools 2026</li>
-      <li>RAG benchmark leaders and evaluation suites 2026</li>
-      <li>RAG chunking and ingestion innovation 2026</li>
-      <li>Docling and modern document parsers for new RAG 2026</li>
-      <li>agentic RAG systems state of practice 2026</li>
-      <li>open source new RAG repositories 2026 site:github.com</li>
-      <li>new generation RAG tools for production 2026</li>
+      <li>Aucune requête enregistrée.</li>
     </ol>
   </div>
 </div>
@@ -787,7 +799,7 @@
       <div class="modal-title">Historique des versions</div>
       <button class="close-btn" type="button" id="close-history-info">Fermer</button>
     </div>
-    <div class="modal-meta">Page: Panorama New RAG · Dernières 10 générations</div>
+    <div class="modal-meta">Page: Ressources IA · Dernières 10 générations</div>
     <table class="history-table">
       <thead>
         <tr>
@@ -798,54 +810,54 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date"><a href="snapshots/newrag/2026-04-16_01-27-20-664.html" target="_blank">2026-04-16 01:27:20.664</a></td>
-          <td class="history-count">16</td>
-          <td><a href="snapshots/newrag/2026-04-16_01-27-20-664.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-16_01-27-20-664.html&amp;right=newrag.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_20-56-53-998.html" target="_blank">2026-04-17 20:56:53.998</a></td>
+          <td class="history-count">1</td>
+          <td><a href="snapshots/ia-resources/2026-04-17_20-56-53-998.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_20-56-53-998.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/newrag/2026-04-16_01-28-23-965.html" target="_blank">2026-04-16 01:28:23.965</a></td>
-          <td class="history-count">16</td>
-          <td><a href="snapshots/newrag/2026-04-16_01-28-23-965.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-16_01-28-23-965.html&amp;right=newrag.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_20-58-33-498.html" target="_blank">2026-04-17 20:58:33.498</a></td>
+          <td class="history-count">1</td>
+          <td><a href="snapshots/ia-resources/2026-04-17_20-58-33-498.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_20-58-33-498.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/newrag/2026-04-15_23-44-42-722.html" target="_blank">2026-04-15 23:44:42.722</a></td>
-          <td class="history-count">16</td>
-          <td><a href="snapshots/newrag/2026-04-15_23-44-42-722.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-15_23-44-42-722.html&amp;right=newrag.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-06-28-616.html" target="_blank">2026-04-17 21:06:28.616</a></td>
+          <td class="history-count">1</td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-06-28-616.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-06-28-616.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/newrag/2026-04-15_23-53-26-242.html" target="_blank">2026-04-15 23:53:26.242</a></td>
-          <td class="history-count">16</td>
-          <td><a href="snapshots/newrag/2026-04-15_23-53-26-242.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-15_23-53-26-242.html&amp;right=newrag.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-08-33-441.html" target="_blank">2026-04-17 21:08:33.441</a></td>
+          <td class="history-count">1</td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-08-33-441.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-08-33-441.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/newrag/2026-04-16_07-10-46-806.html" target="_blank">2026-04-16 07:10:46.806</a></td>
-          <td class="history-count">16</td>
-          <td><a href="snapshots/newrag/2026-04-16_07-10-46-806.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-16_07-10-46-806.html&amp;right=newrag.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-18-02-101.html" target="_blank">2026-04-17 21:18:02.101</a></td>
+          <td class="history-count">1</td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-18-02-101.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-18-02-101.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/newrag/2026-04-16_07-25-52-207.html" target="_blank">2026-04-16 07:25:52.207</a></td>
-          <td class="history-count">16</td>
-          <td><a href="snapshots/newrag/2026-04-16_07-25-52-207.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-16_07-25-52-207.html&amp;right=newrag.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-40-48-014.html" target="_blank">2026-04-17 21:40:48.014</a></td>
+          <td class="history-count">1</td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-40-48-014.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-40-48-014.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/newrag/2026-04-16_09-04-05-931.html" target="_blank">2026-04-16 09:04:05.931</a></td>
-          <td class="history-count">16</td>
-          <td><a href="snapshots/newrag/2026-04-16_09-04-05-931.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-16_09-04-05-931.html&amp;right=newrag.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-43-42-694.html" target="_blank">2026-04-17 21:43:42.694</a></td>
+          <td class="history-count">1</td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-43-42-694.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-43-42-694.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/newrag/2026-04-16_09-41-12-312.html" target="_blank">2026-04-16 09:41:12.312</a></td>
-          <td class="history-count">16</td>
-          <td><a href="snapshots/newrag/2026-04-16_09-41-12-312.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-16_09-41-12-312.html&amp;right=newrag.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-45-54-909.html" target="_blank">2026-04-17 21:45:54.909</a></td>
+          <td class="history-count">1</td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-45-54-909.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-45-54-909.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/newrag/2026-04-17_20-25-36-261.html" target="_blank">2026-04-17 20:25:36.261</a></td>
-          <td class="history-count">16</td>
-          <td><a href="snapshots/newrag/2026-04-17_20-25-36-261.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-17_20-25-36-261.html&amp;right=newrag.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-48-56-357.html" target="_blank">2026-04-17 21:48:56.357</a></td>
+          <td class="history-count">1</td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-48-56-357.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-48-56-357.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/newrag/2026-04-17_20-41-30-273.html" target="_blank">2026-04-17 20:41:30.273</a></td>
-          <td class="history-count">16</td>
-          <td><a href="snapshots/newrag/2026-04-17_20-41-30-273.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/newrag/2026-04-17_20-41-30-273.html&amp;right=newrag.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_21-55-47-673.html" target="_blank">2026-04-17 21:55:47.673</a></td>
+          <td class="history-count">1</td>
+          <td><a href="snapshots/ia-resources/2026-04-17_21-55-47-673.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_21-55-47-673.html&amp;right=ia-resources.html">Comparer</a></td>
         </tr>
       </tbody>
     </table>
@@ -864,8 +876,16 @@
   const closeHistoryInfo = document.getElementById('close-history-info');
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
-  const currentPageFile = 'newrag.html';
+  const layoutColumnsToggle = document.getElementById('layout-columns-toggle');
+  const currentPageLabel = document.getElementById('current-page-label');
+  const currentPageFile = 'ia-resources.html';
   const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}, {"slug": "ia-resources", "html": "ia-resources.html", "data": "data/tools-ia-resources.json"}]};
+  const mainMenuToggle = document.getElementById('main-menu-toggle');
+  const submenuToggle = document.getElementById('submenu-toggle');
+  const pageSwitcher = document.querySelector('.page-switcher');
+  const categoryNav = document.getElementById('category-nav');
+  const summaryToggle = document.getElementById('summary-toggle');
+  const headerSummary = document.getElementById('header-summary');
   const panelToggle = document.getElementById('panel-toggle');
   const pageMeta = document.querySelector('.page-meta');
   const audienceBrief = document.querySelector('.audience-brief');
@@ -932,11 +952,13 @@
       categories.forEach(c => {
         c.classList.toggle('visible', cat === 'all' || c.dataset.id === cat);
       });
+      updateGridScope(cat);
     });
   });
 
   // Show all on load
   categories.forEach(c => c.classList.add('visible'));
+  updateGridScope('all');
 
   // Search modal handlers
   openSearchInfo.addEventListener('click', () => {
@@ -1008,6 +1030,169 @@
     updateThemeToggle();
   });
 
+  // Category columns toggle button (cycles through: 1 -> 2 -> 3 -> 1)
+  // UI controls only the "all" scope for now.
+  const validGridLayouts = ['1', '2', '3'];
+  const storedGridColumnsAll = localStorage.getItem('gridColumnsAll') || '1';
+  const storedGridColumnsSingle = localStorage.getItem('gridColumnsSingle') || '3';
+
+  function getGridLayoutForScope(scope) {
+    return scope === 'all'
+      ? (localStorage.getItem('gridColumnsAll') || '1')
+      : (localStorage.getItem('gridColumnsSingle') || '3');
+  }
+
+  function applyGridColumnsLayoutForScope(scope) {
+    document.body.setAttribute('data-grid-columns', getGridLayoutForScope(scope));
+  }
+
+  // Future hook: keep single-category mode configurable without exposing UI yet.
+  function setSingleGridColumnsLayout(layoutValue) {
+    if (!validGridLayouts.includes(layoutValue)) return;
+    localStorage.setItem('gridColumnsSingle', layoutValue);
+    if ((document.body.getAttribute('data-grid-scope') || 'all') === 'single') {
+      applyGridColumnsLayoutForScope('single');
+      updateLayoutToggle();
+    }
+  }
+
+  function updateGridScope(selectedCategory) {
+    const scope = selectedCategory === 'all' ? 'all' : 'single';
+    document.body.setAttribute('data-grid-scope', scope);
+    applyGridColumnsLayoutForScope(scope);
+    updateLayoutToggle();
+  }
+
+  function updateLayoutToggle() {
+    const currentScope = document.body.getAttribute('data-grid-scope') || 'all';
+    const currentLayout = getGridLayoutForScope(currentScope);
+    const targetLabel = currentScope === 'all' ? 'categories' : 'outils';
+    layoutColumnsToggle.textContent = currentLayout;
+    const canChangeFromUi = currentScope === 'all';
+    layoutColumnsToggle.disabled = !canChangeFromUi;
+    layoutColumnsToggle.setAttribute('aria-pressed', String(canChangeFromUi));
+    if (canChangeFromUi) {
+      layoutColumnsToggle.setAttribute('aria-label', `Changer le nombre de colonnes de categories (actuel: ${currentLayout})`);
+      layoutColumnsToggle.setAttribute('title', `Colonnes categories: ${currentLayout}`);
+    } else {
+      layoutColumnsToggle.setAttribute('aria-label', `Colonnes outils fixes (actuel: ${currentLayout})`);
+      layoutColumnsToggle.setAttribute('title', `Colonnes outils: ${currentLayout} (fixe pour l'instant)`);
+    }
+    updateAllButtonStates();
+  }
+
+  function cycleLayoutColumns() {
+    const currentScope = document.body.getAttribute('data-grid-scope') || 'all';
+    if (currentScope !== 'all') return;
+    const currentLayout = localStorage.getItem('gridColumnsAll') || '1';
+    const currentIndex = validGridLayouts.indexOf(currentLayout);
+    const safeIndex = currentIndex === -1 ? 0 : currentIndex;
+    const nextIndex = (safeIndex + 1) % validGridLayouts.length;
+    const nextLayout = validGridLayouts[nextIndex];
+    localStorage.setItem('gridColumnsAll', nextLayout);
+    applyGridColumnsLayoutForScope('all');
+    updateLayoutToggle();
+  }
+
+  const initialGridLayoutAll = validGridLayouts.includes(storedGridColumnsAll) ? storedGridColumnsAll : '1';
+  const initialGridLayoutSingle = validGridLayouts.includes(storedGridColumnsSingle) ? storedGridColumnsSingle : '3';
+  localStorage.setItem('gridColumnsAll', initialGridLayoutAll);
+  localStorage.setItem('gridColumnsSingle', initialGridLayoutSingle);
+  applyGridColumnsLayoutForScope('all');
+  updateLayoutToggle();
+
+  layoutColumnsToggle.addEventListener('click', cycleLayoutColumns);
+
+  // Main menu toggle (page switcher only)
+  const storedMainMenuState = localStorage.getItem('mainMenuVisible');
+  const mainMenuVisible = storedMainMenuState === null ? true : storedMainMenuState === 'true';
+
+  function updateMainMenuToggle() {
+    const isVisible = !pageSwitcher.classList.contains('hidden');
+    mainMenuToggle.setAttribute('aria-pressed', String(isVisible));
+    mainMenuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu principal' : 'Afficher le menu principal');
+    mainMenuToggle.setAttribute('title', isVisible ? 'Masquer le menu principal' : 'Afficher le menu principal');
+    updateAllButtonStates();
+  }
+
+  function toggleMainMenu() {
+    const isHidden = pageSwitcher.classList.contains('hidden');
+    if (isHidden) {
+      pageSwitcher.classList.remove('hidden');
+      localStorage.setItem('mainMenuVisible', 'true');
+    } else {
+      pageSwitcher.classList.add('hidden');
+      localStorage.setItem('mainMenuVisible', 'false');
+    }
+    updateMainMenuToggle();
+  }
+
+  if (!mainMenuVisible) {
+    pageSwitcher.classList.add('hidden');
+  }
+  updateMainMenuToggle();
+  mainMenuToggle.addEventListener('click', toggleMainMenu);
+
+  // Subcategory menu toggle (category tabs only)
+  const storedSubmenuState = localStorage.getItem('subcategoryMenuVisible');
+  const submenuVisible = storedSubmenuState === null ? true : storedSubmenuState === 'true';
+
+  function updateSubmenuToggle() {
+    const isVisible = !categoryNav.classList.contains('hidden');
+    submenuToggle.setAttribute('aria-pressed', String(isVisible));
+    submenuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu des sous-categories' : 'Afficher le menu des sous-categories');
+    submenuToggle.setAttribute('title', isVisible ? 'Masquer le menu des sous-categories' : 'Afficher le menu des sous-categories');
+    updateAllButtonStates();
+  }
+
+  function toggleSubmenu() {
+    const isHidden = categoryNav.classList.contains('hidden');
+    if (isHidden) {
+      categoryNav.classList.remove('hidden');
+      localStorage.setItem('subcategoryMenuVisible', 'true');
+    } else {
+      categoryNav.classList.add('hidden');
+      localStorage.setItem('subcategoryMenuVisible', 'false');
+    }
+    updateSubmenuToggle();
+  }
+
+  if (!submenuVisible) {
+    categoryNav.classList.add('hidden');
+  }
+  updateSubmenuToggle();
+  submenuToggle.addEventListener('click', toggleSubmenu);
+
+  // Header summary toggle (subtitle + stats)
+  const storedSummaryState = localStorage.getItem('headerSummaryVisible');
+  const summaryVisible = storedSummaryState === null ? true : storedSummaryState === 'true';
+
+  function updateSummaryToggle() {
+    const isVisible = !headerSummary.classList.contains('hidden');
+    summaryToggle.setAttribute('aria-pressed', String(isVisible));
+    summaryToggle.setAttribute('aria-label', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
+    summaryToggle.setAttribute('title', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
+    updateAllButtonStates();
+  }
+
+  function toggleHeaderSummary() {
+    const isHidden = headerSummary.classList.contains('hidden');
+    if (isHidden) {
+      headerSummary.classList.remove('hidden');
+      localStorage.setItem('headerSummaryVisible', 'true');
+    } else {
+      headerSummary.classList.add('hidden');
+      localStorage.setItem('headerSummaryVisible', 'false');
+    }
+    updateSummaryToggle();
+  }
+
+  if (!summaryVisible) {
+    headerSummary.classList.add('hidden');
+  }
+  updateSummaryToggle();
+  summaryToggle.addEventListener('click', toggleHeaderSummary);
+
   // Panel toggle functionality
   const storedPanelState = localStorage.getItem('panelsVisible');
   const panelsVisible = storedPanelState === null ? true : storedPanelState === 'true';
@@ -1017,6 +1202,7 @@
     panelToggle.setAttribute('aria-pressed', String(isVisible));
     panelToggle.setAttribute('aria-label', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
     panelToggle.setAttribute('title', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
+    updateAllButtonStates();
   }
 
   function togglePanels() {
@@ -1041,6 +1227,20 @@
   updatePanelToggle();
 
   panelToggle.addEventListener('click', togglePanels);
+
+  // Master function to sync all button aria-pressed states and page label visibility
+  function updateAllButtonStates() {
+    // Update page label visibility: show when menu is hidden, hide when menu is visible
+    const isMenuVisible = !pageSwitcher.classList.contains('hidden');
+    if (isMenuVisible) {
+      currentPageLabel.classList.add('hidden');
+    } else {
+      currentPageLabel.classList.remove('hidden');
+    }
+  }
+
+  // Initialize all button states
+  updateAllButtonStates();
 </script>
 
 </body>
