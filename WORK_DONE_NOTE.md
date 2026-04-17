@@ -3,6 +3,20 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## PLAN) Backlog structure pour evolutions majeures
+
+### Changed
+- Added `BACKLOG_EVOLUTION_APP.md` with epics, user stories, priorities, acceptance criteria, risks, and sprint proposal.
+- Structured requested topics into actionable tasks: tools relevance expansion, history/comparison fixes, database/settings, config export/import, and multi-provider support.
+
+### Why
+- User requested a concrete task list to resolve major product evolution needs.
+- A structured backlog enables execution planning and progressive delivery.
+
+### Files touched
+- `BACKLOG_EVOLUTION_APP.md`
+- `WORK_DONE_NOTE.md`
+
 ## FIX) Reduce column mode label text size
 
 ### Changed
