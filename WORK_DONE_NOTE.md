@@ -3,6 +3,21 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FIX) Left-align main page title
+
+### Changed
+- Updated main title (`h1`) styling to align text to the left.
+- Added width constraints (`max-width: 1100px; margin: 0 auto;`) so left alignment follows page content width.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested moving `Boîte à outils IA Génératives` to the left side of the screen.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
 ## FIX) Header polish: menu label, badge position, toggle inversion, title tone
 
 ### Changed

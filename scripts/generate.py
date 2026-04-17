@@ -407,6 +407,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       -webkit-text-fill-color: transparent;
       background-clip: text;
       line-height: 1.15;
+      text-align: left;
+      max-width: 1100px;
+      margin: 0 auto;
     }}
     .subtitle {{
       margin-top: 12px;

@@ -78,7 +78,29 @@
       background: var(--surface);
       transform: scale(1.05);
     }
-    .menu-toggle {
+    .main-menu-toggle {
+      position: absolute;
+      top: 24px;
+      right: 208px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .main-menu-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
+    .submenu-toggle {
       position: absolute;
       top: 24px;
       right: 162px;
@@ -95,7 +117,7 @@
       font-size: 18px;
       transition: all 0.2s;
     }
-    .menu-toggle:hover {
+    .submenu-toggle:hover {
       border-color: var(--accent2);
       background: var(--surface);
       transform: scale(1.05);
@@ -144,6 +166,57 @@
       background: var(--surface);
       transform: scale(1.05);
     }
+    .layout-columns-toggle {
+      position: absolute;
+      top: 24px;
+      right: 254px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .layout-columns-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
+    button[aria-pressed="false"] {
+      opacity: 0.5;
+      filter: brightness(0.7);
+    }
+    button[aria-pressed="false"]:hover {
+      opacity: 0.8;
+      filter: brightness(0.85);
+    }
+    .current-page-label {
+      position: absolute;
+      top: 24px;
+      right: 300px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent2);
+      letter-spacing: 0.01em;
+      text-transform: none;
+      text-align: center;
+      min-width: 60px;
+      transition: all 0.2s;
+    }
+    .current-page-label.hidden {
+      display: none;
+    }
     header::after {
       content: '';
       display: block;
@@ -154,6 +227,9 @@
     }
     .header-badge {
       display: inline-block;
+      position: absolute;
+      top: 72px;
+      right: 24px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       color: var(--accent2);
@@ -161,18 +237,21 @@
       border: 1px solid rgba(0,212,170,0.25);
       padding: 4px 12px;
       border-radius: 20px;
-      margin-bottom: 20px;
+      margin-bottom: 0;
       letter-spacing: 0.08em;
     }
     h1 {
-      font-size: clamp(28px, 5vw, 48px);
-      font-weight: 700;
+      font-size: clamp(26px, 4.6vw, 42px);
+      font-weight: 650;
       letter-spacing: -0.02em;
       background: linear-gradient(135deg, var(--text) 30%, var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       line-height: 1.15;
+      text-align: left;
+      max-width: 1100px;
+      margin: 0 auto;
     }
     .subtitle {
       margin-top: 12px;
@@ -398,6 +477,21 @@
     }
 
     /* ── Category section ── */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 24px;
+    }
+    body[data-grid-scope="all"][data-grid-columns="1"] .categories-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    body[data-grid-scope="all"][data-grid-columns="2"] .categories-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    body[data-grid-scope="all"][data-grid-columns="3"] .categories-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .category {
       margin-bottom: 48px;
       display: none;
@@ -456,6 +550,15 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 10px;
+    }
+    body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
     .tool-card {
       display: flex;
@@ -584,6 +687,11 @@
 
     @media (max-width: 600px) {
       .tools-grid { grid-template-columns: 1fr 1fr; }
+      .categories-grid { grid-template-columns: 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid { grid-template-columns: 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid { grid-template-columns: 1fr 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid { grid-template-columns: 1fr 1fr; }
+      .header-badge { position: static; margin-bottom: 16px; }
       .page-meta { grid-template-columns: 1fr; }
       .audience-brief { grid-template-columns: 1fr; }
     }
@@ -592,34 +700,37 @@
 <body>
 
 <header>
-  <button class="menu-toggle" id="menu-toggle" aria-label="Masquer le menu" aria-pressed="true" title="Masquer le menu">🧭</button>
+  <div class="current-page-label" id="current-page-label">Vue VS Code</div>
+  <button class="submenu-toggle" id="submenu-toggle" aria-label="Masquer le menu des sous-categories" aria-pressed="true" title="Masquer le menu des sous-categories">🗂️</button>
+  <button class="main-menu-toggle" id="main-menu-toggle" aria-label="Masquer le menu principal" aria-pressed="true" title="Masquer le menu principal">🧭</button>
   <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
   <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
+  <button class="layout-columns-toggle" id="layout-columns-toggle" aria-label="Changer le nombre de colonnes de categories" aria-pressed="true" title="Colonnes categories: 1">1</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · 17/04/2026</div>
   <h1>Boîte à outils IA Génératives</h1>
   <div class="header-summary" id="header-summary">
     <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
-    <p class="update-info">Dernière mise à jour : <span>2026-04-17</span></p>
-    <p class="update-info">Outils : <span>1</span> · Nouveaux : <span>0</span></p>
+    <p class="update-info">Dernière mise à jour : <span>2026-04-16</span></p>
+    <p class="update-info">Outils : <span>16</span> · Nouveaux : <span>1</span></p>
   </div>
   <div class="page-switcher"><a class="page-link" href="index.html">Vue Generale</a>
     <a class="page-link" href="enterprise.html">Vue Enterprise</a>
     <a class="page-link" href="discovery.html">Vue Decouverte</a>
     <a class="page-link" href="ragdev.html">Vue RAG Pro + DevTools</a>
     <a class="page-link" href="agentdev.html">Vue Agent Dev + IDE Tools</a>
-    <a class="page-link" href="vscode.html">Vue VS Code</a>
+    <a class="page-link active" href="vscode.html">Vue VS Code</a>
     <a class="page-link" href="newrag.html">Vue New RAG</a>
     <a class="page-link" href="cowork.html">vue Claude Cowork</a>
     <a class="page-link" href="ocr.html">Vue OCR</a>
     <a class="page-link" href="dococr.html">Vue OCR Système Complet</a>
     <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a>
-    <a class="page-link-static active" href="ia-resources.html">Ressources IA</a></div>
+    <a class="page-link-static" href="ia-resources.html">Ressources IA</a></div>
   <div class="page-meta">
     <div>
       <div class="page-meta-label">Type de page</div>
-      <div class="page-meta-title">Ressources IA</div>
-      <div class="page-meta-desc">Ressources IA et liens importants mis à jour manuellement.</div>
+      <div class="page-meta-title">Panorama VS Code + Extensions IA</div>
+      <div class="page-meta-desc">Outils, extensions et workflows IA dédiés à VS Code.</div>
     </div>
     <div class="button-group">
       <button class="info-btn" type="button" id="open-search-info">Sources</button>
@@ -632,41 +743,183 @@
     <article class="reader-card reader-dev">
       <div class="reader-label">Public cible</div>
       <div class="reader-title">Pour les developpeurs</div>
-      <div class="reader-text">Priorisez les outils avec API claire, documentation maintenue et integration CI/CD avant toute adoption.</div>
+      <div class="reader-text">Choisissez les extensions VS Code qui accelerent revue, refactor et tests sans degrade la qualite.</div>
     </article>
     <article class="reader-card reader-manager">
       <div class="reader-label">Public cible</div>
       <div class="reader-title">Pour les managers</div>
-      <div class="reader-text">Comparez la valeur business, les risques de conformite et le cout total avant de lancer un pilote.</div>
+      <div class="reader-text">Encadrez l&#x27;usage des extensions IA avec standards d&#x27;equipe, securite et mesure de productivite.</div>
     </article>
   </div>
 </header>
 
 <nav id="category-nav">
   <a class="nav-tab active" href="#" data-cat="all">Tout voir</a>
-  <a class="nav-tab" href="#" data-cat="ressources-principales">📚 Ressources Principales</a>
+  <a class="nav-tab" href="#" data-cat="vscode-extensions">🧩 Extensions VS Code</a>
+  <a class="nav-tab" href="#" data-cat="vscode-workflows">⚙️ Workflows Dev</a>
 </nav>
 
 <main>
-  
-  <section class="category" data-id="ressources-principales">
+  <div class="categories-grid">
+    
+  <section class="category" data-id="vscode-extensions">
     <div class="category-header">
-      <div class="category-icon">📚</div>
-      <div class="category-title">Ressources Principales</div>
+      <div class="category-icon">🧩</div>
+      <div class="category-title">Extensions VS Code</div>
     </div>
     
     <div class="subcategory">
-      <div class="subcategory-title">🤖 Modèles & Plateformes</div>
+      <div class="subcategory-title">💡 Assistants Code</div>
       <div class="tools-grid">
         
-      <a class="tool-card" href="https://models.dev/" target="_blank" rel="noopener">
-        <div class="tool-name">IA Models</div>
-        <div class="tool-provider">Models.dev</div>
-        <div class="tool-desc">Comparateur de modèles IA et plateformes</div>
+      <a class="tool-card" href="https://www.heygen.com/" target="_blank" rel="noopener">
+        <div class="tool-name">HeyGen</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://chat.mistral.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Le Chat</div>
+        <div class="tool-provider">Mistral</div>
+        <div class="tool-desc">IA française</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🛠️ Refactoring & Review</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://agent.minimax.io/" target="_blank" rel="noopener">
+        <div class="tool-name">MiniMax</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://www.perplexity.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Perplexity</div>
+        
+        <div class="tool-desc">Recherche IA</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">💬 Prompt & Chat</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://www.songr.ai" target="_blank" rel="noopener">
+        <div class="tool-name">SongR</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://www.udio.com" target="_blank" rel="noopener">
+        <div class="tool-name">Udio</div>
+        
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🧪 Tests & Docs</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://copilot.microsoft.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Copilot</div>
+        <div class="tool-provider">Microsoft</div>
+        <div class="tool-desc">Intégré à Windows</div>
+      </a>
+
+      <a class="tool-card" href="https://www.canva.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Canva AI</div>
+        <div class="tool-provider">Canva</div>
+        <div class="tool-desc">Design IA</div>
       </a>
       </div>
     </div>
   </section>
+
+  <section class="category" data-id="vscode-workflows">
+    <div class="category-header">
+      <div class="category-icon">⚙️</div>
+      <div class="category-title">Workflows Dev</div>
+    </div>
+    
+    <div class="subcategory">
+      <div class="subcategory-title">🖥️ Terminal AI</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://chat.deepseek.com/" target="_blank" rel="noopener">
+        <div class="tool-name">DeepSeek</div>
+        
+        <div class="tool-desc">IA chinoise open source</div>
+      </a>
+
+      <a class="tool-card" href="https://gamma.app/" target="_blank" rel="noopener">
+        <div class="tool-name">Gamma</div>
+        
+        <div class="tool-desc">Présentations IA</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🚀 CI/CD Integration</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://gemini.google.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Imagen (Gemini)</div>
+        <div class="tool-provider">Google</div>
+        <div class="tool-desc">Gratuit</div>
+      </a>
+
+      <a class="tool-card" href="https://lumalabs.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Luma Dream Machine</div>
+        
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🐞 Debugging</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://notebooklm.google/" target="_blank" rel="noopener">
+        <div class="tool-name">NotebookLM</div>
+        <div class="tool-provider">Google</div>
+        <div class="tool-desc">FAQ, Podcast IA</div>
+      </a>
+
+      <a class="tool-card" href="https://chat.qwen.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Qwen</div>
+        <div class="tool-provider">Alibaba</div>
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">👥 Team Productivity</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://stablediffusionweb.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Stable Diffusion</div>
+        
+        
+      </a>
+
+      <a class="tool-card is-new" href="https://www.vo3ai.com/" target="_blank" rel="noopener">
+        <div class="tool-name">VO3AI</div>
+        <div class="tool-provider">VO3AI</div>
+        <div class="tool-desc">Crée des vidéos à partir d'images statiques</div>
+      </a>
+      </div>
+    </div>
+  </section>
+  </div>
 </main>
 
 <footer>
@@ -681,9 +934,23 @@
       <div class="modal-title">Requêtes de recherche utilisées</div>
       <button class="close-btn" type="button" id="close-search-info">Fermer</button>
     </div>
-    <div class="modal-meta">Page: Ressources IA · Dernière mise à jour: 2026-04-17</div>
+    <div class="modal-meta">Page: Panorama VS Code + Extensions IA · Dernière mise à jour: 2026-04-16</div>
     <ol class="query-list">
-      <li>Aucune requête enregistrée.</li>
+      <li>best VS Code AI extensions for developers 2026</li>
+      <li>Gemini Code Assist VS Code extension capabilities</li>
+      <li>GitHub Copilot VS Code extension capabilities</li>
+      <li>OpenAI Codex integration for VS Code workflows</li>
+      <li>Claude Code with VS Code terminal workflow</li>
+      <li>Gemini CLI with VS Code terminal tasks</li>
+      <li>VS Code coding assistant extensions comparison 2026</li>
+      <li>open source VS Code AI extension ecosystem 2026</li>
+      <li>VS Code agent extension for code automation 2026</li>
+      <li>VS Code AI code review extension professional teams 2026</li>
+      <li>VS Code AI refactoring productivity extensions 2026</li>
+      <li>VS Code AI terminal assistant extension 2026</li>
+      <li>VS Code enterprise AI extension governance 2026</li>
+      <li>best VS Code AI extensions for professional teams 2026</li>
+      <li>VS Code extension development with AI copilots 2026</li>
     </ol>
   </div>
 </div>
@@ -694,7 +961,7 @@
       <div class="modal-title">Historique des versions</div>
       <button class="close-btn" type="button" id="close-history-info">Fermer</button>
     </div>
-    <div class="modal-meta">Page: Ressources IA · Dernières 10 générations</div>
+    <div class="modal-meta">Page: Panorama VS Code + Extensions IA · Dernières 10 générations</div>
     <table class="history-table">
       <thead>
         <tr>
@@ -705,29 +972,54 @@
       </thead>
       <tbody>
                 <tr>
-          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_19-05-26-163.html" target="_blank">2026-04-17 19:05:26.163</a></td>
-          <td class="history-count">1</td>
-          <td><a href="snapshots/ia-resources/2026-04-17_19-05-26-163.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_19-05-26-163.html&amp;right=ia-resources.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/vscode/2026-04-17_21-06-28-603.html" target="_blank">2026-04-17 21:06:28.603</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/vscode/2026-04-17_21-06-28-603.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-17_21-06-28-603.html&amp;right=vscode.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_20-25-36-273.html" target="_blank">2026-04-17 20:25:36.273</a></td>
-          <td class="history-count">1</td>
-          <td><a href="snapshots/ia-resources/2026-04-17_20-25-36-273.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_20-25-36-273.html&amp;right=ia-resources.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/vscode/2026-04-17_21-08-33-430.html" target="_blank">2026-04-17 21:08:33.430</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/vscode/2026-04-17_21-08-33-430.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-17_21-08-33-430.html&amp;right=vscode.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_20-41-30-285.html" target="_blank">2026-04-17 20:41:30.285</a></td>
-          <td class="history-count">1</td>
-          <td><a href="snapshots/ia-resources/2026-04-17_20-41-30-285.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_20-41-30-285.html&amp;right=ia-resources.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/vscode/2026-04-17_21-18-02-088.html" target="_blank">2026-04-17 21:18:02.088</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/vscode/2026-04-17_21-18-02-088.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-17_21-18-02-088.html&amp;right=vscode.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_20-56-53-998.html" target="_blank">2026-04-17 20:56:53.998</a></td>
-          <td class="history-count">1</td>
-          <td><a href="snapshots/ia-resources/2026-04-17_20-56-53-998.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_20-56-53-998.html&amp;right=ia-resources.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/vscode/2026-04-17_21-40-48-001.html" target="_blank">2026-04-17 21:40:48.001</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/vscode/2026-04-17_21-40-48-001.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-17_21-40-48-001.html&amp;right=vscode.html">Comparer</a></td>
         </tr>
         <tr>
-          <td class="history-date"><a href="snapshots/ia-resources/2026-04-17_20-58-33-498.html" target="_blank">2026-04-17 20:58:33.498</a></td>
-          <td class="history-count">1</td>
-          <td><a href="snapshots/ia-resources/2026-04-17_20-58-33-498.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ia-resources/2026-04-17_20-58-33-498.html&amp;right=ia-resources.html">Comparer</a></td>
+          <td class="history-date"><a href="snapshots/vscode/2026-04-17_21-43-42-681.html" target="_blank">2026-04-17 21:43:42.681</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/vscode/2026-04-17_21-43-42-681.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-17_21-43-42-681.html&amp;right=vscode.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/vscode/2026-04-17_21-45-54-895.html" target="_blank">2026-04-17 21:45:54.895</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/vscode/2026-04-17_21-45-54-895.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-17_21-45-54-895.html&amp;right=vscode.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/vscode/2026-04-17_21-48-56-344.html" target="_blank">2026-04-17 21:48:56.344</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/vscode/2026-04-17_21-48-56-344.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-17_21-48-56-344.html&amp;right=vscode.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/vscode/2026-04-17_21-55-47-659.html" target="_blank">2026-04-17 21:55:47.659</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/vscode/2026-04-17_21-55-47-659.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-17_21-55-47-659.html&amp;right=vscode.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/vscode/2026-04-17_21-58-52-404.html" target="_blank">2026-04-17 21:58:52.404</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/vscode/2026-04-17_21-58-52-404.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-17_21-58-52-404.html&amp;right=vscode.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/vscode/2026-04-17_21-59-48-585.html" target="_blank">2026-04-17 21:59:48.585</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/vscode/2026-04-17_21-59-48-585.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/vscode/2026-04-17_21-59-48-585.html&amp;right=vscode.html">Comparer</a></td>
         </tr>
       </tbody>
     </table>
@@ -746,9 +1038,12 @@
   const closeHistoryInfo = document.getElementById('close-history-info');
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
-  const currentPageFile = 'ia-resources.html';
+  const layoutColumnsToggle = document.getElementById('layout-columns-toggle');
+  const currentPageLabel = document.getElementById('current-page-label');
+  const currentPageFile = 'vscode.html';
   const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}, {"slug": "ia-resources", "html": "ia-resources.html", "data": "data/tools-ia-resources.json"}]};
-  const menuToggle = document.getElementById('menu-toggle');
+  const mainMenuToggle = document.getElementById('main-menu-toggle');
+  const submenuToggle = document.getElementById('submenu-toggle');
   const pageSwitcher = document.querySelector('.page-switcher');
   const categoryNav = document.getElementById('category-nav');
   const summaryToggle = document.getElementById('summary-toggle');
@@ -819,11 +1114,13 @@
       categories.forEach(c => {
         c.classList.toggle('visible', cat === 'all' || c.dataset.id === cat);
       });
+      updateGridScope(cat);
     });
   });
 
   // Show all on load
   categories.forEach(c => c.classList.add('visible'));
+  updateGridScope('all');
 
   // Search modal handlers
   openSearchInfo.addEventListener('click', () => {
@@ -895,37 +1192,138 @@
     updateThemeToggle();
   });
 
-  // Menu toggle (page switcher + category nav)
-  const storedMenuState = localStorage.getItem('menuVisible');
-  const menuVisible = storedMenuState === null ? true : storedMenuState === 'true';
+  // Category columns toggle button (cycles through: 1 -> 2 -> 3 -> 1)
+  // UI controls only the "all" scope for now.
+  const validGridLayouts = ['1', '2', '3'];
+  const storedGridColumnsAll = localStorage.getItem('gridColumnsAll') || '1';
+  const storedGridColumnsSingle = localStorage.getItem('gridColumnsSingle') || '3';
 
-  function updateMenuToggle() {
-    const isVisible = !pageSwitcher.classList.contains('hidden') && !categoryNav.classList.contains('hidden');
-    menuToggle.setAttribute('aria-pressed', String(isVisible));
-    menuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu' : 'Afficher le menu');
-    menuToggle.setAttribute('title', isVisible ? 'Masquer le menu' : 'Afficher le menu');
+  function getGridLayoutForScope(scope) {
+    return scope === 'all'
+      ? (localStorage.getItem('gridColumnsAll') || '1')
+      : (localStorage.getItem('gridColumnsSingle') || '3');
   }
 
-  function toggleMenu() {
-    const isHidden = pageSwitcher.classList.contains('hidden') || categoryNav.classList.contains('hidden');
+  function applyGridColumnsLayoutForScope(scope) {
+    document.body.setAttribute('data-grid-columns', getGridLayoutForScope(scope));
+  }
+
+  // Future hook: keep single-category mode configurable without exposing UI yet.
+  function setSingleGridColumnsLayout(layoutValue) {
+    if (!validGridLayouts.includes(layoutValue)) return;
+    localStorage.setItem('gridColumnsSingle', layoutValue);
+    if ((document.body.getAttribute('data-grid-scope') || 'all') === 'single') {
+      applyGridColumnsLayoutForScope('single');
+      updateLayoutToggle();
+    }
+  }
+
+  function updateGridScope(selectedCategory) {
+    const scope = selectedCategory === 'all' ? 'all' : 'single';
+    document.body.setAttribute('data-grid-scope', scope);
+    applyGridColumnsLayoutForScope(scope);
+    updateLayoutToggle();
+  }
+
+  function updateLayoutToggle() {
+    const currentScope = document.body.getAttribute('data-grid-scope') || 'all';
+    const currentLayout = getGridLayoutForScope(currentScope);
+    const targetLabel = currentScope === 'all' ? 'categories' : 'outils';
+    layoutColumnsToggle.textContent = currentLayout;
+    const canChangeFromUi = currentScope === 'all';
+    layoutColumnsToggle.disabled = !canChangeFromUi;
+    layoutColumnsToggle.setAttribute('aria-pressed', String(canChangeFromUi));
+    if (canChangeFromUi) {
+      layoutColumnsToggle.setAttribute('aria-label', `Changer le nombre de colonnes de categories (actuel: ${currentLayout})`);
+      layoutColumnsToggle.setAttribute('title', `Colonnes categories: ${currentLayout}`);
+    } else {
+      layoutColumnsToggle.setAttribute('aria-label', `Colonnes outils fixes (actuel: ${currentLayout})`);
+      layoutColumnsToggle.setAttribute('title', `Colonnes outils: ${currentLayout} (fixe pour l'instant)`);
+    }
+    updateAllButtonStates();
+  }
+
+  function cycleLayoutColumns() {
+    const currentScope = document.body.getAttribute('data-grid-scope') || 'all';
+    if (currentScope !== 'all') return;
+    const currentLayout = localStorage.getItem('gridColumnsAll') || '1';
+    const currentIndex = validGridLayouts.indexOf(currentLayout);
+    const safeIndex = currentIndex === -1 ? 0 : currentIndex;
+    const nextIndex = (safeIndex + 1) % validGridLayouts.length;
+    const nextLayout = validGridLayouts[nextIndex];
+    localStorage.setItem('gridColumnsAll', nextLayout);
+    applyGridColumnsLayoutForScope('all');
+    updateLayoutToggle();
+  }
+
+  const initialGridLayoutAll = validGridLayouts.includes(storedGridColumnsAll) ? storedGridColumnsAll : '1';
+  const initialGridLayoutSingle = validGridLayouts.includes(storedGridColumnsSingle) ? storedGridColumnsSingle : '3';
+  localStorage.setItem('gridColumnsAll', initialGridLayoutAll);
+  localStorage.setItem('gridColumnsSingle', initialGridLayoutSingle);
+  applyGridColumnsLayoutForScope('all');
+  updateLayoutToggle();
+
+  layoutColumnsToggle.addEventListener('click', cycleLayoutColumns);
+
+  // Main menu toggle (page switcher only)
+  const storedMainMenuState = localStorage.getItem('mainMenuVisible');
+  const mainMenuVisible = storedMainMenuState === null ? true : storedMainMenuState === 'true';
+
+  function updateMainMenuToggle() {
+    const isVisible = !pageSwitcher.classList.contains('hidden');
+    mainMenuToggle.setAttribute('aria-pressed', String(isVisible));
+    mainMenuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu principal' : 'Afficher le menu principal');
+    mainMenuToggle.setAttribute('title', isVisible ? 'Masquer le menu principal' : 'Afficher le menu principal');
+    updateAllButtonStates();
+  }
+
+  function toggleMainMenu() {
+    const isHidden = pageSwitcher.classList.contains('hidden');
     if (isHidden) {
       pageSwitcher.classList.remove('hidden');
-      categoryNav.classList.remove('hidden');
-      localStorage.setItem('menuVisible', 'true');
+      localStorage.setItem('mainMenuVisible', 'true');
     } else {
       pageSwitcher.classList.add('hidden');
-      categoryNav.classList.add('hidden');
-      localStorage.setItem('menuVisible', 'false');
+      localStorage.setItem('mainMenuVisible', 'false');
     }
-    updateMenuToggle();
+    updateMainMenuToggle();
   }
 
-  if (!menuVisible) {
+  if (!mainMenuVisible) {
     pageSwitcher.classList.add('hidden');
+  }
+  updateMainMenuToggle();
+  mainMenuToggle.addEventListener('click', toggleMainMenu);
+
+  // Subcategory menu toggle (category tabs only)
+  const storedSubmenuState = localStorage.getItem('subcategoryMenuVisible');
+  const submenuVisible = storedSubmenuState === null ? true : storedSubmenuState === 'true';
+
+  function updateSubmenuToggle() {
+    const isVisible = !categoryNav.classList.contains('hidden');
+    submenuToggle.setAttribute('aria-pressed', String(isVisible));
+    submenuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu des sous-categories' : 'Afficher le menu des sous-categories');
+    submenuToggle.setAttribute('title', isVisible ? 'Masquer le menu des sous-categories' : 'Afficher le menu des sous-categories');
+    updateAllButtonStates();
+  }
+
+  function toggleSubmenu() {
+    const isHidden = categoryNav.classList.contains('hidden');
+    if (isHidden) {
+      categoryNav.classList.remove('hidden');
+      localStorage.setItem('subcategoryMenuVisible', 'true');
+    } else {
+      categoryNav.classList.add('hidden');
+      localStorage.setItem('subcategoryMenuVisible', 'false');
+    }
+    updateSubmenuToggle();
+  }
+
+  if (!submenuVisible) {
     categoryNav.classList.add('hidden');
   }
-  updateMenuToggle();
-  menuToggle.addEventListener('click', toggleMenu);
+  updateSubmenuToggle();
+  submenuToggle.addEventListener('click', toggleSubmenu);
 
   // Header summary toggle (subtitle + stats)
   const storedSummaryState = localStorage.getItem('headerSummaryVisible');
@@ -936,6 +1334,7 @@
     summaryToggle.setAttribute('aria-pressed', String(isVisible));
     summaryToggle.setAttribute('aria-label', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
     summaryToggle.setAttribute('title', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
+    updateAllButtonStates();
   }
 
   function toggleHeaderSummary() {
@@ -965,6 +1364,7 @@
     panelToggle.setAttribute('aria-pressed', String(isVisible));
     panelToggle.setAttribute('aria-label', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
     panelToggle.setAttribute('title', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
+    updateAllButtonStates();
   }
 
   function togglePanels() {
@@ -989,6 +1389,20 @@
   updatePanelToggle();
 
   panelToggle.addEventListener('click', togglePanels);
+
+  // Master function to sync all button aria-pressed states and page label visibility
+  function updateAllButtonStates() {
+    // Update page label visibility: show when menu is hidden, hide when menu is visible
+    const isMenuVisible = !pageSwitcher.classList.contains('hidden');
+    if (isMenuVisible) {
+      currentPageLabel.classList.add('hidden');
+    } else {
+      currentPageLabel.classList.remove('hidden');
+    }
+  }
+
+  // Initialize all button states
+  updateAllButtonStates();
 </script>
 
 </body>
