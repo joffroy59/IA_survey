@@ -3,6 +3,27 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FIX) Use boolean for static page config and fix class name concatenation
+
+### Changed
+- Updated `scripts/generate.py` PAGE_CONFIGS to use boolean `True` instead of string `"true"` for the "static" key
+- Fixed `render_page_switcher()` function to properly set class name `"page-link-static"` instead of concatenating to create invalid `"page-linkstatic"`
+
+### Why
+- Python booleans should be used for configuration values, not strings
+- CSS class names need proper hyphenation: `.page-link-static` not `.page-linkstatic`
+- User identified that the static page styling was not applying correctly due to invalid class names
+
+### Files touched
+- `scripts/generate.py`
+- All generated HTML pages (regenerated with correct styling)
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Ran `python scripts/generate.py` - all pages generated successfully
+- Verified `ia-resources.html` page has correct class `page-link-static active`
+- CSS styling now applies correctly to static pages
+
 ## FEATURE) Add IA Resources page with static links
 
 ### Changed
