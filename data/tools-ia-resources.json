@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "title": "Boîte à outils IA Génératives",
+    "subtitle": "Les meilleurs outils IA, mis à jour automatiquement",
+    "last_updated": "2026-04-17",
+    "page_name": "ia-resources",
+    "page_label": "Ressources IA",
+    "page_description": "Ressources IA et liens importants mis à jour manuellement.",
+    "search_queries": [],
+    "page_history": [
+      {
+        "generated_at": "2026-04-17 19:05:26.163",
+        "tool_count": 1,
+        "snapshot_file": "snapshots/ia-resources/2026-04-17_19-05-26-163.html"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "ressources-principales",
+      "name": "Ressources Principales",
+      "icon": "📚",
+      "subcategories": [
+        {
+          "name": "Modèles & Plateformes",
+          "icon": "🤖",
+          "tools": [
+            {
+              "name": "IA Models",
+              "provider": "Models.dev",
+              "url": "https://models.dev/",
+              "desc": "Comparateur de modèles IA et plateformes"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
