@@ -23,41 +23,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-15 23:44:42.722",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/newrag/2026-04-15_23-44-42-722.html"
-      },
-      {
-        "generated_at": "2026-04-15 23:53:26.242",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/newrag/2026-04-15_23-53-26-242.html"
-      },
-      {
-        "generated_at": "2026-04-16 07:10:46.806",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/newrag/2026-04-16_07-10-46-806.html"
-      },
-      {
-        "generated_at": "2026-04-16 07:25:52.207",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/newrag/2026-04-16_07-25-52-207.html"
-      },
-      {
-        "generated_at": "2026-04-16 09:04:05.931",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/newrag/2026-04-16_09-04-05-931.html"
-      },
-      {
-        "generated_at": "2026-04-16 09:41:12.312",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/newrag/2026-04-16_09-41-12-312.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:25:36.261",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/newrag/2026-04-17_20-25-36-261.html"
-      },
-      {
         "generated_at": "2026-04-17 20:41:30.273",
         "tool_count": 16,
         "snapshot_file": "snapshots/newrag/2026-04-17_20-41-30-273.html"
@@ -71,6 +36,41 @@
         "generated_at": "2026-04-17 20:58:33.487",
         "tool_count": 16,
         "snapshot_file": "snapshots/newrag/2026-04-17_20-58-33-487.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:06:28.606",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-17_21-06-28-606.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:08:33.432",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-17_21-08-33-432.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:18:02.090",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-17_21-18-02-090.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:40:48.004",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-17_21-40-48-004.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:43:42.684",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-17_21-43-42-684.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:45:54.897",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-17_21-45-54-897.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:48:56.346",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-17_21-48-56-346.html"
       }
     ]
   },

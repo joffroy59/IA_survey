@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boîte à outils IA Génératives</title>
+  <meta name="description" content="Les meilleurs outils IA, mis à jour automatiquement">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #1a1a24;
+      --border: #2a2a3a;
+      --accent: #6c63ff;
+      --accent2: #00d4aa;
+      --text: #e8e8f0;
+      --muted: #8888a0;
+      --new: #ff6b6b;
+      --radius: 12px;
+    }
+
+    /* Light mode */
+    html[data-theme="light"] {
+      --bg: #f8f7fc;
+      --surface: #ffffff;
+      --surface2: #f0edff;
+      --border: #e0d9f0;
+      --accent: #6c63ff;
+      --accent2: #00d4aa;
+      --text: #1a1620;
+      --muted: #6b6b7d;
+      --new: #ff6b6b;
+    }
+
+    html[data-theme="light"] body {
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(108,99,255,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(0,212,170,0.05) 0%, transparent 50%);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(108,99,255,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(0,212,170,0.08) 0%, transparent 50%);
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      padding: 60px 24px 40px;
+      position: relative;
+    }
+    .theme-toggle {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
+    .menu-toggle {
+      position: absolute;
+      top: 24px;
+      right: 162px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .menu-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
+    .summary-toggle {
+      position: absolute;
+      top: 24px;
+      right: 116px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .summary-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
+    .panel-toggle {
+      position: absolute;
+      top: 24px;
+      right: 70px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .panel-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
+    .layout-columns-toggle {
+      position: absolute;
+      top: 24px;
+      right: 208px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .layout-columns-toggle:hover {
+      border-color: var(--accent2);
+      background: var(--surface);
+      transform: scale(1.05);
+    }
+    button[aria-pressed="false"] {
+      opacity: 0.5;
+      filter: brightness(0.7);
+    }
+    button[aria-pressed="false"]:hover {
+      opacity: 0.8;
+      filter: brightness(0.85);
+    }
+    .current-page-label {
+      position: absolute;
+      top: 24px;
+      right: 254px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent2);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align: center;
+      min-width: 60px;
+      transition: all 0.2s;
+    }
+    .current-page-label.hidden {
+      display: none;
+    }
+    header::after {
+      content: '';
+      display: block;
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+      margin: 24px auto 0;
+    }
+    .header-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent2);
+      background: rgba(0,212,170,0.1);
+      border: 1px solid rgba(0,212,170,0.25);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      letter-spacing: 0.08em;
+    }
+    h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--text) 30%, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.15;
+    }
+    .subtitle {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+    .update-info {
+      margin-top: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .update-info span { color: var(--accent2); }
+    .header-summary.hidden {
+      display: none;
+    }
+    .page-switcher {
+      margin-top: 20px;
+      display: inline-flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .page-switcher.hidden {
+      display: none;
+    }
+    .page-link {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .page-link.active, .page-link:hover {
+      color: #fff;
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+    .page-link-static {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .page-link-static.active, .page-link-static:hover {
+      color: #fff;
+      border-color: var(--accent2);
+      background: var(--accent2);
+    }
+    .page-meta {
+      margin: 20px auto 0;
+      max-width: 820px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 16px;
+      transition: all 0.3s ease;
+    }
+    .page-meta.hidden {
+      display: none;
+    }
+    .page-meta-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--accent2);
+      text-transform: uppercase;
+    }
+    .page-meta-title {
+      font-weight: 700;
+      font-size: 16px;
+      margin-top: 4px;
+    }
+    .page-meta-desc {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .info-btn {
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: all 0.2s;
+    }
+    .info-btn:hover {
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .button-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .audience-brief {
+      margin: 18px auto 0;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      transition: all 0.3s ease;
+    }
+    .audience-brief.hidden {
+      display: none;
+    }
+    .reader-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .reader-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+    .reader-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .reader-text {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    .history-table thead {
+      background: var(--surface2);
+    }
+    .history-table th {
+      text-align: left;
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      border-bottom: 1px solid var(--border);
+    }
+    .history-table td {
+      padding: 10px 12px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+    }
+    .history-table tr:hover {
+      background: rgba(108,99,255,0.05);
+    }
+    .history-date {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent2);
+    }
+    .history-count {
+      text-align: right;
+      color: var(--muted);
+    }
+
+    /* ── Nav tabs ── */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 24px 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    nav.hidden {
+      display: none;
+    }
+    .nav-tab {
+      font-size: 13px;
+      font-weight: 500;
+      padding: 7px 16px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .nav-tab:hover, .nav-tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* ── Main layout ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── Category section ── */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 24px;
+    }
+    body[data-grid-scope="all"][data-grid-columns="1"] .categories-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    body[data-grid-scope="all"][data-grid-columns="2"] .categories-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    body[data-grid-scope="all"][data-grid-columns="3"] .categories-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .category {
+      margin-bottom: 48px;
+      display: none;
+    }
+    .category.visible { display: block; }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .category-icon {
+      font-size: 28px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface2);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .category-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Subcategory ── */
+    .subcategory {
+      margin-bottom: 28px;
+    }
+    .subcategory-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .subcategory-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Tools grid ── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+    }
+    body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .tool-card {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: all 0.18s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .tool-card:hover {
+      border-color: var(--accent);
+      background: var(--surface2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(108,99,255,0.15);
+    }
+    .tool-card.is-new {
+      border-color: rgba(255,107,107,0.3);
+    }
+    .tool-card.is-new::before {
+      content: 'NEW';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 9px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: var(--new);
+      background: rgba(255,107,107,0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.08em;
+    }
+    .tool-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .tool-provider {
+      font-size: 11px;
+      color: var(--accent2);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .tool-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 32px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    footer a { color: var(--accent2); text-decoration: none; }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 5, 8, 0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 99;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      width: min(920px, 100%);
+      max-height: 82vh;
+      overflow: auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      padding: 18px 20px;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .close-btn {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface2);
+      color: var(--text);
+      padding: 7px 10px;
+      cursor: pointer;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .modal-meta {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .query-list {
+      list-style: decimal inside;
+      display: grid;
+      gap: 8px;
+    }
+    .query-list li {
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.45;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+
+    @media (max-width: 600px) {
+      .tools-grid { grid-template-columns: 1fr 1fr; }
+      .categories-grid { grid-template-columns: 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="1"] .category.visible .tools-grid { grid-template-columns: 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="2"] .category.visible .tools-grid { grid-template-columns: 1fr 1fr; }
+      body[data-grid-scope="single"][data-grid-columns="3"] .category.visible .tools-grid { grid-template-columns: 1fr 1fr; }
+      .page-meta { grid-template-columns: 1fr; }
+      .audience-brief { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="current-page-label" id="current-page-label">ragdev</div>
+  <button class="menu-toggle" id="menu-toggle" aria-label="Masquer le menu" aria-pressed="true" title="Masquer le menu">🧭</button>
+  <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
+  <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
+  <button class="layout-columns-toggle" id="layout-columns-toggle" aria-label="Changer le nombre de colonnes de categories" aria-pressed="true" title="Colonnes categories: 1">1</button>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
+  <div class="header-badge">🤖 Auto-updated by AI · 17/04/2026</div>
+  <h1>Boîte à outils IA Génératives</h1>
+  <div class="header-summary" id="header-summary">
+    <p class="subtitle">Les meilleurs outils IA, mis à jour automatiquement</p>
+    <p class="update-info">Dernière mise à jour : <span>2026-04-16</span></p>
+    <p class="update-info">Outils : <span>16</span> · Nouveaux : <span>0</span></p>
+  </div>
+  <div class="page-switcher"><a class="page-link" href="index.html">Vue Generale</a>
+    <a class="page-link" href="enterprise.html">Vue Enterprise</a>
+    <a class="page-link" href="discovery.html">Vue Decouverte</a>
+    <a class="page-link active" href="ragdev.html">Vue RAG Pro + DevTools</a>
+    <a class="page-link" href="agentdev.html">Vue Agent Dev + IDE Tools</a>
+    <a class="page-link" href="vscode.html">Vue VS Code</a>
+    <a class="page-link" href="newrag.html">Vue New RAG</a>
+    <a class="page-link" href="cowork.html">vue Claude Cowork</a>
+    <a class="page-link" href="ocr.html">Vue OCR</a>
+    <a class="page-link" href="dococr.html">Vue OCR Système Complet</a>
+    <a class="page-link" href="aicliapps.html">Vue AI CLI Applications</a>
+    <a class="page-link-static" href="ia-resources.html">Ressources IA</a></div>
+  <div class="page-meta">
+    <div>
+      <div class="page-meta-label">Type de page</div>
+      <div class="page-meta-title">Panorama RAG Pro + DevTools</div>
+      <div class="page-meta-desc">Focus architecture RAG production et outils IA pour developpeurs.</div>
+    </div>
+    <div class="button-group">
+      <button class="info-btn" type="button" id="open-search-info">Sources</button>
+      <button class="info-btn" type="button" id="open-history-info">Historique</button>
+      <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
+      <button class="info-btn" type="button" id="export-all-zip">ZIP All</button>
+    </div>
+  </div>
+  <div class="audience-brief">
+    <article class="reader-card reader-dev">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les developpeurs</div>
+      <div class="reader-text">Concentrez-vous sur la qualite retrieval, l&#x27;evaluation et la stabilite de la pipeline RAG en production.</div>
+    </article>
+    <article class="reader-card reader-manager">
+      <div class="reader-label">Public cible</div>
+      <div class="reader-title">Pour les managers</div>
+      <div class="reader-text">Suivez les gains de precision, de productivite et de reduction des risques sur les workflows metier.</div>
+    </article>
+  </div>
+</header>
+
+<nav id="category-nav">
+  <a class="nav-tab active" href="#" data-cat="all">Tout voir</a>
+  <a class="nav-tab" href="#" data-cat="generiques">🧠 IA Génériques</a>
+  <a class="nav-tab" href="#" data-cat="specialisees">📱 IA Spécialisées</a>
+  <a class="nav-tab" href="#" data-cat="images">🎨 IA Images</a>
+  <a class="nav-tab" href="#" data-cat="code">💻 Code & Dev</a>
+  <a class="nav-tab" href="#" data-cat="audio">🎧 IA Audio</a>
+  <a class="nav-tab" href="#" data-cat="video">🎬 IA Vidéo</a>
+</nav>
+
+<main>
+  <div class="categories-grid">
+    
+  <section class="category" data-id="generiques">
+    <div class="category-header">
+      <div class="category-icon">🧠</div>
+      <div class="category-title">IA Génériques</div>
+    </div>
+    
+    <div class="subcategory">
+      <div class="subcategory-title">📌 Indispensables</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://cursor.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Cursor</div>
+        <div class="tool-provider">Anysphere</div>
+        
+      </a>
+
+      <a class="tool-card" href="https://elevenlabs.io" target="_blank" rel="noopener">
+        <div class="tool-name">ElevenLabs</div>
+        
+        <div class="tool-desc">Leader voix réaliste</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">⭐ Importantes</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://gamma.app/" target="_blank" rel="noopener">
+        <div class="tool-name">Gamma</div>
+        
+        <div class="tool-desc">Présentations IA</div>
+      </a>
+
+      <a class="tool-card" href="https://www.grok.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Grok</div>
+        <div class="tool-provider">xAI</div>
+        <div class="tool-desc">IA d'Elon Musk</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🔬 Avancées - Veille</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://gemini.google.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Imagen (Gemini)</div>
+        <div class="tool-provider">Google</div>
+        <div class="tool-desc">Gratuit</div>
+      </a>
+
+      <a class="tool-card" href="https://chat.mistral.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Le Chat</div>
+        <div class="tool-provider">Mistral</div>
+        <div class="tool-desc">IA française</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Productivité / Email</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://meta.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Meta AI</div>
+        <div class="tool-provider">Meta</div>
+        <div class="tool-desc">IA de Meta</div>
+      </a>
+
+      <a class="tool-card" href="https://murf.ai" target="_blank" rel="noopener">
+        <div class="tool-name">Murf AI</div>
+        
+        
+      </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="category" data-id="specialisees">
+    <div class="category-header">
+      <div class="category-icon">📱</div>
+      <div class="category-title">IA Spécialisées</div>
+    </div>
+    
+    <div class="subcategory">
+      <div class="subcategory-title">🎙️ Réunions & Audio</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://otter.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Otter.ai</div>
+        
+        <div class="tool-desc">Prise de notes IA</div>
+      </a>
+
+      <a class="tool-card" href="https://chat.qwen.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Qwen</div>
+        <div class="tool-provider">Alibaba</div>
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">📊 Productivité & Présentation</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://www.songr.ai" target="_blank" rel="noopener">
+        <div class="tool-name">SongR</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://suno.com" target="_blank" rel="noopener">
+        <div class="tool-name">Suno</div>
+        
+        
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Gestion des connaissances</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://deepmind.google/models/veo/" target="_blank" rel="noopener">
+        <div class="tool-name">Veo</div>
+        <div class="tool-provider">Google</div>
+        <div class="tool-desc">Ultra réaliste</div>
+      </a>
+
+      <a class="tool-card" href="https://firefly.adobe.com/" target="_blank" rel="noopener">
+        <div class="tool-name">Adobe Firefly</div>
+        <div class="tool-provider">Adobe</div>
+        <div class="tool-desc">Pro créatif</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Infrastructure IA</div>
+      <div class="tools-grid">
+        
+      <a class="tool-card" href="https://boomy.com" target="_blank" rel="noopener">
+        <div class="tool-name">Boomy</div>
+        
+        
+      </a>
+
+      <a class="tool-card" href="https://claude.ai/" target="_blank" rel="noopener">
+        <div class="tool-name">Claude</div>
+        <div class="tool-provider">Anthropic</div>
+        <div class="tool-desc">Excellent pour l'analyse</div>
+      </a>
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Prise de notes de réunions</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Synthèse de réunions</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Présentations / Idées</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Voyage</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Notetaker</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Dictée vocale</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Orchestration AI</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+  </section>
+
+  <section class="category" data-id="images">
+    <div class="category-header">
+      <div class="category-icon">🎨</div>
+      <div class="category-title">IA Images</div>
+    </div>
+    
+    <div class="subcategory">
+      <div class="subcategory-title">🎨 Gratuit & accessible</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">💎 Usages pro</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🛠️ Open Source & expérimentaux</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Edition photo & vidéo IA</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+  </section>
+
+  <section class="category" data-id="code">
+    <div class="category-header">
+      <div class="category-icon">💻</div>
+      <div class="category-title">Code & Dev</div>
+    </div>
+    
+    <div class="subcategory">
+      <div class="subcategory-title">⌨️ Assistants code</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Création d'apps No-code</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Prompt Engineering</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Agent AI</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Code Review</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+  </section>
+
+  <section class="category" data-id="audio">
+    <div class="category-header">
+      <div class="category-icon">🎧</div>
+      <div class="category-title">IA Audio</div>
+    </div>
+    
+    <div class="subcategory">
+      <div class="subcategory-title">🎵 Génération musicale</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🎤 Voix & clonage vocal</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+  </section>
+
+  <section class="category" data-id="video">
+    <div class="category-header">
+      <div class="category-icon">🎬</div>
+      <div class="category-title">IA Vidéo</div>
+    </div>
+    
+    <div class="subcategory">
+      <div class="subcategory-title">🎬 Text-to-Video PRO</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🧍 Avatar IA</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🆕 Génération vidéo et image</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title">🆕 Image-to-Video</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+
+    <div class="subcategory">
+      <div class="subcategory-title"> Présentations vidéo</div>
+      <div class="tools-grid">
+        
+      </div>
+    </div>
+  </section>
+  </div>
+</main>
+
+<footer>
+  Généré automatiquement par GitHub Actions + Gemini AI ·
+  Copyright made by joffroy ·
+  <a href="https://github.com/joffroy59/IA_survey" target="_blank">Voir sur GitHub</a>
+</footer>
+
+<div class="modal-overlay" id="search-modal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Recherche utilisee">
+    <div class="modal-header">
+      <div class="modal-title">Requêtes de recherche utilisées</div>
+      <button class="close-btn" type="button" id="close-search-info">Fermer</button>
+    </div>
+    <div class="modal-meta">Page: Panorama RAG Pro + DevTools · Dernière mise à jour: 2026-04-16</div>
+    <ol class="query-list">
+      <li>production RAG architecture patterns 2026</li>
+      <li>RAG developer tools evaluation framework 2026</li>
+      <li>RAG ingestion pipeline tooling doc parsing chunking 2026</li>
+      <li>RAG retrieval and reranking stack comparison 2026</li>
+      <li>RAG observability and evaluation tools 2026</li>
+      <li>RAG framework alternatives LangChain LlamaIndex 2026</li>
+      <li>Docling document parsing for RAG ingestion pipelines 2026</li>
+      <li>RAG vector database benchmarking for dev teams 2026</li>
+      <li>agentic RAG workflows for software teams 2026</li>
+      <li>secure RAG deployment for enterprise dev environments 2026</li>
+      <li>RAG architecture tools for professional developer teams 2026</li>
+    </ol>
+  </div>
+</div>
+
+<div class="modal-overlay" id="history-modal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Historique des versions">
+    <div class="modal-header">
+      <div class="modal-title">Historique des versions</div>
+      <button class="close-btn" type="button" id="close-history-info">Fermer</button>
+    </div>
+    <div class="modal-meta">Page: Panorama RAG Pro + DevTools · Dernières 10 générations</div>
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>Date de génération</th>
+          <th class="history-count">Outils détectés</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+                <tr>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-17_20-25-36-254.html" target="_blank">2026-04-17 20:25:36.254</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-17_20-25-36-254.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-17_20-25-36-254.html&amp;right=ragdev.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-17_20-41-30-266.html" target="_blank">2026-04-17 20:41:30.266</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-17_20-41-30-266.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-17_20-41-30-266.html&amp;right=ragdev.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-17_20-56-53-979.html" target="_blank">2026-04-17 20:56:53.979</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-17_20-56-53-979.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-17_20-56-53-979.html&amp;right=ragdev.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-17_20-58-33-480.html" target="_blank">2026-04-17 20:58:33.480</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-17_20-58-33-480.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-17_20-58-33-480.html&amp;right=ragdev.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-17_21-06-28-598.html" target="_blank">2026-04-17 21:06:28.598</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-17_21-06-28-598.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-17_21-06-28-598.html&amp;right=ragdev.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-17_21-08-33-426.html" target="_blank">2026-04-17 21:08:33.426</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-17_21-08-33-426.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-17_21-08-33-426.html&amp;right=ragdev.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-17_21-18-02-083.html" target="_blank">2026-04-17 21:18:02.083</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-17_21-18-02-083.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-17_21-18-02-083.html&amp;right=ragdev.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-17_21-40-47-996.html" target="_blank">2026-04-17 21:40:47.996</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-17_21-40-47-996.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-17_21-40-47-996.html&amp;right=ragdev.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-17_21-43-42-677.html" target="_blank">2026-04-17 21:43:42.677</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-17_21-43-42-677.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-17_21-43-42-677.html&amp;right=ragdev.html">Comparer</a></td>
+        </tr>
+        <tr>
+          <td class="history-date"><a href="snapshots/ragdev/2026-04-17_21-45-54-889.html" target="_blank">2026-04-17 21:45:54.889</a></td>
+          <td class="history-count">16</td>
+          <td><a href="snapshots/ragdev/2026-04-17_21-45-54-889.html" target="_blank">Voir</a> · <a href="compare-view.html?left=snapshots/ragdev/2026-04-17_21-45-54-889.html&amp;right=ragdev.html">Comparer</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script>
+  const tabs = document.querySelectorAll('.nav-tab');
+  const categories = document.querySelectorAll('.category');
+  const searchModal = document.getElementById('search-modal');
+  const historyModal = document.getElementById('history-modal');
+  const openSearchInfo = document.getElementById('open-search-info');
+  const closeSearchInfo = document.getElementById('close-search-info');
+  const openHistoryInfo = document.getElementById('open-history-info');
+  const closeHistoryInfo = document.getElementById('close-history-info');
+  const exportPageZipBtn = document.getElementById('export-page-zip');
+  const exportAllZipBtn = document.getElementById('export-all-zip');
+  const layoutColumnsToggle = document.getElementById('layout-columns-toggle');
+  const currentPageLabel = document.getElementById('current-page-label');
+  const currentPageFile = 'ragdev.html';
+  const exportManifest = {"pages": [{"slug": "general", "html": "index.html", "data": "data/tools.json"}, {"slug": "enterprise", "html": "enterprise.html", "data": "data/tools-enterprise.json"}, {"slug": "discovery", "html": "discovery.html", "data": "data/tools-discovery.json"}, {"slug": "ragdev", "html": "ragdev.html", "data": "data/tools-ragdev.json"}, {"slug": "agentdev", "html": "agentdev.html", "data": "data/tools-agentdev.json"}, {"slug": "vscode", "html": "vscode.html", "data": "data/tools-vscode.json"}, {"slug": "newrag", "html": "newrag.html", "data": "data/tools-newrag.json"}, {"slug": "cowork", "html": "cowork.html", "data": "data/tools-cowork.json"}, {"slug": "ocr", "html": "ocr.html", "data": "data/tools-ocr.json"}, {"slug": "dococr", "html": "dococr.html", "data": "data/tools-dococr.json"}, {"slug": "aicliapps", "html": "aicliapps.html", "data": "data/tools-aicliapps.json"}, {"slug": "ia-resources", "html": "ia-resources.html", "data": "data/tools-ia-resources.json"}]};
+  const menuToggle = document.getElementById('menu-toggle');
+  const pageSwitcher = document.querySelector('.page-switcher');
+  const categoryNav = document.getElementById('category-nav');
+  const summaryToggle = document.getElementById('summary-toggle');
+  const headerSummary = document.getElementById('header-summary');
+  const panelToggle = document.getElementById('panel-toggle');
+  const pageMeta = document.querySelector('.page-meta');
+  const audienceBrief = document.querySelector('.audience-brief');
+
+  async function fetchAsText(path) {
+    const res = await fetch(path, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`Failed to fetch ${path} (${res.status})`);
+    return res.text();
+  }
+
+  function downloadBlob(filename, blob) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  async function exportZip(files, zipName) {
+    const zip = new JSZip();
+    for (const item of files) {
+      const content = await fetchAsText(item.path);
+      zip.file(item.name, content);
+    }
+    const blob = await zip.generateAsync({ type: 'blob' });
+    downloadBlob(zipName, blob);
+  }
+
+  exportPageZipBtn.addEventListener('click', async () => {
+    const current = exportManifest.pages.find(p => p.html === currentPageFile);
+    if (!current) return;
+    try {
+      await exportZip([
+        { path: current.html, name: current.html },
+        { path: current.data, name: current.data },
+      ], `export-${current.slug}.zip`);
+    } catch (err) {
+      alert(`Export page failed: ${err.message}`);
+    }
+  });
+
+  exportAllZipBtn.addEventListener('click', async () => {
+    try {
+      const files = [];
+      for (const p of exportManifest.pages) {
+        files.push({ path: p.html, name: p.html });
+        files.push({ path: p.data, name: p.data });
+      }
+      await exportZip(files, 'export-all-pages.zip');
+    } catch (err) {
+      alert(`Export all failed: ${err.message}`);
+    }
+  });
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.dataset.cat;
+      categories.forEach(c => {
+        c.classList.toggle('visible', cat === 'all' || c.dataset.id === cat);
+      });
+      updateGridScope(cat);
+    });
+  });
+
+  // Show all on load
+  categories.forEach(c => c.classList.add('visible'));
+  updateGridScope('all');
+
+  // Search modal handlers
+  openSearchInfo.addEventListener('click', () => {
+    searchModal.classList.add('open');
+    searchModal.setAttribute('aria-hidden', 'false');
+  });
+
+  closeSearchInfo.addEventListener('click', () => {
+    searchModal.classList.remove('open');
+    searchModal.setAttribute('aria-hidden', 'true');
+  });
+
+  // History modal handlers
+  openHistoryInfo.addEventListener('click', () => {
+    historyModal.classList.add('open');
+    historyModal.setAttribute('aria-hidden', 'false');
+  });
+
+  closeHistoryInfo.addEventListener('click', () => {
+    historyModal.classList.remove('open');
+    historyModal.setAttribute('aria-hidden', 'true');
+  });
+
+  // Close modals on overlay click or Escape
+  function closeAllModals() {
+    [searchModal, historyModal].forEach(m => {
+      m.classList.remove('open');
+      m.setAttribute('aria-hidden', 'true');
+    });
+  }
+
+  [searchModal, historyModal].forEach(modal => {
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeAllModals();
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeAllModals();
+    }
+  });
+
+  // Theme toggle functionality
+  const themeToggle = document.getElementById('theme-toggle');
+  const htmlElement = document.documentElement;
+  const storedTheme = localStorage.getItem('theme') || 'dark';
+
+  // Set initial theme
+  htmlElement.setAttribute('data-theme', storedTheme);
+  updateThemeToggle();
+
+  function updateThemeToggle() {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const isDark = currentTheme === 'dark';
+    themeToggle.textContent = isDark ? '☀️' : '🌙';
+    themeToggle.setAttribute('aria-pressed', String(!isDark));
+    themeToggle.setAttribute('aria-label', isDark ? 'Activer le mode clair' : 'Activer le mode sombre');
+    themeToggle.setAttribute('title', isDark ? 'Activer le mode clair' : 'Activer le mode sombre');
+  }
+
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    htmlElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeToggle();
+  });
+
+  // Category columns toggle button (cycles through: 1 -> 2 -> 3 -> 1)
+  const validGridLayouts = ['1', '2', '3'];
+  const storedGridColumns = localStorage.getItem('gridColumnsLayout') || '1';
+
+  function applyGridColumnsLayout(layoutValue) {
+    document.body.setAttribute('data-grid-columns', layoutValue);
+  }
+
+  function updateGridScope(selectedCategory) {
+    const scope = selectedCategory === 'all' ? 'all' : 'single';
+    document.body.setAttribute('data-grid-scope', scope);
+    updateLayoutToggle();
+  }
+
+  function updateLayoutToggle() {
+    const currentLayout = localStorage.getItem('gridColumnsLayout') || '1';
+    const currentScope = document.body.getAttribute('data-grid-scope') || 'all';
+    const targetLabel = currentScope === 'all' ? 'categories' : 'outils';
+    layoutColumnsToggle.textContent = currentLayout;
+    layoutColumnsToggle.setAttribute('aria-pressed', 'true');
+    layoutColumnsToggle.setAttribute('aria-label', `Changer le nombre de colonnes de ${targetLabel} (actuel: ${currentLayout})`);
+    layoutColumnsToggle.setAttribute('title', `Colonnes ${targetLabel}: ${currentLayout}`);
+    updateAllButtonStates();
+  }
+
+  function cycleLayoutColumns() {
+    const currentLayout = localStorage.getItem('gridColumnsLayout') || '1';
+    const currentIndex = validGridLayouts.indexOf(currentLayout);
+    const safeIndex = currentIndex === -1 ? 0 : currentIndex;
+    const nextIndex = (safeIndex + 1) % validGridLayouts.length;
+    const nextLayout = validGridLayouts[nextIndex];
+    applyGridColumnsLayout(nextLayout);
+    localStorage.setItem('gridColumnsLayout', nextLayout);
+    updateLayoutToggle();
+  }
+
+  const initialGridLayout = validGridLayouts.includes(storedGridColumns) ? storedGridColumns : '1';
+  applyGridColumnsLayout(initialGridLayout);
+  localStorage.setItem('gridColumnsLayout', initialGridLayout);
+  updateLayoutToggle();
+
+  layoutColumnsToggle.addEventListener('click', cycleLayoutColumns);
+
+  // Menu toggle (page switcher + category nav)
+  const storedMenuState = localStorage.getItem('menuVisible');
+  const menuVisible = storedMenuState === null ? true : storedMenuState === 'true';
+
+  function updateMenuToggle() {
+    const isVisible = !pageSwitcher.classList.contains('hidden') && !categoryNav.classList.contains('hidden');
+    menuToggle.setAttribute('aria-pressed', String(isVisible));
+    menuToggle.setAttribute('aria-label', isVisible ? 'Masquer le menu' : 'Afficher le menu');
+    menuToggle.setAttribute('title', isVisible ? 'Masquer le menu' : 'Afficher le menu');
+    updateAllButtonStates();
+  }
+
+  function toggleMenu() {
+    const isHidden = pageSwitcher.classList.contains('hidden') || categoryNav.classList.contains('hidden');
+    if (isHidden) {
+      pageSwitcher.classList.remove('hidden');
+      categoryNav.classList.remove('hidden');
+      localStorage.setItem('menuVisible', 'true');
+    } else {
+      pageSwitcher.classList.add('hidden');
+      categoryNav.classList.add('hidden');
+      localStorage.setItem('menuVisible', 'false');
+    }
+    updateMenuToggle();
+  }
+
+  if (!menuVisible) {
+    pageSwitcher.classList.add('hidden');
+    categoryNav.classList.add('hidden');
+  }
+  updateMenuToggle();
+  menuToggle.addEventListener('click', toggleMenu);
+
+  // Header summary toggle (subtitle + stats)
+  const storedSummaryState = localStorage.getItem('headerSummaryVisible');
+  const summaryVisible = storedSummaryState === null ? true : storedSummaryState === 'true';
+
+  function updateSummaryToggle() {
+    const isVisible = !headerSummary.classList.contains('hidden');
+    summaryToggle.setAttribute('aria-pressed', String(isVisible));
+    summaryToggle.setAttribute('aria-label', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
+    summaryToggle.setAttribute('title', isVisible ? "Masquer les infos d'en-tete" : "Afficher les infos d'en-tete");
+    updateAllButtonStates();
+  }
+
+  function toggleHeaderSummary() {
+    const isHidden = headerSummary.classList.contains('hidden');
+    if (isHidden) {
+      headerSummary.classList.remove('hidden');
+      localStorage.setItem('headerSummaryVisible', 'true');
+    } else {
+      headerSummary.classList.add('hidden');
+      localStorage.setItem('headerSummaryVisible', 'false');
+    }
+    updateSummaryToggle();
+  }
+
+  if (!summaryVisible) {
+    headerSummary.classList.add('hidden');
+  }
+  updateSummaryToggle();
+  summaryToggle.addEventListener('click', toggleHeaderSummary);
+
+  // Panel toggle functionality
+  const storedPanelState = localStorage.getItem('panelsVisible');
+  const panelsVisible = storedPanelState === null ? true : storedPanelState === 'true';
+
+  function updatePanelToggle() {
+    const isVisible = !pageMeta.classList.contains('hidden');
+    panelToggle.setAttribute('aria-pressed', String(isVisible));
+    panelToggle.setAttribute('aria-label', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
+    panelToggle.setAttribute('title', isVisible ? 'Masquer les panneaux' : 'Afficher les panneaux');
+    updateAllButtonStates();
+  }
+
+  function togglePanels() {
+    const isHidden = pageMeta.classList.contains('hidden');
+    if (isHidden) {
+      pageMeta.classList.remove('hidden');
+      audienceBrief.classList.remove('hidden');
+      localStorage.setItem('panelsVisible', 'true');
+    } else {
+      pageMeta.classList.add('hidden');
+      audienceBrief.classList.add('hidden');
+      localStorage.setItem('panelsVisible', 'false');
+    }
+    updatePanelToggle();
+  }
+
+  // Initialize panel state
+  if (!panelsVisible) {
+    pageMeta.classList.add('hidden');
+    audienceBrief.classList.add('hidden');
+  }
+  updatePanelToggle();
+
+  panelToggle.addEventListener('click', togglePanels);
+
+  // Master function to sync all button aria-pressed states and page label visibility
+  function updateAllButtonStates() {
+    // Update page label visibility: show when menu is hidden, hide when menu is visible
+    const isMenuVisible = !pageSwitcher.classList.contains('hidden');
+    if (isMenuVisible) {
+      currentPageLabel.classList.add('hidden');
+    } else {
+      currentPageLabel.classList.remove('hidden');
+    }
+  }
+
+  // Initialize all button states
+  updateAllButtonStates();
+</script>
+
+</body>
+</html>

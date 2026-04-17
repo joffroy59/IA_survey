@@ -61,41 +61,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-15 23:44:42.719",
-        "tool_count": 12,
-        "snapshot_file": "snapshots/agentdev/2026-04-15_23-44-42-719.html"
-      },
-      {
-        "generated_at": "2026-04-15 23:53:26.240",
-        "tool_count": 12,
-        "snapshot_file": "snapshots/agentdev/2026-04-15_23-53-26-240.html"
-      },
-      {
-        "generated_at": "2026-04-16 07:10:46.803",
-        "tool_count": 12,
-        "snapshot_file": "snapshots/agentdev/2026-04-16_07-10-46-803.html"
-      },
-      {
-        "generated_at": "2026-04-16 07:25:52.204",
-        "tool_count": 12,
-        "snapshot_file": "snapshots/agentdev/2026-04-16_07-25-52-204.html"
-      },
-      {
-        "generated_at": "2026-04-16 09:04:05.929",
-        "tool_count": 12,
-        "snapshot_file": "snapshots/agentdev/2026-04-16_09-04-05-929.html"
-      },
-      {
-        "generated_at": "2026-04-16 09:41:12.309",
-        "tool_count": 12,
-        "snapshot_file": "snapshots/agentdev/2026-04-16_09-41-12-309.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:25:36.257",
-        "tool_count": 12,
-        "snapshot_file": "snapshots/agentdev/2026-04-17_20-25-36-257.html"
-      },
-      {
         "generated_at": "2026-04-17 20:41:30.269",
         "tool_count": 12,
         "snapshot_file": "snapshots/agentdev/2026-04-17_20-41-30-269.html"
@@ -109,6 +74,41 @@
         "generated_at": "2026-04-17 20:58:33.483",
         "tool_count": 12,
         "snapshot_file": "snapshots/agentdev/2026-04-17_20-58-33-483.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:06:28.601",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/agentdev/2026-04-17_21-06-28-601.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:08:33.427",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/agentdev/2026-04-17_21-08-33-427.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:18:02.085",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/agentdev/2026-04-17_21-18-02-085.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:40:47.998",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/agentdev/2026-04-17_21-40-47-998.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:43:42.679",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/agentdev/2026-04-17_21-43-42-679.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:45:54.893",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/agentdev/2026-04-17_21-45-54-893.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:48:56.342",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/agentdev/2026-04-17_21-48-56-342.html"
       }
     ]
   },

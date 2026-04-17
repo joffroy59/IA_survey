@@ -3,6 +3,129 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FIX) Set scope defaults (all=1, single=3) and keep UI control only for Tout voir
+
+### Changed
+- Split grid layout persistence into two keys:
+  - `gridColumnsAll` default `1` for `Tout voir`
+  - `gridColumnsSingle` default `3` for selected-category view
+- Kept UI toggle action only for `Tout voir` scope.
+- In selected-category scope, tools layout uses `gridColumnsSingle` and the toggle is disabled in UI.
+- Added helper `setSingleGridColumnsLayout(layoutValue)` as a future hook to change single-category columns without exposing a new control yet.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested default mode `1` for `Tous` and `3` for specific selected category.
+- User requested that, for now, UI mode control works only when `Tous` is selected, while keeping the code ready for future specific-category mode control.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
+## FIX) Use context-aware column mode (Tout voir vs selected category)
+
+### Changed
+- Added a column scope switch controlled by active tab:
+  - `Tout voir` (`all`) applies `1|2|3` columns to top-level categories via `.categories-grid`.
+  - Any specific category tab applies `1|2|3` columns to tools inside the visible category via `.category.visible .tools-grid`.
+- Added `data-grid-scope` management in JavaScript (`all` or `single`) when tabs change.
+- Updated column toggle title/label text so it reflects current target (`categories` or `outils`).
+- Kept responsive behavior on mobile for both scopes.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested mixed behavior: keep current column mode for `Tout voir`, but when a category is selected, use column mode for that category's tools content.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
+## FIX) Apply column mode to top-level categories
+
+### Changed
+- Moved column layout target from subcategory groups to top-level categories.
+- Added a new `.categories-grid` wrapper in the page template and mapped `data-grid-columns` (`1|2|3`) to this grid.
+- Removed the previous `.category-columns` wrapper/layout from category rendering.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested that `2` column mode places major categories side by side (for example: `IA Generiques` and `IA Specialisees`).
+- Previous implementation was splitting subcategories instead of main categories.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
+## FIX) Remove now mode and apply columns to categories
+
+### Changed
+- Removed `now` from column layout toggle cycle. The button now cycles only: `1 -> 2 -> 3 -> 1`.
+- Changed grid-column behavior so the toggle applies to category blocks (subcategories) via `.category-columns` instead of tool cards.
+- Updated category rendering to wrap subcategories inside a new `.category-columns` container.
+- Updated responsive CSS so category columns collapse to one column on small screens.
+- Updated layout toggle label/title logic to reflect category columns and current numeric mode.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested to remove `now` mode entirely.
+- User requested column behavior based on categories, with one category per column.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
+## FEATURE) Convert column layout to toggle button + add button darkening + add page label indicator
+
+### Changed
+- **Column Layout Toggle**: Converted from `<select>` dropdown to a toggle button (⊞) that cycles through: 1 → now → 2 → 3 → 1.
+- **Button Darkening**: Added CSS `button[aria-pressed="false"]` styling (opacity: 0.5, filter: brightness(0.7)) so toggle buttons appear darkened when their associated elements are hidden.
+- **Page Label Indicator**: Added `.current-page-label` element showing current page slug (e.g., "general", "enterprise") that auto-hides when menu is visible and shows when menu is hidden.
+- Updated `scripts/generate.py`:
+  - Replaced layout selector HTML with layout-columns-toggle button
+  - Added `.layout-columns-toggle` and `.current-page-label` CSS
+  - Added `button[aria-pressed="false"]` CSS for darkened button state
+  - Added `cycleLayoutColumns()` function to cycle through layout options
+  - Added `updateLayoutToggle()` to manage layout button state
+  - Added `updateAllButtonStates()` master function to sync button states and page label visibility
+  - Added `page_slug` template parameter to HTML_TEMPLATE.format()
+  - Removed old `.layout-selector-wrap`, `.layout-selector-label`, `.layout-select` CSS
+
+### Why
+- User requested: column layout as a toggle button (not a dropdown), matching other UI controls
+- Darkening toggle buttons provides visual feedback when associated content is hidden
+- Page label keeps users informed of current page even when menu navigation is hidden for more screen space
+
+### Files touched
+- `scripts/generate.py`
+
+---
+
+## FEATURE) Add selector for 1/now/2/3 column layout
+
+### Changed
+- Added a layout selector in the header action area with options: `1`, `now`, `2`, `3`.
+- Updated `scripts/generate.py` CSS to support forced grid column counts via `body[data-grid-columns]`.
+- Kept responsive behavior on small screens by capping the 3-column choice to 2 columns on mobile.
+- Added JavaScript state persistence with localStorage key `gridColumnsLayout`.
+- Regenerated all HTML pages and related snapshots.
+
+### Why
+- User requested a selector to switch between `1`, current (`now`), `2`, or `3` columns.
+- Persisting the choice keeps the preferred layout across refreshes.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Ran `python scripts/generate.py` successfully.
+- Verified generated template and output include `layout-columns-select`, `gridColumnsLayout`, and `data-grid-columns` logic.
+
 ## FEATURE) Add toggle to hide menu
 
 ### Changed
