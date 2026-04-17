@@ -3,6 +3,22 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## RELEASE) Publish v1.6.1 with complete-site artifact
+
+### Changed
+- Created release branch `release/v1.6.1` from `develop` for release work isolation.
+- Built release artifact `v1.6.1-complete-site.zip` in `release_assets/v1.6.1/` containing all generated HTML entry pages and the `data/` folder.
+- Validated extracted package includes `index.html` and required data files.
+- Ran `python scripts/check_pages.py` before release publication.
+
+### Why
+- User requested creating a GitHub release.
+- Repository rules require attaching a complete usable site package for each release.
+
+### Files touched
+- `release_assets/v1.6.1/v1.6.1-complete-site.zip`
+- `WORK_DONE_NOTE.md`
+
 ## RULE) Require complete usable site artifact in releases
 
 ### Changed
