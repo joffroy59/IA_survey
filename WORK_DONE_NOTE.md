@@ -3,6 +3,25 @@
 Date: 2026-04-18
 Repository: IA_survey
 
+## CHORE) Remove static known CLI catalog logic
+
+### Changed
+- Removed `KNOWN_CLI_TOOL_CATALOG` from `scripts/update.py`.
+- Removed the fallback first-pass detection based on known CLI keywords in `scripts/update.py`.
+
+### Why
+- User requested removing all known CLI static logic.
+- Detection now relies on dynamic extraction (prompt + explicit-name parsing + fallback parsing) without hardcoded known tools.
+
+### Files touched
+- `scripts/update.py`
+- `WORK_DONE_NOTE.md`
+
+---
+
+Date: 2026-04-18
+Repository: IA_survey
+
 ## FIX) Improve aicliapps extraction via prompt + explicit-name parsing (no known-tools dependency)
 
 ### Changed

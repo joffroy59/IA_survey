@@ -270,73 +270,6 @@ GENERIC_CLI_ENTITY_TOKENS = {
     "line",
 }
 
-KNOWN_CLI_TOOL_CATALOG = [
-    {
-        "name": "Claude Code",
-        "provider": "Anthropic",
-        "url": "https://www.anthropic.com/claude-code",
-        "keywords": ["claude code", "anthropic cli"],
-        "category_id": "cli_dev",
-        "subcategory_name": "Code generation et refactor",
-    },
-    {
-        "name": "Aider",
-        "provider": "Aider",
-        "url": "https://aider.chat/",
-        "keywords": ["aider", "aider chat"],
-        "category_id": "cli_dev",
-        "subcategory_name": "Code generation et refactor",
-    },
-    {
-        "name": "Open Interpreter",
-        "provider": "OpenInterpreter",
-        "url": "https://github.com/OpenInterpreter/open-interpreter",
-        "keywords": ["open interpreter", "open-interpreter"],
-        "category_id": "cli_agents",
-        "subcategory_name": "Agents autonomes CLI",
-    },
-    {
-        "name": "ShellGPT",
-        "provider": "ShellGPT",
-        "url": "https://github.com/TheR1D/shell_gpt",
-        "keywords": ["shellgpt", "shell gpt", "sgpt"],
-        "category_id": "cli_agents",
-        "subcategory_name": "Assistants terminal",
-    },
-    {
-        "name": "Ollama",
-        "provider": "Ollama",
-        "url": "https://ollama.com/",
-        "keywords": ["ollama"],
-        "category_id": "cli_local",
-        "subcategory_name": "Inference locale",
-    },
-    {
-        "name": "llama.cpp",
-        "provider": "llama.cpp",
-        "url": "https://github.com/ggerganov/llama.cpp",
-        "keywords": ["llama.cpp", "llama cpp"],
-        "category_id": "cli_local",
-        "subcategory_name": "Inference locale",
-    },
-    {
-        "name": "Fabric",
-        "provider": "Fabric",
-        "url": "https://github.com/danielmiessler/fabric",
-        "keywords": ["fabric ai", "danielmiessler/fabric"],
-        "category_id": "cli_ops",
-        "subcategory_name": "Automatisation shell",
-    },
-    {
-        "name": "Warp",
-        "provider": "Warp",
-        "url": "https://www.warp.dev/",
-        "keywords": ["warp terminal", "warp ai"],
-        "category_id": "cli_agents",
-        "subcategory_name": "Assistants terminal",
-    },
-]
-
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Update AI tools datasets")
@@ -989,37 +922,6 @@ def extract_tools_from_results_fallback(search_results: list[dict], existing_nam
     tracer = get_tracer()
     extracted: list[dict] = []
     seen = set(existing_names)
-
-    # First pass: detect known CLI tools from raw search evidence.
-    if profile == "aicliapps":
-        corpus = "\n".join(
-            f"{hit.get('title', '')} {hit.get('body', '')} {hit.get('url', '')} {hit.get('query', '')}".lower()
-            for hit in search_results
-        )
-        for known_tool in KNOWN_CLI_TOOL_CATALOG:
-            if any(keyword in corpus for keyword in known_tool["keywords"]):
-                lowered_name = known_tool["name"].lower()
-                if lowered_name in seen:
-                    continue
-                extracted.append({
-                    "name": known_tool["name"],
-                    "provider": known_tool["provider"],
-                    "url": known_tool["url"],
-                    "desc": "Detecte via resultats DuckDuckGo CLI",
-                    "category_id": known_tool["category_id"],
-                    "subcategory_name": known_tool["subcategory_name"],
-                    "source_text": corpus,
-                })
-                tracer.log("DEBUG", "FALLBACK_DETECTION", f"Detected known CLI tool: {known_tool['name']}", {})
-                seen.add(lowered_name)
-            if len(extracted) >= 10:
-                return extracted
-
-        # Keep CLI profile clean: if at least one known CLI tool was detected,
-        # stop here instead of adding noisy article titles.
-        if extracted:
-            tracer.log("INFO", "FALLBACK_EXTRACTION", f"Found {len(extracted)} CLI tools via keyword matching", {"count": len(extracted)})
-            return extracted
 
     for hit in search_results:
         title = hit.get("title", "")
