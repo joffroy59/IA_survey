@@ -3,6 +3,25 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FIX) Remove now mode and apply columns to categories
+
+### Changed
+- Removed `now` from column layout toggle cycle. The button now cycles only: `1 -> 2 -> 3 -> 1`.
+- Changed grid-column behavior so the toggle applies to category blocks (subcategories) via `.category-columns` instead of tool cards.
+- Updated category rendering to wrap subcategories inside a new `.category-columns` container.
+- Updated responsive CSS so category columns collapse to one column on small screens.
+- Updated layout toggle label/title logic to reflect category columns and current numeric mode.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested to remove `now` mode entirely.
+- User requested column behavior based on categories, with one category per column.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
 ## FEATURE) Convert column layout to toggle button + add button darkening + add page label indicator
 
 ### Changed

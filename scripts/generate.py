@@ -637,6 +637,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       letter-spacing: -0.01em;
     }}
 
+    /* ── Subcategory layout ── */
+    .category-columns {{
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 18px;
+    }}
+    body[data-grid-columns="1"] .category-columns {{
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }}
+    body[data-grid-columns="2"] .category-columns {{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }}
+    body[data-grid-columns="3"] .category-columns {{
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }}
+
     /* ── Subcategory ── */
     .subcategory {{
       margin-bottom: 28px;
@@ -664,15 +680,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 10px;
-    }}
-    body[data-grid-columns="1"] .tools-grid {{
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-    }}
-    body[data-grid-columns="2"] .tools-grid {{
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }}
-    body[data-grid-columns="3"] .tools-grid {{
-      grid-template-columns: repeat(3, minmax(0, 1fr));
     }}
     .tool-card {{
       display: flex;
@@ -801,9 +808,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     @media (max-width: 600px) {{
       .tools-grid {{ grid-template-columns: 1fr 1fr; }}
-      body[data-grid-columns="1"] .tools-grid {{ grid-template-columns: 1fr; }}
-      body[data-grid-columns="2"] .tools-grid {{ grid-template-columns: 1fr 1fr; }}
-      body[data-grid-columns="3"] .tools-grid {{ grid-template-columns: 1fr 1fr; }}
+      .category-columns {{ grid-template-columns: 1fr; }}
       .page-meta {{ grid-template-columns: 1fr; }}
       .audience-brief {{ grid-template-columns: 1fr; }}
     }}
@@ -816,7 +821,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <button class="menu-toggle" id="menu-toggle" aria-label="Masquer le menu" aria-pressed="true" title="Masquer le menu">🧭</button>
   <button class="summary-toggle" id="summary-toggle" aria-label="Masquer les infos d'en-tete" aria-pressed="true" title="Masquer les infos d'en-tete">ℹ️</button>
   <button class="panel-toggle" id="panel-toggle" aria-label="Afficher/Masquer les panneaux" aria-pressed="true" title="Afficher/Masquer les panneaux">📋</button>
-  <button class="layout-columns-toggle" id="layout-columns-toggle" aria-label="Changer le nombre de colonnes" aria-pressed="true" title="Changer le nombre de colonnes">⊞</button>
+  <button class="layout-columns-toggle" id="layout-columns-toggle" aria-label="Changer le nombre de colonnes de categories" aria-pressed="true" title="Colonnes categories: 1">1</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Activer le mode clair" aria-pressed="false" title="Activer le mode clair">🌙</button>
   <div class="header-badge">🤖 Auto-updated by AI · {today}</div>
   <h1>{title}</h1>
@@ -1066,38 +1071,37 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     updateThemeToggle();
   }});
 
-  // Layout columns toggle button (cycles through: 1 -> now -> 2 -> 3 -> 1)
-  const validGridLayouts = ['1', 'now', '2', '3'];
-  const storedGridColumns = localStorage.getItem('gridColumnsLayout') || 'now';
+  // Category columns toggle button (cycles through: 1 -> 2 -> 3 -> 1)
+  const validGridLayouts = ['1', '2', '3'];
+  const storedGridColumns = localStorage.getItem('gridColumnsLayout') || '1';
 
   function applyGridColumnsLayout(layoutValue) {{
-    if (layoutValue === 'now') {{
-      document.body.removeAttribute('data-grid-columns');
-      return;
-    }}
     document.body.setAttribute('data-grid-columns', layoutValue);
   }}
 
   function updateLayoutToggle() {{
-    const currentLayout = localStorage.getItem('gridColumnsLayout') || 'now';
-    const isDefault = currentLayout === 'now';
-    layoutColumnsToggle.setAttribute('aria-pressed', String(isDefault));
-    layoutColumnsToggle.setAttribute('title', `Colonnes: ${{currentLayout}}`);
+    const currentLayout = localStorage.getItem('gridColumnsLayout') || '1';
+    layoutColumnsToggle.textContent = currentLayout;
+    layoutColumnsToggle.setAttribute('aria-pressed', 'true');
+    layoutColumnsToggle.setAttribute('aria-label', `Changer le nombre de colonnes de categories (actuel: ${{currentLayout}})`);
+    layoutColumnsToggle.setAttribute('title', `Colonnes categories: ${{currentLayout}}`);
     updateAllButtonStates();
   }}
 
   function cycleLayoutColumns() {{
-    const currentLayout = localStorage.getItem('gridColumnsLayout') || 'now';
+    const currentLayout = localStorage.getItem('gridColumnsLayout') || '1';
     const currentIndex = validGridLayouts.indexOf(currentLayout);
-    const nextIndex = (currentIndex + 1) % validGridLayouts.length;
+    const safeIndex = currentIndex === -1 ? 0 : currentIndex;
+    const nextIndex = (safeIndex + 1) % validGridLayouts.length;
     const nextLayout = validGridLayouts[nextIndex];
     applyGridColumnsLayout(nextLayout);
     localStorage.setItem('gridColumnsLayout', nextLayout);
     updateLayoutToggle();
   }}
 
-  const initialGridLayout = validGridLayouts.includes(storedGridColumns) ? storedGridColumns : 'now';
+  const initialGridLayout = validGridLayouts.includes(storedGridColumns) ? storedGridColumns : '1';
   applyGridColumnsLayout(initialGridLayout);
+  localStorage.setItem('gridColumnsLayout', initialGridLayout);
   updateLayoutToggle();
 
   layoutColumnsToggle.addEventListener('click', cycleLayoutColumns);
@@ -1251,7 +1255,9 @@ def render_category(cat: dict) -> str:
       <div class="category-icon">{cat['icon']}</div>
       <div class="category-title">{cat['name']}</div>
     </div>
-    {subs_html}
+    <div class="category-columns">
+      {subs_html}
+    </div>
   </section>"""
 
 
