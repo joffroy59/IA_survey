@@ -3,6 +3,25 @@
 Date: 2026-04-18
 Repository: IA_survey
 
+## FIX) Prevent Ollama from using Gemini API key
+
+### Changed
+- Updated `scripts/update.py` to enforce `api_key_env = ""` for local providers (`ollama`, `lmstudio`) when loading global settings.
+- Updated `scripts/update.py` to force-disable Authorization header for `ollama` and `lmstudio` in OpenAI-compatible requests.
+
+### Why
+- User reported that Ollama was using Gemini key.
+- Local runtimes (Ollama/LM Studio) must never send cloud provider API keys, even if misconfigured in settings.
+
+### Files touched
+- `scripts/update.py`
+- `WORK_DONE_NOTE.md`
+
+---
+
+Date: 2026-04-18
+Repository: IA_survey
+
 ## FEATURE) Add named multi-provider LLM configuration and global settings panel
 
 ### Changed

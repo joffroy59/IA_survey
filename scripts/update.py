@@ -386,6 +386,12 @@ def load_global_settings() -> dict:
         raw = json.load(f)
 
     merged = _deep_merge(DEFAULT_GLOBAL_SETTINGS, raw)
+
+    # Local providers should never require nor send API keys.
+    for local_provider in ["ollama", "lmstudio"]:
+        if "llm" in merged and local_provider in merged["llm"]:
+            merged["llm"][local_provider]["api_key_env"] = ""
+
     if merged != raw:
         save_global_settings(merged)
     return merged
@@ -794,6 +800,11 @@ def ask_openai_compatible(prompt: str, settings: dict, provider_name: str) -> st
     base_url = str(provider_cfg.get("base_url", "")).strip().rstrip("/")
     model = str(provider_cfg.get("model", "")).strip()
     api_key_env = str(provider_cfg.get("api_key_env", "")).strip()
+
+    # Never send auth header to local OpenAI-compatible runtimes.
+    if provider_name in {"ollama", "lmstudio"}:
+        api_key_env = ""
+
     api_key = os.environ.get(api_key_env, "") if api_key_env else ""
 
     if not base_url or not model:
