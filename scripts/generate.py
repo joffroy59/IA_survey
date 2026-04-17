@@ -447,6 +447,38 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       flex-wrap: wrap;
       justify-content: center;
     }}
+    .layout-selector-wrap {{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--muted);
+      border-radius: 10px;
+      padding: 0 8px;
+      height: 36px;
+    }}
+    .layout-selector-label {{
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent2);
+    }}
+    .layout-select {{
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      cursor: pointer;
+      min-width: 64px;
+    }}
+    .layout-select option {{
+      background: var(--surface);
+      color: var(--text);
+    }}
     .audience-brief {{
       margin: 18px auto 0;
       max-width: 980px;
@@ -615,6 +647,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 10px;
     }}
+    body[data-grid-columns="1"] .tools-grid {{
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }}
+    body[data-grid-columns="2"] .tools-grid {{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }}
+    body[data-grid-columns="3"] .tools-grid {{
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }}
     .tool-card {{
       display: flex;
       flex-direction: column;
@@ -742,6 +783,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     @media (max-width: 600px) {{
       .tools-grid {{ grid-template-columns: 1fr 1fr; }}
+      body[data-grid-columns="1"] .tools-grid {{ grid-template-columns: 1fr; }}
+      body[data-grid-columns="2"] .tools-grid {{ grid-template-columns: 1fr 1fr; }}
+      body[data-grid-columns="3"] .tools-grid {{ grid-template-columns: 1fr 1fr; }}
       .page-meta {{ grid-template-columns: 1fr; }}
       .audience-brief {{ grid-template-columns: 1fr; }}
     }}
@@ -769,6 +813,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <div class="page-meta-desc">{page_description}</div>
     </div>
     <div class="button-group">
+      <div class="layout-selector-wrap">
+        <label class="layout-selector-label" for="layout-columns-select">Colonnes</label>
+        <select class="layout-select" id="layout-columns-select" aria-label="Selection du nombre de colonnes">
+          <option value="1">1</option>
+          <option value="now">now</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
       <button class="info-btn" type="button" id="open-search-info">Sources</button>
       <button class="info-btn" type="button" id="open-history-info">Historique</button>
       <button class="info-btn" type="button" id="export-page-zip">ZIP Page</button>
@@ -851,6 +904,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   const closeHistoryInfo = document.getElementById('close-history-info');
   const exportPageZipBtn = document.getElementById('export-page-zip');
   const exportAllZipBtn = document.getElementById('export-all-zip');
+  const layoutColumnsSelect = document.getElementById('layout-columns-select');
   const currentPageFile = '{history_page_file}';
   const exportManifest = {export_manifest_json};
   const menuToggle = document.getElementById('menu-toggle');
@@ -998,6 +1052,28 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     htmlElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeToggle();
+  }});
+
+  // Layout columns selector (1, now, 2, 3)
+  const storedGridColumns = localStorage.getItem('gridColumnsLayout') || 'now';
+
+  function applyGridColumnsLayout(layoutValue) {{
+    if (layoutValue === 'now') {{
+      document.body.removeAttribute('data-grid-columns');
+      return;
+    }}
+    document.body.setAttribute('data-grid-columns', layoutValue);
+  }}
+
+  const validGridLayouts = ['1', 'now', '2', '3'];
+  const initialGridLayout = validGridLayouts.includes(storedGridColumns) ? storedGridColumns : 'now';
+  layoutColumnsSelect.value = initialGridLayout;
+  applyGridColumnsLayout(initialGridLayout);
+
+  layoutColumnsSelect.addEventListener('change', () => {{
+    const nextLayout = layoutColumnsSelect.value;
+    applyGridColumnsLayout(nextLayout);
+    localStorage.setItem('gridColumnsLayout', nextLayout);
   }});
 
   // Menu toggle (page switcher + category nav)

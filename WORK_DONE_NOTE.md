@@ -3,6 +3,28 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FEATURE) Add selector for 1/now/2/3 column layout
+
+### Changed
+- Added a layout selector in the header action area with options: `1`, `now`, `2`, `3`.
+- Updated `scripts/generate.py` CSS to support forced grid column counts via `body[data-grid-columns]`.
+- Kept responsive behavior on small screens by capping the 3-column choice to 2 columns on mobile.
+- Added JavaScript state persistence with localStorage key `gridColumnsLayout`.
+- Regenerated all HTML pages and related snapshots.
+
+### Why
+- User requested a selector to switch between `1`, current (`now`), `2`, or `3` columns.
+- Persisting the choice keeps the preferred layout across refreshes.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
+### Verification
+- Ran `python scripts/generate.py` successfully.
+- Verified generated template and output include `layout-columns-select`, `gridColumnsLayout`, and `data-grid-columns` logic.
+
 ## FEATURE) Add toggle to hide menu
 
 ### Changed
