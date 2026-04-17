@@ -3,21 +3,17 @@
 Date: 2026-04-18
 Repository: IA_survey
 
-## FIX) Ensure aicliapps keeps canonical CLI tools when LLM output is noisy
+## FIX) Improve aicliapps extraction via prompt + explicit-name parsing (no known-tools dependency)
 
 ### Changed
-- Extended `KNOWN_CLI_TOOL_CATALOG` in `scripts/update.py` with:
-  - `Gemini CLI`
-  - `Codex CLI`
-- Added candidate merge helper in `scripts/update.py` to deduplicate and prioritize known tools.
-- Updated `main()` extraction flow in `scripts/update.py` for profile `aicliapps`:
-  - Always enrich/merge LLM extraction with known CLI detections from search evidence.
-  - Use provider-neutral extraction label `llm_extraction`.
+- Updated `scripts/update.py` prompt rules to force extraction of exact tool names explicitly mentioned in search results and to prefer official/project URLs.
+- Added explicit CLI entity extraction in `scripts/update.py` from search titles/bodies using generic regex patterns and quality filters.
+- Added candidate merge logic in `scripts/update.py` to combine explicit-name extraction with LLM output while deduplicating by name.
+- Updated extraction label to `llm_extraction` for provider-neutral trace output.
 
 ### Why
-- User observed missing key tools (Gemini CLI, Claude Code, Codex) despite relevant search evidence.
-- Previously, when LLM returned any valid list, fallback known-tool detection was skipped.
-- Merge step now keeps canonical tools even when LLM returns noisy blog-derived entries.
+- User observed that Ollama response often returned noisy blog-derived tools and missed explicit names like Gemini CLI, Claude Code, and Codex CLI.
+- This correction improves recovery of explicitly named tools without relying on the static known-tools catalog.
 
 ### Files touched
 - `scripts/update.py`

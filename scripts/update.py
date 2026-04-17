@@ -250,28 +250,32 @@ GENERIC_TOOL_NAME_TOKENS = {
     "ranking",
 }
 
+GENERIC_CLI_ENTITY_TOKENS = {
+    "ai",
+    "coding",
+    "agentic",
+    "tools",
+    "tool",
+    "best",
+    "top",
+    "guide",
+    "install",
+    "using",
+    "developers",
+    "developer",
+    "workflow",
+    "workflows",
+    "terminal",
+    "command",
+    "line",
+}
+
 KNOWN_CLI_TOOL_CATALOG = [
-    {
-        "name": "Gemini CLI",
-        "provider": "Google",
-        "url": "https://github.com/google-gemini/gemini-cli",
-        "keywords": ["gemini cli", "google-gemini/gemini-cli", "@google/gemini-cli"],
-        "category_id": "cli_agents",
-        "subcategory_name": "Assistants terminal",
-    },
     {
         "name": "Claude Code",
         "provider": "Anthropic",
         "url": "https://www.anthropic.com/claude-code",
         "keywords": ["claude code", "anthropic cli"],
-        "category_id": "cli_dev",
-        "subcategory_name": "Code generation et refactor",
-    },
-    {
-        "name": "Codex CLI",
-        "provider": "OpenAI",
-        "url": "https://github.com/openai/codex",
-        "keywords": ["codex cli", "openai codex", "openai/codex"],
         "category_id": "cli_dev",
         "subcategory_name": "Code generation et refactor",
     },
@@ -951,6 +955,9 @@ Règles :
 - Uniquement des outils réels avec URL valide et fonctionnel
 - Les variantes, extensions, CLI, plugins d'un produit connu = nouveaux outils (ne pas les exclure)
 - Les doublons stricts à exclure : même nom ET même type d'accès
+- Si un nom d'outil est explicitement cité dans les titres (ex: "Gemini CLI", "Claude Code", "Codex CLI"), privilégie ce nom exact
+- Privilégie les URL officielles du projet/éditeur (site officiel, GitHub du projet) plutôt que les articles comparatifs
+- N'invente pas de noms: n'extrais que des outils explicitement nommés dans les résultats
 - Utilise les noms de sous-catégories existants si possible
 - category_id doit correspondre à une catégorie existante
 - subcategory_name doit correspondre à une sous-catégorie existante pour le category_id choisi
@@ -1061,7 +1068,7 @@ def extract_tools_from_results_fallback(search_results: list[dict], existing_nam
 
 
 def merge_tool_candidates(primary: list[dict], secondary: list[dict], limit: int = 10) -> list[dict]:
-    """Merge candidates with de-duplication by normalized name while preserving order priority."""
+    """Merge candidates while de-duplicating by normalized name and preserving priority order."""
     merged: list[dict] = []
     seen: set[str] = set()
 
@@ -1075,6 +1082,116 @@ def merge_tool_candidates(primary: list[dict], secondary: list[dict], limit: int
             if len(merged) >= limit:
                 return merged
     return merged
+
+
+def extract_explicit_cli_tools(search_results: list[dict], existing_names: list[str]) -> list[dict]:
+    """Extract explicitly named CLI tools from search results without relying on a static known-tools catalog."""
+    tracer = get_tracer()
+    existing = set(existing_names)
+
+    # Pattern focuses on explicit names in content such as "Gemini CLI", "Codex CLI", "Claude Code".
+    explicit_patterns = [
+        re.compile(r"\b([A-Z][A-Za-z0-9.+-]*(?:\s+[A-Z][A-Za-z0-9.+-]*)?\s+CLI)\b"),
+        re.compile(r"\b(Claude Code|Open Interpreter|Amazon Q|Aider)\b"),
+    ]
+
+    def is_specific_cli_entity(name: str) -> bool:
+        lowered = name.lower().strip()
+        if not lowered:
+            return False
+        tokens = re.split(r"\s+", lowered)
+        if len(tokens) > 3:
+            return False
+        if tokens[0] in {"best", "top", "install", "using"}:
+            return False
+
+        meaningful_tokens = [t for t in tokens if t not in {"cli", "code"}]
+        if not meaningful_tokens:
+            return False
+        if all(t in GENERIC_CLI_ENTITY_TOKENS for t in meaningful_tokens):
+            return False
+        return True
+
+    stats: dict[str, dict] = {}
+
+    for hit in search_results:
+        title = hit.get("title", "")
+        body = hit.get("body", "")
+        url = hit.get("url", "")
+        if not url or is_excluded_host(url):
+            continue
+
+        combined = f"{title}\n{body}"
+        for pattern in explicit_patterns:
+            for match in pattern.finditer(combined):
+                raw_name = normalize_tool_name(match.group(1).strip())
+                lowered = raw_name.lower()
+                if lowered in existing:
+                    continue
+                if not is_likely_tool_name(raw_name):
+                    continue
+                if not is_specific_cli_entity(raw_name):
+                    continue
+
+                entry = stats.setdefault(
+                    lowered,
+                    {
+                        "name": raw_name,
+                        "count": 0,
+                        "hits_in_title": 0,
+                        "best_url": "",
+                        "best_score": -1,
+                        "source_text": "",
+                    },
+                )
+                entry["count"] += 1
+                if raw_name.lower() in title.lower():
+                    entry["hits_in_title"] += 1
+
+                # Prefer likely official/project URLs.
+                score = 0
+                lowered_url = url.lower()
+                compact_name = re.sub(r"[^a-z0-9]+", "", raw_name.lower())
+                if "github.com" in lowered_url:
+                    score += 4
+                if compact_name and compact_name in re.sub(r"[^a-z0-9]+", "", lowered_url):
+                    score += 3
+                if raw_name.lower() in title.lower():
+                    score += 2
+
+                if score > entry["best_score"]:
+                    entry["best_score"] = score
+                    entry["best_url"] = url
+                    entry["source_text"] = f"{title} {body} {hit.get('query', '')}"
+
+    extracted: list[dict] = []
+    for _, info in sorted(stats.items(), key=lambda item: (-item[1]["hits_in_title"], -item[1]["count"], item[1]["name"])):
+        if len(extracted) >= 10:
+            break
+        if info["count"] < 2 and info["hits_in_title"] == 0:
+            continue
+        if not is_valid_tool_url(info["best_url"]):
+            continue
+
+        host = (urlparse(info["best_url"]).hostname or "").lower().removeprefix("www.")
+        provider = host.split(".")[0].capitalize() if host else ""
+        source_text = info["source_text"]
+        category_id, sub_name = infer_aicliapps_category(source_text)
+
+        extracted.append(
+            {
+                "name": info["name"],
+                "provider": provider,
+                "url": info["best_url"],
+                "desc": "Detecte explicitement dans les resultats CLI",
+                "category_id": category_id,
+                "subcategory_name": sub_name,
+                "source_text": source_text,
+            }
+        )
+
+    tracer.log("INFO", "EXPLICIT_EXTRACTION", f"Extracted {len(extracted)} explicitly named CLI tools", {"count": len(extracted)})
+    return extracted
 
 
 def add_tools_to_data(data: dict, new_tools: list[dict], profile: str) -> int:
@@ -1184,14 +1301,14 @@ def main():
     new_tools = extract_new_tools(search_context, existing, global_settings, data)
 
     if profile == "aicliapps":
-        known_cli_tools = extract_tools_from_results_fallback(search_results, existing, profile)
-        if known_cli_tools:
-            new_tools = merge_tool_candidates(known_cli_tools, new_tools, limit=10)
+        explicit_cli_tools = extract_explicit_cli_tools(search_results, existing)
+        if explicit_cli_tools:
+            new_tools = merge_tool_candidates(explicit_cli_tools, new_tools, limit=10)
             tracer.log(
                 "INFO",
                 "EXTRACTION",
-                "Merged known CLI detections with LLM extraction",
-                {"known": len(known_cli_tools), "merged": len(new_tools)},
+                "Merged explicit CLI extraction with LLM extraction",
+                {"explicit": len(explicit_cli_tools), "merged": len(new_tools)},
             )
 
     if new_tools:
