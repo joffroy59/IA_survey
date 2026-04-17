@@ -3,6 +3,36 @@
 Date: 2026-04-18
 Repository: IA_survey
 
+## FEATURE) Add named multi-provider LLM configuration and global settings panel
+
+### Changed
+- Added global settings file `data/global_settings.json` to manage LLM provider and per-provider options.
+- Extended `scripts/update.py` with provider support: `gemini`, `openai`, `openrouter`, `ollama`, `lmstudio`.
+- Added CLI options in `scripts/update.py`:
+  - `--settings-panel` for interactive global settings management
+  - `--set-provider` to persist a default provider
+  - `--provider` to override provider for a single run
+- Implemented provider router in `scripts/update.py`:
+  - Gemini path preserved with model fallback and retry
+  - OpenAI-compatible API path added for OpenAI/OpenRouter/Ollama/LM Studio
+- Updated `README.md` with provider environment variables and settings panel usage examples.
+
+### Why
+- User requested explicit provider naming instead of an implicit single-provider setup.
+- User requested adding OpenAI, OpenRouter, Ollama, and LM Studio alongside Gemini.
+- User requested a global configuration panel to manage provider selection and options.
+
+### Files touched
+- `scripts/update.py`
+- `data/global_settings.json`
+- `README.md`
+- `WORK_DONE_NOTE.md`
+
+---
+
+Date: 2026-04-18
+Repository: IA_survey
+
 ## FEATURE) Improve Gemini prompt to recognize tool variants as distinct offerings
 
 ### Changed

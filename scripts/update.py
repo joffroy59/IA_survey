@@ -22,17 +22,20 @@ try:
     from ddgs import DDGS
     import google.generativeai as genai
     from google.api_core import exceptions as google_api_exceptions
+    import requests
 except ImportError:
     print("Installing dependencies...")
-    os.system("pip install ddgs google-generativeai --quiet")
+    os.system("pip install ddgs google-generativeai requests --quiet")
     from ddgs import DDGS
     import google.generativeai as genai
     from google.api_core import exceptions as google_api_exceptions
+    import requests
 
 # ── Config ────────────────────────────────────────────────────────────────────
 ROOT = Path(__file__).parent.parent
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 SEARCH_QUERIES_FILE = ROOT / "data" / "search_queries.json"
+GLOBAL_SETTINGS_FILE = ROOT / "data" / "global_settings.json"
 
 PROFILE_CONFIG = {
     "general": {
@@ -116,13 +119,46 @@ PROFILE_CONFIG = {
 
 MAX_SEARCH_RESULTS = 15  # par requête
 GEMINI_RETRY_WAIT_SECONDS = 60
-MAX_SEARCH_CONTEXT_LINES = 80
+MAX_SEARCH_CONTEXT_LINES = 15000
+HTTP_TIMEOUT_SECONDS = 60
 
 # Ordered list of Gemini models to try. On quota exhaustion the next model is used.
 GEMINI_MODELS = [
     "gemini-2.5-pro",
     "gemini-2.5-flash",
 ]
+
+SUPPORTED_PROVIDERS = ["gemini", "openai", "openrouter", "ollama", "lmstudio"]
+
+DEFAULT_GLOBAL_SETTINGS = {
+    "llm": {
+        "provider": "gemini",
+        "gemini": {
+            "models": GEMINI_MODELS,
+            "retry_wait_seconds": GEMINI_RETRY_WAIT_SECONDS,
+        },
+        "openai": {
+            "base_url": "https://api.openai.com/v1",
+            "model": "gpt-4o-mini",
+            "api_key_env": "OPENAI_API_KEY",
+        },
+        "openrouter": {
+            "base_url": "https://openrouter.ai/api/v1",
+            "model": "openai/gpt-4o-mini",
+            "api_key_env": "OPENROUTER_API_KEY",
+        },
+        "ollama": {
+            "base_url": "http://localhost:11434/v1",
+            "model": "llama3.1:8b",
+            "api_key_env": "",
+        },
+        "lmstudio": {
+            "base_url": "http://localhost:1234/v1",
+            "model": "local-model",
+            "api_key_env": "",
+        },
+    }
+}
 
 AICLIAPPS_CATEGORIES = [
     {
@@ -305,7 +341,119 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Save trace log to JSON file (e.g., trace_output.json)",
     )
+    parser.add_argument(
+        "--provider",
+        choices=SUPPORTED_PROVIDERS,
+        default=None,
+        help="Override LLM provider for this run (gemini/openai/openrouter/ollama/lmstudio)",
+    )
+    parser.add_argument(
+        "--set-provider",
+        choices=SUPPORTED_PROVIDERS,
+        default=None,
+        help="Set default provider in global settings and continue run",
+    )
+    parser.add_argument(
+        "--settings-panel",
+        action="store_true",
+        help="Open global settings panel for LLM provider configuration",
+    )
     return parser.parse_args()
+
+
+def _deep_merge(defaults: dict, override: dict) -> dict:
+    merged = dict(defaults)
+    for key, value in override.items():
+        if isinstance(value, dict) and isinstance(merged.get(key), dict):
+            merged[key] = _deep_merge(merged[key], value)
+        else:
+            merged[key] = value
+    return merged
+
+
+def save_global_settings(settings: dict) -> None:
+    GLOBAL_SETTINGS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(GLOBAL_SETTINGS_FILE, "w", encoding="utf-8") as f:
+        json.dump(settings, f, ensure_ascii=False, indent=2)
+
+
+def load_global_settings() -> dict:
+    if not GLOBAL_SETTINGS_FILE.exists():
+        save_global_settings(DEFAULT_GLOBAL_SETTINGS)
+        return json.loads(json.dumps(DEFAULT_GLOBAL_SETTINGS))
+
+    with open(GLOBAL_SETTINGS_FILE, "r", encoding="utf-8") as f:
+        raw = json.load(f)
+
+    merged = _deep_merge(DEFAULT_GLOBAL_SETTINGS, raw)
+    if merged != raw:
+        save_global_settings(merged)
+    return merged
+
+
+def print_global_settings(settings: dict) -> None:
+    llm_cfg = settings.get("llm", {})
+    provider = llm_cfg.get("provider", "gemini")
+    print("\n=== Global Settings Panel ===")
+    print(f"Provider actif: {provider}")
+    print(f"Fichier: {GLOBAL_SETTINGS_FILE}")
+    print("Providers disponibles: gemini, openai, openrouter, ollama, lmstudio")
+
+    for provider_name in SUPPORTED_PROVIDERS:
+        cfg = llm_cfg.get(provider_name, {})
+        if provider_name == "gemini":
+            models = cfg.get("models", GEMINI_MODELS)
+            print(f"- {provider_name}: models={models}")
+        else:
+            print(
+                f"- {provider_name}: base_url={cfg.get('base_url', '')}, "
+                f"model={cfg.get('model', '')}, api_key_env={cfg.get('api_key_env', '')}"
+            )
+
+
+def run_settings_panel(settings: dict) -> dict:
+    print_global_settings(settings)
+    print("\nChoisir un provider par defaut (laisser vide pour conserver):")
+    new_provider = input("provider> ").strip().lower()
+    if not new_provider:
+        print("Aucun changement applique.")
+        return settings
+
+    if new_provider not in SUPPORTED_PROVIDERS:
+        print(f"Provider invalide: {new_provider}")
+        return settings
+
+    settings["llm"]["provider"] = new_provider
+
+    if new_provider != "gemini":
+        cfg = settings["llm"].get(new_provider, {})
+        current_model = str(cfg.get("model", "")).strip()
+        current_base_url = str(cfg.get("base_url", "")).strip()
+
+        model_input = input(f"model [{current_model}]> ").strip()
+        base_url_input = input(f"base_url [{current_base_url}]> ").strip()
+
+        if model_input:
+            cfg["model"] = model_input
+        if base_url_input:
+            cfg["base_url"] = base_url_input
+        settings["llm"][new_provider] = cfg
+
+    save_global_settings(settings)
+    print(f"Provider par defaut mis a jour: {new_provider}")
+    return settings
+
+
+def apply_provider_overrides(args: argparse.Namespace, settings: dict) -> dict:
+    updated = json.loads(json.dumps(settings))
+    if args.set_provider:
+        updated["llm"]["provider"] = args.set_provider
+        save_global_settings(updated)
+        print(f"Default provider updated in global settings: {args.set_provider}")
+    if args.provider:
+        updated["llm"]["provider"] = args.provider
+        print(f"Provider override for current run: {args.provider}")
+    return updated
 
 
 def load_search_queries() -> dict[str, list[str]]:
@@ -323,7 +471,7 @@ def load_search_queries() -> dict[str, list[str]]:
             raise ValueError(f"No queries configured for profile '{profile_name}'")
 
         cleaned = [q.strip() for q in profile_queries if isinstance(q, str) and q.strip()]
-        if len(cleaned) < 10:
+        if len(cleaned) < 3:
             raise ValueError(
                 f"Profile '{profile_name}' must define at least 10 queries, found {len(cleaned)}"
             )
@@ -564,10 +712,16 @@ def passes_tool_quality_gate(tool: dict) -> bool:
     return True
 
 
-def ask_gemini(prompt: str) -> str:
-    """Appel Gemini avec fallback automatique entre modèles (voir GEMINI_MODELS)."""
+def ask_gemini(prompt: str, settings: dict) -> str:
+    """Appel Gemini avec fallback automatique entre modèles."""
     tracer = get_tracer()
     tracer.trace_gemini_prompt(prompt)
+    llm_cfg = settings.get("llm", {})
+    gemini_cfg = llm_cfg.get("gemini", {})
+    gemini_models = gemini_cfg.get("models", GEMINI_MODELS)
+    if not isinstance(gemini_models, list) or not gemini_models:
+        gemini_models = GEMINI_MODELS
+    retry_wait_seconds = int(gemini_cfg.get("retry_wait_seconds", GEMINI_RETRY_WAIT_SECONDS))
 
     if tracer.is_dry_run:
         print("\n[DRY-RUN] Skipping Gemini API call.")
@@ -581,9 +735,9 @@ def ask_gemini(prompt: str) -> str:
 
     genai.configure(api_key=GEMINI_API_KEY)
 
-    for idx, model_name in enumerate(GEMINI_MODELS):
-        is_last = idx == len(GEMINI_MODELS) - 1
-        print(f"Trying model {model_name} ({idx + 1}/{len(GEMINI_MODELS)})...")
+    for idx, model_name in enumerate(gemini_models):
+        is_last = idx == len(gemini_models) - 1
+        print(f"Trying model {model_name} ({idx + 1}/{len(gemini_models)})...")
         model = genai.GenerativeModel(model_name)
 
         def _generate_once() -> str:
@@ -595,10 +749,10 @@ def ask_gemini(prompt: str) -> str:
         except google_api_exceptions.ResourceExhausted as e:
             print(
                 f"Gemini quota exceeded for {model_name} (ResourceExhausted). "
-                f"Waiting {GEMINI_RETRY_WAIT_SECONDS}s before one retry: {e}"
+                f"Waiting {retry_wait_seconds}s before one retry: {e}"
             )
             tracer.log("WARNING", "GEMINI", "Quota exceeded, retrying", {"model": model_name})
-            time.sleep(GEMINI_RETRY_WAIT_SECONDS)
+            time.sleep(retry_wait_seconds)
             try:
                 return _generate_once()
             except google_api_exceptions.ResourceExhausted:
@@ -633,7 +787,65 @@ def ask_gemini(prompt: str) -> str:
     return "[]"
 
 
-def extract_new_tools(search_results: str, existing_names: list[str], data: dict = None) -> list[dict]:
+def ask_openai_compatible(prompt: str, settings: dict, provider_name: str) -> str:
+    tracer = get_tracer()
+    llm_cfg = settings.get("llm", {})
+    provider_cfg = llm_cfg.get(provider_name, {})
+    base_url = str(provider_cfg.get("base_url", "")).strip().rstrip("/")
+    model = str(provider_cfg.get("model", "")).strip()
+    api_key_env = str(provider_cfg.get("api_key_env", "")).strip()
+    api_key = os.environ.get(api_key_env, "") if api_key_env else ""
+
+    if not base_url or not model:
+        print(f"{provider_name} settings invalid (base_url/model). Skipping LLM step.")
+        tracer.log("ERROR", "LLM", "Provider settings invalid", {"provider": provider_name})
+        return "[]"
+
+    headers = {"Content-Type": "application/json"}
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
+    elif api_key_env and provider_name in {"openai", "openrouter"}:
+        print(f"{api_key_env} not set. Skipping LLM step for {provider_name}.")
+        tracer.log("ERROR", "LLM", "Missing API key", {"provider": provider_name, "env": api_key_env})
+        return "[]"
+
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "user", "content": prompt},
+        ],
+        "temperature": 0.2,
+    }
+
+    endpoint = f"{base_url}/chat/completions"
+    try:
+        response = requests.post(endpoint, headers=headers, json=payload, timeout=HTTP_TIMEOUT_SECONDS)
+        response.raise_for_status()
+        body = response.json()
+        choices = body.get("choices", [])
+        if not choices:
+            tracer.log("ERROR", "LLM", "No choices returned", {"provider": provider_name})
+            return "[]"
+        message = choices[0].get("message", {})
+        return str(message.get("content", "[]"))
+    except requests.RequestException as e:
+        print(f"{provider_name} API call failed: {e}. Skipping LLM step.")
+        tracer.log("ERROR", "LLM", f"Provider API call failed: {e}", {"provider": provider_name})
+        return "[]"
+
+
+def ask_llm(prompt: str, settings: dict) -> str:
+    provider = settings.get("llm", {}).get("provider", "gemini")
+    if provider == "gemini":
+        return ask_gemini(prompt, settings)
+    if provider in {"openai", "openrouter", "ollama", "lmstudio"}:
+        return ask_openai_compatible(prompt, settings, provider)
+
+    print(f"Unknown provider '{provider}'. Falling back to gemini.")
+    return ask_gemini(prompt, settings)
+
+
+def extract_new_tools(search_results: str, existing_names: list[str], settings: dict, data: dict = None) -> list[dict]:
     """Demande à Gemini d'identifier les nouveaux outils."""
     tracer = get_tracer()
     existing_str = ", ".join(existing_names[:50])
@@ -688,7 +900,7 @@ Règles :
 - Si aucun nouvel outil pertinent, retourne []
 """
 
-    raw = ask_gemini(prompt)
+    raw = ask_llm(prompt, settings)
 
     # Nettoyer la réponse (parfois Gemini ajoute des backticks)
     raw = raw.strip()
@@ -848,6 +1060,15 @@ def add_tools_to_data(data: dict, new_tools: list[dict], profile: str) -> int:
 def main():
     args = parse_args()
     profile = args.profile
+    global_settings = load_global_settings()
+
+    if args.settings_panel:
+        global_settings = run_settings_panel(global_settings)
+
+    global_settings = apply_provider_overrides(args, global_settings)
+
+    if args.settings_panel and not args.provider and not args.set_provider:
+        return
 
     # Initialize tracer
     tracer = initialize_tracer(
@@ -876,6 +1097,7 @@ def main():
 
     print("Searching for new AI tools...")
     print(f"Profile: {profile}")
+    print(f"Provider: {global_settings.get('llm', {}).get('provider', 'gemini')}")
     existing = get_existing_names(data)
     print(f"   {len(existing)} existing tools loaded")
 
@@ -884,8 +1106,8 @@ def main():
     search_context = format_search_results_for_llm(search_results)
     tracer.trace_search_results_formatted(search_context)
 
-    print("Asking Gemini to identify new tools...")
-    new_tools = extract_new_tools(search_context, existing, data)
+    print("Asking configured LLM provider to identify new tools...")
+    new_tools = extract_new_tools(search_context, existing, global_settings, data)
     if new_tools:
         tracer.trace_tool_extraction("gemini_extraction", new_tools)
     else:

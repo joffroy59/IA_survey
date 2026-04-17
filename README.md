@@ -21,16 +21,33 @@ Boîte à outils IA mise à jour automatiquement chaque semaine par GitHub Actio
 git clone https://joffroy59.github.io/IA_survey/
 ```
 
-### 2. Obtenir une clé Gemini gratuite
+### 2. Configurer un provider LLM
 
-→ [aistudio.google.com](https://aistudio.google.com) → **Get API Key** → Copier la clé
+Provider par défaut: **Gemini**.
 
-### 3. Ajouter le secret GitHub
+Option A (Gemini):
+- [aistudio.google.com](https://aistudio.google.com) → **Get API Key**
+- Utiliser la variable `GEMINI_API_KEY`
+
+Option B (autres providers):
+- OpenAI: `OPENAI_API_KEY`
+- OpenRouter: `OPENROUTER_API_KEY`
+- Ollama: local (`http://localhost:11434/v1`)
+- LM Studio: local (`http://localhost:1234/v1`)
+
+### 3. Ajouter les secrets GitHub nécessaires
 
 ```
 Settings → Secrets and variables → Actions → New repository secret
 Name  : GEMINI_API_KEY
 Value : votre-clé-ici
+```
+
+Si vous utilisez OpenAI ou OpenRouter, ajoutez aussi:
+
+```
+OPENAI_API_KEY
+OPENROUTER_API_KEY
 ```
 
 ### 4. Activer GitHub Pages
@@ -62,3 +79,20 @@ Actions → "Update AI Toolbox" → Run workflow
 - **Ajouter un outil manuellement** : éditer `data/tools.json`
 - **Changer la fréquence** : modifier le cron dans `.github/workflows/update.yml`
 - **Changer le style** : modifier le `HTML_TEMPLATE` dans `scripts/generate.py`
+
+## Global Settings Panel (providers)
+
+Le fichier global est `data/global_settings.json`.
+
+Commandes utiles:
+
+```bash
+# Ouvrir le panneau global (CLI interactif)
+python scripts/update.py --settings-panel
+
+# Définir le provider par défaut
+python scripts/update.py --set-provider openrouter
+
+# Override provider uniquement pour ce run
+python scripts/update.py --provider ollama --profile general --dry-run
+```
