@@ -16,6 +16,36 @@ Repository: IA_survey
 - `.github/copilot-instructions.md`
 - `WORK_DONE_NOTE.md`
 
+## RELEASE) Publish v1.6.1 with complete-site artifact
+
+### Changed
+- Created release branch `release/v1.6.1` from `develop` for release work isolation.
+- Built release artifact `v1.6.1-complete-site.zip` in `release_assets/v1.6.1/` containing all generated HTML entry pages and the `data/` folder.
+- Validated extracted package includes `index.html` and required data files.
+- Ran `python scripts/check_pages.py` before release publication.
+
+### Why
+- User requested creating a GitHub release.
+- Repository rules require attaching a complete usable site package for each release.
+
+### Files touched
+- `release_assets/v1.6.1/v1.6.1-complete-site.zip`
+- `WORK_DONE_NOTE.md`
+
+## RULE) Require complete usable site artifact in releases
+
+### Changed
+- Updated `.github/copilot-instructions.md` with a new mandatory section: `Release Artifacts Rule (Required)`.
+- Added requirements to always publish a `complete-site` ZIP artifact for each release, including generated pages and required data files.
+- Added explicit validation step to open the extracted package from `index.html`.
+
+### Why
+- User requested that each release include an artifact containing the complete usable site.
+
+### Files touched
+- `.github/copilot-instructions.md`
+- `WORK_DONE_NOTE.md`
+
 ## PLAN) Add branch triage rule in backlog
 
 ### Changed

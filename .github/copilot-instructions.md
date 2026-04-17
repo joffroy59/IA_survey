@@ -69,3 +69,15 @@ Release changelog requirements:
 4. List notable files or areas impacted when relevant.
 5. Include a short migration/compatibility note if there is any breaking or operational impact.
 6. Publish this changelog in the GitHub release notes body when creating the release.
+
+## Release Artifacts Rule (Required)
+
+For every new release in this repository, always attach a complete usable site package as a release artifact.
+
+Release artifact requirements:
+1. Include one ZIP artifact named with the release tag and `complete-site` suffix (for example: `v1.6.0-complete-site.zip`).
+2. The artifact must include all generated HTML entry pages required to run and browse the site.
+3. The artifact must include required data files used by the generated pages.
+4. Exclude development-only folders when they are not needed to use the site package.
+5. Validate that the ZIP can be extracted and opened locally starting from `index.html`.
+6. Attach this artifact to the GitHub release before considering the release complete.
