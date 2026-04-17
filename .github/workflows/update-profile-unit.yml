@@ -17,6 +17,7 @@ on:
         required: true
         type: choice
         options:
+          - all
           - general
           - enterprise
           - discovery
@@ -57,6 +58,7 @@ jobs:
       - name: Resolve dataset path
         run: |
           case "$PROFILE" in
+            all) DATASET_PATH="data/tools*.json" ;;
             general) DATASET_PATH="data/tools.json" ;;
             enterprise) DATASET_PATH="data/tools-enterprise.json" ;;
             discovery) DATASET_PATH="data/tools-discovery.json" ;;

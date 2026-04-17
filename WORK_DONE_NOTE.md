@@ -3,6 +3,27 @@
 Date: 2026-04-18
 Repository: IA_survey
 
+## FEATURE) Add all-profiles execution mode
+
+### Changed
+- Updated `scripts/update.py` to support `--profile all`.
+- Added all-profiles loop execution in `scripts/update.py` so all configured profiles run sequentially in one command.
+- Updated `.github/workflows/update-profile-unit.yml` to include `all` in workflow_dispatch profile choices.
+- Updated workflow dataset artifact resolution for `all` using `data/tools*.json`.
+
+### Why
+- User requested a profile option to execute all profiles in a single run.
+
+### Files touched
+- `scripts/update.py`
+- `.github/workflows/update-profile-unit.yml`
+- `WORK_DONE_NOTE.md`
+
+---
+
+Date: 2026-04-18
+Repository: IA_survey
+
 ## CHORE) Remove static known CLI catalog logic
 
 ### Changed

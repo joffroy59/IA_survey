@@ -275,9 +275,9 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Update AI tools datasets")
     parser.add_argument(
         "--profile",
-        choices=sorted(PROFILE_CONFIG.keys()),
+        choices=sorted(list(PROFILE_CONFIG.keys()) + ["all"]),
         default="general",
-        help="Dataset profile to update",
+        help="Dataset profile to update (or 'all' for every profile)",
     )
     parser.add_argument(
         "--trace",
@@ -1170,80 +1170,89 @@ def main():
         dry_run=args.dry_run
     )
 
-    tracer.trace_start(profile, [])  # Will be updated with queries below
-
-    cfg = PROFILE_CONFIG[profile]
-    tools_file = cfg["tools_file"]
     query_map = load_search_queries()
-    search_queries = query_map[profile]
+    profiles_to_run = list(PROFILE_CONFIG.keys()) if profile == "all" else [profile]
 
-    # Update trace start with actual queries
-    tracer.trace_log.clear()  # Clear placeholder
-    tracer.trace_start(profile, search_queries)
+    if profile == "all":
+        print(f"Running all profiles: {', '.join(profiles_to_run)}")
 
-    if profile == "aicliapps":
-        # For CLI apps, rebuild from query evidence only.
-        data = build_aicliapps_dataset(search_queries)
-    else:
-        ensure_tools_file(profile, search_queries)
-        data = load_tools(tools_file)
+    total_added = 0
+    for current_profile in profiles_to_run:
+        cfg = PROFILE_CONFIG[current_profile]
+        tools_file = cfg["tools_file"]
+        search_queries = query_map[current_profile]
 
-    print("Searching for new AI tools...")
-    print(f"Profile: {profile}")
-    print(f"Provider: {global_settings.get('llm', {}).get('provider', 'gemini')}")
-    existing = get_existing_names(data)
-    print(f"   {len(existing)} existing tools loaded")
+        tracer.trace_log.clear()
+        tracer.trace_start(current_profile, search_queries)
 
-    search_results = search_new_tools(search_queries)
-    print(f"   {len(search_results)} search results collected")
-    search_context = format_search_results_for_llm(search_results)
-    tracer.trace_search_results_formatted(search_context)
-
-    print("Asking configured LLM provider to identify new tools...")
-    new_tools = extract_new_tools(search_context, existing, global_settings, data)
-
-    if profile == "aicliapps":
-        explicit_cli_tools = extract_explicit_cli_tools(search_results, existing)
-        if explicit_cli_tools:
-            new_tools = merge_tool_candidates(explicit_cli_tools, new_tools, limit=10)
-            tracer.log(
-                "INFO",
-                "EXTRACTION",
-                "Merged explicit CLI extraction with LLM extraction",
-                {"explicit": len(explicit_cli_tools), "merged": len(new_tools)},
-            )
-
-    if new_tools:
-        tracer.trace_tool_extraction("llm_extraction", new_tools)
-    else:
-        print("No valid LLM extraction. Falling back to query-only extraction...")
-        new_tools = extract_tools_from_results_fallback(search_results, existing, profile)
-        tracer.trace_tool_extraction("fallback_extraction", new_tools)
-    print(f"   {len(new_tools)} candidates found")
-
-    added = 0
-    if new_tools:
-        added = add_tools_to_data(data, new_tools, profile)
-        print(f"{added} new tools added")
-        tracer.trace_json_update_summary(added, len(existing))
-
-        # Skip save in dry-run mode
-        if not tracer.is_dry_run:
-            save_tools(data, profile, tools_file, search_queries)
+        if current_profile == "aicliapps":
+            # For CLI apps, rebuild from query evidence only.
+            data = build_aicliapps_dataset(search_queries)
         else:
-            print(f"\n[DRY-RUN] Would save {added} new tools to {tools_file.name}")
-            tracer.log("DRY_RUN", "SAVE", f"Would save to {tools_file.name}", {"added": added})
-    else:
-        print("No new tools to add, updating date only")
-        tracer.trace_json_update_summary(0, len(existing))
+            ensure_tools_file(current_profile, search_queries)
+            data = load_tools(tools_file)
 
-        if not tracer.is_dry_run:
-            save_tools(data, profile, tools_file, search_queries)
+        print("Searching for new AI tools...")
+        print(f"Profile: {current_profile}")
+        print(f"Provider: {global_settings.get('llm', {}).get('provider', 'gemini')}")
+        existing = get_existing_names(data)
+        print(f"   {len(existing)} existing tools loaded")
+
+        search_results = search_new_tools(search_queries)
+        print(f"   {len(search_results)} search results collected")
+        search_context = format_search_results_for_llm(search_results)
+        tracer.trace_search_results_formatted(search_context)
+
+        print("Asking configured LLM provider to identify new tools...")
+        new_tools = extract_new_tools(search_context, existing, global_settings, data)
+
+        if current_profile == "aicliapps":
+            explicit_cli_tools = extract_explicit_cli_tools(search_results, existing)
+            if explicit_cli_tools:
+                new_tools = merge_tool_candidates(explicit_cli_tools, new_tools, limit=10)
+                tracer.log(
+                    "INFO",
+                    "EXTRACTION",
+                    "Merged explicit CLI extraction with LLM extraction",
+                    {"explicit": len(explicit_cli_tools), "merged": len(new_tools)},
+                )
+
+        if new_tools:
+            tracer.trace_tool_extraction("llm_extraction", new_tools)
         else:
-            print(f"\n[DRY-RUN] Would update metadata in {tools_file.name}")
-            tracer.log("DRY_RUN", "SAVE", f"Would update {tools_file.name}", {})
+            print("No valid LLM extraction. Falling back to query-only extraction...")
+            new_tools = extract_tools_from_results_fallback(search_results, existing, current_profile)
+            tracer.trace_tool_extraction("fallback_extraction", new_tools)
+        print(f"   {len(new_tools)} candidates found")
 
-    tracer.trace_end(added, profile)
+        added = 0
+        if new_tools:
+            added = add_tools_to_data(data, new_tools, current_profile)
+            print(f"{added} new tools added")
+            tracer.trace_json_update_summary(added, len(existing))
+
+            # Skip save in dry-run mode
+            if not tracer.is_dry_run:
+                save_tools(data, current_profile, tools_file, search_queries)
+            else:
+                print(f"\n[DRY-RUN] Would save {added} new tools to {tools_file.name}")
+                tracer.log("DRY_RUN", "SAVE", f"Would save to {tools_file.name}", {"added": added})
+        else:
+            print("No new tools to add, updating date only")
+            tracer.trace_json_update_summary(0, len(existing))
+
+            if not tracer.is_dry_run:
+                save_tools(data, current_profile, tools_file, search_queries)
+            else:
+                print(f"\n[DRY-RUN] Would update metadata in {tools_file.name}")
+                tracer.log("DRY_RUN", "SAVE", f"Would update {tools_file.name}", {})
+
+        total_added += added
+        tracer.trace_end(added, current_profile)
+
+    if profile == "all":
+        print(f"All profiles complete. Total tools added: {total_added}")
+
     tracer.print_summary()
 
 
