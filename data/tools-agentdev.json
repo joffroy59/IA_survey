@@ -61,31 +61,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-17 20:41:30.269",
-        "tool_count": 12,
-        "snapshot_file": "snapshots/agentdev/2026-04-17_20-41-30-269.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:56:53.981",
-        "tool_count": 12,
-        "snapshot_file": "snapshots/agentdev/2026-04-17_20-56-53-981.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:58:33.483",
-        "tool_count": 12,
-        "snapshot_file": "snapshots/agentdev/2026-04-17_20-58-33-483.html"
-      },
-      {
-        "generated_at": "2026-04-17 21:06:28.601",
-        "tool_count": 12,
-        "snapshot_file": "snapshots/agentdev/2026-04-17_21-06-28-601.html"
-      },
-      {
-        "generated_at": "2026-04-17 21:08:33.427",
-        "tool_count": 12,
-        "snapshot_file": "snapshots/agentdev/2026-04-17_21-08-33-427.html"
-      },
-      {
         "generated_at": "2026-04-17 21:18:02.085",
         "tool_count": 12,
         "snapshot_file": "snapshots/agentdev/2026-04-17_21-18-02-085.html"
@@ -109,6 +84,31 @@
         "generated_at": "2026-04-17 21:48:56.342",
         "tool_count": 12,
         "snapshot_file": "snapshots/agentdev/2026-04-17_21-48-56-342.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:55:47.657",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/agentdev/2026-04-17_21-55-47-657.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:58:52.401",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/agentdev/2026-04-17_21-58-52-401.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:59:48.581",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/agentdev/2026-04-17_21-59-48-581.html"
+      },
+      {
+        "generated_at": "2026-04-17 22:00:34.312",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/agentdev/2026-04-17_22-00-34-312.html"
+      },
+      {
+        "generated_at": "2026-04-17 22:01:37.652",
+        "tool_count": 12,
+        "snapshot_file": "snapshots/agentdev/2026-04-17_22-01-37-652.html"
       }
     ]
   },

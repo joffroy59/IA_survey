@@ -3,6 +3,109 @@
 Date: 2026-04-17
 Repository: IA_survey
 
+## FIX) Reduce column mode label text size
+
+### Changed
+- Reduced `.layout-columns-toggle` text size from `18px` to `14px`.
+- Added `font-weight: 600` to keep readability for `1/2/3` values at smaller size.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested smaller text for the column mode label/button.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
+## FIX) Reduce header badge text size
+
+### Changed
+- Reduced `header-badge` font size from `11px` to `9px` for the text `🤖 Auto-updated by AI · {date}`.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested a smaller visual size for the auto-updated badge text.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
+## FIX) Left-align main page title
+
+### Changed
+- Updated main title (`h1`) styling to align text to the left.
+- Added width constraints (`max-width: 1100px; margin: 0 auto;`) so left alignment follows page content width.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested moving `Boîte à outils IA Génératives` to the left side of the screen.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
+## FIX) Header polish: menu label, badge position, toggle inversion, title tone
+
+### Changed
+- Confirmed hidden main-menu label uses the same page/menu wording (for example `Vue Generale`).
+- Updated `.current-page-label` styling to match menu-like text better (no forced uppercase, adjusted typography).
+- Moved header badge (`🤖 Auto-updated by AI · {today}`) to the right side under the toggle row, with mobile fallback to normal flow.
+- Inverted main/submenu toggle layout positions (swapped horizontal placement).
+- Reduced main title visual intensity by lowering font size/weight slightly.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested better consistency between hidden-label text and menu text.
+- User requested right-side badge placement under toggles.
+- User requested inversion between main/submenu toggle placement.
+- User requested a slightly less prominent title styling.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
+## FIX) Hidden main-menu label matches menu text
+
+### Changed
+- Updated hidden main-menu label content to use the same page label text as the page switcher menu item.
+- Replaced template token from slug-based label to menu-label value in the header indicator.
+- Passed `current_page_menu_label` from `PAGE_CONFIGS` into `HTML_TEMPLATE.format()`.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested that when the main menu is hidden, the visible label should match menu naming instead of showing the slug.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
+## FEATURE) Add separate toggles for main menu and subcategory menu
+
+### Changed
+- Split the previous single menu toggle into two independent buttons:
+  - `main-menu-toggle` for page switcher visibility.
+  - `submenu-toggle` for subcategory tabs (`#category-nav`) visibility.
+- Added dedicated localStorage states:
+  - `mainMenuVisible`
+  - `subcategoryMenuVisible`
+- Added dedicated update/toggle functions for each control and kept aria labels/titles synchronized.
+- Repositioned header controls (`layout-columns-toggle`, current page label) to avoid overlap with the new button.
+- Regenerated all HTML pages and snapshots.
+
+### Why
+- User requested specific toggle buttons for main menu and subcategory menu.
+- Independent controls improve layout flexibility and mirror the separate UI sections.
+
+### Files touched
+- `scripts/generate.py`
+- Generated pages/data/snapshots
+- `WORK_DONE_NOTE.md`
+
 ## FIX) Set scope defaults (all=1, single=3) and keep UI control only for Tout voir
 
 ### Changed

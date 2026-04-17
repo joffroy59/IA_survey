@@ -22,31 +22,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-17 20:41:30.271",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/vscode/2026-04-17_20-41-30-271.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:56:53.984",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/vscode/2026-04-17_20-56-53-984.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:58:33.485",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/vscode/2026-04-17_20-58-33-485.html"
-      },
-      {
-        "generated_at": "2026-04-17 21:06:28.603",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/vscode/2026-04-17_21-06-28-603.html"
-      },
-      {
-        "generated_at": "2026-04-17 21:08:33.430",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/vscode/2026-04-17_21-08-33-430.html"
-      },
-      {
         "generated_at": "2026-04-17 21:18:02.088",
         "tool_count": 16,
         "snapshot_file": "snapshots/vscode/2026-04-17_21-18-02-088.html"
@@ -70,6 +45,31 @@
         "generated_at": "2026-04-17 21:48:56.344",
         "tool_count": 16,
         "snapshot_file": "snapshots/vscode/2026-04-17_21-48-56-344.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:55:47.659",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/vscode/2026-04-17_21-55-47-659.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:58:52.404",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/vscode/2026-04-17_21-58-52-404.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:59:48.585",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/vscode/2026-04-17_21-59-48-585.html"
+      },
+      {
+        "generated_at": "2026-04-17 22:00:34.315",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/vscode/2026-04-17_22-00-34-315.html"
+      },
+      {
+        "generated_at": "2026-04-17 22:01:37.656",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/vscode/2026-04-17_22-01-37-656.html"
       }
     ]
   },

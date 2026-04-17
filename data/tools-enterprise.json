@@ -34,31 +34,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-17 20:41:30.261",
-        "tool_count": 48,
-        "snapshot_file": "snapshots/enterprise/2026-04-17_20-41-30-261.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:56:53.974",
-        "tool_count": 48,
-        "snapshot_file": "snapshots/enterprise/2026-04-17_20-56-53-974.html"
-      },
-      {
-        "generated_at": "2026-04-17 20:58:33.474",
-        "tool_count": 48,
-        "snapshot_file": "snapshots/enterprise/2026-04-17_20-58-33-474.html"
-      },
-      {
-        "generated_at": "2026-04-17 21:06:28.593",
-        "tool_count": 48,
-        "snapshot_file": "snapshots/enterprise/2026-04-17_21-06-28-593.html"
-      },
-      {
-        "generated_at": "2026-04-17 21:08:33.421",
-        "tool_count": 48,
-        "snapshot_file": "snapshots/enterprise/2026-04-17_21-08-33-421.html"
-      },
-      {
         "generated_at": "2026-04-17 21:18:02.077",
         "tool_count": 48,
         "snapshot_file": "snapshots/enterprise/2026-04-17_21-18-02-077.html"
@@ -82,6 +57,31 @@
         "generated_at": "2026-04-17 21:48:56.334",
         "tool_count": 48,
         "snapshot_file": "snapshots/enterprise/2026-04-17_21-48-56-334.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:55:47.649",
+        "tool_count": 48,
+        "snapshot_file": "snapshots/enterprise/2026-04-17_21-55-47-649.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:58:52.393",
+        "tool_count": 48,
+        "snapshot_file": "snapshots/enterprise/2026-04-17_21-58-52-393.html"
+      },
+      {
+        "generated_at": "2026-04-17 21:59:48.571",
+        "tool_count": 48,
+        "snapshot_file": "snapshots/enterprise/2026-04-17_21-59-48-571.html"
+      },
+      {
+        "generated_at": "2026-04-17 22:00:34.304",
+        "tool_count": 48,
+        "snapshot_file": "snapshots/enterprise/2026-04-17_22-00-34-304.html"
+      },
+      {
+        "generated_at": "2026-04-17 22:01:37.638",
+        "tool_count": 48,
+        "snapshot_file": "snapshots/enterprise/2026-04-17_22-01-37-638.html"
       }
     ]
   },
