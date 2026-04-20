@@ -5,11 +5,6 @@
     "last_updated": "2026-04-16",
     "page_history": [
       {
-        "generated_at": "2026-04-17 21:48:56.355",
-        "tool_count": 2,
-        "snapshot_file": "snapshots/aicliapps/2026-04-17_21-48-56-355.html"
-      },
-      {
         "generated_at": "2026-04-17 21:55:47.671",
         "tool_count": 2,
         "snapshot_file": "snapshots/aicliapps/2026-04-17_21-55-47-671.html"
@@ -53,6 +48,11 @@
         "generated_at": "2026-04-17 22:03:08.659",
         "tool_count": 2,
         "snapshot_file": "snapshots/aicliapps/2026-04-17_22-03-08-659.html"
+      },
+      {
+        "generated_at": "2026-04-20 09:07:04.724",
+        "tool_count": 2,
+        "snapshot_file": "snapshots/aicliapps/2026-04-20_09-07-04-724.html"
       }
     ],
     "page_name": "aicliapps",
