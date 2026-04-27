@@ -23,11 +23,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-17 21:55:47.661",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/newrag/2026-04-17_21-55-47-661.html"
-      },
-      {
         "generated_at": "2026-04-17 21:58:52.406",
         "tool_count": 16,
         "snapshot_file": "snapshots/newrag/2026-04-17_21-58-52-406.html"
@@ -71,6 +66,11 @@
         "generated_at": "2026-04-20 09:07:04.717",
         "tool_count": 16,
         "snapshot_file": "snapshots/newrag/2026-04-20_09-07-04-717.html"
+      },
+      {
+        "generated_at": "2026-04-27 09:17:30.472",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/newrag/2026-04-27_09-17-30-472.html"
       }
     ]
   },
