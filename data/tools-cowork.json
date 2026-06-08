@@ -22,11 +22,6 @@
     ],
     "page_history": [
       {
-        "generated_at": "2026-04-17 20:37:21.911",
-        "tool_count": 16,
-        "snapshot_file": "snapshots/cowork/2026-04-17_20-37-21-911.html"
-      },
-      {
         "generated_at": "2026-04-17 20:41:35.219",
         "tool_count": 16,
         "snapshot_file": "snapshots/cowork/2026-04-17_20-41-35-219.html"
@@ -70,6 +65,11 @@
         "generated_at": "2026-06-01 12:32:20.565",
         "tool_count": 16,
         "snapshot_file": "snapshots/cowork/2026-06-01_12-32-20-565.html"
+      },
+      {
+        "generated_at": "2026-06-08 11:52:41.034",
+        "tool_count": 16,
+        "snapshot_file": "snapshots/cowork/2026-06-08_11-52-41-034.html"
       }
     ]
   },

@@ -5,11 +5,6 @@
     "last_updated": "2026-04-15",
     "page_history": [
       {
-        "generated_at": "2026-04-17 20:37:21.898",
-        "tool_count": 50,
-        "snapshot_file": "snapshots/general/2026-04-17_20-37-21-898.html"
-      },
-      {
         "generated_at": "2026-04-17 20:41:35.205",
         "tool_count": 50,
         "snapshot_file": "snapshots/general/2026-04-17_20-41-35-205.html"
@@ -53,6 +48,11 @@
         "generated_at": "2026-06-01 12:32:20.550",
         "tool_count": 50,
         "snapshot_file": "snapshots/general/2026-06-01_12-32-20-550.html"
+      },
+      {
+        "generated_at": "2026-06-08 11:52:41.020",
+        "tool_count": 50,
+        "snapshot_file": "snapshots/general/2026-06-08_11-52-41-020.html"
       }
     ],
     "page_name": "general",
