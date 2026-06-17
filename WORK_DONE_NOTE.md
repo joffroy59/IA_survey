@@ -1,5 +1,23 @@
 # Work Done Note
 
+---
+
+## 2026-06-18 — Disable scheduled and push-triggered GitHub Actions workflow
+
+### What changed
+- Removed the `schedule` (cron every Monday) and `push` triggers from `.github/workflows/update.yml`.
+- The workflow now only runs via `workflow_dispatch` (manual trigger).
+
+### Why
+- The scheduled and push triggers were consuming GitHub Actions minutes and Gemini API tokens automatically, without user intent.
+- Keeping only `workflow_dispatch` preserves the ability to run the workflow on demand.
+
+### Files touched
+- `.github/workflows/update.yml`
+- `WORK_DONE_NOTE.md`
+
+---
+
 Date: 2026-04-17
 Repository: IA_survey
 
